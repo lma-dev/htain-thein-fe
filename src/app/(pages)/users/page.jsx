@@ -1,6 +1,7 @@
-import BreadCrumb from "@/app/components/Breadcrumb/Breadcrumb";
-import Table from "@/app/components/Table/page";
-import Layout from "@/app/components/layout";
+import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
+import UserTable from "../../components/Table/UserTable/page";
+
+import Layout from "../../components/layout";
 
 
 const UsersPage = () => {
@@ -9,7 +10,7 @@ const UsersPage = () => {
         <Layout>
             <div className="flex flex-col">
                 <BreadCrumb title='Users' />
-                <Table />
+                <UserTable />
             </div>
         </Layout>
     );
