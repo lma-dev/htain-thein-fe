@@ -1,7 +1,6 @@
 
-import Navbar from "./Navbar/page";
 import Sidebar from "./Sidebar/page";
-
+import SettingFloatButton from "./Button/SettingFloatButton";
 export default function Layout({ children }) {
 
     return (
@@ -11,8 +10,9 @@ export default function Layout({ children }) {
                     <Sidebar />
                 </div>
                 <div className="p-5 flex-1">
-                    <Navbar />
+                    {/* <Navbar /> */}
                     <main>{children}</main>
+                    <SettingFloatButton />
                 </div>
             </div>
         </div>

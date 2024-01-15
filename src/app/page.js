@@ -15,7 +15,7 @@ export default function Home() {
               Dive into a world of endless possibilities with my platform. Manage your finances, track your expenses, and achieve your financial goals effortlessly.
             </p>
 
-            <Link href="/dashboard"
+            <Link href="/login"
               className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
             >
               Get Started Today
