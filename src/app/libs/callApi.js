@@ -2,7 +2,7 @@
 import { parseCookies } from 'nookies';
 import axios from '../utils/axios';
 
-export async function callApi(method, url, data) {
+export async function callApi(method, url, data,responseType=null) {
   const token= parseCookies.accessToken
   const config = {
     headers: {
@@ -10,7 +10,8 @@ export async function callApi(method, url, data) {
     },
     method: method,
     url: url,
-    data: data
+    data: data,
+    responseType: responseType
   }
   const response = await axios(config)
   return response.data

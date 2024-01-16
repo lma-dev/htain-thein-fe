@@ -13,6 +13,10 @@ export async function fetchSingleData(url) {
   return await callApi('get', defaultRoute + url)
 }
 
+export async function exportData(url) {
+  return await callApi('get', defaultRoute + url, null, 'arraybuffer')
+}
+
 export async function deleteSingleData(url) {
   return await callApi('delete', defaultRoute + url)
 }

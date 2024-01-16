@@ -25,7 +25,7 @@ const UsersPage = () => {
         <Layout>
             <div className="flex flex-col">
                 <BreadCrumb title='Users' />
-                <UserTable data={users} />
+                <UserTable data={users} fetchUsers={fetchUsers} />
             </div>
         </Layout>
     );

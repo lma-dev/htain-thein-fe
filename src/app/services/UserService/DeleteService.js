@@ -1,8 +1,6 @@
-// services/deleteUserService.js
+import { deleteSingleData } from "../../libs/ApiRequestHelper";
+
 export const deleteUserService = async (userId) => {
-    // Simulated delete user service function
-    // Perform the logic to delete the user on the server
-    // ...
-    // Return success status or handle errors
+ return await deleteSingleData(`/users/${userId}`);
   };
   

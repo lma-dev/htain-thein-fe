@@ -16,7 +16,9 @@
     "nookies": "^2.5.2",
     "preline": "^2.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "rippleui": "^1.12.1"
   },
   "devDependencies": {
     "@types/node": "20.10.8",
