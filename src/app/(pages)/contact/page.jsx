@@ -5,7 +5,7 @@ const contactPage = () => {
     return (
         <Layout>
             <BreadCrumb title='Contact' />
-            <div className="my-6 mx-auto max-w-xl bg-white">
+            <div className="my-6 mx-auto max-w-xl">
                 <h1 className="text-3xl text-gray-600 font-extrabold text-center">Contact</h1>
                 <form className="mt-8 space-y-4">
                     <input type='text' placeholder='Name'

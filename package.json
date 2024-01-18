@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "@preline/dropdown": "^2.0.2",
     "axios": "^1.6.5",
     "lucide-react": "^0.309.0",

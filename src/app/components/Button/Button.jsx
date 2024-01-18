@@ -11,10 +11,10 @@ export const AnimationButton = ({ text }) => {
 }
 
 
-export const NormalButton = ({ text }) => {
+export const NormalButton = ({ text, onClick }) => {
     return (
         <div>
-            <button className="block w-full rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border">
+            <button className="block w-full rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border" onClick={onClick} type="submit">
                 {text}
             </button>
         </div>
