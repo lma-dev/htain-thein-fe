@@ -31,24 +31,22 @@ export default function UserDropDown({ userId, fetchUsers }) {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
                         <div className="px-1 py-1 ">
                             <Menu.Item>
-                                <Link href={`/users/${userId}`}>
-                                    <span className="dropdown-item text-sm block">
-                                        <Pencil size={16} className="mr-2 inline-block" />
-                                        Edit
-                                    </span>
+                                <Link href={`/users/${userId}`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                    <Pencil size={16} className="mr-2 inline-block" />
+                                    Edit
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href="#" className="dropdown-item text-sm block" onClick={handleExport}>
+                                <Link href="#" className="p-2 hover:bg-gray-200 w-full rounded text-sm block" onClick={handleExport}>
                                     <Download size={16} className="mr-2 inline-block" />
                                     Export
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href="#" className="dropdown-item text-sm block text-red-400" onClick={handleDelete}>
+                                <Link href="#" className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400" onClick={handleDelete}>
                                     <Trash2 size={16} className="mr-2 inline-block" />
                                     Delete
                                 </Link>
