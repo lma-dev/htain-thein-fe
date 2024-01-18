@@ -1,27 +1,12 @@
-import { MoreVertical, Pencil, Trash2, Eye, Download } from 'lucide-react';
+import { MoreVertical, Pencil, Trash2, Download } from 'lucide-react';
 import { deleteUserService } from "../../services/UserService/DeleteService";
 import { exportUserService } from "../../services/UserService/ExportService";
+import Link from 'next/link';
 
 const UserDropDown = ({ userId, fetchUsers }) => {
-
     const handleDelete = async () => {
-        try {
-            const res = await deleteUserService(userId);
-            fetchUsers();
-            console.log(res); // Handle the response accordingly
-        } catch (error) {
-            console.error("Error deleting user:", error);
-        }
-    }
-
-    const handleEdit = () => {
-        // Implement the logic for editing a user
-        console.log(`Editing user with ID ${userId}`);
-    }
-
-    const handleView = () => {
-        // Implement the logic for viewing a user
-        console.log(`Viewing user with ID ${userId}`);
+        await deleteUserService(userId);
+        fetchUsers();
     }
 
     const handleExport = async () => {
@@ -31,29 +16,27 @@ const UserDropDown = ({ userId, fetchUsers }) => {
     return (
         <div>
             <div className="dropdown">
-                <label className="btn btn-solid-primary mx-2" tabIndex="0">
-                    <MoreVertical size={16} />
-                </label>
+                <span className="mx-2" tabIndex="0">
+                    <MoreVertical size={16} className='flex justify-center items-center text-sm font-semibold text-gray-800 cursor-pointer hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600' />
+                </span>
                 <div className="dropdown-menu dropdown-menu-left-bottom">
                     <span className="dropdown-item text-sm text-gray-400">Account settings</span>
-                    <span className="dropdown-item text-sm block" onClick={handleEdit}>
-                        <Pencil size={16} className="mr-2 inline-block" />
-                        Edit
-                    </span>
-                    <a href="#" className="dropdown-item text-sm block" onClick={handleView}>
-                        <Eye size={16} className="mr-2 inline-block" />
-                        View
-                    </a>
-                    <a href="#" className="dropdown-item text-sm block" onClick={handleExport}>
+                    <Link href={`/users/${userId}`}>
+                        <span className="dropdown-item text-sm block">
+                            <Pencil size={16} className="mr-2 inline-block" />
+                            Edit
+                        </span>
+                    </Link>
+                    <Link href="#" className="dropdown-item text-sm block" onClick={handleExport}>
                         <Download size={16} className="mr-2 inline-block" />
                         Export
-                    </a>
+                    </Link>
                     <div className="dropdown-divider" role="separator"></div>
                     <span className="dropdown-item text-sm text-gray-400">Danger Zone</span>
-                    <a href="#" className="dropdown-item text-sm block" onClick={handleDelete}>
+                    <Link href="#" className="dropdown-item text-sm block text-red-400" onClick={handleDelete}>
                         <Trash2 size={16} className="mr-2 inline-block" />
                         Delete
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
