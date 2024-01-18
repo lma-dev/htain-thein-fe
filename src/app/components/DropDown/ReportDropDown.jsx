@@ -1,37 +1,59 @@
-import { PencilLine, Trash2, MoreVertical, Lock } from 'lucide-react';
+import { Menu, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+import { MoreVertical, Pencil, Trash2, Eye } from 'lucide-react';
+import { deleteReportService } from "../../services/ReportService/DeleteReportService";
+import Link from 'next/link';
 
-const ReportDropDown = () => {
+export default function ReportDropDown({ reportId, fetchReports }) {
+    const handleDelete = async () => {
+        await deleteReportService(reportId);
+        fetchReports();
+    }
+
+
     return (
-        <div className="hs-dropdown relative inline-flex">
-            <button id="hs-dropdown-custom-icon-trigger" type="button" className="hs-dropdown-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                <MoreVertical className='text-gray-500' size={16} />
-            </button>
-
-            <div className="border divide-y divide-gray-100 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700" aria-labelledby="hs-dropdown-custom-icon-trigger">
-                <div className="py-2 first:pt-0 last:pb-0">
-                    <span className="block py-2 px-3 text-xs font-medium uppercase text-gray-400 dark:text-gray-500 text-left">
-                        Settings
-                    </span>
-
-                    <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                        <PencilLine size={16} /> Edit
-                    </a>
+        <div className="">
+            <Menu as="div" className="relative inline-block text-left">
+                <div>
+                    <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium  border hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+                        <MoreVertical size={16} className='flex justify-center items-center text-sm font-semibold text-gray-800 cursor-pointer disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600' />
+                    </Menu.Button>
                 </div>
-                <div className="py-2 first:pt-0 last:pb-0">
-                    <span className="block py-2 px-3 text-xs font-medium uppercase text-gray-400 dark:text-gray-500 text-left">
-                        Danger Zone
-                    </span>
+                <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                >
+                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                        <div className="px-1 py-1 ">
+                            <Menu.Item>
+                                <Link href={`/reports/${reportId}/edit`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                    <Pencil size={16} className="mr-2 inline-block" />
+                                    Edit
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link href={`/reports/${reportId}`} className="text-sm block p-2 hover:bg-gray-200 w-full rounded">
+                                    <Eye size={16} className="mr-2 inline-block" />
+                                    Detail
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link href="#" className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400" onClick={handleDelete}>
+                                    <Trash2 size={16} className="mr-2 inline-block" />
+                                    Delete
+                                </Link>
+                            </Menu.Item>
+                        </div>
 
-                    <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                        <Trash2 size={16} /> Delete
-
-                    </a>
-                </div>
-
-
-            </div>
-        </div >
+                    </Menu.Items>
+                </Transition>
+            </Menu>
+        </div>
     )
 }
 
-export default ReportDropDown

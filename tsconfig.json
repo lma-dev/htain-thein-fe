@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/(pages)/users/[userId]/page.jsx"  ],
+, "src/app/(pages)/users/[userId]/page.jsx", "src/app/(pages)/reports/[reportId]/history/page.jsx", "src/app/components/Table/ReportHistoryTable/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

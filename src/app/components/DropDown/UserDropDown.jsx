@@ -1,8 +1,8 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Download } from 'lucide-react';
-import { deleteUserService } from "../../services/UserService/DeleteService";
-import { exportUserService } from "../../services/UserService/ExportService";
+import { deleteUserService } from "../../services/UserService/DeleteUserService";
+import { exportUserService } from "../../services/UserService/ExportUserService";
 import Link from 'next/link';
 
 export default function UserDropDown({ userId, fetchUsers }) {

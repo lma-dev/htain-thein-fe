@@ -5,13 +5,13 @@ import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import UserTable from "../../components/Table/UserTable/page";
 
 import Layout from "../../components/layout";
-import { fetchAllData } from "../../libs/ApiRequestHelper";
+import { fetchUsersService } from "../../services/UserService/fetchUsersService";
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
 
     const fetchUsers = async () => {
-        const res = await fetchAllData('/users');
+        const res = await fetchUsersService();
         setUsers(res.data);
         console.log(res.data);
     };

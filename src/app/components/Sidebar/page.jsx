@@ -56,21 +56,7 @@ const Sidebar = () => {
             </div>
 
             <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
-                {/* <a href="#" className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
-                    <img
-                        alt="Man"
-                        src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                        className="h-10 w-10 rounded-full object-cover"
-                    />
 
-                    <div>
-                        <p className="text-xs">
-                            <strong className="block font-medium">Eric Frusciante</strong>
-
-                            <span> eric@frusciante.com </span>
-                        </p>
-                    </div>
-                </a> */}
                 <div className="hs-dropdown relative inline-flex">
                     <button id="hs-dropdown-custom-trigger" type="button" className="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold bg-white p-4 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                         <img className="h-10 w-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Maria" />
