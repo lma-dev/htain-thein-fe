@@ -20,7 +20,7 @@ const SettingFloatButton = () => {
 
             <div className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-x-0 group-hover:scale-x-100 group-hover:-translate-y-14 group-hover:-translate-x-14   flex  p-2 hover:p-3 bg-yellow-300 hover:bg-yellow-400 text-white">
 
-                <Link href="/regular-cost/create">   <CalendarPlus size={20} /></Link>
+                <Link href="/regular-costs/create">   <CalendarPlus size={20} /></Link>
             </div>
         </div>
     )
