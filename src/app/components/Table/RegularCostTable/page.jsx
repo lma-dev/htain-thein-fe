@@ -5,8 +5,8 @@ const RegularCostTable = ({ data, fetchRegularCosts }) => {
     return (
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">
-                <div className="border rounded-lg shadow dark:border-gray-700 dark:shadow-gray-900">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700  ">
+                <div className="border rounded-lg shadow dark:border-gray-700 dark:shadow-gray-900 h-80 overflow-auto">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 sticky top-0 z-[1] ">
                         <thead className="bg-gray-50 dark:bg-gray-700">
                             <tr>
                                 <th scope="col" className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400">Id</th>
