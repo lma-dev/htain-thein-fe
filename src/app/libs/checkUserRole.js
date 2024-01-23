@@ -1,10 +1,11 @@
-import { getCookie } from "cookies-next";
-import { getSingleData } from "./ApiRequestHelper";
+import { parseCookies } from "nookies";
+import { fetchSingleData } from "./ApiRequestHelper";
+
 
 export const checkUserRoles = async () => {
   try {
-    const userId = getCookie("userId");
-    const response = await getSingleData(`/users/${userId}`);
+    const userId = parseCookies().userId;
+    const response = await fetchSingleData(`/users/${userId}`);
     return response.data.role;
   } catch (error) {
     // Handle error

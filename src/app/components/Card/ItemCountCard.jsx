@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-const ItemCountCard = ({ title, count }) => {
+const ItemCountCard = ({ title, count, text = null }) => {
 
     return (
         <div>
@@ -16,7 +16,13 @@ const ItemCountCard = ({ title, count }) => {
                             </div>
                             <div className="ml-4">
                                 <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-                                <p className="text-gray-600">You have <span className="text-indigo-500 font-bold">{count}</span> items in your collection.</p>
+                                {count ? (
+                                    <p className="text-gray-600">{text} <span className="text-indigo-500 font-bold">{count}</span> items in your collection.</p>
+                                ) : (
+                                    <p className="text-gray-600">{text}</p>
+                                )
+
+                                }
                             </div>
                         </div>
                     </div>
