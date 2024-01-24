@@ -9,10 +9,12 @@ import { fetchRegularCostsData } from "../../services/RegularCostService/FetchRe
 
 const RegularCost = () => {
     const [regularCosts, setRegularCosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchRegularCosts = async () => {
         const res = await fetchRegularCostsData();
         setRegularCosts(res.data);
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -24,7 +26,7 @@ const RegularCost = () => {
         <Layout>
             <div className="flex flex-col">
                 <BreadCrumb title='Regular Costs' />
-                <RegularCostTable data={regularCosts} fetchRegularCosts={fetchRegularCosts} />
+                <RegularCostTable data={regularCosts} fetchRegularCosts={fetchRegularCosts} loading={loading} />
             </div>
         </Layout>
     );

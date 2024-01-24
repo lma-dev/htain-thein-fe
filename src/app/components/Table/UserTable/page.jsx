@@ -1,6 +1,6 @@
 import UserDropDown from "../../DropDown/UserDropDown";
-
-const UserTable = ({ data, fetchUsers }) => {
+import SkeletonTableRow from "../../Animation/SkeletonTableRow";
+const UserTable = ({ data, fetchUsers, loading }) => {
     return (
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -18,20 +18,34 @@ const UserTable = ({ data, fetchUsers }) => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700 relative">
-                            {data.map((user, index) => (
-                                <tr key={index}>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{user.id}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{user.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.email}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.role}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.accountStatus}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.createdAt}</td>
+                            {
+                                loading ? (
+                                    <>
+                                        <SkeletonTableRow cellWidths={['16', '24', '20', '32', '28', '28', '8']} />
+                                        <SkeletonTableRow cellWidths={['16', '24', '20', '32', '28', '28', '8']} />
+                                        <SkeletonTableRow cellWidths={['16', '24', '20', '32', '28', '28', '8']} />
+                                        <SkeletonTableRow cellWidths={['16', '24', '20', '32', '28', '28', '8']} />
+                                        <SkeletonTableRow cellWidths={['16', '24', '20', '32', '28', '28', '8']} />
+                                        <SkeletonTableRow cellWidths={['16', '24', '20', '32', '28', '28', '8']} />
 
-                                    <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                                        <UserDropDown userId={user.id} fetchUsers={fetchUsers} />
-                                    </td>
-                                </tr>
-                            ))
+                                    </>
+                                ) : (
+                                    data.map((user, index) => (
+                                        <tr key={index}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{user.id}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{user.name}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.email}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.role}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.accountStatus}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.createdAt}</td>
+
+                                            <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
+                                                <UserDropDown userId={user.id} fetchUsers={fetchUsers} />
+                                            </td>
+                                        </tr>
+                                    ))
+
+                                )
                             }
                         </tbody>
                     </table>

@@ -9,10 +9,12 @@ import { fetchReportsData } from "../../services/ReportService/FetchReportsServi
 
 const ReportsPage = () => {
     const [reports, setReports] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchReports = async () => {
         const res = await fetchReportsData();
         setReports(res.data);
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -24,7 +26,7 @@ const ReportsPage = () => {
         <Layout>
             <div className="flex flex-col">
                 <BreadCrumb title='Reports' />
-                <ReportTable data={reports} fetchReports={fetchReports} />
+                <ReportTable data={reports} fetchReports={fetchReports} loading={loading} />
             </div>
         </Layout>
     );

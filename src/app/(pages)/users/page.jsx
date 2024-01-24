@@ -9,10 +9,12 @@ import { fetchUsersService } from "../../services/UserService/fetchUsersService"
 
 const UsersPage = () => {
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchUsers = async () => {
         const res = await fetchUsersService();
         setUsers(res.data);
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -24,7 +26,7 @@ const UsersPage = () => {
         <Layout>
             <div className="flex flex-col">
                 <BreadCrumb title='Users' />
-                <UserTable data={users} fetchUsers={fetchUsers} />
+                <UserTable data={users} fetchUsers={fetchUsers} loading={loading} />
             </div>
         </Layout>
     );
