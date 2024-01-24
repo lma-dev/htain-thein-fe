@@ -17,10 +17,10 @@ const ItemCountCard = ({ title, count, text = null }) => {
 
     return (
         <div>
-            <article className="rounded-lg border border-gray-100 bg-white p-6">
+            <article className="rounded-lg border border-gray-100 bg-white p-6 shadow-lg hover:cursor-pointer hover:shadow-gray-300">
                 <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-sm text-gray-500">{title}</p>
+                        <p className="text-sm text-gray-500 uppercase">{title}</p>
 
                         {count ? (
                             <p className="text-2xl font-medium">{text} <span className="text-indigo-500 font-bold">{count}</span> </p>

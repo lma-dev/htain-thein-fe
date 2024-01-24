@@ -6,11 +6,11 @@ const OverAllStatusCard = ({
 }) => {
     return (
 
-        <div>
+        <div >
             <h1 className="pb-4 text-xl font-semibold text-gray-500">
                 OverAll Status
             </h1>
-            <div className="h-96 rounded-lg border p-5 shadow-lg">
+            <div className="h-96 rounded-lg border p-5 shadow-lg bg-white">
                 <h3 className="pb-2 text-lg font-semibold text-gray-500">
                     Available Balance
                 </h3>

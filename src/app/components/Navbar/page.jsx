@@ -1,7 +1,6 @@
 const Navbar = () => {
     return (
-
-        <div className="">
+        <div className="mt-5">
             <div className="sm:hidden">
                 <label htmlFor="Tab" className="sr-only">Tab</label>
 
@@ -9,41 +8,43 @@ const Navbar = () => {
                     <option>Settings</option>
                     <option>Messages</option>
                     <option>Archive</option>
-                    <option>Notifications</option>
+                    <option select>Notifications</option>
                 </select>
             </div>
 
             <div className="hidden sm:block">
-                <nav className="flex gap-6" aria-label="Tabs">
-                    <a
-                        href="#"
-                        className="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                    >
-                        Settings
-                    </a>
+                <div className="border-b border-gray-200">
+                    <nav className="-mb-px flex gap-6 text-center align-middle justify-center" aria-label="Tabs">
+                        <a
+                            href="#"
+                            className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                        >
+                            Settings
+                        </a>
 
-                    <a
-                        href="#"
-                        className="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                    >
-                        Messages
-                    </a>
+                        <a
+                            href="#"
+                            className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                        >
+                            Messages
+                        </a>
 
-                    <a
-                        href="#"
-                        className="shrink-0 rounded-lg p-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-                    >
-                        Archive
-                    </a>
+                        <a
+                            href="#"
+                            className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                        >
+                            Archive
+                        </a>
 
-                    <a
-                        href="#"
-                        className="shrink-0 rounded-lg bg-sky-100 p-2 text-sm font-medium text-sky-600"
-                        aria-current="page"
-                    >
-                        Notifications
-                    </a>
-                </nav>
+                        <a
+                            href="#"
+                            className="shrink-0 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600"
+                            aria-current="page"
+                        >
+                            Notifications
+                        </a>
+                    </nav>
+                </div>
             </div>
         </div>
     )
