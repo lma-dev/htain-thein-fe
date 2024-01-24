@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     return (
         <div>
             <div className="flex min-h-screen">
-            <div class="h-screen sticky top-0">
+            <div class="min-h-full sticky top-0">
                     <Sidebar />
                 </div>
                 <div className="p-5 flex-1">
