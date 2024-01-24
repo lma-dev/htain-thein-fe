@@ -29,8 +29,6 @@ const EditUser = () => {
     const fetchData = async () => {
         const res = await fetchSingleData(`/users/${params.userId}`);
         setFormData(res.data);
-        console.log(res.data);
-
     }
 
     useEffect(() => {

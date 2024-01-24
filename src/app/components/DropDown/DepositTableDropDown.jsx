@@ -1,9 +1,33 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { MoreVertical, Check, X } from 'lucide-react';
-import Link from 'next/link';
+import ConfirmBox from '../../components/ModalBox/ConfirmBox';
+import { ConfirmStatus } from '../../enums/ConfirmStatus';
 
-export default function DepositTableDropDown({ id }) {
+export default function DepositTableDropDown({ id, fetchData }) {
+    const [openDialog, setOpenDialog] = useState(false);
+    const [status, setStatus] = useState();
+    const handleReportAction = async (key) => {
+        setOpenDialog(true);
+        setStatus(key);
+    };
+
+    const renderConfirmBox = () => {
+        return (
+            <div>
+                {openDialog && (
+                    <ConfirmBox
+                        id={id}
+                        status={status}
+                        setOpenDialog={setOpenDialog}
+                        openDialog={openDialog}
+                        fetchData={fetchData}
+                    />
+                )}
+            </div>
+        );
+    };
+
 
     return (
         <div className="">
@@ -25,22 +49,23 @@ export default function DepositTableDropDown({ id }) {
                     <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
                         <div className="px-1 py-1 ">
                             <Menu.Item>
-                                <Link href="#" className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                <a href="#" className='text-sm block p-2 hover:bg-gray-200 w-full rounded' onClick={() => handleReportAction(ConfirmStatus.ACCEPT)}>
                                     <Check size={16} className="mr-2 inline-block" />Accept
-                                </Link>
+                                </a>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href="#" className="text-sm block p-2 hover:bg-gray-200 w-full rounded">
+                                <a href="#" className="text-sm block p-2 hover:bg-gray-200 w-full rounded" onClick={() => handleReportAction(ConfirmStatus.REJECT)}>
                                     <X size={16} className="mr-2 inline-block" /> Reject
-                                </Link>
+                                </a>
                             </Menu.Item>
 
                         </div>
 
                     </Menu.Items>
                 </Transition>
-            </Menu>
-        </div>
+            </Menu >
+            {renderConfirmBox()}
+        </div >
     )
 }
 

@@ -13,7 +13,6 @@ const RegularCost = () => {
     const fetchRegularCosts = async () => {
         const res = await fetchRegularCostsData();
         setRegularCosts(res.data);
-        console.log(res.data);
     };
 
     useEffect(() => {

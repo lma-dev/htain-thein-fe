@@ -31,8 +31,6 @@ const EditReport = () => {
     const fetchData = async () => {
         const res = await fetchSingleData(`/reports/${params.reportId}`);
         setFormData(res.data);
-        console.log(res.data);
-
     }
 
     useEffect(() => {

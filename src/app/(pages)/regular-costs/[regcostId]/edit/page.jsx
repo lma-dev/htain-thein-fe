@@ -28,8 +28,6 @@ const EditRegularCost = () => {
     const fetchData = async () => {
         const res = await fetchSingleData(`/general-outcome/${params.regcostId}`);
         setFormData(res.data);
-        console.log(res.data);
-
     }
 
     useEffect(() => {

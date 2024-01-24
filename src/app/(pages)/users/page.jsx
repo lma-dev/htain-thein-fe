@@ -13,7 +13,6 @@ const UsersPage = () => {
     const fetchUsers = async () => {
         const res = await fetchUsersService();
         setUsers(res.data);
-        console.log(res.data);
     };
 
     useEffect(() => {

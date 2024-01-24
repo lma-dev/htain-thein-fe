@@ -3,11 +3,11 @@
 import ItemCountCard from "../../components/Card/ItemCountCard";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
-import OverAllStatusTable from "../../components/Table/OverViewStatusTable/page";
 import { useEffect, useState } from "react";
 import { fetchAllDashboardData } from "../../services/DashboardService/FetchAllDashboardDataService";
 import DepositWithdrawTable from "../../components/Table/DepositWithDrawTable/page";
 import RegularCostTable from "../../components/Table/RegularCostTable/page";
+import OverAllStatusCard from "../../components/Card/OverAllStatusCard";
 
 const DashboardPage = () => {
     const [data, setData] = useState([]);
@@ -15,7 +15,6 @@ const DashboardPage = () => {
 
     const fetchData = () => {
         fetchAllDashboardData(setData, setLoading);
-
     };
 
     useEffect(() => {
@@ -24,7 +23,7 @@ const DashboardPage = () => {
 
 
     useEffect(() => {
-        console.log(data)
+        console.log(data);
     }, [data])
     return (
         <Layout>
@@ -33,18 +32,21 @@ const DashboardPage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <ItemCountCard count={data.userCount} title={"users"} />
                     <ItemCountCard count={data.reportsCount} title={"reports"} />
-                    <ItemCountCard text={data.income} title={"Users"} />
-                    <ItemCountCard text={data.outcome} title={"Users"} />
+                    <ItemCountCard text={data.income} title={"income"} />
+                    <ItemCountCard text={data.outcome} title={"outcome"} />
                 </div>
-            </div>
-            <div className="mt-8">
-                <h1 className="text-gray-600 font-bold text-lg my-5">Deposit Withdraw Table</h1>
-                <DepositWithdrawTable data={data} loading={loading} />
-            </div>
+                <div className="mt-8">
+                    <OverAllStatusCard balanceData={data.balanceData} />
+                </div>
+                <div className="mt-8">
+                    <h1 className="text-gray-600 font-bold text-lg my-5">Deposit Withdraw Table</h1>
+                    <DepositWithdrawTable data={data.uncheckReports} loading={loading} fetchData={fetchData} />
+                </div>
 
-            <div className="mt-8">
-                <h1 className="text-gray-600 font-bold text-lg my-5">General Outcome Table</h1>
-                <RegularCostTable data={data} loading={loading} />
+                <div className="mt-8">
+                    <h1 className="text-gray-600 font-bold text-lg my-5">General Outcome Table</h1>
+                    <RegularCostTable data={data.regularData} loading={loading} fetchData={fetchData} />
+                </div>
             </div>
         </Layout>
     );

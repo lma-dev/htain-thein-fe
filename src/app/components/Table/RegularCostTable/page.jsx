@@ -1,13 +1,12 @@
 import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 
-const RegularCostTable = ({ data, fetchRegularCosts }) => {
-    console.log(data)
+const RegularCostTable = ({ data, fetchData }) => {
     return (
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">
                 <div className="border rounded-lg shadow dark:border-gray-700 dark:shadow-gray-900 h-80 overflow-auto">
-                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 sticky top-0 z-[1] ">
-                        <thead className="bg-gray-50 dark:bg-gray-700">
+                    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 ">
+                        <thead className="bg-gray-50 dark:bg-gray-700 sticky top-0 z-[1]">
                             <tr>
                                 <th scope="col" className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400">Id</th>
                                 <th scope="col" className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400">Requester</th>
@@ -18,7 +17,7 @@ const RegularCostTable = ({ data, fetchRegularCosts }) => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700 relative">
-                            {data.regularData?.map((item, index) => (
+                            {data?.map((item, index) => (
                                 <tr key={index}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start">{item.id}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start"> {item.reporter}
@@ -29,7 +28,7 @@ const RegularCostTable = ({ data, fetchRegularCosts }) => {
 
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 text-start">{item.createdAt}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle" >
-                                        <RegularCostDropDown regularCostId={item?.id} fetchRegularCosts={fetchRegularCosts} />
+                                        <RegularCostDropDown regularCostId={item?.id} fetchData={fetchData} />
                                     </td>
                                 </tr>
                             ))

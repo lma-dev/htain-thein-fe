@@ -4,10 +4,10 @@ import { MoreVertical, Pencil, Trash2, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { deleteRegularCostService } from '../../services/RegularCostService/DeleteRegularCostService';
 
-export default function RegularCostTable({ regularCostId, fetchRegularCosts }) {
+export default function RegularCostTable({ regularCostId, fetchData }) {
     const handleDelete = async () => {
         await deleteRegularCostService(regularCostId);
-        fetchRegularCosts();
+        fetchData();
     }
 
 

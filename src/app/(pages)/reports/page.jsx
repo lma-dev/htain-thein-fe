@@ -13,7 +13,6 @@ const ReportsPage = () => {
     const fetchReports = async () => {
         const res = await fetchReportsData();
         setReports(res.data);
-        console.log(res.data);
     };
 
     useEffect(() => {
