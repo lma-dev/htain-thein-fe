@@ -4,11 +4,11 @@ const Navbar = () => {
             <div className="sm:hidden">
                 <label htmlFor="Tab" className="sr-only">Tab</label>
 
-                <select id="Tab" className="w-full rounded-md border-gray-200">
+                <select className="w-full rounded-md border-gray-200">
                     <option>Settings</option>
                     <option>Messages</option>
                     <option>Archive</option>
-                    <option select>Notifications</option>
+                    <option>Notifications</option>
                 </select>
             </div>
 
