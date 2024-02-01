@@ -24,14 +24,17 @@ const AuthService = {
   logout: async () => {
     try {
       const response = await axios.post('/logout');
-
+      destroyCookie(null, 'accessToken');
+      destroyCookie(null,'userId');
+      destroyCookie(null,'userName');
+      localStorage.removeItem('laravel_session');
       if (!response.data) {
         throw new Error('Logout failed');
       }
 
       // Additional cleanup or handling on successful logout
 
-      return response.data;
+      return 200;
     } catch (error) {
       console.error('Logout error:', error);
       throw new Error('Logout failed');

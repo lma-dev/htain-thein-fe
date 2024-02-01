@@ -24,8 +24,6 @@ const useAuth = () => {
   const logout = async () => {
     try {
       await AuthService.logout();
-      setUser(null);
-      setError(null);
     } catch (error) {
       console.error('Error during logout:', error);
     }
