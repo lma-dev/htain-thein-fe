@@ -14,7 +14,7 @@ const Sidebar = () => {
 
     }
     return (
-        <div className="hidden md:flex min-h-full flex-col justify-between border-e bg-white fixed">
+        <div className="flex min-h-full flex-col justify-between fixed">
             <div className="px-4 py-6">
                 <span className="grid h-10 w-32 place-content-center rounded-lg font-bold text-lg uppercase text-gray-600">
                     HTAIN THEIN
