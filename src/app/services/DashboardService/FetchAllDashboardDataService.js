@@ -1,6 +1,6 @@
-import { fetchAllDataApi } from "../../api/dashboard/fetchAllDataApi";
+import { fetchAllDashboardDataApi } from "../../api/dashboard/fetchAllDashboardDataApi";
 
-export const fetchAllDashboardData =  async(setData,setLoading) => {
-    return await fetchAllDataApi(setData, setLoading);
+export const fetchAllDashboardDataService =  async(setData,setLoading) => {
+    return await fetchAllDashboardDataApi(setData, setLoading);
 };
   

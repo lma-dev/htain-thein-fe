@@ -2,7 +2,7 @@
 import { fetchAllData } from '../../libs/ApiRequestHelper';
 import {checkUserRoles} from '../../libs/checkUserRole';
 
-export const fetchAllDataApi = async (setData, setLoading) => {
+export const fetchAllDashboardDataApi = async (setData, setLoading) => {
   try {
     const [fetchFinancial, fetchUsers, fetchReports, fetchUncheckReports, fetchRegularData, role] = await Promise.all([
       fetchAllData("/calculations"),

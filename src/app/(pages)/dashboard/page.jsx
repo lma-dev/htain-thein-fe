@@ -13,8 +13,8 @@ import SkeletonAnimation from "../../components/Animation/SkeletonAnimation";
 const DashboardPage = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true); // Set initial loading state to true
-    const fetchData = () => {
-        fetchAllDashboardData(setData, setLoading);
+    const fetchData = async () => {
+        await fetchAllDashboardData(setData, setLoading);
     };
 
     useEffect(() => {

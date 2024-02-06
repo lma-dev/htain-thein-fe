@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Navbar = () => {
     return (
         <div className="mt-5">
@@ -36,13 +38,13 @@ const Navbar = () => {
                             Archive
                         </a>
 
-                        <a
-                            href="#"
+                        <Link
+                            href="/notifications"
                             className="shrink-0 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600"
                             aria-current="page"
                         >
                             Notifications
-                        </a>
+                        </Link>
                     </nav>
                 </div>
             </div>

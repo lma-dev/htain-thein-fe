@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -26,9 +22,11 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/app/(pages)/users/[userId]/page.jsx", "src/app/(pages)/reports/[reportId]/history/page.jsx", "src/app/components/Table/ReportHistoryTable/page.jsx", "src/app/(pages)/notification/page.jsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.tsx",
+    "src/app/(pages)/users/[userId]/page.jsx",
+    "src/app/(pages)/reports/[reportId]/history/page.jsx",
+    "src/app/components/Table/ReportHistoryTable/page.jsx",
+    "src/app/(pages)/notifications/page.jsx"
+  ],
+  "exclude": ["node_modules"]
 }
