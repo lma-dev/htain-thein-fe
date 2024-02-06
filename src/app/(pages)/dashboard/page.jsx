@@ -4,7 +4,7 @@ import ItemCountCard from "../../components/Card/ItemCountCard";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
 import { useEffect, useState } from "react";
-import { fetchAllDashboardData } from "../../services/DashboardService/FetchAllDashboardDataService";
+import { fetchAllDashboardDataService } from "../../services/DashboardService/FetchAllDashboardDataService";
 import DepositWithdrawTable from "../../components/Table/DepositWithDrawTable/page";
 import RegularCostTable from "../../components/Table/RegularCostTable/page";
 import OverAllStatusCard from "../../components/Card/OverAllStatusCard";
@@ -14,7 +14,7 @@ const DashboardPage = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true); // Set initial loading state to true
     const fetchData = async () => {
-        await fetchAllDashboardData(setData, setLoading);
+        await fetchAllDashboardDataService(setData, setLoading);
     };
 
     useEffect(() => {
