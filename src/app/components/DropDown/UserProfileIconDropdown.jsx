@@ -19,10 +19,10 @@ const UserProfileIconDropdown = () => {
 
     }
     return (
-        <Menu as="div" className="relative inline-block text-left">
+        <Menu as="div" className="relative inline-block text-left ">
             <div>
-                <Menu.Button className="inline-flex rounded-md  ">
-                    <CircleUserRound size={27} className='text-gray-900' />
+                <Menu.Button className="inline-flex rounded-md">
+                    <CircleUserRound size={27} className='text-gray-600' />
                 </Menu.Button>
             </div>
 

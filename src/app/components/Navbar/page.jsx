@@ -1,23 +1,27 @@
 
 import Link from "next/link";
 import UserProfileIconDropdown from "../DropDown/UserProfileIconDropdown";
+import { AlignLeft } from 'lucide-react';
 
 const Navbar = () => {
 
     return (
         <div className="mt-5">
-            <div className="sm:hidden">
-                <label htmlFor="Tab" className="sr-only">Tab</label>
-
-                <select className="w-full rounded-md border-gray-200">
-                    <option>Settings</option>
-                    <option>Messages</option>
-                    <option>Archive</option>
-                    <option>Notifications</option>
-                </select>
+            <div className="sm:hidden md:hidden flex justify-between border-b border-gray-200 ">
+                <div class="text-center ml-5">
+                    <div class="inline-flex">
+                        <AlignLeft size={24} className="mr-5 cursor-pointer text-gray-600" />
+                        <span class="align-middle font-bold text-lg uppercase text-gray-600">
+                            HTAIN THEIN
+                        </span>
+                    </div>
+                </div>
+                <div className="mr-7">
+                    <UserProfileIconDropdown />
+                </div>
             </div>
 
-            <div className="hidden sm:block">
+            <div className="hidden sm:block md:block">
                 <div className="border-b border-gray-200">
                     <div className="flex justify-between px-5">
                         <div></div>
