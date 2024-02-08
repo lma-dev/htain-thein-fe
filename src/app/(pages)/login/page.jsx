@@ -5,11 +5,13 @@ import useAuth from '../../hooks/useAuth';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const { login } = useAuth();
 
     const handleLogin = async (e) => {
+        setLoading(true);
         e.preventDefault();
-        await login(email, password);
+        await login(email, password, setLoading);
     };
 
     return (
@@ -47,8 +49,9 @@ const Login = () => {
                             />
                         </div>
                         <div>
-                            <button type="submit" className="w-full p-3 text-center hover:bg-gray-950 text-white rounded-lg bg-gray-800 dark:text-gray-900 dark:bg-violet-400">
-                                Sign in
+                            <button type="submit" className="w-full p-3 text-center hover:bg-gray-950 text-white rounded-lg bg-gray-800 dark:text-gray-900 dark:bg-violet-400" disabled={loading}>
+
+                                {loading ? 'Signing in...' : 'Sign in'}
                             </button>
                         </div>
                     </form>

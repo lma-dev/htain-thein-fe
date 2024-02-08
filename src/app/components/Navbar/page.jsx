@@ -8,10 +8,10 @@ const Navbar = () => {
     return (
         <div className="mt-5">
             <div className="sm:hidden md:hidden flex justify-between border-b border-gray-200 ">
-                <div class="text-center ml-5">
-                    <div class="inline-flex">
+                <div className="text-center ml-5">
+                    <div className="inline-flex">
                         <AlignLeft size={24} className="mr-5 cursor-pointer text-gray-600" />
-                        <span class="align-middle font-bold text-lg uppercase text-gray-600">
+                        <span className="align-middle font-bold text-lg uppercase text-gray-600">
                             HTAIN THEIN
                         </span>
                     </div>
