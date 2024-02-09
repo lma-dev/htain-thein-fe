@@ -1,4 +1,4 @@
-
+'use client'
 import Link from "next/link";
 import UserProfileIconDropdown from "../DropDown/UserProfileIconDropdown";
 import { AlignLeft } from 'lucide-react';

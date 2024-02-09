@@ -20,7 +20,6 @@ const Sidebar = ({ setOpen, open }) => {
             initial={{ x: "-100%" }}
             animate={{ x: open ? "0%" : "-100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            transitionEnd={{ display: "none" }}
         >
             <div className="flex min-h-full flex-col justify-between">
                 <div className="px-4 py-6">
