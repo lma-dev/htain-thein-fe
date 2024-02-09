@@ -1,6 +1,6 @@
 import { deleteSingleData } from "../../libs/ApiRequestHelper";
 
 export const deleteUserService = async (userId) => {
- return await deleteSingleData(`/users/${userId}`);
-  };
-  
+  await deleteSingleData(`/users/${userId}`);
+  return;
+};

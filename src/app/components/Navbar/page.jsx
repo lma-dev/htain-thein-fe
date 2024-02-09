@@ -4,9 +4,10 @@ import UserProfileIconDropdown from "../DropDown/UserProfileIconDropdown";
 import { AlignLeft } from 'lucide-react';
 import MobileSidebar from "../MobileSidebar/page";
 import { useState } from "react";
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
-
+    const pathname = usePathname()
     const [open, setOpen] = useState(false);
 
 
@@ -33,22 +34,21 @@ const Navbar = () => {
                             <nav className="-mb-px flex gap-6 text-center align-middle justify-center" aria-label="Tabs">
                                 <a
                                     href="#"
-                                    className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                    className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${pathname === '/settings' ? 'border-b-2 border-sky-500 text-sky-600' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700'}`}
                                 >
                                     Settings
                                 </a>
 
                                 <a
                                     href="#"
-                                    className="shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                    className="shrink-0 border-b-2 px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                                 >
                                     About
                                 </a>
 
                                 <Link
                                     href="/notifications"
-                                    className="shrink-0 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600"
-                                    aria-current="page"
+                                    className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${pathname === '/notifications' ? ' border-sky-500 text-sky-600' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700'}`}
                                 >
                                     Notifications
                                 </Link>

@@ -1,15 +1,24 @@
+'use client'
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Eye } from 'lucide-react';
 import { deleteReportService } from "../../services/ReportService/DeleteReportService";
+import ConfirmDialog from '../Dialog/ConfirmDialog';
 import Link from 'next/link';
 
 export default function ReportDropDown({ reportId, fetchReports }) {
-    const handleDelete = async () => {
-        await deleteReportService(reportId);
-        fetchReports();
+
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+    const handleDelete = () => {
+        setOpenDeleteDialog(true);
     }
 
+    const handleConfirmDelete = async () => {
+        await deleteReportService(reportId);
+        fetchReports();
+        setOpenDeleteDialog(false);
+    }
 
     return (
         <div className="">
@@ -53,6 +62,7 @@ export default function ReportDropDown({ reportId, fetchReports }) {
                     </Menu.Items>
                 </Transition>
             </Menu>
+            <ConfirmDialog open={openDeleteDialog} setOpen={setOpenDeleteDialog} method={handleConfirmDelete} />
         </div>
     )
 }

@@ -22,7 +22,6 @@ const DashboardPage = () => {
     }, []);
 
     useEffect(() => {
-        console.log(data);
     }, [data]);
 
     return (
@@ -54,7 +53,7 @@ const DashboardPage = () => {
                 </div>
                 <div className="mt-8">
                     <h1 className="text-gray-600 font-bold text-lg my-5">General Outcome Table</h1>
-                    <RegularCostTable data={data.regularData} loading={loading} fetchData={fetchData} tableHeight='h-80' />
+                    <RegularCostTable data={data.regularData} loading={loading} fetchRegularCosts={fetchData} tableHeight='h-80' />
                 </div>
 
             </div>

@@ -17,6 +17,8 @@ const RegularCost = () => {
         setLoading(false);
     };
 
+
+
     useEffect(() => {
         fetchRegularCosts();
     }, [])

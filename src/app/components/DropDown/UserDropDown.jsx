@@ -3,12 +3,20 @@ import { Fragment, useEffect, useRef, useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Download } from 'lucide-react';
 import { deleteUserService } from "../../services/UserService/DeleteUserService";
 import { exportUserService } from "../../services/UserService/ExportUserService";
+import ConfirmDialog from '../Dialog/ConfirmDialog';
 import Link from 'next/link';
 
 export default function UserDropDown({ userId, fetchUsers }) {
-    const handleDelete = async () => {
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+    const handleDelete = () => {
+        setOpenDeleteDialog(true);
+    }
+
+    const handleConfirmDelete = async () => {
         await deleteUserService(userId);
         fetchUsers();
+        setOpenDeleteDialog(false);
     }
 
     const handleExport = async () => {
@@ -56,6 +64,7 @@ export default function UserDropDown({ userId, fetchUsers }) {
                     </Menu.Items>
                 </Transition>
             </Menu>
+            <ConfirmDialog open={openDeleteDialog} setOpen={setOpenDeleteDialog} method={handleConfirmDelete} />
         </div>
     )
 }

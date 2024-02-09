@@ -1,7 +1,7 @@
 import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Animation/SkeletonTableRow";
 
-const RegularCostTable = ({ data, fetchData, loading }) => {
+const RegularCostTable = ({ data, fetchRegularCosts, loading }) => {
     return (
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -31,7 +31,7 @@ const RegularCostTable = ({ data, fetchData, loading }) => {
 
                                     </>
                                 ) : (
-                                    data.map((item, index) => (
+                                    data?.map((item, index) => (
                                         <tr key={index}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{item.id}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200"> {item.reporter}
@@ -44,7 +44,7 @@ const RegularCostTable = ({ data, fetchData, loading }) => {
 
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{item.createdAt}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                                                <RegularCostDropDown regularCostId={item?.id} fetchData={fetchData} />
+                                                <RegularCostDropDown regularCostId={item?.id} fetchRegularCosts={fetchRegularCosts} />
                                             </td>
                                         </tr>
                                     ))

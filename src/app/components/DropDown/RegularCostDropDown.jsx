@@ -1,15 +1,24 @@
+'use client'
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { deleteRegularCostService } from '../../services/RegularCostService/DeleteRegularCostService';
+import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-export default function RegularCostTable({ regularCostId, fetchData }) {
-    const handleDelete = async () => {
-        await deleteRegularCostService(regularCostId);
-        fetchData();
+export default function RegularCostTable({ regularCostId, fetchRegularCosts }) {
+
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+    const handleDelete = () => {
+        setOpenDeleteDialog(true);
     }
 
+    const handleConfirmDelete = async () => {
+        await deleteRegularCostService(regularCostId);
+        fetchRegularCosts();
+        setOpenDeleteDialog(false);
+    }
 
     return (
         <div className="">
@@ -53,6 +62,7 @@ export default function RegularCostTable({ regularCostId, fetchData }) {
                     </Menu.Items>
                 </Transition>
             </Menu>
+            <ConfirmDialog open={openDeleteDialog} setOpen={setOpenDeleteDialog} method={handleConfirmDelete} />
         </div>
     )
 }

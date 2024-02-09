@@ -15,7 +15,6 @@ const useAuth = () => {
       setLoading(true);
       setError(null);
       router.push("/dashboard");
-      console.log("Login successful:", userData);
     } catch (error) {
       setError(error.message || "Login failed");
       setUser(null);

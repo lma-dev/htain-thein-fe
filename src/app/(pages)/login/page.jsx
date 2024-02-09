@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import ButtonLoading from '../../components/Loading/ButtonLoading';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -51,7 +52,7 @@ const Login = () => {
                         <div>
                             <button type="submit" className="w-full p-3 text-center hover:bg-gray-950 text-white rounded-lg bg-gray-800 dark:text-gray-900 dark:bg-violet-400" disabled={loading}>
 
-                                {loading ? 'Signing in...' : 'Sign in'}
+                                {loading ? <ButtonLoading /> : 'Sign in'}
                             </button>
                         </div>
                     </form>
