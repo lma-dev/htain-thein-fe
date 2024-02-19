@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { MoreVertical, Pencil, Trash2, Download } from 'lucide-react';
+import { MoreVertical, Pencil, Trash2, Download, MapPinned } from 'lucide-react';
 import { deleteUserService } from "../../services/UserService/DeleteUserService";
 import { exportUserService } from "../../services/UserService/ExportUserService";
 import ConfirmDialog from '../Dialog/ConfirmDialog';
@@ -41,6 +41,14 @@ export default function UserDropDown({ userId, fetchUsers }) {
                 >
                     <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
                         <div className="px-1 py-1 ">
+                            <h2 className='text-gray-500 font-semibold p-2'>Settings</h2>
+
+                            <Menu.Item>
+                                <Link href={`/users/${userId}/location`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                    <MapPinned size={16} className="mr-2 inline-block" />
+                                    Request Location
+                                </Link>
+                            </Menu.Item>
                             <Menu.Item>
                                 <Link href={`/users/${userId}`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
                                     <Pencil size={16} className="mr-2 inline-block" />
@@ -53,6 +61,8 @@ export default function UserDropDown({ userId, fetchUsers }) {
                                     Export
                                 </Link>
                             </Menu.Item>
+                            <hr className="my-1 border-gray-300" />
+                            <h2 className='text-gray-500 font-semibold p-2'>Danger Zone</h2>
                             <Menu.Item>
                                 <Link href="#" className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400" onClick={handleDelete}>
                                     <Trash2 size={16} className="mr-2 inline-block" />
