@@ -1,10 +1,9 @@
 // api.js
-import { fetchAllData } from '../../libs/ApiRequestHelper';
-import {checkUserRoles} from '../../libs/checkUserRole';
+import { fetchAllData } from "../../libs/ApiRequestHelper";
 
 export const fetchAllNotificationsApi = async (setData, setLoading) => {
   try {
-   const response = await fetchAllData("/all-notis");
+    const response = await fetchAllData("/all-notis");
 
     setData(response.data);
     setLoading(false);
@@ -12,4 +11,3 @@ export const fetchAllNotificationsApi = async (setData, setLoading) => {
     setLoading(false);
   }
 };
-

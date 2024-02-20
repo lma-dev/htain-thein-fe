@@ -4,7 +4,6 @@ import ToastsBox from "../components/Toasts/ToastsBox";
 
 export async function callApi(method, url, data, responseType = null) {
   const token = parseCookies().accessToken;
-  console.log("token", token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -18,7 +17,8 @@ export async function callApi(method, url, data, responseType = null) {
 
   if (
     (response.status === 200 || response.status === 201) &&
-    response.data.msg
+    response.data.msg &&
+    response.data.isVisible === true
   ) {
     ToastsBox.success({ message: response.data.msg });
   }

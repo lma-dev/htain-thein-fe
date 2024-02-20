@@ -4,12 +4,13 @@ import { LogOut } from 'lucide-react';
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { usePathname } from 'next/navigation'
+import { parseCookies } from "nookies";
 
 const Sidebar = () => {
     const { logout } = useAuth();
     const router = useRouter();
     const pathname = usePathname()
-
+    const userId = parseCookies().userId;
     const handleLogout = async () => {
         await logout();
         router.push("/");
