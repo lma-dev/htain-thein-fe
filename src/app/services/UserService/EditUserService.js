@@ -1,11 +1,7 @@
-import { editData } from "../../libs/ApiRequestHelper";
+import { editUserApi } from "../../api/user/editUserApi";
 
 const EditUserService = async (userId, newData) => {
-    const response= await editData(`/users/${userId}`, newData);
-    if (response && response.result == 1) {
-      return response.data;
-    }
-   return 'Error in Edit User Service';
-  };
+  return await editUserApi(userId, newData);
+};
 
-  export default EditUserService;
+export default EditUserService;

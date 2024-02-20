@@ -15,7 +15,7 @@ const ChatPage = () => {
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading] = useState(true);
     const senderId = parseCookies().userId;
-    console.log('senderId', senderId);
+
     const pusherJob = () => {
         console.log('in pusher ...');
         const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY, {

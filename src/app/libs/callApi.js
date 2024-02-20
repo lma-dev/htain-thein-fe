@@ -18,7 +18,7 @@ export async function callApi(method, url, data, responseType = null) {
   if (
     (response.status === 200 || response.status === 201) &&
     response.data.msg &&
-    response.data.isVisible === true
+    response.data.alertVisible === 1
   ) {
     ToastsBox.success({ message: response.data.msg });
   }

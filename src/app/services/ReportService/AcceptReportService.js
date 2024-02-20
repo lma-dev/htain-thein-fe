@@ -1,11 +1,7 @@
-import { editData } from "../../libs/ApiRequestHelper";
+import { acceptReportApi } from "../../api/report/acceptReportApi";
 
-const AcceptReportService = async (id) => {
-  const response = await editData(`/reports/${id}/accept`);
-  if (response && response.result == 1) {
-    return response.data;
-  }
-  return "Error in Edit Report Service";
+const AcceptReportService = async (reportId) => {
+  return await acceptReportApi(reportId);
 };
 
 export default AcceptReportService;

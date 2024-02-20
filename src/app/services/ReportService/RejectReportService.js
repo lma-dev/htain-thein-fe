@@ -1,11 +1,7 @@
-import { editData, fetchSingleData } from "../../libs/ApiRequestHelper";
+import { rejectReportApi } from "../../api/report/rejectReportApi";
 
-const RejectReportService = async (id) => {
-  const response = await fetchSingleData(`/reports/${id}/reject`);
-  if (response && response.result == 1) {
-    return response.data;
-  }
-  return "Error in Rejected Report Service";
+const RejectReportService = async (reportId) => {
+  return await rejectReportApi(reportId);
 };
 
 export default RejectReportService;

@@ -1,6 +1,5 @@
-import { createData } from "../../libs/ApiRequestHelper";
+import { createRegularCostApi } from "../../api/regular-cost/createRegularCostApi";
 
 export const createRegularCostService = async (newData) => {
-        return await createData('/general-outcome',newData);
+  return await createRegularCostApi("/general-outcome", newData);
 };
-  

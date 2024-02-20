@@ -1,6 +1,5 @@
-import { createData } from "../../libs/ApiRequestHelper";
+import { createReportApi } from "../../api/report/createReportApi";
 
 export const createReportService = async (newData) => {
-        return await createData('/reports',newData);
+  return await createReportApi(newData);
 };
-  

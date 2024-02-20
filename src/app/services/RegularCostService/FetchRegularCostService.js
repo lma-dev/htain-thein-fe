@@ -1,6 +1,5 @@
-import { fetchAllData } from "../../libs/ApiRequestHelper";
+import { fetchRegularCostApi } from "../../api/regular-cost/fetchRegularCostApi";
 
 export const fetchRegularCostsData = async () => {
- return await fetchAllData('/general-outcome');
-  };
-  
+  return await fetchRegularCostApi();
+};

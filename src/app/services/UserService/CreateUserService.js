@@ -1,5 +1,5 @@
-import { createData } from "../../libs/ApiRequestHelper";
+import { createUserApi } from "../../api/user/createUserApi";
 
-export const createUserService = async (senderId, newData) => {
-  return await createData(senderId, newData);
+export const createUserService = async (newData) => {
+  return await createUserApi(newData);
 };

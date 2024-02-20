@@ -1,6 +1,5 @@
-import { deleteSingleData } from "../../libs/ApiRequestHelper";
+import { deleteReportApi } from "../../api/report/deleteReportApi";
 
 export const deleteReportService = async (reportId) => {
- return await deleteSingleData(`/reports/${reportId}`);
-  };
-  
+  return await deleteReportApi(reportId);
+};

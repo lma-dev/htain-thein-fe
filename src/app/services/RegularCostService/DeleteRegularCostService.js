@@ -1,6 +1,5 @@
-import { deleteSingleData } from "../../libs/ApiRequestHelper";
+import { deleteRegularCostApi } from "../../api/regular-cost/deleteRegularCostApi";
 
-export const deleteRegularCostService = async (reportId) => {
- return await deleteSingleData(`/general-outcome/${reportId}`);
-  };
-  
+export const deleteRegularCostService = async (regularCostId) => {
+  return await deleteRegularCostApi(`/general-outcome/${regularCostId}`);
+};

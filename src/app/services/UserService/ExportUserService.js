@@ -1,14 +1,16 @@
-import { exportData } from "../../libs/ApiRequestHelper";
+import { exportUserDataApi } from "../../api/user/exportUserDataApi";
 
 export const exportUserService = async (userId) => {
   try {
-    const response = await exportData(`/user-report/${userId}`);
+    const response = await exportUserDataApi(userId);
 
-    const currentDate = new Date().toISOString().replace(/:/g, ''); // Get current date and time without colons
+    const currentDate = new Date().toISOString().replace(/:/g, ""); // Get current date and time without colons
     const filename = `${userId}ReportExports_${currentDate}.xlsx`;
-    const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const blob = new Blob([response.data], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = filename;
     a.click();
