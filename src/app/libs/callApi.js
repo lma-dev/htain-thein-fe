@@ -3,7 +3,8 @@ import axios from "../utils/axios";
 import ToastsBox from "../components/Toasts/ToastsBox";
 
 export async function callApi(method, url, data, responseType = null) {
-  const token = parseCookies.accessToken;
+  const token = parseCookies().accessToken;
+  console.log("token", token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -14,6 +15,7 @@ export async function callApi(method, url, data, responseType = null) {
     responseType: responseType,
   };
   const response = await axios(config);
+
   if (
     (response.status === 200 || response.status === 201) &&
     response.data.msg
