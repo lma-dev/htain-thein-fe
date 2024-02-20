@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@tanstack/react-query": "^5.22.2",
     "axios": "^1.6.5",
     "framer-motion": "^11.0.3",
     "lucide-react": "^0.309.0",
@@ -21,6 +22,7 @@
     "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.20.1",
     "@types/node": "20.10.8",
     "@types/react": "18.2.47",
     "autoprefixer": "^10.4.17",

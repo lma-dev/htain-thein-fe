@@ -1,19 +1,25 @@
+import { parseCookies } from "nookies";
+import axios from "../utils/axios";
+import ToastsBox from "../components/Toasts/ToastsBox";
 
-import { parseCookies } from 'nookies';
-import axios from '../utils/axios';
-
-export async function callApi(method, url, data,responseType=null) {
-  const token= parseCookies.accessToken
+export async function callApi(method, url, data, responseType = null) {
+  const token = parseCookies.accessToken;
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     method: method,
     url: url,
     data: data,
-    responseType: responseType
+    responseType: responseType,
+  };
+  const response = await axios(config);
+  if (
+    (response.status === 200 || response.status === 201) &&
+    response.data.msg
+  ) {
+    ToastsBox.success({ message: response.data.msg });
   }
-  const response = await axios(config)
-  return response.data
 
+  return response.data;
 }

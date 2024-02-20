@@ -18,6 +18,7 @@ const useAuth = () => {
     } catch (error) {
       setError(error.message || "Login failed");
       setUser(null);
+      setLoading(false);
     }
   };
 
