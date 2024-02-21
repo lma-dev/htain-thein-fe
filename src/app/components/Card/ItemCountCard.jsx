@@ -1,28 +1,65 @@
 import Link from "next/link";
+import { FileText, ScrollText, UsersRound, Frown, Smile } from 'lucide-react';
 
-
-const ItemCountCard = ({ title, count }) => {
+const ItemCountCard = ({ title, count, text = null }) => {
+    const getIcon = () => {
+        if (title === "reports") {
+            return <ScrollText size={24} />
+        } else if (title === "outcome") {
+            return <Frown size={24} />
+        } else if (title === "income") {
+            return <Smile size={24} />
+        } else if (title === "users") {
+            return <UsersRound size={24} />
+        }
+        return <FileText size={24} />
+    }
 
     return (
         <div>
-            <Link href={title}>
-                <div class="max-w-md mx-auto bg-white rounded-xl overflow-hidden shadow-lg transform transition-transform hover:scale-105">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <svg class="h-12 w-12 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15v5h14v-5h-3V10a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3v5H5zm2-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm12 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <h2 class="text-2xl font-bold text-gray-800">{title}</h2>
-                                <p class="text-gray-600">You have <span class="text-indigo-500 font-bold">{count}</span> items in your collection.</p>
-                            </div>
-                        </div>
+            <article className="rounded-lg border border-gray-100 bg-white p-6 shadow-lg hover:cursor-pointer hover:shadow-gray-300">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-sm text-gray-500 uppercase">{title}</p>
+
+                        {count ? (
+                            <p className="text-2xl font-medium">{text} <span className="text-indigo-500 font-bold">{count}</span> </p>
+                        ) : (
+                            <p className="text-2xl font-medium"><span className="text-indigo-500 font-bold">{text} </span> </p>
+                        )
+
+                        }
                     </div>
+
+                    <span className="rounded-full bg-blue-100 p-3 text-blue-600">
+
+                        {getIcon()}
+                    </span>
                 </div>
 
-            </Link>
+                <div className="mt-1 flex gap-1 text-green-600">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                        />
+                    </svg>
+
+                    <p className="flex gap-2 text-xs">
+                        <span className="font-medium"> 67.81% </span>
+
+                        <span className="text-gray-500"> Since last week </span>
+                    </p>
+                </div>
+            </article>
         </div>
 
 

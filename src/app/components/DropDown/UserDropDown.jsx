@@ -1,45 +1,81 @@
-import { PencilLine, Trash2, MoreVertical, Lock } from 'lucide-react';
+import { Menu, Transition } from '@headlessui/react'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { MoreVertical, Pencil, Trash2, Download, MapPinned } from 'lucide-react';
+import { deleteUserService } from "../../services/UserService/DeleteUserService";
+import { exportUserService } from "../../services/UserService/ExportUserService";
+import ConfirmDialog from '../Dialog/ConfirmDialog';
+import Link from 'next/link';
 
-const UserDropDown = () => {
+export default function UserDropDown({ userId, fetchUsers }) {
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+    const handleDelete = () => {
+        setOpenDeleteDialog(true);
+    }
+
+    const handleConfirmDelete = async () => {
+        await deleteUserService(userId);
+        fetchUsers();
+        setOpenDeleteDialog(false);
+    }
+
+    const handleExport = async () => {
+        await exportUserService(userId);
+    }
     return (
-        <div className="hs-dropdown relative inline-flex">
-            <button id="hs-dropdown-custom-icon-trigger" type="button" className="hs-dropdown-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                <MoreVertical className='text-gray-500' size={16} />
-            </button>
-
-            <div className="border divide-y divide-gray-100 hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700" aria-labelledby="hs-dropdown-custom-icon-trigger">
-                <div class="py-2 first:pt-0 last:pb-0">
-                    <span class="block py-2 px-3 text-xs font-medium uppercase text-gray-400 dark:text-gray-500 text-left">
-                        Settings
-                    </span>
-
-                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                        <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" /><path d="M12 12v9" /><path d="m8 17 4 4 4-4" /></svg>
-                        Export Report Information
-                    </a>
-                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                        <PencilLine size={16} /> Edit
-                    </a>
+        <div className="">
+            <Menu as="div" className="relative inline-block text-left">
+                <div>
+                    <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium  border hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+                        <MoreVertical size={16} className='flex justify-center items-center text-sm font-semibold text-gray-800 cursor-pointer disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600' />
+                    </Menu.Button>
                 </div>
-                <div class="py-2 first:pt-0 last:pb-0">
-                    <span class="block py-2 px-3 text-xs font-medium uppercase text-gray-400 dark:text-gray-500 text-left">
-                        Danger Zone
-                    </span>
+                <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                >
+                    <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                        <div className="px-1 py-1 ">
+                            <h2 className='text-gray-500 font-semibold p-2'>Settings</h2>
 
-                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                        <Lock size={16} /> Account Status (Active)
+                            <Menu.Item>
+                                <Link href={`/users/${userId}/location`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                    <MapPinned size={16} className="mr-2 inline-block" />
+                                    Request Location
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link href={`/users/${userId}`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                    <Pencil size={16} className="mr-2 inline-block" />
+                                    Edit
+                                </Link>
+                            </Menu.Item>
+                            <Menu.Item>
+                                <Link href="#" className="p-2 hover:bg-gray-200 w-full rounded text-sm block" onClick={handleExport}>
+                                    <Download size={16} className="mr-2 inline-block" />
+                                    Export
+                                </Link>
+                            </Menu.Item>
+                            <hr className="my-1 border-gray-300" />
+                            <h2 className='text-gray-500 font-semibold p-2'>Danger Zone</h2>
+                            <Menu.Item>
+                                <Link href="#" className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400" onClick={handleDelete}>
+                                    <Trash2 size={16} className="mr-2 inline-block" />
+                                    Delete
+                                </Link>
+                            </Menu.Item>
+                        </div>
 
-                    </a>
-                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
-                        <Trash2 size={16} /> Delete
-
-                    </a>
-                </div>
-
-
-            </div>
-        </div >
+                    </Menu.Items>
+                </Transition>
+            </Menu>
+            <ConfirmDialog open={openDeleteDialog} setOpen={setOpenDeleteDialog} method={handleConfirmDelete} />
+        </div>
     )
 }
 
-export default UserDropDown

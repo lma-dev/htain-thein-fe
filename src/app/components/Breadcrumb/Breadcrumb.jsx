@@ -1,4 +1,5 @@
 import { ChevronRight, Home } from 'lucide-react';
+import Link from 'next/link';
 
 
 const BreadCrumb = ({ title }) => {
@@ -7,11 +8,11 @@ const BreadCrumb = ({ title }) => {
             <nav aria-label="Breadcrumb">
                 <ol className="flex items-center gap-1 text-sm text-gray-600">
                     <li>
-                        <a href="#" className="block transition hover:text-gray-700">
+                        <Link href="/dashboard" className="block transition hover:text-gray-700">
                             <span className="sr-only"> Home </span>
 
                             <Home size={16} />
-                        </a>
+                        </Link>
                     </li>
 
                     <li className="rtl:rotate-180">
