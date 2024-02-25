@@ -2,7 +2,7 @@ import React from "react";
 
 
 const OverAllStatusCard = ({
-    balanceData
+    calculations
 }) => {
     return (
 
@@ -16,10 +16,10 @@ const OverAllStatusCard = ({
                 </h3>
                 <h1 className="w-auto rounded-lg border bg-gray-100 p-4 md:text-4xl sm:text-lg font-semibold text-gray-800">
                     <span
-                        className={`mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold ${balanceData?.availableBalance < 0 ? "text-red-500" : "text-green-500"
+                        className={`mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold ${calculations?.data?.availableBalance < 0 ? "text-red-500" : "text-green-500"
                             }`}
                     >
-                        {balanceData?.availableBalance?.toLocaleString()} $
+                        {calculations?.data?.availableBalance?.toLocaleString()} $
                     </span>
                 </h1>
                 <div className="pt-6">
@@ -31,7 +31,7 @@ const OverAllStatusCard = ({
                             Regular Deposit:
                         </span>
                         <span className="mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold text-gray-800 ">
-                            {balanceData?.regularCost} $
+                            {calculations?.data?.regularCost} $
                         </span>
                     </div>
                     <div className="mt-4 flex space-x-4">
@@ -40,7 +40,7 @@ const OverAllStatusCard = ({
                                 Most Deposit Person:
                             </span>
                             <span className="mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold text-gray-800">
-                                {balanceData?.mostDepositPerson}
+                                {calculations?.data?.mostDepositPerson}
                             </span>
                         </div>
                         <div className="flex-1">
@@ -48,7 +48,7 @@ const OverAllStatusCard = ({
                                 Most Withdraw Person:
                             </span>
                             <span className="mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold text-gray-800">
-                                {balanceData?.mostWithdrawPerson}
+                                {calculations?.data?.mostWithdrawPerson}
                             </span>
                         </div>
                     </div>

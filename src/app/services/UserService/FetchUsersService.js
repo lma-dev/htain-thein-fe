@@ -1,5 +1,5 @@
-import { fetchUserApi } from "../../api/user/fetchUserApi";
+import { fetchUsersApi } from "../../api/user/fetchUsersApi";
 
 export const fetchUsersService = async () => {
-  return await fetchUserApi();
+  return await fetchUsersApi();
 };

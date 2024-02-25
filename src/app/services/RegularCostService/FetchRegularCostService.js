@@ -1,5 +1,5 @@
 import { fetchRegularCostApi } from "../../api/regular-cost/fetchRegularCostApi";
 
-export const fetchRegularCostsData = async () => {
+export const fetchRegularCostsDataService = async () => {
   return await fetchRegularCostApi();
 };

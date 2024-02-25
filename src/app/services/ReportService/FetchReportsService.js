@@ -1,5 +1,5 @@
 import { fetchReportApi } from "../../api/report/fetchReportApi";
 
-export const fetchReportsData = async () => {
+export const fetchReportsDataService = async () => {
   return await fetchReportApi();
 };

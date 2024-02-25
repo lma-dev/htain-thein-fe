@@ -1,5 +1,5 @@
 import { fetchAllData } from "../../libs/ApiRequestHelper";
 
-export const fetchUserApi = async () => {
+export const fetchUsersApi = async () => {
   return await fetchAllData("/users");
 };

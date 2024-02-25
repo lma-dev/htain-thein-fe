@@ -1,13 +1,6 @@
 // api.js
 import { fetchAllData } from "../../libs/ApiRequestHelper";
 
-export const fetchAllNotificationsApi = async (setData, setLoading) => {
-  try {
-    const response = await fetchAllData("/all-notis");
-
-    setData(response.data);
-    setLoading(false);
-  } catch (error) {
-    setLoading(false);
-  }
+export const fetchAllNotificationsApi = async () => {
+  return await fetchAllData("/all-notis");
 };

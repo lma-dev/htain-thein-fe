@@ -1,12 +1,12 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment,  useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Download, MapPinned } from 'lucide-react';
 import { deleteUserService } from "../../services/UserService/DeleteUserService";
 import { exportUserService } from "../../services/UserService/ExportUserService";
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 import Link from 'next/link';
 
-export default function UserDropDown({ userId, fetchUsers }) {
+export default function UserDropDown({ userId }) {
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
     const handleDelete = () => {
@@ -15,7 +15,6 @@ export default function UserDropDown({ userId, fetchUsers }) {
 
     const handleConfirmDelete = async () => {
         await deleteUserService(userId);
-        fetchUsers();
         setOpenDeleteDialog(false);
     }
 

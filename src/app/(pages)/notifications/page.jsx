@@ -1,23 +1,15 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query'
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
 import NotificationCard from "../../components/Notification/NotificationCard";
-import { fetchAllNotificationsData } from "../../services/NotificationService/FetchAllNotificationsData";
+import { fetchAllNotificationsDataService } from "../../services/NotificationService/FetchAllNotificationsData";
 
 const NotificationPage = () => {
 
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true);
+    const { data:notifications, isLoading: loading} =  useQuery({ queryKey: ['notifications'], queryFn: fetchAllNotificationsDataService,cached: true})
 
-    const fetchData = async () => {
-        fetchAllNotificationsData(setData, setLoading);
-    }
-
-    useEffect(() => {
-        fetchData()
-    }, [])
     return (
         <Layout>
             <BreadCrumb title='Notifications' />
@@ -27,7 +19,7 @@ const NotificationPage = () => {
                 ) : (
                     <div>
                         {
-                            data.length > 0 && data.map((notification, index) => (
+                            notifications.data.length > 0 && notifications.data.map((notification, index) => (
                                 <NotificationCard key={index} notification={notification} />
                             ))
                         }

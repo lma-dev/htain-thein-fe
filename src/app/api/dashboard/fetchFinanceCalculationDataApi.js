@@ -8,8 +8,6 @@ export const fetchAllDashboardDataApi = async (setData, setLoading) => {
       fetchAllData("/calculations"),
       fetchAllData("/users"),
       fetchAllData("/reports"),
-      fetchAllData("/uncheck-reports"),
-      fetchAllData('/general-outcome'),
       checkUserRoles()
     ]);
 
