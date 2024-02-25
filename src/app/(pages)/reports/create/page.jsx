@@ -8,8 +8,11 @@ import { createReportService } from "../../../services/ReportService/CreateRepor
 import { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
 import { fetchSingleData } from "../../../libs/ApiRequestHelper";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const CreateReport = () => {
+    const router=useRouter();
     const [reporterName, setReporterName] = useState('')
     const [formData, setFormData] = useState({
         amount: 0,
@@ -41,8 +44,15 @@ const CreateReport = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const updatedFormData = { ...formData, reporter_id: userId }
-        const response = await createReportService(updatedFormData)
+        createReportMutation.mutate(updatedFormData)
+        router.push('/reports')
     }
+
+    const createReportMutation = useMutation({
+        mutationFn: (newReportData) => {
+          return createReportService(newReportData)
+        },
+      })
 
     return (
         <Layout>

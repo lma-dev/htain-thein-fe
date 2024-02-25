@@ -2,6 +2,7 @@ import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Animation/SkeletonTableRow";
 
 const RegularCostTable = ({ regularCosts, loading }) => {
+    console.log('regularCosts', regularCosts)
     return (
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">

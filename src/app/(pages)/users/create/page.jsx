@@ -6,8 +6,11 @@ import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../components/Button/Button";
 import { createUserService } from "../../../services/UserService/CreateUserService";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 
 const CreateUser = () => {
+    const router= useRouter();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,11 +23,18 @@ const CreateUser = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
-        await createUserService(formData);
+        createUserMutation.mutate(formData);
+        router.push('/users');
+
     };
 
+    const createUserMutation = useMutation({
+        mutationFn: (newUserData) => {
+          return createUserService(newUserData)
+        },
+      })
 
     return (
         <Layout>

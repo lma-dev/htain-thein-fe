@@ -8,8 +8,11 @@ import { createRegularCostService } from "../../../services/RegularCostService/C
 import { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
 import { fetchSingleData } from "../../../libs/ApiRequestHelper";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const CreateRegularCost = () => {
+    const router=useRouter();
     const [reporterName, setReporterName] = useState('')
     const [formData, setFormData] = useState({
         amount: 0,
@@ -40,8 +43,16 @@ const CreateRegularCost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const updatedFormData = { ...formData, reporter_id: userId }
-        const response = await createRegularCostService(updatedFormData)
+        createRegularCostMutation.mutate(updatedFormData)
+        router.push('/regular-costs')
     }
+
+    //TODOD:CHECK Empty Validation in the form
+    const createRegularCostMutation = useMutation({
+        mutationFn: (newRegularCostData) => {
+          return createRegularCostService(newRegularCostData)
+        },
+      })
 
     return (
         <Layout>
