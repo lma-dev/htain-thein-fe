@@ -1,15 +1,13 @@
 'use client'
-
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import UserTable from "../../components/Table/UserTable/page";
-import { useQuery } from '@tanstack/react-query'
 import Layout from "../../components/layout";
-import { fetchUsersService } from "../../services/UserService/fetchUsersService";
+import { FetchUsersService } from "../../services/UserService/FetchUsersService";
 import Link from "next/link";
 
 const UsersPage = () => {
 
-    const { data:users, isLoading: loading} =  useQuery({ queryKey: ['users'], queryFn: fetchUsersService,cached: true})
+    const { data:users, isLoading: loading} =  FetchUsersService()
    
     return (
         <Layout>

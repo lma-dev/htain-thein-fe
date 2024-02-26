@@ -1,14 +1,13 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
 import NotificationCard from "../../components/Notification/NotificationCard";
-import { fetchAllNotificationsDataService } from "../../services/NotificationService/FetchAllNotificationsData";
+import { FetchAllNotificationsDataService } from "../../services/NotificationService/FetchAllNotificationsService";
 
 const NotificationPage = () => {
 
-    const { data:notifications, isLoading: loading} =  useQuery({ queryKey: ['notifications'], queryFn: fetchAllNotificationsDataService,cached: true})
+    const { data:notifications, isLoading: loading} =  FetchAllNotificationsDataService()
 
     return (
         <Layout>

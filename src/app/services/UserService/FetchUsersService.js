@@ -1,5 +1,6 @@
 import { fetchUsersApi } from "../../api/user/fetchUsersApi";
+import { useFetchQuery } from "../../hooks/useFetchQuery";
 
-export const fetchUsersService = async () => {
-  return await fetchUsersApi();
+export const FetchUsersService = () => {
+  return useFetchQuery("users", fetchUsersApi);
 };

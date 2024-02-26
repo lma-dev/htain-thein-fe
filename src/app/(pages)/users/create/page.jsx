@@ -7,8 +7,7 @@ import { NormalButton } from "../../../components/Button/Button";
 import { createUserService } from "../../../services/UserService/CreateUserService";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
-
+import {useCreateQuery} from '../../../hooks/useCreateQuery'
 const CreateUser = () => {
     const router= useRouter();
     const [formData, setFormData] = useState({

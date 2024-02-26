@@ -1,14 +1,12 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import ReportTable from "../../components/Table/ReportTable/page";
 import Layout from "../../components/layout";
-import { fetchReportsDataService } from "../../services/ReportService/FetchReportsService";
+import { FetchReportsService } from "../../services/ReportService/FetchReportsService";
 
 const ReportsPage = () => {
-    const { data:reports, isLoading: loading} =  useQuery({ queryKey: ['reports'], queryFn: fetchReportsDataService,cached: true})
-
+    const { data:reports, isLoading: loading} =  FetchReportsService()
 
     return (
         <Layout>
