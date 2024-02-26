@@ -5,8 +5,8 @@ import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
 import EditReportService from "../../../../services/ReportService/EditReportService";
 import { useEffect, useState } from "react";
-import { fetchSingleData } from "../../../../libs/ApiRequestHelper";
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { FetchSingleReportService } from "../../../../services/ReportService/FetchSingleReportService";
 
 const EditReport = () => {
     const [formData, setFormData] = useState({
@@ -18,6 +18,8 @@ const EditReport = () => {
         verifier: '',
     });
     const params = useParams();
+    const router = useRouter();
+    const { data: reportData } = FetchSingleReportService(params.reportId);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,16 +28,14 @@ const EditReport = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await EditReportService(params.reportId, formData);
+        router.push('/reports');
     };
 
-    const fetchData = async () => {
-        const res = await fetchSingleData(`/reports/${params.reportId}`);
-        setFormData(res.data);
-    }
-
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (reportData?.data) {
+            setFormData(reportData.data);
+        }
+    }, [reportData]); 
 
     return (
         <Layout>

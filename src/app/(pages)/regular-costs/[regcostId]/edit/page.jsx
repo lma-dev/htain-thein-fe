@@ -5,8 +5,8 @@ import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
 import EditRegularCostService from "../../../../services/RegularCostService/EditRegularCostService";
 import { useEffect, useState } from "react";
-import { fetchSingleData } from "../../../../libs/ApiRequestHelper";
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { FetchSingleRegularCostService } from "../../../../services/RegularCostService/FetchSingleRegularCostService";
 
 const EditRegularCost = () => {
     const [formData, setFormData] = useState({
@@ -15,6 +15,8 @@ const EditRegularCost = () => {
         reporter: '',
     });
     const params = useParams();
+    const router= useRouter();
+    const { data: regularCostData } = FetchSingleRegularCostService(params.regcostId);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,16 +25,14 @@ const EditRegularCost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await EditRegularCostService(params.regcostId, formData);
+        router.push('/regular-costs');
     };
 
-    const fetchData = async () => {
-        const res = await fetchSingleData(`/general-outcome/${params.regcostId}`);
-        setFormData(res.data);
-    }
-
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (regularCostData?.data) {
+            setFormData(regularCostData.data);
+        }
+    }, [regularCostData]); 
 
     return (
         <Layout>

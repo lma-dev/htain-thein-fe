@@ -5,8 +5,8 @@ import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../components/Button/Button";
 import EditUserService from "../../../services/UserService/EditUserService";
 import { useEffect, useState } from "react";
-import { fetchSingleData } from "../../../libs/ApiRequestHelper";
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { FetchSingleUserService } from "../../../services/UserService/FetchSingleUserService";
 
 const EditUser = () => {
     const [formData, setFormData] = useState({
@@ -15,7 +15,9 @@ const EditUser = () => {
         role: '',
         accountStatus: '',
     });
+    const router= useRouter();
     const params = useParams();
+    const { data: userData } = FetchSingleUserService(params.userId);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,16 +26,15 @@ const EditUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await EditUserService(params.userId, formData);
+        router.push('/users');
+        
     };
 
-    const fetchData = async () => {
-        const res = await fetchSingleData(`/users/${params.userId}`);
-        setFormData(res.data);
-    }
-
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (userData?.data) {
+            setFormData(userData.data);
+        }
+    }, [userData]); 
 
     return (
         <Layout>

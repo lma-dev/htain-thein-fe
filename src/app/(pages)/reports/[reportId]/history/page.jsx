@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../../../../components/layout';
 import NestedTable from '../../../../components/Table/ReportHistoryTable/page';
 import Link from "next/link";
-import { fetchAllData } from '../../../../libs/ApiRequestHelper';
+import { fetchAllData } from '../../../../libs/ApiMethodHelper';
 import BreadCrumb from '../../../../components/BreadCrumb/BreadCrumb';
 
 const History = () => {

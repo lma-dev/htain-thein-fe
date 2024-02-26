@@ -1,16 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 
-
-
-const useCreateQuery = (data, service) => {
+export const useCreateQuery = (apiFn) => {
     return useMutation(
         {
             mutationFn: (data) => {
-                return service(data)
+                return apiFn(data)
             },
         }
     )
 }
-
-
-export default useCreateQuery;
