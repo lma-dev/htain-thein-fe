@@ -49,7 +49,7 @@ export default function UserDropDown({ userId }) {
                                 </Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href={`/users/${userId}`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
+                                <Link href={`/users/${userId}/edit`} className='text-sm block p-2 hover:bg-gray-200 w-full rounded'>
                                     <Pencil size={16} className="mr-2 inline-block" />
                                     Edit
                                 </Link>

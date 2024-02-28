@@ -1,12 +1,12 @@
 'use client'
 import Link from "next/link";
-import Layout from "../../../components/layout"
-import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
-import { NormalButton } from "../../../components/Button/Button";
-import EditUserService from "../../../services/UserService/EditUserService";
+import Layout from "../../../../components/layout"
+import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
+import { NormalButton } from "../../../../components/Button/Button";
+import EditUserService from "../../../../services/UserService/EditUserService";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from 'next/navigation'
-import { FetchSingleUserService } from "../../../services/UserService/FetchSingleUserService";
+import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 
 const EditUser = () => {
     const [formData, setFormData] = useState({

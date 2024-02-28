@@ -1,21 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+
 import Layout from '../../../../components/layout';
 import NestedTable from '../../../../components/Table/ReportHistoryTable/page';
-import Link from "next/link";
-import { fetchAllData } from '../../../../libs/ApiMethodHelper';
+import { FetchChangedHistoriesService } from "../../../../services/ReportService/FetchChangedHistoriesService";
 import BreadCrumb from '../../../../components/BreadCrumb/BreadCrumb';
 
 const History = () => {
-    const [data, setData] = useState([]);
-    const fetchData = async () => {
-        const response = await fetchAllData('/changed-histories');
-        setData(response.data);
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const { data:histories, isLoading: loading} =  FetchChangedHistoriesService()
 
     return (
         <Layout>
@@ -38,7 +29,7 @@ const History = () => {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                            {data.map((edit) => (
+                                            {histories?.data.map((edit) => (
                                                 <tr key={edit.id} className='hover:bg-gray-100 dark:hover:bg-gray-700'>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200" >{edit.id}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{edit.editor}</td>
