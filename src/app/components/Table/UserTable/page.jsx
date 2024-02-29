@@ -1,7 +1,9 @@
 import UserDropDown from "../../DropDown/UserDropDown";
 import SkeletonTableRow from "../../Animation/SkeletonTableRow";
-const UserTable = ({ data, fetchUsers, loading }) => {
+const UserTable = ({ users, loading }) => {
+   
     return (
+  
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">
                 <div className="border rounded-lg shadow dark:border-gray-700 dark:shadow-gray-900">
@@ -30,7 +32,7 @@ const UserTable = ({ data, fetchUsers, loading }) => {
 
                                     </>
                                 ) : (
-                                    data.map((user, index) => (
+                                    users.data?.map((user, index) => (
                                         <tr key={index}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{user.id}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{user.name}</td>
@@ -40,7 +42,7 @@ const UserTable = ({ data, fetchUsers, loading }) => {
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{user.createdAt}</td>
 
                                             <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                                                <UserDropDown userId={user.id} fetchUsers={fetchUsers} />
+                                                <UserDropDown userId={user.id}  />
                                             </td>
                                         </tr>
                                     ))

@@ -17,7 +17,6 @@ const ChatPage = () => {
     const senderId = parseCookies().userId;
 
     const pusherJob = () => {
-        console.log('in pusher ...');
         const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY, {
             cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
         });
@@ -25,7 +24,6 @@ const ChatPage = () => {
         const channel = pusher.subscribe('home-chat');
 
         channel.bind('keeper', function (data) {
-            console.log('in keeper ...');
             setMessages(prevMessages => [...prevMessages, data.message]);
         });
 
@@ -49,7 +47,6 @@ const ChatPage = () => {
 
     const fetchData = async () => {
         try {
-            console.log('in fetching ...');
             const [fetchAllMessages, fetchUserInfo] = await fetchMessagesService(senderId, setLoading);
             setLoading(false);
             setMessages(fetchAllMessages.messages);

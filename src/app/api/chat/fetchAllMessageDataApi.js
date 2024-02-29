@@ -1,5 +1,5 @@
 // api.js
-import { fetchAllData, fetchSingleData } from "../../libs/ApiRequestHelper";
+import { fetchAllData, fetchSingleData } from "../../libs/ApiMethodHelper";
 export const fetchAllMessageDataApi = async (senderId, setLoading) => {
   try {
     const [fetchMessages, fetchUserInfo] = await Promise.all([

@@ -1,28 +1,14 @@
 'use client'
-
-import { useEffect, useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import UserTable from "../../components/Table/UserTable/page";
-import { PlusCircle } from 'lucide-react';
 import Layout from "../../components/layout";
-import { fetchUsersService } from "../../services/UserService/fetchUsersService";
+import { FetchUsersService } from "../../services/UserService/FetchUsersService";
 import Link from "next/link";
 
 const UsersPage = () => {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
 
-    const fetchUsers = async () => {
-        const res = await fetchUsersService();
-        setUsers(res.data);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        fetchUsers();
-    }, [])
-
-
+    const { data:users, isLoading: loading} =  FetchUsersService()
+   
     return (
         <Layout>
             <div className="flex flex-col">
@@ -32,7 +18,7 @@ const UsersPage = () => {
                         Create User
                     </Link>
                 </div>
-                <UserTable data={users} fetchUsers={fetchUsers} loading={loading} />
+                <UserTable users={users} loading={loading} />
             </div>
         </Layout>
     );

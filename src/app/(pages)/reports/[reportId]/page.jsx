@@ -3,8 +3,8 @@ import Link from "next/link";
 import Layout from "../../../components/layout"
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import { useEffect, useState } from "react";
-import { fetchSingleData } from "../../../libs/ApiRequestHelper";
 import { useParams } from 'next/navigation'
+import { FetchSingleReportService } from "../../../services/ReportService/FetchSingleReportService";
 
 const DetailReport = () => {
     const [formData, setFormData] = useState({
@@ -16,15 +16,14 @@ const DetailReport = () => {
         verifier: '',
     });
     const params = useParams();
+    const { data: reportData } = FetchSingleReportService(params.reportId);
 
-    const fetchData = async () => {
-        const res = await fetchSingleData(`/reports/${params.reportId}`);
-        setFormData(res.data);
-    }
 
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (reportData?.data) {
+            setFormData(reportData.data);
+        }
+    }, [reportData]); 
 
     return (
         <Layout>

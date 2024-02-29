@@ -2,9 +2,9 @@
 import Layout from "../../../components/layout"
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import { useEffect, useState } from "react";
-import { fetchSingleData } from "../../../libs/ApiRequestHelper";
 import { useParams } from 'next/navigation'
 import Link from "next/link";
+import { FetchSingleRegularCostService } from "../../../services/RegularCostService/FetchSingleRegularCostService";
 
 const DetailRegularCost = () => {
     const [formData, setFormData] = useState({
@@ -13,15 +13,13 @@ const DetailRegularCost = () => {
         reporter: '',
     });
     const params = useParams();
-
-    const fetchData = async () => {
-        const res = await fetchSingleData(`/general-outcome/${params.regcostId}`);
-        setFormData(res.data);
-    }
+    const { data: regularCostData } = FetchSingleRegularCostService(params.regcostId);
 
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (regularCostData?.data) {
+            setFormData(regularCostData.data);
+        }
+    }, [regularCostData]); 
 
     return (
         <Layout>

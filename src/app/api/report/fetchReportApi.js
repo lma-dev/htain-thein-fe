@@ -1,5 +1,5 @@
-import { fetchAllData } from "../../libs/ApiRequestHelper";
+import { fetchAllData } from "../../libs/ApiMethodHelper";
 
-export const fetchReportApi = async () => {
+export const fetchReportsApi = async () => {
   return await fetchAllData("/reports");
 };

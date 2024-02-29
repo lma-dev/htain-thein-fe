@@ -5,34 +5,25 @@ import Layout from "../../../components/layout"
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../components/Button/Button";
 import { createReportService } from "../../../services/ReportService/CreateReportService";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { parseCookies } from "nookies";
-import { fetchSingleData } from "../../../libs/ApiRequestHelper";
+import { useCreateQuery } from "../../../hooks/useCreateQuery";
+import { useRouter } from "next/navigation";
+import { FetchSingleUserService } from "../../../services/UserService/FetchSingleUserService";
 
 const CreateReport = () => {
-    const [reporterName, setReporterName] = useState('')
+    const router=useRouter();
+    const userId = parseCookies().userId;
+    const { data: userData } = FetchSingleUserService(userId);
+    const reporterName = userData?.data?.name || '';
+    const createReportMutation = useCreateQuery(createReportService);
+
     const [formData, setFormData] = useState({
         amount: 0,
         type: 'Income',
         description: ''
     })
-    const userId = parseCookies().userId;
-
-    useEffect(() => {
-        const fetchReporterName = async () => {
-            try {
-                const response = await fetchSingleData(`/users/${userId}`)
-                setReporterName(response.data.name)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        if (userId) {
-            fetchReporterName()
-        }
-    }, [userId])
-
+  
     const handleInputChange = (e) => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
@@ -41,7 +32,8 @@ const CreateReport = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const updatedFormData = { ...formData, reporter_id: userId }
-        const response = await createReportService(updatedFormData)
+        await createReportMutation.mutateAsync(updatedFormData)
+        router.push('/reports')
     }
 
     return (

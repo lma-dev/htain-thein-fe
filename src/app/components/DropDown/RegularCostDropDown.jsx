@@ -3,20 +3,20 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Eye } from 'lucide-react';
 import Link from 'next/link';
-import { deleteRegularCostService } from '../../services/RegularCostService/DeleteRegularCostService';
+import { DeleteRegularCostService } from '../../services/RegularCostService/DeleteRegularCostService';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-export default function RegularCostTable({ regularCostId, fetchRegularCosts }) {
+export default function RegularCostTable({ regularCostId }) {
 
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const deleteMutation = DeleteRegularCostService();
 
     const handleDelete = () => {
         setOpenDeleteDialog(true);
     }
 
     const handleConfirmDelete = async () => {
-        await deleteRegularCostService(regularCostId);
-        fetchRegularCosts();
+        await deleteMutation.mutate(regularCostId);
         setOpenDeleteDialog(false);
     }
 

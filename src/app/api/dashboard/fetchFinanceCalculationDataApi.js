@@ -1,5 +1,5 @@
 // api.js
-import { fetchAllData } from '../../libs/ApiRequestHelper';
+import { fetchAllData } from '../../libs/ApiMethodHelper';
 import {checkUserRoles} from '../../libs/checkUserRole';
 
 export const fetchAllDashboardDataApi = async (setData, setLoading) => {
@@ -8,8 +8,6 @@ export const fetchAllDashboardDataApi = async (setData, setLoading) => {
       fetchAllData("/calculations"),
       fetchAllData("/users"),
       fetchAllData("/reports"),
-      fetchAllData("/uncheck-reports"),
-      fetchAllData('/general-outcome'),
       checkUserRoles()
     ]);
 

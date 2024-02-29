@@ -1,9 +1,8 @@
 import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType"
-import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Animation/SkeletonTableRow";
 
-const DepositWithdrawTable = ({ data, fetchData, loading }) => {
+const DepositWithdrawTable = ({ uncheckReports, loading }) => {
     return (
         <div className="flex flex-col w-full ">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -32,7 +31,7 @@ const DepositWithdrawTable = ({ data, fetchData, loading }) => {
 
                                 </>
                             ) : (
-                                data?.map((item, index) => (
+                                uncheckReports?.data?.map((item, index) => (
                                     <tr key={index}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start">{item.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start"> {item.reporter?.name}
@@ -67,7 +66,7 @@ const DepositWithdrawTable = ({ data, fetchData, loading }) => {
 
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 text-start">{item.createdAt}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle" >
-                                            <DepositTableDropDown id={item.id} fetchData={fetchData} />
+                                            <DepositTableDropDown id={item.id}/>
                                         </td>
                                     </tr>
                                 ))

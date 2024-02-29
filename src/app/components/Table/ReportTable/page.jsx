@@ -1,7 +1,7 @@
 import ReportDropDown from "../../DropDown/ReportDropDown";
 import SkeletonTableRow from "../../Animation/SkeletonTableRow";
 
-const ReportTable = ({ data, fetchReports, loading }) => {
+const ReportTable = ({ reports, loading }) => {
     return (
         <div className="flex flex-col w-full">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -32,7 +32,7 @@ const ReportTable = ({ data, fetchReports, loading }) => {
 
                                     </>
                                 ) : (
-                                    data.map((item, index) => (
+                                    reports.data.map((item, index) => (
                                         <tr key={index}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">{item.id}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200"> {item.reporter?.name ?? ""}
@@ -66,7 +66,7 @@ const ReportTable = ({ data, fetchReports, loading }) => {
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">{item.createdAt}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                                                <ReportDropDown reportId={item?.id} fetchReports={fetchReports} />
+                                                <ReportDropDown reportId={item?.id} />
                                             </td>
                                         </tr>
                                     ))

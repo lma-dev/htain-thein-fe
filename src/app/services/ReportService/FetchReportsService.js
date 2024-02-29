@@ -1,5 +1,6 @@
-import { fetchReportApi } from "../../api/report/fetchReportApi";
+import { fetchReportsApi } from "../../api/report/fetchReportApi";
+import { useFetchQuery } from "../../hooks/useFetchQuery";
 
-export const fetchReportsData = async () => {
-  return await fetchReportApi();
+export const FetchReportsService = () => {
+  return useFetchQuery("reports", fetchReportsApi);
 };
