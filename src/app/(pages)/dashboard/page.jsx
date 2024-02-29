@@ -29,8 +29,6 @@ const DashboardPage = () => {
   let reportsCount = reports?.meta?.totalItems;
   let income = calculations?.data?.income;
   let outcome = calculations?.data?.outcome;
-
-  console.log(calculations);
   return (
     <Layout>
       <div className="flex flex-col">

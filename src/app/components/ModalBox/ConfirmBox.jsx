@@ -5,17 +5,15 @@ import AcceptReportService from '../../services/ReportService/AcceptReportServic
 import RejectReportService from '../../services/ReportService/RejectReportService';
 import { ConfirmStatus } from '../../enums/ConfirmStatus';
 
-const ConfirmBox = ({ id, status, setOpenDialog, openDialog, fetchData }) => {
+const ConfirmBox = ({ id, status, setOpenDialog, openDialog }) => {
 
     const cancelButtonRef = useRef(null)
 
     const handleButtonAction = async () => {
         if (status === ConfirmStatus.ACCEPT) {
             await AcceptReportService(id);
-            fetchData();
         } else if (status === ConfirmStatus.REJECT) {
             await RejectReportService(id);
-            fetchData();
         }
         setOpenDialog(false);
     };

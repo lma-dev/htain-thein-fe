@@ -1,6 +1,5 @@
 import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType"
-import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Animation/SkeletonTableRow";
 
 const DepositWithdrawTable = ({ uncheckReports, loading }) => {
