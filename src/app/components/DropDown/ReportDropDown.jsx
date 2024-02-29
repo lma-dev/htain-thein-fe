@@ -2,21 +2,21 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { MoreVertical, Pencil, Trash2, Eye } from 'lucide-react';
-import { deleteReportService } from "../../services/ReportService/DeleteReportService";
+import { DeleteReportService } from "../../services/ReportService/DeleteReportService";
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 import Link from 'next/link';
 
-export default function ReportDropDown({ reportId, fetchReports }) {
+export default function ReportDropDown({ reportId }) {
 
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const deleteMutation = DeleteReportService();
 
     const handleDelete = () => {
         setOpenDeleteDialog(true);
     }
 
     const handleConfirmDelete = async () => {
-        await deleteReportService(reportId);
-        fetchReports();
+        await deleteMutation.mutate(reportId);
         setOpenDeleteDialog(false);
     }
 

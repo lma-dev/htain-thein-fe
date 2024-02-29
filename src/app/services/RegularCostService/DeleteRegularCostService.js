@@ -1,5 +1,6 @@
 import { deleteRegularCostApi } from "../../api/regular-cost/deleteRegularCostApi";
+import { useDeleteQuery } from "../../hooks/useDeleteQuery";
 
-export const deleteRegularCostService = async (regularCostId) => {
-  return await deleteRegularCostApi(regularCostId);
+export const DeleteRegularCostService = () => {
+  return useDeleteQuery("general-outcome", deleteRegularCostApi);
 };

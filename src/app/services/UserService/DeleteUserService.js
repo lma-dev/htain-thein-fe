@@ -1,5 +1,6 @@
 import { deleteUserApi } from "../../api/user/deleteUserApi";
+import { useDeleteQuery } from "../../hooks/useDeleteQuery";
 
-export const deleteUserService = async (userId) => {
-  return await deleteUserApi(userId);
+export const DeleteUserService = () => {
+  return useDeleteQuery("users", deleteUserApi);
 };
