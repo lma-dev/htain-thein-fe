@@ -1,7 +1,7 @@
 import { editRegularCostApi } from "../../api/regular-cost/editRegularCostApi";
+import { useUpdateQuery } from "../../hooks/useUpdateQuery";
 
-const EditRegularCostService = async (regularCostId, newData) => {
-  return await editRegularCostApi(regularCostId, newData);
+export const EditRegularCostService = () => {
+  return useUpdateQuery("general-outcome", editRegularCostApi);
 };
 
-export default EditRegularCostService;

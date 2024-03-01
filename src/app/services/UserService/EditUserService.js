@@ -1,7 +1,6 @@
 import { editUserApi } from "../../api/user/editUserApi";
+import { useUpdateQuery } from "../../hooks/useUpdateQuery";
 
-const editUserService = async (userId, newData) => {
-  return await editUserApi(userId, newData);
+export const EditUserService = () => {
+  return useUpdateQuery("users", editUserApi);
 };
-
-export default editUserService;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "../../../../components/layout"
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
-import EditUserService from "../../../../services/UserService/EditUserService";
+import {EditUserService} from "../../../../services/UserService/EditUserService";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from 'next/navigation'
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
@@ -18,6 +18,7 @@ const EditUser = () => {
     const router= useRouter();
     const params = useParams();
     const { data: userData } = FetchSingleUserService(params.userId);
+    const updateMutation = EditUserService();
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +26,7 @@ const EditUser = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await EditUserService(params.userId, formData);
+        await updateMutation.mutate({ id: params.userId, data: formData });
         router.push('/users');
         
     };
