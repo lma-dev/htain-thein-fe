@@ -9,3 +9,16 @@ export const useCreateQuery = (apiFn) => {
         }
     )
 }
+
+export const useDoubleParameterCreateQuery= (key,apiFn) => {
+    return useMutation(
+        {
+            mutationFn: ({id, data}) => {
+                return apiFn(id, data)
+            },
+            onSuccess: () => {
+                queryClient.invalidateQueries({ queryKey: [key] });
+            },
+        }
+    )
+}
