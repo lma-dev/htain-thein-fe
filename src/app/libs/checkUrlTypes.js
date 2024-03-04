@@ -1,6 +1,6 @@
-const startsWithBackSlash: RegExp = /^\/app/;
+const startsWithBackSlash = /^\/app/;
 
-export const isPathStartsWithBackSlash  = (path: string): boolean => {
+export const isPathStartsWithBackSlash  = (path) => {
   return startsWithBackSlash.test(path)
 }
 
