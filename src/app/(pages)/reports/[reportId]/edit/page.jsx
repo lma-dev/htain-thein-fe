@@ -28,7 +28,6 @@ const EditReport = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('formData',formData)
         // await updateMutation.mutate({ id: params.reportId, data: formData });
         // router.push('/reports');
     };

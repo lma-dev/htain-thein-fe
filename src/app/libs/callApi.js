@@ -16,8 +16,6 @@ export async function callApi(method, url, data, responseType = null) {
 
   try {
     const response = await axios(config);
-    // console.log(config);
-    // console.log(response.status);
     if (
       (response.status === 200 || response.status === 201) &&
       response.data.msg &&
