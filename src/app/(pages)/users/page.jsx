@@ -5,8 +5,7 @@ import Layout from "../../components/layout";
 import { FetchUsersService } from "../../services/UserService/FetchUsersService";
 import Link from "next/link";
 import UserFilterInputField from "../../components/filter/UserFilterInputField";
-import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 const UsersPage = () => {
   const [generalSearch, setGeneralSearch] = useState("");
