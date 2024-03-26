@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <div>
       <div className="relative flex min-h-screen bg-gray-50 divide-x">
-        <div className="min-h-full hidden bg-white xl:block">
+        <div className="min-h-full hidden bg-white xl:block lg:block md:block">
           <Sidebar />
         </div>
         <div className="flex flex-col flex-1">

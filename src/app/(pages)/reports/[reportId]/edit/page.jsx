@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "../../../../components/layout"
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
-import EditReportService from "../../../../services/ReportService/EditReportService";
+import {EditReportService} from "../../../../services/ReportService/EditReportService";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from 'next/navigation'
 import { FetchSingleReportService } from "../../../../services/ReportService/FetchSingleReportService";
@@ -20,6 +20,7 @@ const EditReport = () => {
     const params = useParams();
     const router = useRouter();
     const { data: reportData } = FetchSingleReportService(params.reportId);
+    const updateMutation = EditReportService();
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,8 +28,8 @@ const EditReport = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await EditReportService(params.reportId, formData);
-        router.push('/reports');
+        // await updateMutation.mutate({ id: params.reportId, data: formData });
+        // router.push('/reports');
     };
 
     useEffect(() => {

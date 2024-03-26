@@ -1,7 +1,7 @@
 import { editReportApi } from "../../api/report/editReportApi";
+import { useUpdateQuery } from "../../hooks/useUpdateQuery";
 
-const editReportService = async (reportId, newData) => {
-  return await editReportApi(reportId, newData);
+export const EditReportService = () => {
+  return useUpdateQuery("reports", editReportApi);
 };
 
-export default editReportService;

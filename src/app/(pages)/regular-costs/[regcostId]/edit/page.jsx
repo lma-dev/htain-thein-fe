@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "../../../../components/layout"
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
-import EditRegularCostService from "../../../../services/RegularCostService/EditRegularCostService";
+import {EditRegularCostService} from "../../../../services/RegularCostService/EditRegularCostService";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from 'next/navigation'
 import { FetchSingleRegularCostService } from "../../../../services/RegularCostService/FetchSingleRegularCostService";
@@ -17,6 +17,7 @@ const EditRegularCost = () => {
     const params = useParams();
     const router= useRouter();
     const { data: regularCostData } = FetchSingleRegularCostService(params.regcostId);
+    const updateMutation = EditRegularCostService();
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +25,7 @@ const EditRegularCost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await EditRegularCostService(params.regcostId, formData);
+        await updateMutation.mutate({ id: params.regcostId, data: formData });
         router.push('/regular-costs');
     };
 
