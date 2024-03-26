@@ -50,7 +50,9 @@ const Navbar = () => {
                 </Link>
 
                 <a
-                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://lma-dev.github.io/"
                   className="shrink-0 border-b-2 px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
                   About
