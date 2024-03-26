@@ -1,5 +1,5 @@
 import UserDropDown from "../../DropDown/UserDropDown";
-import SkeletonTableRow from "../../Animation/SkeletonTableRow";
+import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 const UserTable = ({ users, loading }) => {
   return (
     <div className="flex flex-col w-full">

@@ -1,34 +1,34 @@
-'use client'
+"use client";
 
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
 import NotificationCard from "../../components/Notification/NotificationCard";
 import { FetchAllNotificationsDataService } from "../../services/NotificationService/FetchAllNotificationsService";
+import NotificationSkeletonAnimation from "../../components/Skeleton/NotificationSkeletonAnimation";
 
 const NotificationPage = () => {
+  const { data: notifications, isLoading: loading } =
+    FetchAllNotificationsDataService();
 
-    const { data:notifications, isLoading: loading} =  FetchAllNotificationsDataService()
+  return (
+    <Layout>
+      <BreadCrumb title="Notifications" />
+      {loading ? (
+        <div>
+          <NotificationSkeletonAnimation />
+          <NotificationSkeletonAnimation />
+          <NotificationSkeletonAnimation />
+        </div>
+      ) : (
+        <div>
+          {notifications.data.length > 0 &&
+            notifications.data.map((notification, index) => (
+              <NotificationCard key={index} notification={notification} />
+            ))}
+        </div>
+      )}
+    </Layout>
+  );
+};
 
-    return (
-        <Layout>
-            <BreadCrumb title='Notifications' />
-            {
-                loading ? (
-                    <div>Loading</div>
-                ) : (
-                    <div>
-                        {
-                            notifications.data.length > 0 && notifications.data.map((notification, index) => (
-                                <NotificationCard key={index} notification={notification} />
-                            ))
-                        }
-                    </div>
-                )
-            }
-
-        </Layout >
-    )
-
-}
-
-export default NotificationPage;    
+export default NotificationPage;

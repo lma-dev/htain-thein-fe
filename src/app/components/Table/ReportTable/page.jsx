@@ -1,5 +1,5 @@
 import ReportDropDown from "../../DropDown/ReportDropDown";
-import SkeletonTableRow from "../../Animation/SkeletonTableRow";
+import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 
 const ReportTable = ({ reports, loading }) => {
   return (

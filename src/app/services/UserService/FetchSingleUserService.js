@@ -1,6 +1,6 @@
 import { fetchSingleUserApi } from "../../api/user/fetchSingleUserApi";
-import { useFetchQueryWithParams } from "../../hooks/useFetchQuery";
+import { useFetchQuery } from "../../hooks/useFetchQuery";
 
 export const FetchSingleUserService = (userId) => {
-  return useFetchQueryWithParams("users",fetchSingleUserApi, userId);
+  return useFetchQuery(["users", userId], () => fetchSingleUserApi(userId));
 };

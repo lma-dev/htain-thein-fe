@@ -13,10 +13,10 @@ import { FetchRegularCostsDataService } from "../../services/RegularCostService/
 import DepositWithdrawTable from "../../components/Table/DepositWithDrawTable/page";
 import RegularCostTable from "../../components/Table/RegularCostTable/page";
 import OverAllStatusCard from "../../components/Card/OverAllStatusCard";
-import SkeletonAnimation from "../../components/Animation/SkeletonAnimation";
+import SkeletonAnimation from "../../components/Skeleton/SkeletonAnimation";
 
 const DashboardPage = () => {
-  const { data: users, isLoading: loading } = FetchUsersService();
+  const { data: users, isLoading: loadingUsers } = FetchUsersService();
   const { data: reports, isLoading: loadingReports } = FetchReportsService();
   const { data: calculations, isLoading: loadingCalculations } =
     FetchFinanceCalculationService();
@@ -24,6 +24,13 @@ const DashboardPage = () => {
     FetchUncheckReportService();
   const { data: regularCosts, isLoading: loadingGeneralOutcome } =
     FetchRegularCostsDataService();
+
+  const overallLoading =
+    loadingUsers ||
+    loadingReports ||
+    loadingCalculations ||
+    loadingUncheckReports ||
+    loadingGeneralOutcome;
 
   let userCount = users?.meta?.totalItems;
   let reportsCount = reports?.meta?.totalItems;
@@ -34,43 +41,41 @@ const DashboardPage = () => {
       <div className="flex flex-col">
         <BreadCrumb title="Dashboard" />
 
-        {loading ? (
+        {overallLoading ? (
           <SkeletonAnimation />
         ) : (
           // Actual content when data is available
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ItemCountCard count={userCount} title={"users"} />
-            <ItemCountCard count={reportsCount} title={"reports"} />
-            <ItemCountCard text={income} title={"income"} />
-            <ItemCountCard text={outcome} title={"outcome"} />
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <ItemCountCard count={userCount} title={"users"} />
+              <ItemCountCard count={reportsCount} title={"reports"} />
+              <ItemCountCard text={income} title={"income"} />
+              <ItemCountCard text={outcome} title={"outcome"} />
+            </div>
+            <div>
+              <div className="mt-8">
+                <OverAllStatusCard calculations={calculations} />
+              </div>
+
+              <div className="mt-8">
+                <h1 className="text-gray-600 font-bold text-lg my-5">
+                  Deposit Withdraw Table
+                </h1>
+                <DepositWithdrawTable uncheckReports={uncheckReports} />
+              </div>
+              <div className="mt-8">
+                <h1 className="text-gray-600 font-bold text-lg my-5">
+                  General Outcome Table
+                </h1>
+                <RegularCostTable
+                  regularCosts={regularCosts}
+                  loading={overallLoading}
+                  tableHeight="h-80"
+                />
+              </div>
+            </div>
           </div>
         )}
-
-        {!loading && (
-          <div className="mt-8">
-            <OverAllStatusCard calculations={calculations} loading={loading} />
-          </div>
-        )}
-
-        <div className="mt-8">
-          <h1 className="text-gray-600 font-bold text-lg my-5">
-            Deposit Withdraw Table
-          </h1>
-          <DepositWithdrawTable
-            uncheckReports={uncheckReports}
-            loading={loading}
-          />
-        </div>
-        <div className="mt-8">
-          <h1 className="text-gray-600 font-bold text-lg my-5">
-            General Outcome Table
-          </h1>
-          <RegularCostTable
-            regularCosts={regularCosts}
-            loading={loading}
-            tableHeight="h-80"
-          />
-        </div>
       </div>
     </Layout>
   );
