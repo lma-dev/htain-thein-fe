@@ -59,7 +59,7 @@ const ChatPage = () => {
                 // This will log true or false in the console
                 <div
                   className={`flex ${
-                    message?.senderInfo.id === senderId
+                    message?.senderInfo?.id === senderId
                       ? "justify-end items-end"
                       : "justify-start items-start"
                   } mb-4`}
@@ -67,19 +67,19 @@ const ChatPage = () => {
                 >
                   <div
                     className={`rounded-lg p-3 max-w-md ${
-                      message?.senderInfo.id === senderId
+                      message?.senderInfo?.id === senderId
                         ? "bg-gray-700 text-white"
                         : "bg-gray-200 text-black"
                     } shadow-md`}
                   >
                     <p
                       className={`text-sm font-semibold mb-1 ${
-                        message?.senderInfo.id === senderId
+                        message?.senderInfo?.id === senderId
                           ? "text-yellow-400"
                           : "text-black"
                       }`}
                     >
-                      {message?.senderInfo.name}
+                      {message?.senderInfo?.name ?? "still loading ..."}
                     </p>
                     <p className="text-base break-words">{message.message}</p>
                     <small className="text-xs text-gray-400 mt-1">
