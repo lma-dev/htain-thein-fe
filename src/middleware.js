@@ -13,7 +13,7 @@ export function middleware(request) {
       cookies[name] = decodeURIComponent(value);
     });
 
-    const appCookie = cookies[cookieName];
+    const appCookie = cookies["accessToken"];
     if (!appCookie) {
       // If the cookie is not present, redirect to the unauthorized page
       return NextResponse.redirect(new URL("/not-found", request.url));
@@ -34,5 +34,6 @@ export const config = {
     "/reports/:path*",
     "/users/:path*",
     "/regular-costs/:path*",
+    "/chat-room/:path*",
   ],
 };

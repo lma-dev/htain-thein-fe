@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
 import { parseCookies } from "nookies";
@@ -10,12 +10,10 @@ import { useDoubleParameterCreateQuery } from "../../hooks/useCreateQuery";
 import { changeFormatHumanTime } from "../../libs/FunctionHelper";
 import usePusher from "../../hooks/usePusher";
 import { Send } from "lucide-react";
-import { useQueryClient } from "@tanstack/react-query";
 
 const ChatPage = () => {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const queryClient = useQueryClient();
   const senderId = parseCookies().userId;
   const createMessageMutation = useDoubleParameterCreateQuery(
     "chats",
@@ -23,6 +21,7 @@ const ChatPage = () => {
   );
 
   const handleMessage = (data) => {
+    console.log("data", data);
     setMessages((prevMessages) => [...prevMessages, data.message]);
   };
 
@@ -37,6 +36,12 @@ const ChatPage = () => {
     setNewMessage("");
   };
 
+  useEffect(() => {
+    if (data) {
+      setMessages(data.messages);
+    }
+  }, [data]);
+
   return (
     <Layout>
       <div className="flex flex-col">
@@ -48,7 +53,7 @@ const ChatPage = () => {
         <div className="p-5">
           <div className="mr-5 mt-5 ">
             <div className="mb-4 overflow-y-auto max-h-screen md:max-h-[560px] sm:max-h-[360px]">
-              {data?.messages?.map((message, index) => (
+              {messages?.map((message, index) => (
                 <div
                   className={`flex ${
                     message.sender_id === senderId
