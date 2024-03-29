@@ -39,7 +39,7 @@ export default function SettingTab() {
         shareCount: 12,
       },
     ],
-    Trending: [
+    UserPermission: [
       {
         id: 1,
         title: "Ask Me Anything: 10 answers to your questions about coffee",

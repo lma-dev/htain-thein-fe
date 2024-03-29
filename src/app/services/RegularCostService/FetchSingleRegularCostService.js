@@ -2,5 +2,9 @@ import { fetchSingleRegularCostApi } from "../../api/regular-cost/fetchSingleReg
 import { useFetchQueryWithParams } from "../../hooks/useFetchQuery";
 
 export const FetchSingleRegularCostService = (reportId) => {
-  return useFetchQueryWithParams("general-outcome",fetchSingleRegularCostApi, reportId);
+  return useFetchQueryWithParams(
+    ["general-outcome"],
+    fetchSingleRegularCostApi,
+    reportId
+  );
 };

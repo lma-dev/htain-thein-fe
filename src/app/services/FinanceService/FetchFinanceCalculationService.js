@@ -2,6 +2,5 @@ import { fetchFinanceCalculationDataApi } from "../../api/finance/fetchFinanceCa
 import { useFetchQuery } from "../../hooks/useFetchQuery";
 
 export const FetchFinanceCalculationService = () => {
-  return useFetchQuery("calculations", fetchFinanceCalculationDataApi);
-
+  return useFetchQuery(["calculations"], fetchFinanceCalculationDataApi);
 };
