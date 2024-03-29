@@ -2,6 +2,5 @@ import { fetchAllNotificationsApi } from "../../api/notification/fetchAllNotific
 import { useFetchQuery } from "../../hooks/useFetchQuery";
 
 export const FetchAllNotificationsDataService = () => {
- return useFetchQuery("notifications", fetchAllNotificationsApi);
-  };
-  
+  return useFetchQuery(["notifications"], fetchAllNotificationsApi);
+};
