@@ -10,7 +10,7 @@ import { changeFormatHumanTime } from "../../libs/FunctionHelper";
 import usePusher from "../../hooks/usePusher";
 import { Send } from "lucide-react";
 import ToastsBox from "../../components/Toasts/ToastsBox";
-
+import Spinner from "../../components/Spinner/Spinner";
 const ChatPage = () => {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -50,7 +50,9 @@ const ChatPage = () => {
         <BreadCrumb title="chat-room" />
       </div>
       {loadingMessages ? (
-        <span>Loading... </span>
+        <>
+          <Spinner />
+        </>
       ) : (
         <div className="p-5">
           <div className="mr-5 mt-5 ">

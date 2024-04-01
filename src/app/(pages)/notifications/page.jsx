@@ -21,7 +21,7 @@ const NotificationPage = () => {
         </div>
       ) : (
         <div>
-          {notifications.data.length > 0 &&
+          {notifications?.data.length > 0 &&
             notifications.data.map((notification, index) => (
               <NotificationCard key={index} notification={notification} />
             ))}
