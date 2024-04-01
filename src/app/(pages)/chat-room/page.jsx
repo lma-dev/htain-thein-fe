@@ -38,6 +38,12 @@ const ChatPage = () => {
     setNewMessage("");
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   useEffect(() => {
     if (data) {
       setMessages(data.messages);
@@ -85,7 +91,7 @@ const ChatPage = () => {
                     </p>
                     <p className="text-base break-words">{message.message}</p>
                     <small className="text-xs text-gray-400 mt-1">
-                      {changeFormatHumanTime(message.created_at)}
+                      {message.createdAt}
                     </small>
                   </div>
                 </div>
@@ -99,6 +105,7 @@ const ChatPage = () => {
                 placeholder="Type your message..."
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
                 className="flex-1 border border-gray-300 rounded p-2 mb-2 lg:mb-0 lg:mr-2 focus:outline-none focus:border-blue-500"
               />
               <div className="">
