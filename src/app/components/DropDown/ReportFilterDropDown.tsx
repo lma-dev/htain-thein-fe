@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { Filter } from 'lucide-react';
+import { CurrencyType } from "../../enums/CurrencyType";
 
 export default function ReportFilterDropDown({
     amount, type, confirmStatus, createdAt, onAmountChange, onTypeChange, onConfirmStatusChange, onCreatedAtChange
@@ -57,7 +58,7 @@ export default function ReportFilterDropDown({
                                     <div>
                                         <div className="mt-2 px-3">
                                             <label htmlFor="role" className="text-sm font-medium text-gray-900 mb-1">
-                                                Amount (kyats)
+                                                Amount ({CurrencyType.MMK})
                                             </label>
                                             <input type="number" value={amount} name='amount' className='w-full block mt-3 py-3 px-4 text-sm rounded-md border border-gray-300 focus:outline-none sm:w-auto focus:border-blue-500 dark:bg-gray-800 dark:text-gray-100 focus:dark:bg-gray-900 focus:dark:border-violet-400' onChange={(e) => onAmountChange(e.target.value)}
                                             />

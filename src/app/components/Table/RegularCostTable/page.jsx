@@ -1,5 +1,6 @@
 import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
+import { CurrencyType } from "../../../enums/CurrencyType";
 
 const RegularCostTable = ({ regularCosts, loading }) => {
   return (
@@ -76,11 +77,10 @@ const RegularCostTable = ({ regularCosts, loading }) => {
                       {item.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {" "}
                       {item.reporter}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words ">
-                      {item.amount}
+                      {item.amount} {CurrencyType.MMK}
                     </td>
 
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words max-w-[200px] truncate text-start">
