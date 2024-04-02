@@ -1,22 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../components/layout";
 import { parseCookies } from "nookies";
-import { FetchSingleUserService } from "../../services/UserService/FetchSingleUserService";
 import { FetchAllMessageService } from "../../services/ChatService/FetchAllMessageService";
 import { createMessagesService } from "../../services/ChatService/CreateMessageService";
 import { useDoubleParameterCreateQuery } from "../../hooks/useCreateQuery";
 import { changeFormatHumanTime } from "../../libs/FunctionHelper";
 import usePusher from "../../hooks/usePusher";
 import { Send } from "lucide-react";
-import { useQueryClient } from "@tanstack/react-query";
-
+import ToastsBox from "../../components/Toasts/ToastsBox";
+import Spinner from "../../components/Spinner/Spinner";
 const ChatPage = () => {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const queryClient = useQueryClient();
-  const senderId = parseCookies().userId;
+  const userIdFromCookies = parseCookies().userId;
+  if (!userIdFromCookies) {
+    ToastsBox.error({ message: errorMessage });
+    throw new Error("User ID from cookies is null or undefined");
+  }
+  const senderId = parseInt(userIdFromCookies, 10);
   const createMessageMutation = useDoubleParameterCreateQuery(
     "chats",
     createMessagesService
@@ -28,8 +31,6 @@ const ChatPage = () => {
 
   usePusher(process.env.NEXT_PUBLIC_PUSHER_CHANNEL_NAME, handleMessage);
 
-  const { data: userInfo, isLoading: loading } =
-    FetchSingleUserService(senderId);
   const { data, isLoading: loadingMessages } = FetchAllMessageService(senderId);
 
   const sendMessage = async () => {
@@ -37,21 +38,36 @@ const ChatPage = () => {
     setNewMessage("");
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      setMessages(data.messages);
+    }
+  }, [data]);
+
   return (
     <Layout>
       <div className="flex flex-col">
         <BreadCrumb title="chat-room" />
       </div>
-      {loading ? (
-        <span>Loading... </span>
+      {loadingMessages ? (
+        <>
+          <Spinner />
+        </>
       ) : (
         <div className="p-5">
           <div className="mr-5 mt-5 ">
             <div className="mb-4 overflow-y-auto max-h-screen md:max-h-[560px] sm:max-h-[360px]">
-              {data?.messages?.map((message, index) => (
+              {messages?.map((message, index) => (
+                // This will log true or false in the console
                 <div
                   className={`flex ${
-                    message.sender_id === senderId
+                    message?.senderInfo?.id === senderId
                       ? "justify-end items-end"
                       : "justify-start items-start"
                   } mb-4`}
@@ -59,23 +75,23 @@ const ChatPage = () => {
                 >
                   <div
                     className={`rounded-lg p-3 max-w-md ${
-                      message.sender_id === senderId
+                      message?.senderInfo?.id === senderId
                         ? "bg-gray-700 text-white"
                         : "bg-gray-200 text-black"
                     } shadow-md`}
                   >
                     <p
                       className={`text-sm font-semibold mb-1 ${
-                        message.sender_id === senderId
+                        message?.senderInfo?.id === senderId
                           ? "text-yellow-400"
                           : "text-black"
                       }`}
                     >
-                      {userInfo?.data.name}
+                      {message?.senderInfo?.name ?? "still loading ..."}
                     </p>
                     <p className="text-base break-words">{message.message}</p>
                     <small className="text-xs text-gray-400 mt-1">
-                      {changeFormatHumanTime(message.created_at)}
+                      {message.createdAt}
                     </small>
                   </div>
                 </div>
@@ -89,6 +105,7 @@ const ChatPage = () => {
                 placeholder="Type your message..."
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
                 className="flex-1 border border-gray-300 rounded p-2 mb-2 lg:mb-0 lg:mr-2 focus:outline-none focus:border-blue-500"
               />
               <div className="">

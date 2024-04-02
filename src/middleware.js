@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
-  const cookieName = process.env.NEXT_PUBLIC_APP_NAME;
   const cookiesString = request.headers.get("cookie");
 
   if (cookiesString) {
@@ -13,7 +12,7 @@ export function middleware(request) {
       cookies[name] = decodeURIComponent(value);
     });
 
-    const appCookie = cookies[cookieName];
+    const appCookie = cookies["accessToken"];
     if (!appCookie) {
       // If the cookie is not present, redirect to the unauthorized page
       return NextResponse.redirect(new URL("/not-found", request.url));
@@ -34,5 +33,6 @@ export const config = {
     "/reports/:path*",
     "/users/:path*",
     "/regular-costs/:path*",
+    "/chat-room/:path*",
   ],
 };

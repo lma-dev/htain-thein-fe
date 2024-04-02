@@ -1,4 +1,4 @@
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 import axios from "../utils/axios";
 import ToastsBox from "../components/Toasts/ToastsBox";
 
@@ -28,10 +28,14 @@ const AuthService = {
   logout: async () => {
     try {
       const response = await axios.post("/logout");
+
+      if (!response.data) {
+        throw new Error("Logout failed");
+      }
       destroyCookie(null, "accessToken");
       destroyCookie(null, "userId");
       destroyCookie(null, "userName");
-      localStorage.removeItem("laravel_session");
+
       if (!response.data) {
         throw new Error("Logout failed");
       }

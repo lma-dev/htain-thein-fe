@@ -1,6 +1,5 @@
 import { parseCookies } from "nookies";
-import { fetchSingleData } from "./ApiMethodHelper";
-
+import { fetchSingleData } from "../libs/ApiMethodHelper";
 
 export const checkUserRoles = async () => {
   try {

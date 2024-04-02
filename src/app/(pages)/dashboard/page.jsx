@@ -9,6 +9,7 @@ import { FetchReportsService } from "../../services/ReportService/FetchReportsSe
 import { FetchFinanceCalculationService } from "../../services/FinanceService/FetchFinanceCalculationService";
 import { FetchUncheckReportService } from "../../services/ReportService/FetchUncheckReportService";
 import { FetchRegularCostsDataService } from "../../services/RegularCostService/FetchRegularCostService";
+import { checkIncomeAndOutCome } from "../../utils/checkIncomeAndOutCome";
 
 import DepositWithdrawTable from "../../components/Table/DepositWithDrawTable/page";
 import RegularCostTable from "../../components/Table/RegularCostTable/page";
@@ -36,6 +37,13 @@ const DashboardPage = () => {
   let reportsCount = reports?.meta?.totalItems;
   let income = calculations?.data?.income;
   let outcome = calculations?.data?.outcome;
+  let incomePercentage = calculations?.data?.incomeRate ?? 0;
+  let outcomePercentage = calculations?.data?.outcomeRate ?? 0;
+
+  const { isIncomeGreaterThanOutcome } = checkIncomeAndOutCome(
+    incomePercentage,
+    outcomePercentage
+  );
   return (
     <Layout>
       <div className="flex flex-col">
@@ -49,8 +57,18 @@ const DashboardPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <ItemCountCard count={userCount} title={"users"} />
               <ItemCountCard count={reportsCount} title={"reports"} />
-              <ItemCountCard text={income} title={"income"} />
-              <ItemCountCard text={outcome} title={"outcome"} />
+              <ItemCountCard
+                text={income}
+                title={"income"}
+                rate={incomePercentage}
+                financialStatus={isIncomeGreaterThanOutcome}
+              />
+              <ItemCountCard
+                text={outcome}
+                title={"outcome"}
+                rate={outcomePercentage}
+                financialStatus={isIncomeGreaterThanOutcome}
+              />
             </div>
             <div>
               <div className="mt-8">

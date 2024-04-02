@@ -1,8 +1,7 @@
 import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType";
-import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 
-const DepositWithdrawTable = ({ uncheckReports, loading }) => {
+const DepositWithdrawTable = ({ uncheckReports }) => {
   return (
     <div className="flex flex-col w-full ">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -61,7 +60,6 @@ const DepositWithdrawTable = ({ uncheckReports, loading }) => {
                     {item.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start">
-                    {" "}
                     {item.reporter?.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words text-start">
