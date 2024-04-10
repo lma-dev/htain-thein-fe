@@ -28,7 +28,7 @@ const DetailUser = () => {
               </label>
 
               <input
-                type="name"
+                type="text"
                 id="name"
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
                 name="name"

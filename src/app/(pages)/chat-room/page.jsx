@@ -6,7 +6,6 @@ import { parseCookies } from "nookies";
 import { FetchAllMessageService } from "../../services/ChatService/FetchAllMessageService";
 import { createMessagesService } from "../../services/ChatService/CreateMessageService";
 import { useDoubleParameterCreateQuery } from "../../hooks/useCreateQuery";
-import { changeFormatHumanTime } from "../../libs/FunctionHelper";
 import usePusher from "../../hooks/usePusher";
 import { Send } from "lucide-react";
 import ToastsBox from "../../components/Toasts/ToastsBox";
@@ -15,10 +14,7 @@ const ChatPage = () => {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const userIdFromCookies = parseCookies().userId;
-  if (!userIdFromCookies) {
-    ToastsBox.error({ message: errorMessage });
-    throw new Error("User ID from cookies is null or undefined");
-  }
+
   const senderId = parseInt(userIdFromCookies, 10);
   const createMessageMutation = useDoubleParameterCreateQuery(
     "chats",
@@ -29,7 +25,7 @@ const ChatPage = () => {
     setMessages((prevMessages) => [...prevMessages, data.message]);
   };
 
-  usePusher(process.env.NEXT_PUBLIC_PUSHER_CHANNEL_NAME, handleMessage);
+  usePusher(process.env.NEXT_PUBLIC_CHAT_CHANNEL, handleMessage);
 
   const { data, isLoading: loadingMessages } = FetchAllMessageService(senderId);
 

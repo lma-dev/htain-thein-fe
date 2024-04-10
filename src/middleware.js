@@ -35,5 +35,7 @@ export const config = {
     "/regular-costs/:path*",
     "/chat-room/:path*",
     "/deposit-requests/:path*",
+    "/notifications/:path*",
+    "/announcements/:path*",
   ],
 };

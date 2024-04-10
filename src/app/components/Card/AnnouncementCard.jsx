@@ -1,5 +1,5 @@
 import { BadgeInfo } from "lucide-react";
-
+import AnnouncementDropdown from "../DropDown/AnnouncementDropDown";
 const AnnouncementCard = ({ announcement }) => {
   const getBadgeColor = (level) => {
     if (level == 1) {
@@ -12,35 +12,60 @@ const AnnouncementCard = ({ announcement }) => {
       return <BadgeInfo size={17} className="text-red-600" />;
     }
   };
+
+  function getBadgeTitle(priority) {
+    switch (priority) {
+      case "1":
+        return "Low priority";
+      case "2":
+        return "Normal priority";
+      case "3":
+        return "High priority";
+      default:
+        return "Unknown priority";
+    }
+  }
   return (
     <>
-      <div className="border border-solid w-full rounded-lg p-5 my-5 hover:cursor-pointer hover:bg-gray-200">
-        <div className="flex justify-between">
+      <div className="border border-solid w-full rounded-lg p-5 my-5 shadow-md">
+        <div className="flex justify-between items-center mb-4">
           <div>
-            <h3 className="inline-flex col-span-full md:col-start-2 md:col-span-4 xl:col-start-3 xl:col-span-9 font-semibold text-gray-600 mb-2 md:ml-0 md:mb-1 xl:mb-2">
+            <h3 className="font-semibold text-gray-800 text-lg mb-1">
               {announcement.title}
+              <span
+                className={`inline-block ml-2 px-2 py-0.5 rounded-full text-xs ${
+                  announcement.isVisible == 1
+                    ? "bg-green-500 text-white"
+                    : "bg-red-500 text-white"
+                }`}
+              >
+                {announcement.isVisible == 1 ? "Published" : "Unpublished"}
+              </span>
+            </h3>
+            <div className="flex items-center">
+              <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 mr-2">
+                {announcement.slug}
+              </span>
               <a
                 href="#"
-                className="text-primary dark:text-primary-400 inline-block ml-2 md:ml-3 xl:ml-4 mt-1 md:mt-0 xl:mt-1"
+                className="text-primary dark:text-primary-400 text-sm mr-2"
                 data-twe-toggle="tooltip"
-                title="Important level of announcement"
+                title={getBadgeTitle(announcement.priority)}
               >
                 {getBadgeColor(announcement.priority)}
               </a>
-            </h3>
+              <span className="text-gray-500 text-sm">
+                {announcement.createdAt}
+              </span>
+            </div>
           </div>
-          <div className="col-span-full md:col-start-1 xl:col-span-2 row-start-2 md:row-start-1 text-gray-500 text-sm dark:text-gray-400">
-            {announcement.createdAt}
+          <div className="text-gray-500 text-sm">
+            <AnnouncementDropdown announcementId={announcement.id} />
           </div>
         </div>
-
-        <p className="col-span-full md:col-start-2 md:col-span-4 xl:col-start-3 xl:col-span-9 md:ml-0 text-gray-500 text-md dark:text-gray-400 text-wrap">
+        <p className="text-gray-500 text-md text-wrap line-clamp-1">
           {announcement.content}
         </p>
-
-        <div className="bg-gray-700 text-white rounded-lg p-1 px-2 text-sm mt-5 w-fit">
-          {announcement.slug}
-        </div>
       </div>
     </>
   );

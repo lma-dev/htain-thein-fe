@@ -9,10 +9,10 @@ const usePusher = (channelName, handleMessage) => {
 
     const channel = pusher.subscribe(channelName);
 
-    channel.bind(process.env.NEXT_PUBLIC_PUSHER_EVENT_NAME, handleMessage);
+    channel.bind(process.env.NEXT_PUBLIC_CHAT_EVENT, handleMessage);
 
     return () => {
-      channel.unbind(process.env.NEXT_PUBLIC_PUSHER_EVENT_NAME);
+      channel.unbind(process.env.NEXT_PUBLIC_CHAT_EVENT);
       pusher.unsubscribe(channelName);
     };
   }, [channelName, handleMessage]);

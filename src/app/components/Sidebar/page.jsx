@@ -99,9 +99,9 @@ const Sidebar = () => {
 
           <li>
             <Link
-              href="/announcement"
+              href="/announcements"
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/announcement"
+                pathname === "/announcements"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
