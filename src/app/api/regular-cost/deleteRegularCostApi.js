@@ -1,4 +1,4 @@
-import { deleteSingleData } from "../../libs/ApiMethodHelper";
+import { deleteSingleData } from "../../utils/ApiMethodHelper";
 
 export const deleteRegularCostApi = async (regularCostId) => {
   return await deleteSingleData(`/general-outcome/${regularCostId}`);

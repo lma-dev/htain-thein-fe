@@ -1,5 +1,5 @@
 // api.js
-import { fetchAllData } from "../../libs/ApiMethodHelper";
+import { fetchAllData } from "../../utils/ApiMethodHelper";
 
 export const fetchAllNotificationsApi = async () => {
   return await fetchAllData("/all-notis");

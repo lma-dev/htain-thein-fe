@@ -1,4 +1,4 @@
-import { deleteSingleData } from "../../libs/ApiMethodHelper";
+import { deleteSingleData } from "../../utils/ApiMethodHelper";
 
 export const deleteUserApi = async (userId) => {
   return await deleteSingleData(`/users/${userId}`);

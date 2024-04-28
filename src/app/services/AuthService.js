@@ -6,7 +6,6 @@ const AuthService = {
   login: async (email, password) => {
     try {
       const response = await axios.post("/login", { email, password });
-
       if (!response.data) {
         ToastsBox.error({
           message: "Something went wrong!",

@@ -8,6 +8,7 @@ import { createAnnouncementService } from "../../../services/AnnouncementService
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateQuery } from "../../../hooks/useCreateQuery";
+import usePusher from "../../../hooks/usePusher";
 
 const CreateAnnouncement = () => {
   const router = useRouter();
@@ -25,12 +26,21 @@ const CreateAnnouncement = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     await createMutation.mutateAsync(formData);
-    router.push("/announcements");
+    // router.push("/announcements");
+  };
+
+  const handleNewAnnouncement = () => {
+    // Handle the new announcement event here, e.g., show a notification
+    console.log("New announcement received");
   };
 
   const createMutation = useCreateQuery(createAnnouncementService);
+  usePusher(
+    process.env.NEXT_PUBLIC_ANNOUNCEMENT_CHANNEL,
+    process.env.NEXT_PUBLIC_ANNOUNCEMENT_EVENT,
+    handleNewAnnouncement
+  );
 
   return (
     <Layout>
@@ -119,7 +129,7 @@ const CreateAnnouncement = () => {
                 >
                   <option value="">Please select</option>
                   <option value={1}>Public</option>
-                  {/* <option value={0}>UnPublish</option> */}
+                  <option value={0}>UnPublish</option>
                 </select>
               </div>
               <div className="mb-6">

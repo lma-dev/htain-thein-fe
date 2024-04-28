@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { FetchSingleAnnouncementService } from "../../../services/AnnouncementService/FetchSingleAnnouncementService";
 import Link from "next/link";
 import Spinner from "../../../components/Spinner/Spinner";
-import { getPriority, getVisibility } from "../../../libs/FunctionHelper";
+import { getPriority, getVisibility } from "../../../utils/FunctionHelper";
 const DetailUser = () => {
   const params = useParams();
   const { data: announceData, isLoading } = FetchSingleAnnouncementService(

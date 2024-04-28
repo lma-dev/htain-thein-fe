@@ -8,7 +8,6 @@ import { createMessagesService } from "../../services/ChatService/CreateMessageS
 import { useDoubleParameterCreateQuery } from "../../hooks/useCreateQuery";
 import usePusher from "../../hooks/usePusher";
 import { Send } from "lucide-react";
-import ToastsBox from "../../components/Toasts/ToastsBox";
 import Spinner from "../../components/Spinner/Spinner";
 const ChatPage = () => {
   const [newMessage, setNewMessage] = useState("");
@@ -25,7 +24,11 @@ const ChatPage = () => {
     setMessages((prevMessages) => [...prevMessages, data.message]);
   };
 
-  usePusher(process.env.NEXT_PUBLIC_CHAT_CHANNEL, handleMessage);
+  usePusher(
+    process.env.NEXT_PUBLIC_CHAT_CHANNEL,
+    process.env.NEXT_PUBLIC_CHAT_EVENT,
+    handleMessage
+  );
 
   const { data, isLoading: loadingMessages } = FetchAllMessageService(senderId);
 

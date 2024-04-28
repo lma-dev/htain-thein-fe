@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { EditAnnouncementService } from "../../../../services/AnnouncementService/EditAnnouncementService";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { getPriority, getVisibility } from "../../../../libs/FunctionHelper";
+import { getPriority, getVisibility } from "../../../../utils/FunctionHelper";
 const EditAnnouncement = () => {
   const router = useRouter();
   const params = useParams();

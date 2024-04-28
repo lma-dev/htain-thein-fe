@@ -1,5 +1,5 @@
 "use client";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { CircleUserRound } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
@@ -15,6 +15,7 @@ const UserProfileIconDropdown = () => {
   const { logout } = useAuth();
   const router = useRouter();
   const authUser = parseCookies().userId;
+  console.log(authUser);
   const handleLogout = async () => {
     await logout();
     router.push("/");
