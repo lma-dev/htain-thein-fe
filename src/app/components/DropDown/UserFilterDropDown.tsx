@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { Filter } from 'lucide-react';
 
-export default function UserFilterDropDown({ role, accountStatus, onRoleChange, onAccountStatusChange}) {
+export default function UserFilterDropDown({ role, accountStatus, onRoleChange, onAccountStatusChange }) {
     let [isOpen, setIsOpen] = useState(false)
 
     function closeModal() {
@@ -13,6 +13,11 @@ export default function UserFilterDropDown({ role, accountStatus, onRoleChange, 
         setIsOpen(true)
     }
 
+    const handleClear = () => {
+        onRoleChange('');
+        onAccountStatusChange('');
+    }
+
     return (
         <>
             <div className="ml-2">
@@ -21,7 +26,7 @@ export default function UserFilterDropDown({ role, accountStatus, onRoleChange, 
                     onClick={openModal}
                     className="rounded-md bg-gray-700 text-white px-4 py-2 text-sm font-medium transition hover:scale-105"
                 >
-                  <Filter size={21}/>
+                    <Filter size={21} />
                 </button>
             </div>
 
@@ -86,6 +91,7 @@ export default function UserFilterDropDown({ role, accountStatus, onRoleChange, 
                                         </div>
                                         <div className="mt-3 px-3">
                                             <button
+                                                onClick={handleClear}
                                                 className="inline-block rounded border w-full border-gray-300 p-2 text-sm font-medium text-gray-600 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring active:bg-indigo-500"
                                             >
                                                 Reset All

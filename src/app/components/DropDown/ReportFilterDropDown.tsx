@@ -17,6 +17,13 @@ export default function ReportFilterDropDown({
         setIsOpen(true)
     }
 
+    const handleClear = () => {
+        onAmountChange('');
+        onTypeChange('');
+        onConfirmStatusChange('');
+        onCreatedAtChange('');
+    }
+
     return (
         <>
             <div className="ml-2">
@@ -102,6 +109,7 @@ export default function ReportFilterDropDown({
                                         </div>
                                         <div className="mt-3 px-3">
                                             <button
+                                                onClick={handleClear}
                                                 className="inline-block rounded border w-full border-gray-300 p-2 text-sm font-medium text-gray-600 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring active:bg-indigo-500"
                                             >
                                                 Reset All
