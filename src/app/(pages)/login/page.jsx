@@ -34,11 +34,10 @@ const Login = () => {
 
   useEffect(() => {
     if (decryptedUserData) {
-      console.log("Decrypted Data Login: ", decryptedUserData);
       setCookie(null, "accessToken", decryptedUserData.token);
       setCookie(null, "userId", decryptedUserData.userId);
       setCookie(null, "userName", decryptedUserData.userName);
-
+      setCookie(null, "userRole", decryptedUserData.userRole);
       if (decryptedUserData.token) {
         router.push("/dashboard");
       }

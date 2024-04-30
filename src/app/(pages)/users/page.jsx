@@ -6,8 +6,11 @@ import { FetchUsersService } from "../../services/UserService/FetchUsersService"
 import Link from "next/link";
 import UserFilterInputField from "../../components/filter/UserFilterInputField";
 import { useState } from "react";
+import { parseCookies } from "nookies";
+import { UserType } from "../../enums/UserType";
 
 const UsersPage = () => {
+  const userRole = parseCookies().userRole;
   const [generalSearch, setGeneralSearch] = useState("");
   const [role, setRole] = useState("");
   const [accountStatus, setAccountStatus] = useState("");
@@ -33,12 +36,15 @@ const UsersPage = () => {
             />
           </div>
 
-          <Link
-            href="/users/create"
-            className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
-          >
-            Create User
-          </Link>
+          {(userRole === UserType.ADMIN ||
+            userRole === UserType.SUPER_ADMIN) && (
+            <Link
+              href="/users/create"
+              className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
+            >
+              Create User
+            </Link>
+          )}
         </div>
         <UserTable users={users} loading={loading} />
       </div>

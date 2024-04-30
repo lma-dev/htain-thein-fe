@@ -16,6 +16,7 @@ const AuthService = {
       setCookie(null, "accessToken", response.data.access_token);
       setCookie(null, "userId", response.data.userId);
       setCookie(null, "userName", response.data.userName);
+      setCookie(null, "userRole", response.data.userRole);
       ToastsBox.success({ message: "Successfully Login" });
       return response.data;
     } catch (error) {
