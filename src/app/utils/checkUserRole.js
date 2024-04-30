@@ -1,11 +1,11 @@
-import { parseCookies } from "nookies";
-import { fetchSingleData } from "../libs/ApiMethodHelper";
+import { parseCookies, setCookie } from "nookies";
+import { fetchSingleData } from "../utils/ApiMethodHelper";
 
-export const checkUserRoles = async () => {
+export const checkUserRole = async () => {
   try {
     const userId = parseCookies().userId;
     const response = await fetchSingleData(`/users/${userId}`);
-    return response.data.role;
+    setCookie(null, "userRole", response.data.role);
   } catch (error) {
     // Handle error
     console.error(error);

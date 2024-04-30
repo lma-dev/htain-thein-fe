@@ -1,7 +1,8 @@
 import { acceptReportApi } from "../../api/report/acceptReportApi";
+import { useUpdateQuery } from "../../hooks/useUpdateQuery";
 
-const acceptReportService = async (reportId) => {
-  return await acceptReportApi(reportId);
+const AcceptReportService = () => {
+  return useUpdateQuery("uncheck-reports", acceptReportApi);
 };
 
-export default acceptReportService;
+export default AcceptReportService;

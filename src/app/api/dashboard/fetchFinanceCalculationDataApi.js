@@ -1,14 +1,21 @@
 // api.js
-import { fetchAllData } from '../../libs/ApiMethodHelper';
-import {checkUserRoles} from '../../libs/checkUserRole';
+import { fetchAllData } from "../../utils/ApiMethodHelper";
+import { checkUserRoles } from "../../libs/checkUserRole";
 
 export const fetchAllDashboardDataApi = async (setData, setLoading) => {
   try {
-    const [fetchFinancial, fetchUsers, fetchReports, fetchUncheckReports, fetchRegularData, role] = await Promise.all([
+    const [
+      fetchFinancial,
+      fetchUsers,
+      fetchReports,
+      fetchUncheckReports,
+      fetchRegularData,
+      role,
+    ] = await Promise.all([
       fetchAllData("/calculations"),
       fetchAllData("/users"),
       fetchAllData("/reports"),
-      checkUserRoles()
+      checkUserRoles(),
     ]);
 
     const data = {
@@ -28,4 +35,3 @@ export const fetchAllDashboardDataApi = async (setData, setLoading) => {
     setLoading(false);
   }
 };
-

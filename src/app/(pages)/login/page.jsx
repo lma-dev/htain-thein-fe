@@ -1,7 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import ButtonLoading from "../../components/Loading/ButtonLoading";
+import { useRouter, useSearchParams } from "next/navigation";
+import { setCookie } from "nookies";
+import { decryptAlgorithm } from "../../utils/decryptAlgorithm";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +12,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const [decryptedUserData, setDecryptedUserData] = useState(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     setLoading(true);
@@ -16,6 +22,27 @@ const Login = () => {
     await login(email, password, setLoading);
   };
 
+  const initialCheck = () => {
+    const encryptedUserData = searchParams.get("encryptedUserData");
+    const decryptedData = decryptAlgorithm(encryptedUserData);
+    setDecryptedUserData(decryptedData);
+  };
+
+  useEffect(() => {
+    initialCheck();
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (decryptedUserData) {
+      setCookie(null, "accessToken", decryptedUserData.token);
+      setCookie(null, "userId", decryptedUserData.userId);
+      setCookie(null, "userName", decryptedUserData.userName);
+      setCookie(null, "userRole", decryptedUserData.userRole);
+      if (decryptedUserData.token) {
+        router.push("/dashboard");
+      }
+    }
+  }, [decryptedUserData]);
   return (
     <div>
       <div className="flex h-screen items-center justify-center p-5">

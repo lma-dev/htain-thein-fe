@@ -96,7 +96,7 @@ const Sidebar = ({ setOpen, open }) => {
               </Link>
             </li>
             <li>
-              <Link href="/announcement" passHref>
+              <Link href="/announcements" passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Announcements
                 </span>

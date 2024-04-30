@@ -6,7 +6,6 @@ const AuthService = {
   login: async (email, password) => {
     try {
       const response = await axios.post("/login", { email, password });
-
       if (!response.data) {
         ToastsBox.error({
           message: "Something went wrong!",
@@ -17,6 +16,7 @@ const AuthService = {
       setCookie(null, "accessToken", response.data.access_token);
       setCookie(null, "userId", response.data.userId);
       setCookie(null, "userName", response.data.userName);
+      setCookie(null, "userRole", response.data.userRole);
       ToastsBox.success({ message: "Successfully Login" });
       return response.data;
     } catch (error) {
@@ -28,14 +28,14 @@ const AuthService = {
   logout: async () => {
     try {
       const response = await axios.post("/logout");
-
+      console.log(response);
       if (!response.data) {
         throw new Error("Logout failed");
       }
       destroyCookie(null, "accessToken");
       destroyCookie(null, "userId");
       destroyCookie(null, "userName");
-
+      destroyCookie(null, "userRole");
       if (!response.data) {
         throw new Error("Logout failed");
       }

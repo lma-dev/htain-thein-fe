@@ -22,3 +22,27 @@ export function changeFormatHumanTime(timestamp) {
   };
   return new Date(timestamp).toLocaleString(undefined, options);
 }
+
+export function getPriority(priority) {
+  switch (priority) {
+    case "1":
+      return "Low priority";
+    case "2":
+      return "Normal priority";
+    case "3":
+      return "High priority";
+    default:
+      return "Unknown priority";
+  }
+}
+
+export function getVisibility(isVisible) {
+  switch (isVisible) {
+    case 1:
+      return "Publish";
+    case 0:
+      return "UnPublish";
+    default:
+      return "Unknown";
+  }
+}

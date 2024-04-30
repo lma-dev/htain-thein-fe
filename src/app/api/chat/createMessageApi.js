@@ -1,5 +1,5 @@
 // api.js
-import { createData } from "../../libs/ApiMethodHelper";
+import { createData } from "../../utils/ApiMethodHelper";
 
 export const createMessageApi = async (senderId, newMessage) => {
   await createData(`/message/${senderId}`, {

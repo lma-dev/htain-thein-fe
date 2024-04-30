@@ -1,6 +1,10 @@
 import { fetchChangedHistoriesApi } from "../../api/report/fetchChangedHistoriesApi";
-import { useFetchQuery } from "../../hooks/useFetchQuery";
+import { useFetchQueryWithParams } from "../../hooks/useFetchQuery";
 
-export const FetchChangedHistoriesService = () => {
-  return useFetchQuery("report-changed-histories", fetchChangedHistoriesApi);
+export const FetchChangedHistoriesService = (reportId) => {
+  return useFetchQueryWithParams(
+    "report-changed-histories",
+    fetchChangedHistoriesApi,
+    reportId
+  );
 };

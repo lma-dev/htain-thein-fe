@@ -7,11 +7,9 @@ import Layout from "../../components/layout";
 import { FetchUsersService } from "../../services/UserService/FetchUsersService";
 import { FetchReportsService } from "../../services/ReportService/FetchReportsService";
 import { FetchFinanceCalculationService } from "../../services/FinanceService/FetchFinanceCalculationService";
-import { FetchUncheckReportService } from "../../services/ReportService/FetchUncheckReportService";
 import { FetchRegularCostsDataService } from "../../services/RegularCostService/FetchRegularCostService";
 import { checkIncomeAndOutCome } from "../../utils/checkIncomeAndOutCome";
 
-import DepositWithdrawTable from "../../components/Table/DepositWithDrawTable/page";
 import RegularCostTable from "../../components/Table/RegularCostTable/page";
 import OverAllStatusCard from "../../components/Card/OverAllStatusCard";
 import SkeletonAnimation from "../../components/Skeleton/SkeletonAnimation";
@@ -21,8 +19,6 @@ const DashboardPage = () => {
   const { data: reports, isLoading: loadingReports } = FetchReportsService();
   const { data: calculations, isLoading: loadingCalculations } =
     FetchFinanceCalculationService();
-  const { data: uncheckReports, isLoading: loadingUncheckReports } =
-    FetchUncheckReportService();
   const { data: regularCosts, isLoading: loadingGeneralOutcome } =
     FetchRegularCostsDataService();
 
@@ -30,7 +26,6 @@ const DashboardPage = () => {
     loadingUsers ||
     loadingReports ||
     loadingCalculations ||
-    loadingUncheckReports ||
     loadingGeneralOutcome;
 
   let userCount = users?.meta?.totalItems;
@@ -75,12 +70,6 @@ const DashboardPage = () => {
                 <OverAllStatusCard calculations={calculations} />
               </div>
 
-              <div className="mt-8">
-                <h1 className="text-gray-600 font-bold text-lg my-5">
-                  Deposit Withdraw Table
-                </h1>
-                <DepositWithdrawTable uncheckReports={uncheckReports} />
-              </div>
               <div className="mt-8">
                 <h1 className="text-gray-600 font-bold text-lg my-5">
                   General Outcome Table

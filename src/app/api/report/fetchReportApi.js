@@ -1,4 +1,4 @@
-import { fetchAllData } from "../../libs/ApiMethodHelper";
+import { fetchAllData } from "../../utils/ApiMethodHelper";
 
 export const fetchReportsApi = async (
   generalSearch = "",

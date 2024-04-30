@@ -7,7 +7,6 @@ import Link from "next/link";
 import Spinner from "../../../components/Spinner/Spinner";
 
 const DetailUser = () => {
-  const router = useRouter();
   const params = useParams();
   const { data: userData, isLoading } = FetchSingleUserService(params.userId);
 
@@ -28,11 +27,11 @@ const DetailUser = () => {
               </label>
 
               <input
-                type="name"
+                type="text"
                 id="name"
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
                 name="name"
-                value={userData.data.name}
+                value={userData?.data.name}
                 readOnly
               />
             </div>
@@ -51,7 +50,7 @@ const DetailUser = () => {
                 placeholder="john@rhcp.com"
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
                 name="email"
-                value={userData.data.email}
+                value={userData?.data.email}
                 readOnly
               />
             </div>
@@ -69,7 +68,7 @@ const DetailUser = () => {
                 placeholder="role"
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
                 name="role"
-                value={userData.data.role}
+                value={userData?.data.role}
                 readOnly
               />
             </div>
@@ -87,7 +86,7 @@ const DetailUser = () => {
                 placeholder="accountStatus"
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
                 name="accountStatus"
-                value={userData.data.accountStatus}
+                value={userData?.data.accountStatus}
                 readOnly
               />
             </div>

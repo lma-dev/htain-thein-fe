@@ -12,10 +12,13 @@ import { DeleteUserService } from "../../services/UserService/DeleteUserService"
 import { exportUserService } from "../../services/UserService/ExportUserService";
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 import Link from "next/link";
+import { UserType } from "../../enums/UserType";
+import { parseCookies } from "nookies";
 
 const UserDropDown = ({ userId }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteUserService();
+  const userRole = parseCookies().userRole;
 
   const handleDelete = () => {
     setOpenDeleteDialog(true);
@@ -64,15 +67,6 @@ const UserDropDown = ({ userId }) => {
               </Menu.Item>
               <Menu.Item>
                 <Link
-                  href={`/users/${userId}/edit`}
-                  className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
-                >
-                  <Pencil size={16} className="mr-2 inline-block" />
-                  Edit
-                </Link>
-              </Menu.Item>
-              <Menu.Item>
-                <Link
                   href="#"
                   className="p-2 hover:bg-gray-200 w-full rounded text-sm block"
                   onClick={handleExport}
@@ -81,18 +75,34 @@ const UserDropDown = ({ userId }) => {
                   Export
                 </Link>
               </Menu.Item>
-              <hr className="my-1 border-gray-300" />
-              <h2 className="text-gray-500 font-semibold p-2">Danger Zone</h2>
-              <Menu.Item>
-                <Link
-                  href="#"
-                  className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400"
-                  onClick={handleDelete}
-                >
-                  <Trash2 size={16} className="mr-2 inline-block" />
-                  Delete
-                </Link>
-              </Menu.Item>
+              {(userRole === UserType.ADMIN ||
+                userRole === UserType.SUPER_ADMIN) && (
+                <div>
+                  <Menu.Item>
+                    <Link
+                      href={`/users/${userId}/edit`}
+                      className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
+                    >
+                      <Pencil size={16} className="mr-2 inline-block" />
+                      Edit
+                    </Link>
+                  </Menu.Item>
+                  <hr className="my-1 border-gray-300" />
+                  <h2 className="text-gray-500 font-semibold p-2">
+                    Danger Zone
+                  </h2>
+                  <Menu.Item>
+                    <Link
+                      href="#"
+                      className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400"
+                      onClick={handleDelete}
+                    >
+                      <Trash2 size={16} className="mr-2 inline-block" />
+                      Delete
+                    </Link>
+                  </Menu.Item>
+                </div>
+              )}
             </div>
           </Menu.Items>
         </Transition>
