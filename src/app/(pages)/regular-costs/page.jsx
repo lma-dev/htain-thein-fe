@@ -8,12 +8,17 @@ import Layout from "../../components/layout";
 import { FetchRegularCostsDataService } from "../../services/RegularCostService/FetchRegularCostService";
 import { parseCookies } from "nookies";
 import { UserType } from "../../enums/UserType";
+import { useEffect, useState } from "react";
 
 const RegularCost = () => {
-  const userRole = parseCookies().userRole;
+  const [userRole, setUserRole] = useState();
+
   const { data: regularCosts, isLoading: loading } =
     FetchRegularCostsDataService();
 
+  useEffect(() => {
+    setUserRole(parseCookies().userRole);
+  }, []);
   return (
     <Layout>
       <div className="flex flex-col">
