@@ -27,7 +27,7 @@ const CreateAnnouncement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createMutation.mutateAsync(formData);
-    // router.push("/announcements");
+    router.push("/announcements");
   };
 
   const handleNewAnnouncement = () => {

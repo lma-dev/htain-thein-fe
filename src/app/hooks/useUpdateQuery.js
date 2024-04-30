@@ -9,5 +9,8 @@ export const useUpdateQuery = (key, apiFn) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [key] });
     },
+    onError: (error) => {
+      throw new Error(error);
+    },
   });
 };

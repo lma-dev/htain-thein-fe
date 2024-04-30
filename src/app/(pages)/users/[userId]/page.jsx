@@ -7,7 +7,6 @@ import Link from "next/link";
 import Spinner from "../../../components/Spinner/Spinner";
 
 const DetailUser = () => {
-  const router = useRouter();
   const params = useParams();
   const { data: userData, isLoading } = FetchSingleUserService(params.userId);
 
