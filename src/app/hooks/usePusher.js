@@ -6,9 +6,7 @@ const usePusher = (channelName, eventName, actionFunction) => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY, {
       cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
     });
-    pusher.connection.bind("connected", () => {
-      console.log("Connected to Pusher");
-    });
+    pusher.connection.bind("connected", () => {});
 
     const channel = pusher.subscribe(channelName);
 

@@ -15,7 +15,6 @@ const UserProfileIconDropdown = () => {
   const { logout } = useAuth();
   const router = useRouter();
   const authUser = parseCookies().userId;
-  console.log(authUser);
   const handleLogout = async () => {
     await logout();
     router.push("/");

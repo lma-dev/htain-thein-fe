@@ -28,14 +28,14 @@ const AuthService = {
   logout: async () => {
     try {
       const response = await axios.post("/logout");
-
+      console.log(response);
       if (!response.data) {
         throw new Error("Logout failed");
       }
       destroyCookie(null, "accessToken");
       destroyCookie(null, "userId");
       destroyCookie(null, "userName");
-
+      destroyCookie(null, "userRole");
       if (!response.data) {
         throw new Error("Logout failed");
       }
