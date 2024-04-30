@@ -5,6 +5,7 @@ import AnnouncementCard from "../../components/Card/AnnouncementCard";
 import { FetchAllAnnouncementsService } from "../../services/AnnouncementService/FetchAllAnnouncementsService";
 import Spinner from "../../components/Spinner/Spinner";
 import Link from "next/link";
+
 const Announcement = () => {
   const { data: announcements, isLoading: loading } =
     FetchAllAnnouncementsService();

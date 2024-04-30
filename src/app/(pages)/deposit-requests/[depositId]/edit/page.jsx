@@ -157,7 +157,6 @@ const EditReport = () => {
               </form>
               <div className="mt-5">
                 <span className="text-gray-600 font-light">
-                  {" "}
                   You can check edited histories from here ,
                 </span>
                 <Link

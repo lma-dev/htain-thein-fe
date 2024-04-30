@@ -1,5 +1,5 @@
-import { fetchAllData } from "../../utils/ApiMethodHelper";
+import { fetchSingleData } from "../../utils/ApiMethodHelper";
 
-export const fetchChangedHistoriesApi = async () => {
-  return await fetchAllData("/changed-histories");
+export const fetchChangedHistoriesApi = async (reportId) => {
+  return await fetchSingleData(`/changed-histories/${reportId}`);
 };
