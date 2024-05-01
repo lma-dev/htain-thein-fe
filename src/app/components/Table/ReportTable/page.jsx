@@ -1,7 +1,8 @@
 import ReportDropDown from "../../DropDown/ReportDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
+import Pagination from "../../Pagination/Pagination";
 
-const ReportTable = ({ reports, loading }) => {
+const ReportTable = ({ reports, loading, onPageChange }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -136,6 +137,7 @@ const ReportTable = ({ reports, loading }) => {
           </table>
         </div>
       </div>
+      <Pagination meta={reports?.meta} handlePageChange={onPageChange} />
     </div>
   );
 };

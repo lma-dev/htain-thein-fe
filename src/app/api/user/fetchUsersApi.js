@@ -3,9 +3,10 @@ import { fetchAllData } from "../../utils/ApiMethodHelper";
 export const fetchUsersApi = async (
   generalSearch = "",
   role,
-  accountStatus
+  accountStatus,
+  page = 1
 ) => {
-  let url = `/users?generalSearch=${generalSearch}`;
+  let url = `/users?page=${page}&generalSearch=${generalSearch}`;
 
   if (role) {
     url += `&role=${role}`;

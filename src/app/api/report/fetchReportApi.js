@@ -5,9 +5,10 @@ export const fetchReportsApi = async (
   amount,
   confirmStatus,
   type,
-  createdAt
+  createdAt,
+  page = 1
 ) => {
-  let url = `/reports?generalSearch=${generalSearch}`;
+  let url = `/reports?page=${page}&generalSearch=${generalSearch}`;
 
   if (amount) {
     url += `&amount=${amount}`;

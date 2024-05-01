@@ -6,10 +6,19 @@ export const FetchReportsService = (
   amount,
   confirmStatus,
   type,
-  createdAt
+  createdAt,
+  page
 ) => {
   return useFetchQuery(
-    ["reports", generalSearch, amount, confirmStatus, type, createdAt],
-    () => fetchReportsApi(generalSearch, amount, confirmStatus, type, createdAt)
+    ["reports", generalSearch, amount, confirmStatus, type, createdAt, page],
+    () =>
+      fetchReportsApi(
+        generalSearch,
+        amount,
+        confirmStatus,
+        type,
+        createdAt,
+        page
+      )
   );
 };

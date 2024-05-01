@@ -13,12 +13,18 @@ const UsersPage = () => {
   const [userRole, setUserRole] = useState();
   const [generalSearch, setGeneralSearch] = useState("");
   const [role, setRole] = useState("");
+  const [page, setPage] = useState(1);
   const [accountStatus, setAccountStatus] = useState("");
   const { data: users, isLoading: loading } = FetchUsersService(
     generalSearch,
     role,
-    accountStatus
+    accountStatus,
+    page
   );
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
 
   useEffect(() => {
     setUserRole(parseCookies().userRole);
@@ -52,7 +58,11 @@ const UsersPage = () => {
             </div>
           )}
         </div>
-        <UserTable users={users} loading={loading} />
+        <UserTable
+          users={users}
+          loading={loading}
+          onPageChange={handlePageChange}
+        />
       </div>
     </Layout>
   );
