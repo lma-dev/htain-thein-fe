@@ -3,7 +3,7 @@ import { BellMinus } from "lucide-react";
 import { FinancialType } from "../../enums/FinancialType";
 import { EmptyStatus } from "../../enums/EmptyStatus";
 
-const NotificationCard = ({ notification }) => {
+const NotificationCard = ({ notification, lang }) => {
   const IconType = () => {
     if (notification.reportData?.type === FinancialType.INCOME) {
       return <BellPlus size={24} className="mr-3 text-green-500" />;

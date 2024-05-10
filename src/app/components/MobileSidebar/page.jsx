@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { XCircle } from "lucide-react";
 
-const Sidebar = ({ setOpen, open }) => {
+const Sidebar = ({ setOpen, open, lang }) => {
   const { logout } = useAuth();
   const router = useRouter();
 
@@ -36,42 +36,42 @@ const Sidebar = ({ setOpen, open }) => {
 
           <ul className="space-y-2">
             <li>
-              <Link href="/dashboard" passHref>
+              <Link href={`/${lang}/dashboard`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Dashboard
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/reports" passHref>
+              <Link href={`/${lang}/reports`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Reports
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/regular-costs" passHref>
+              <Link href={`/${lang}/regular-costs`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Regular Costs
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/users" passHref>
+              <Link href={`/${lang}/users`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Users
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/chat-room" passHref>
+              <Link href={`/${lang}/chat-room`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Chat Room
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/settings" passHref>
+              <Link href={`/${lang}/settings`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Setting
                 </span>
@@ -89,14 +89,14 @@ const Sidebar = ({ setOpen, open }) => {
               </a>
             </li>
             <li>
-              <Link href="/notifications" passHref>
+              <Link href={`/${lang}/notifications`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Notifications
                 </span>
               </Link>
             </li>
             <li>
-              <Link href="/announcements" passHref>
+              <Link href={`/${lang}/announcements`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
                   Announcements
                 </span>

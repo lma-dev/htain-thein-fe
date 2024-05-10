@@ -11,13 +11,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const UserProfileIconDropdown = () => {
+const UserProfileIconDropdown = ({ lang }) => {
   const { logout } = useAuth();
   const router = useRouter();
   const authUser = parseCookies().userId;
   const handleLogout = async () => {
     await logout();
-    router.push("/");
+    router.push(`/${params.locale}`);
   };
   return (
     <Menu as="div" className="relative inline-block text-left ">
@@ -41,7 +41,7 @@ const UserProfileIconDropdown = () => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  href={`/users/${authUser}`}
+                  href={`/${lang}/users/${authUser}`}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"

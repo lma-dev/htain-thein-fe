@@ -2,7 +2,7 @@ import ReportDropDown from "../../DropDown/ReportDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import Pagination from "../../Pagination/Pagination";
 
-const ReportTable = ({ reports, loading, onPageChange }) => {
+const ReportTable = ({ reports, loading, onPageChange, lang }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -128,7 +128,7 @@ const ReportTable = ({ reports, loading, onPageChange }) => {
                       {item.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <ReportDropDown reportId={item?.id} />
+                      <ReportDropDown reportId={item?.id} lang={lang} />
                     </td>
                   </tr>
                 ))

@@ -7,7 +7,8 @@ import ConfirmDialog from "../Dialog/ConfirmDialog";
 import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
-export default function ReportDropDown({ reportId }) {
+
+export default function ReportDropDown({ reportId, lang }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteReportService();
   const userRole = parseCookies().userRole;
@@ -45,7 +46,7 @@ export default function ReportDropDown({ reportId }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/reports/${reportId}`}
+                  href={`/${lang}/reports/${reportId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
@@ -57,7 +58,7 @@ export default function ReportDropDown({ reportId }) {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/reports/${reportId}/edit`}
+                      href={`/${lang}/reports/${reportId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />

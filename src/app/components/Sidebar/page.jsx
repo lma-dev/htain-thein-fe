@@ -4,13 +4,11 @@ import { LogOut } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { parseCookies } from "nookies";
 
-const Sidebar = () => {
+const Sidebar = ({ lang }) => {
   const { logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const userId = parseCookies().userId;
   const handleLogout = async () => {
     await logout();
     router.push("/");
@@ -25,7 +23,7 @@ const Sidebar = () => {
         <ul className="mt-6 space-y-1">
           <li>
             <Link
-              href="/dashboard"
+              href={`/${lang}/dashboard`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/dashboard"
                   ? "bg-gray-200 text-gray-900"
@@ -38,7 +36,7 @@ const Sidebar = () => {
 
           <li>
             <Link
-              href="/reports"
+              href={`/${lang}/reports`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/reports"
                   ? "bg-gray-200 text-gray-900"
@@ -50,7 +48,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/regular-costs"
+              href={`/${lang}/regular-costs`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/regular-costs"
                   ? "bg-gray-200 text-gray-900"
@@ -62,7 +60,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/deposit-requests"
+              href={`/${lang}/deposit-requests`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/deposit-requests"
                   ? "bg-gray-200 text-gray-900"
@@ -74,7 +72,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/users"
+              href={`/${lang}/users`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/users"
                   ? "bg-gray-200 text-gray-900"
@@ -86,7 +84,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/chat-room"
+              href={`/${lang}/chat-room`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/chat-room"
                   ? "bg-gray-200 text-gray-900"
@@ -99,7 +97,7 @@ const Sidebar = () => {
 
           <li>
             <Link
-              href="/announcements"
+              href={`/${lang}/announcements`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/announcements"
                   ? "bg-gray-200 text-gray-900"

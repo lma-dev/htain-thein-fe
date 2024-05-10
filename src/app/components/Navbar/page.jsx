@@ -5,8 +5,9 @@ import { AlignLeft } from "lucide-react";
 import MobileSidebar from "../MobileSidebar/page";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import LangSwitcher from "../Language/LangSwitcher";
 
-const Navbar = () => {
+const Navbar = ({ lang }) => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -39,7 +40,7 @@ const Navbar = () => {
                 aria-label="Tabs"
               >
                 <Link
-                  href="/settings"
+                  href={`/${lang}/settings`}
                   className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${
                     pathname === "/settings"
                       ? " border-sky-500 text-sky-600"
@@ -59,7 +60,7 @@ const Navbar = () => {
                 </a>
 
                 <Link
-                  href="/notifications"
+                  href={`/${lang}/notifications`}
                   className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${
                     pathname === "/notifications"
                       ? " border-sky-500 text-sky-600"
@@ -70,7 +71,8 @@ const Navbar = () => {
                 </Link>
               </nav>
 
-              <div>
+              <div className="flex justify-center items-center">
+                <LangSwitcher />
                 <UserProfileIconDropdown />
               </div>
             </div>

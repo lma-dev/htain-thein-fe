@@ -15,7 +15,7 @@ import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
 
-const UserDropDown = ({ userId }) => {
+const UserDropDown = ({ userId, lang }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteUserService();
   const userRole = parseCookies().userRole;
@@ -58,7 +58,7 @@ const UserDropDown = ({ userId }) => {
 
               <Menu.Item>
                 <Link
-                  href={`/users/${userId}/location`}
+                  href={`/${lang}/users/${userId}/location`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <MapPinned size={16} className="mr-2 inline-block" />
@@ -80,7 +80,7 @@ const UserDropDown = ({ userId }) => {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/users/${userId}/edit`}
+                      href={`/${lang}/users/${userId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />

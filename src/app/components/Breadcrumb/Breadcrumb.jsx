@@ -1,14 +1,14 @@
 import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 
-const BreadCrumb = ({ title }) => {
+const BreadCrumb = ({ title, lang }) => {
   return (
     <div className="py-5">
-      <nav aria-label="Breadcrumb">
+      <nav aria-label="BreadCrumb">
         <ol className="flex items-center gap-1 text-sm text-gray-600">
           <li>
             <Link
-              href="/dashboard"
+              href={`/${lang}/dashboard`}
               className="block transition hover:text-gray-700"
             >
               <span className="sr-only"> Home </span>
@@ -23,8 +23,7 @@ const BreadCrumb = ({ title }) => {
 
           <li>
             <a href="#" className="block transition hover:text-gray-700">
-              {" "}
-              {title}{" "}
+              {title}
             </a>
           </li>
         </ol>

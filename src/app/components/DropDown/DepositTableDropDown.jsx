@@ -4,7 +4,7 @@ import { MoreVertical, Check, X } from "lucide-react";
 import ConfirmBox from "../../components/ModalBox/ConfirmBox";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
 
-export default function DepositTableDropDown({ id }) {
+export default function DepositTableDropDown({ id, lang }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [status, setStatus] = useState();
   const handleReportAction = async (key) => {
@@ -21,6 +21,7 @@ export default function DepositTableDropDown({ id }) {
             status={status}
             setOpenDialog={setOpenDialog}
             openDialog={openDialog}
+            lang={lang}
           />
         )}
       </div>

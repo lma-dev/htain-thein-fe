@@ -5,7 +5,7 @@ import AcceptReportService from "../../services/ReportService/AcceptReportServic
 import RejectReportService from "../../services/ReportService/RejectReportService";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
 
-const ConfirmBox = ({ id, status, setOpenDialog, openDialog }) => {
+const ConfirmBox = ({ id, status, setOpenDialog, openDialog, lang }) => {
   const cancelButtonRef = useRef(null);
   const acceptMutation = AcceptReportService();
   const rejectMutation = RejectReportService();
