@@ -3,7 +3,7 @@ import { BellMinus } from "lucide-react";
 import { FinancialType } from "../../enums/FinancialType";
 import { EmptyStatus } from "../../enums/EmptyStatus";
 
-const NotificationCard = ({ notification, lang }) => {
+const NotificationCard = ({ notification, t }) => {
   const IconType = () => {
     if (notification.reportData?.type === FinancialType.INCOME) {
       return <BellPlus size={24} className="mr-3 text-green-500" />;
@@ -30,8 +30,8 @@ const NotificationCard = ({ notification, lang }) => {
         <div>
           <span className="text-lg font-semibold text-gray-800 dark:text-gray-100">
             {notification.reportData?.reporter?.name || EmptyStatus.ANONYMOUS}
-          </span>{" "}
-          requested to {notificationType()}
+          </span>
+          {t("requestedTo")} {notificationType()}
           <p className="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 break-words">
             {notification.reportData?.description || EmptyStatus.NO_DESCRIPTION}
           </p>

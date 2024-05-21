@@ -46,7 +46,6 @@ const UsersPage = ({ params }) => {
               onGeneralSearchChange={setGeneralSearch}
               onRoleChange={setRole}
               onAccountStatusChange={setAccountStatus}
-              lang={params.locale}
             />
           </div>
 
@@ -66,6 +65,7 @@ const UsersPage = ({ params }) => {
           users={users}
           loading={loading}
           onPageChange={handlePageChange}
+          t={t}
           lang={params.locale}
         />
       </div>

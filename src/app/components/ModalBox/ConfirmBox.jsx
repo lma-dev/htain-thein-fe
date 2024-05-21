@@ -5,7 +5,7 @@ import AcceptReportService from "../../services/ReportService/AcceptReportServic
 import RejectReportService from "../../services/ReportService/RejectReportService";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
 
-const ConfirmBox = ({ id, status, setOpenDialog, openDialog, lang }) => {
+const ConfirmBox = ({ id, status, setOpenDialog, openDialog, t, lang }) => {
   const cancelButtonRef = useRef(null);
   const acceptMutation = AcceptReportService();
   const rejectMutation = RejectReportService();
@@ -63,11 +63,11 @@ const ConfirmBox = ({ id, status, setOpenDialog, openDialog, lang }) => {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Confirmation Action Box
+                        {t("confirmationDialog")}
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to do this ?
+                          {t("confirmDialogText")}
                         </p>
                       </div>
                     </div>
@@ -79,7 +79,7 @@ const ConfirmBox = ({ id, status, setOpenDialog, openDialog, lang }) => {
                     className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     onClick={() => handleButtonAction()}
                   >
-                    Confirm
+                    {t("confirm")}
                   </button>
                   <button
                     type="button"
@@ -87,7 +87,7 @@ const ConfirmBox = ({ id, status, setOpenDialog, openDialog, lang }) => {
                     onClick={() => setOpenDialog(false)}
                     ref={cancelButtonRef}
                   >
-                    Cancel
+                    {t("cancel")}
                   </button>
                 </div>
               </Dialog.Panel>

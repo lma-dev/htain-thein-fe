@@ -7,13 +7,16 @@ import { FetchReportsService } from "../../../services/ReportService/FetchReport
 import ReportFilterInputField from "../../../components/filter/ReportFilterInputField";
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
-const ReportsPage = ({params}) => {
+const ReportsPage = ({ params }) => {
   const [generalSearch, setGeneralSearch] = useState("");
   const [amount, setAmount] = useState("");
   const [confirmStatus, setConfirmStatus] = useState("");
   const [type, setType] = useState("");
+  const [page, setPage] = useState(1);
   const [createdAt, setCreatedAt] = useState("");
+  const t = useTranslations("Translation");
   const { data: reports, isLoading: loading } = FetchReportsService(
     generalSearch,
     amount,
@@ -21,6 +24,11 @@ const ReportsPage = ({params}) => {
     type,
     createdAt
   );
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <Layout lang={params.locale}>
       <div className="flex flex-col">
@@ -38,16 +46,23 @@ const ReportsPage = ({params}) => {
               onConfirmStatusChange={setConfirmStatus}
               onTypeChange={setType}
               onCreatedAtChange={setCreatedAt}
+              t={t}
             />
           </div>
           <Link
             href={`/${params.locale}/reports/create`}
             className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
           >
-            Create Reports
+            {t("createReports")}
           </Link>
         </div>
-        <ReportTable reports={reports} loading={loading} lang={params.locale} />
+        <ReportTable
+          reports={reports}
+          loading={loading}
+          onPageChange={handlePageChange}
+          t={t}
+          lang={params.locale}
+        />
       </div>
     </Layout>
   );

@@ -12,7 +12,7 @@ export default function Layout({ children, lang }) {
           <Navbar lang={lang} />
           <div className="p-5 xl:p-10">
             <main>{children}</main>
-            <SettingFloatButton lang={lang} />
+            <SettingFloatButton />
           </div>
         </div>
       </div>

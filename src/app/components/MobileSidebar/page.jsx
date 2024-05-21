@@ -25,7 +25,7 @@ const Sidebar = ({ setOpen, open, lang }) => {
         <div className="px-4 py-6">
           <div className="flex justify-between items-center mb-4">
             <div className="text-white text-lg font-bold uppercase px-4 py-2">
-              HTAIN THEIN
+              {lang("appTitle")}
             </div>
             <XCircle
               size={24}
@@ -38,42 +38,42 @@ const Sidebar = ({ setOpen, open, lang }) => {
             <li>
               <Link href={`/${lang}/dashboard`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Dashboard
+                  {lang("dashboard")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/reports`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Reports
+                  {lang("reports")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/regular-costs`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Regular Costs
+                  {lang("regularCost")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/users`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Users
+                  {lang("user")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/chat-room`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Chat Room
+                  {lang("chatRoom")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/settings`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Setting
+                  {lang("setting")}
                 </span>
               </Link>
             </li>
@@ -84,21 +84,21 @@ const Sidebar = ({ setOpen, open, lang }) => {
                 href="https://lma-dev.github.io/"
               >
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  About
+                  {lang("about")}
                 </span>
               </a>
             </li>
             <li>
               <Link href={`/${lang}/notifications`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Notifications
+                  {lang("notification")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/announcements`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  Announcements
+                  {lang("announcement")}
                 </span>
               </Link>
             </li>
@@ -109,7 +109,7 @@ const Sidebar = ({ setOpen, open, lang }) => {
             className="p-3 flex justify-center items-center cursor-pointer"
             onClick={handleLogout}
           >
-            <span className="text-red-400 pr-2 text-sm">Logout</span>
+            <span className="text-red-400 pr-2 text-sm">{lang("logOut")}</span>
             <LogOut size={16} className="text-red-400" />
           </div>
         </div>

@@ -5,13 +5,14 @@ import NestedTable from "../../../../../components/Table/ReportHistoryTable/page
 import { FetchChangedHistoriesService } from "../../../../../services/ReportService/FetchChangedHistoriesService";
 import BreadCrumb from "../../../../../components/BreadCrumb/BreadCrumb";
 import Spinner from "../../../../../components/Spinner/Spinner";
-import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const History = ({ params }) => {
   const { data: histories, isLoading: loading } = FetchChangedHistoriesService(
     params.reportId
   );
+  const t = useTranslations("Translation");
 
   return (
     <Layout lang={params.locale}>
@@ -33,7 +34,7 @@ const History = ({ params }) => {
                       href={`/${params.locale}/reports/${params.reportId}`}
                       className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5 mb-5"
                     >
-                      Back
+                      {t("back")}
                     </Link>
                   </div>
                   <div className="border rounded-lg shadow overflow-hidden dark:border-gray-700 dark:shadow-gray-700">
@@ -45,31 +46,31 @@ const History = ({ params }) => {
                               scope="col"
                               className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
                             >
-                              id
+                              {t("id")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
                             >
-                              Editor
+                              {t("editor")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
                             >
-                              Old Data
+                              {t("oldData")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
                             >
-                              New Data
+                              {t("newData")}
                             </th>
                             <th
                               scope="col"
                               className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
                             >
-                              Updated Date
+                              {t("updatedDate")}
                             </th>
                           </tr>
                         </thead>

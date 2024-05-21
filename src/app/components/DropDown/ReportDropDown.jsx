@@ -8,11 +8,10 @@ import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
 
-export default function ReportDropDown({ reportId, lang }) {
+export default function ReportDropDown({ reportId, t, lang }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteReportService();
   const userRole = parseCookies().userRole;
-
   const handleDelete = () => {
     setOpenDeleteDialog(true);
   };
@@ -50,7 +49,7 @@ export default function ReportDropDown({ reportId, lang }) {
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
-                  Detail
+                  {t("detail")}
                 </Link>
               </Menu.Item>
               {(userRole === UserType.ADMIN ||
@@ -62,7 +61,7 @@ export default function ReportDropDown({ reportId, lang }) {
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />
-                      Edit
+                      {t("edit")}
                     </Link>
                   </Menu.Item>
                   <Menu.Item>
@@ -72,7 +71,7 @@ export default function ReportDropDown({ reportId, lang }) {
                       onClick={handleDelete}
                     >
                       <Trash2 size={16} className="mr-2 inline-block" />
-                      Delete
+                      {t("delete")}
                     </Link>
                   </Menu.Item>
                 </div>
@@ -85,6 +84,7 @@ export default function ReportDropDown({ reportId, lang }) {
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
         method={handleConfirmDelete}
+        t={t}
       />
     </div>
   );

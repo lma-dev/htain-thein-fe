@@ -5,10 +5,13 @@ import DepositWithdrawTable from "../../../components/Table/DepositWithDrawTable
 import Layout from "../../../components/layout";
 import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const ReportsPage = ({ params }) => {
   const { data: uncheckReports, isLoading: loading } =
     FetchUncheckReportService();
+  const t = useTranslations("Translation");
+
   return (
     <Layout lang={params.locale}>
       <div className="flex flex-col">
@@ -24,6 +27,8 @@ const ReportsPage = ({ params }) => {
         <DepositWithdrawTable
           uncheckReports={uncheckReports}
           loading={loading}
+          t={t}
+          lang={params.locale}
         />
       </div>
     </Layout>

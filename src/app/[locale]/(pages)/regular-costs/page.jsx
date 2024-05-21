@@ -9,10 +9,11 @@ import { FetchRegularCostsDataService } from "../../../services/RegularCostServi
 import { parseCookies } from "nookies";
 import { UserType } from "../../../enums/UserType";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const RegularCost = ({ params }) => {
   const [userRole, setUserRole] = useState();
-
+  const t = useTranslations("Translation");
   const { data: regularCosts, isLoading: loading } =
     FetchRegularCostsDataService();
 
@@ -30,13 +31,14 @@ const RegularCost = ({ params }) => {
               href={`/${params.locale}/regular-costs/create`}
               className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
             >
-              Create Cost
+              {t("createCost")}
             </Link>
           )}
         </div>
         <RegularCostTable
           regularCosts={regularCosts}
           loading={loading}
+          t={t}
           lang={params.locale}
         />
       </div>

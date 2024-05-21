@@ -2,7 +2,7 @@ import ReportDropDown from "../../DropDown/ReportDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import Pagination from "../../Pagination/Pagination";
 
-const ReportTable = ({ reports, loading, onPageChange, lang }) => {
+const ReportTable = ({ reports, loading, onPageChange, t, lang }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -14,49 +14,49 @@ const ReportTable = ({ reports, loading, onPageChange, lang }) => {
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Id
+                  {t("id")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Requester
+                  {t("requester")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Amount
+                  {t("amount")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Type
+                  {t("type")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Status
+                  {t("status")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Verifier
+                  {t("verifier")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Request Date
+                  {t("requestDate")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-end text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Action
+                  {t("action")}
                 </th>
               </tr>
             </thead>
@@ -89,7 +89,6 @@ const ReportTable = ({ reports, loading, onPageChange, lang }) => {
                       {item.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {" "}
                       {item.reporter?.name ?? ""}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words">
@@ -128,7 +127,7 @@ const ReportTable = ({ reports, loading, onPageChange, lang }) => {
                       {item.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <ReportDropDown reportId={item?.id} lang={lang} />
+                      <ReportDropDown reportId={item?.id} t={t} lang={lang} />
                     </td>
                   </tr>
                 ))

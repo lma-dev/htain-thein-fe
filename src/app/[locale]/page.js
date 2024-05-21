@@ -13,7 +13,7 @@ export default function Home({ params }) {
           <div className="mx-auto max-w-lg text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
             <h2 className="text-3xl font-bold sm:text-4xl">{t("title")}</h2>
 
-            <p className="mt-4 text-gray-600">{t("home_text")}</p>
+            <p className="mt-4 text-gray-600">{t("homeText")}</p>
 
             <Link
               href={`/${params.locale}/login`}

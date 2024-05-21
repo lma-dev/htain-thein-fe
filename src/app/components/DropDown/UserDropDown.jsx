@@ -15,7 +15,7 @@ import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
 
-const UserDropDown = ({ userId, lang }) => {
+const UserDropDown = ({ userId, t, lang }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteUserService();
   const userRole = parseCookies().userRole;
@@ -54,7 +54,9 @@ const UserDropDown = ({ userId, lang }) => {
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-gray-100 rounded-md bg-white z-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
             <div className="px-1 py-1 ">
-              <h2 className="text-gray-500 font-semibold p-2">Settings</h2>
+              <h2 className="text-gray-500 font-semibold p-2">
+                {t("setting")}
+              </h2>
 
               <Menu.Item>
                 <Link
@@ -62,7 +64,7 @@ const UserDropDown = ({ userId, lang }) => {
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <MapPinned size={16} className="mr-2 inline-block" />
-                  Request Location
+                  {t("requestLocation")}
                 </Link>
               </Menu.Item>
               <Menu.Item>
@@ -72,7 +74,7 @@ const UserDropDown = ({ userId, lang }) => {
                   onClick={handleExport}
                 >
                   <Download size={16} className="mr-2 inline-block" />
-                  Export
+                  {t("export")}
                 </Link>
               </Menu.Item>
               {(userRole === UserType.ADMIN ||
@@ -84,12 +86,12 @@ const UserDropDown = ({ userId, lang }) => {
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />
-                      Edit
+                      {t("edit")}
                     </Link>
                   </Menu.Item>
                   <hr className="my-1 border-gray-300" />
                   <h2 className="text-gray-500 font-semibold p-2">
-                    Danger Zone
+                    {t("dangerZone")}
                   </h2>
                   <Menu.Item>
                     <Link
@@ -98,7 +100,7 @@ const UserDropDown = ({ userId, lang }) => {
                       onClick={handleDelete}
                     >
                       <Trash2 size={16} className="mr-2 inline-block" />
-                      Delete
+                      {t("delete")}
                     </Link>
                   </Menu.Item>
                 </div>
@@ -111,6 +113,7 @@ const UserDropDown = ({ userId, lang }) => {
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
         method={handleConfirmDelete}
+        t={t}
       />
     </div>
   );

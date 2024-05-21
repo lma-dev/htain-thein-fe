@@ -118,14 +118,14 @@ const DetailReport = ({ params }) => {
 
               <div className="flex justify-between">
                 <Link
-                  href={`/${params.reportId}/reports`}
+                  href={`/${params.locale}/reports`}
                   className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
                 >
                   Back
                 </Link>
 
                 <Link
-                  href={`/${params.reportId}/reports/history`}
+                  href={`/${params.locale}/reports/${params.reportId}/history`}
                   className="sm:w-auto text-sm font-medium text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Check History

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { DeleteAnnouncementService } from "../../services/AnnouncementService/DeleteAnnouncementService";
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 
-export default function AnnouncementDropDown({ announcementId, lang }) {
+export default function AnnouncementDropDown({ announcementId, t, lang }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteAnnouncementService();
 
@@ -47,7 +47,7 @@ export default function AnnouncementDropDown({ announcementId, lang }) {
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Pencil size={16} className="mr-2 inline-block" />
-                  Edit
+                  {t("edit")}
                 </Link>
               </Menu.Item>
               <Menu.Item>
@@ -56,7 +56,7 @@ export default function AnnouncementDropDown({ announcementId, lang }) {
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
-                  Detail
+                  {t("detail")}
                 </Link>
               </Menu.Item>
               <Menu.Item>
@@ -66,7 +66,7 @@ export default function AnnouncementDropDown({ announcementId, lang }) {
                   onClick={handleDelete}
                 >
                   <Trash2 size={16} className="mr-2 inline-block" />
-                  Delete
+                  {t("delete")}
                 </Link>
               </Menu.Item>
             </div>
@@ -77,6 +77,7 @@ export default function AnnouncementDropDown({ announcementId, lang }) {
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
         method={handleConfirmDelete}
+        t={t}
       />
     </div>
   );

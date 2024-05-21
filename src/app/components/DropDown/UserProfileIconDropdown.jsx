@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -14,10 +15,11 @@ function classNames(...classes) {
 const UserProfileIconDropdown = ({ lang }) => {
   const { logout } = useAuth();
   const router = useRouter();
-  const authUser = parseCookies().userId;
+  const authUserId = parseCookies().userId;
+  const t = useTranslations("Translation");
   const handleLogout = async () => {
     await logout();
-    router.push(`/${params.locale}`);
+    router.push(`/${lang}`);
   };
   return (
     <Menu as="div" className="relative inline-block text-left ">
@@ -41,13 +43,13 @@ const UserProfileIconDropdown = ({ lang }) => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  href={`/${lang}/users/${authUser}`}
+                  href={`/${lang}/users/${authUserId}`}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Profile
+                  {t("profile")}
                 </Link>
               )}
             </Menu.Item>
@@ -62,7 +64,7 @@ const UserProfileIconDropdown = ({ lang }) => {
                   )}
                   onClick={handleLogout}
                 >
-                  Sign out
+                  {t("signOut")}
                 </a>
               )}
             </Menu.Item>

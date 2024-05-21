@@ -12,6 +12,7 @@ const LangSwitcher = () => {
   const handleChange = (event) => {
     const newLanguage = event.target.value;
     const currentRoute = pathname.slice(4);
+    console.log("Language : " + newLanguage);
     setSelectedLanguage(newLanguage);
     router.push(`/${newLanguage}/${currentRoute}`, undefined, {
       locale: newLanguage,
@@ -27,23 +28,21 @@ const LangSwitcher = () => {
 
   return (
     <div className="flex">
-      <div className="">
-        <select
-          onChange={handleChange}
-          className="focus:shadow-outline-blue p-1 block w-auto appearance-none rounded-lg text-center border mr-2 border-gray-300 bg-gray-800 text-white leading-tight shadow hover:border-blue-500 focus:border-blue-300 focus:outline-none"
-        >
-          <option value="" readOnly>
-            {getLanguageName()}
-          </option>
-          {options
-            .filter((option) => option.code !== languageCode)
-            .map((option) => (
-              <option key={option.code} value={option.code}>
-                {option.language}
-              </option>
-            ))}
-        </select>
-      </div>
+      <select
+        onChange={handleChange}
+        className="focus:shadow-outline-blue p-1 block w-auto appearance-none rounded-lg text-center border mr-2 border-gray-300 bg-gray-800 text-white leading-tight shadow hover:border-blue-500 focus:border-blue-300 focus:outline-none"
+      >
+        <option value="" readOnly>
+          {getLanguageName()}
+        </option>
+        {options
+          .filter((option) => option.code !== languageCode)
+          .map((option) => (
+            <option key={option.code} value={option.code}>
+              {option.language}
+            </option>
+          ))}
+      </select>
     </div>
   );
 };

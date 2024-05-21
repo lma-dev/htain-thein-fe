@@ -5,10 +5,12 @@ import Layout from "../../../components/layout";
 import NotificationCard from "../../../components/Notification/NotificationCard";
 import { FetchAllNotificationsDataService } from "../../../services/NotificationService/FetchAllNotificationsService";
 import NotificationSkeletonAnimation from "../../../components/Skeleton/NotificationSkeletonAnimation";
+import { useTranslations } from "next-intl";
 
 const NotificationPage = ({ params }) => {
   const { data: notifications, isLoading: loading } =
     FetchAllNotificationsDataService();
+  const t = useTranslations("Translation");
 
   return (
     <Layout lang={params.locale}>
@@ -23,11 +25,7 @@ const NotificationPage = ({ params }) => {
         <div>
           {notifications?.data.length > 0 &&
             notifications.data.map((notification, index) => (
-              <NotificationCard
-                key={index}
-                notification={notification}
-                lang={params.locale}
-              />
+              <NotificationCard key={index} notification={notification} t={t} />
             ))}
         </div>
       )}

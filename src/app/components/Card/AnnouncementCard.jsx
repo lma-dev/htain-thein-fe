@@ -1,6 +1,6 @@
 import { BadgeInfo } from "lucide-react";
 import AnnouncementDropdown from "../DropDown/AnnouncementDropDown";
-const AnnouncementCard = ({ announcement }) => {
+const AnnouncementCard = ({ announcement, t, lang }) => {
   const getBadgeColor = (level) => {
     if (level == 1) {
       return <BadgeInfo size={17} className="text-blue-600" />;
@@ -16,13 +16,13 @@ const AnnouncementCard = ({ announcement }) => {
   function getBadgeTitle(priority) {
     switch (priority) {
       case "1":
-        return "Low priority";
+        return t("lowPriority");
       case "2":
-        return "Normal priority";
+        return t("normalPriority");
       case "3":
-        return "High priority";
+        return t("highPriority");
       default:
-        return "Unknown priority";
+        return t("unknownPriority");
     }
   }
   return (
@@ -39,7 +39,9 @@ const AnnouncementCard = ({ announcement }) => {
                     : "bg-red-500 text-white"
                 }`}
               >
-                {announcement.isVisible == 1 ? "Published" : "Unpublished"}
+                {announcement.isVisible == 1
+                  ? t("published")
+                  : t("unpublished")}
               </span>
             </h3>
             <div className="flex items-center">
@@ -60,7 +62,11 @@ const AnnouncementCard = ({ announcement }) => {
             </div>
           </div>
           <div className="text-gray-500 text-sm">
-            <AnnouncementDropdown announcementId={announcement.id} />
+            <AnnouncementDropdown
+              announcementId={announcement.id}
+              t={t}
+              lang={lang}
+            />
           </div>
         </div>
         <p className="text-gray-500 text-md text-wrap line-clamp-1">

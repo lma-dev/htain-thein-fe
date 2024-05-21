@@ -13,6 +13,7 @@ import { checkIncomeAndOutCome } from "../../../utils/checkIncomeAndOutCome";
 import RegularCostTable from "../../../components/Table/RegularCostTable/page";
 import OverAllStatusCard from "../../../components/Card/OverAllStatusCard";
 import SkeletonAnimation from "../../../components/Skeleton/SkeletonAnimation";
+import { useTranslations } from "next-intl";
 
 const DashboardPage = ({ params }) => {
   const { data: users, isLoading: loadingUsers } = FetchUsersService();
@@ -34,6 +35,7 @@ const DashboardPage = ({ params }) => {
   let outcome = calculations?.data?.outcome;
   let incomePercentage = calculations?.data?.incomeRate ?? 0;
   let outcomePercentage = calculations?.data?.outcomeRate ?? 0;
+  const t = useTranslations("Translation");
 
   const { isIncomeGreaterThanOutcome } = checkIncomeAndOutCome(
     incomePercentage,
@@ -50,34 +52,37 @@ const DashboardPage = ({ params }) => {
           // Actual content when data is available
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <ItemCountCard count={userCount} title={"users"} />
-              <ItemCountCard count={reportsCount} title={"reports"} />
+              <ItemCountCard count={userCount} title={"users"} lang={t} />
+              <ItemCountCard count={reportsCount} title={"reports"} lang={t} />
               <ItemCountCard
                 text={income}
                 title={"income"}
                 rate={incomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
+                lang={t}
               />
               <ItemCountCard
                 text={outcome}
                 title={"outcome"}
                 rate={outcomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
+                lang={t}
               />
             </div>
             <div>
               <div className="mt-8">
-                <OverAllStatusCard calculations={calculations} />
+                <OverAllStatusCard calculations={calculations} lang={t} />
               </div>
 
               <div className="mt-8">
                 <h1 className="text-gray-600 font-bold text-lg my-5">
-                  General Outcome Table
+                  {t("generalOutComeTable")}
                 </h1>
                 <RegularCostTable
                   regularCosts={regularCosts}
                   loading={overallLoading}
-                  tableHeight="h-80"
+                  t={t}
+                  lang={params.locale}
                 />
               </div>
             </div>

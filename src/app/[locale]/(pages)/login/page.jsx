@@ -21,8 +21,10 @@ const Login = ({ params }) => {
   const handleLogin = async (e) => {
     setLoading(true);
     e.preventDefault();
-    await login(email, password, setLoading);
-    router.push(`/${params.locale}/dashboard`);
+    let result = await login(email, password, setLoading);
+    if (result) {
+      router.push(`/${params.locale}/dashboard`);
+    }
   };
 
   const initialCheck = () => {
@@ -68,7 +70,7 @@ const Login = ({ params }) => {
             </div>
             <div className="space-y-1 text-sm">
               <label htmlFor="password" className="block dark:text-gray-400">
-                Password
+                {t("password")}
               </label>
               <input
                 type="password"
@@ -86,14 +88,14 @@ const Login = ({ params }) => {
                 className="w-full p-3 text-center hover:bg-gray-950 text-white rounded-lg bg-gray-800 dark:text-gray-900 dark:bg-violet-400"
                 disabled={loading}
               >
-                {loading ? <ButtonLoading /> : "Sign in"}
+                {loading ? <ButtonLoading t={t} /> : t("signIn")}
               </button>
             </div>
           </form>
           <div className="flex items-center pt-4 space-x-1">
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
             <p className="px-3 text-sm dark:text-gray-400">
-              Login with social accounts
+              {t("LoginWithSocialAccount")}
             </p>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           </div>

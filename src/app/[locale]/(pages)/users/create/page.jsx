@@ -2,15 +2,18 @@
 
 import Link from "next/link";
 import Layout from "../../../../components/layout";
-import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
+import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
 import { createUserService } from "../../../../services/UserService/CreateUserService";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useCreateQuery } from "../../../hooks/useCreateQuery";
+import { useCreateQuery } from "../../../../hooks/useCreateQuery";
+import { useTranslations } from "next-intl";
 
 const CreateUser = ({ params }) => {
   const router = useRouter();
+  const t = useTranslations("Translation");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,7 +46,7 @@ const CreateUser = ({ params }) => {
                   htmlFor="fullName"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Full Name
+                  {t("fullName")}
                 </label>
                 <input
                   name="name"
@@ -60,7 +63,7 @@ const CreateUser = ({ params }) => {
                   htmlFor="email"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Email
+                  {t("email")}
                 </label>
                 <input
                   name="email"
@@ -77,7 +80,7 @@ const CreateUser = ({ params }) => {
                   htmlFor="password"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Password
+                  {t("password")}
                 </label>
                 <input
                   name="password"
@@ -95,7 +98,7 @@ const CreateUser = ({ params }) => {
                   htmlFor="role"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Role
+                  {t("role")}
                 </label>
                 <select
                   name="role"
@@ -105,10 +108,10 @@ const CreateUser = ({ params }) => {
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   required
                 >
-                  <option value="">Please select</option>
-                  <option value="SuperAdmin">SuperAdmin</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Member">Member</option>
+                  <option value=""> {t("select")}</option>
+                  <option value="SuperAdmin"> {t("superAdmin")}</option>
+                  <option value="Admin">{t("admin")}</option>
+                  <option value="Member">{t("member")}</option>
                 </select>
               </div>
               <div className="mb-6">
@@ -116,7 +119,7 @@ const CreateUser = ({ params }) => {
                   htmlFor="accountStatus"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Account Status
+                  {t("accountStatus")}
                 </label>
                 <select
                   name="accountStatus"
@@ -126,9 +129,9 @@ const CreateUser = ({ params }) => {
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   required
                 >
-                  <option value="">Please select</option>
-                  <option value="ACTIVE">Active</option>
-                  <option value="SUSPENDED">Suspend</option>
+                  <option value=""> {t("select")}</option>
+                  <option value="ACTIVE"> {t("active")}</option>
+                  <option value="SUSPENDED"> {t("suspend")}</option>
                 </select>
               </div>
               <div className="flex justify-between">
@@ -136,9 +139,9 @@ const CreateUser = ({ params }) => {
                   href={`/${params.locale}/users`}
                   className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
                 >
-                  Back
+                  {t("back")}
                 </Link>
-                <NormalButton text="create" onClick={handleSubmit} />
+                <NormalButton text={t("create")} onClick={handleSubmit} />
               </div>
             </div>
           </form>
