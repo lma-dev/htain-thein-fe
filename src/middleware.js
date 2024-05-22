@@ -13,5 +13,5 @@ export default middleware;
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ["/", "/(mm|jp|en)/:page*"],
+  matcher: ["/", "/(mm|jp|en)/:path*"],
 };

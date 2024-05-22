@@ -114,6 +114,7 @@
       "requestLocation": "リクエスト場所",
       "requester": "リクエスター",
       "resetAll": "すべてリセット",
+      "requestedTo":"要求されました",
       "role": "役割",
       "select": "選択",
       "send": "送信",
