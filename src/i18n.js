@@ -1,13 +1,19 @@
 import { notFound } from "next/navigation";
 import { getRequestConfig } from "next-intl/server";
+import enMessages from "../messages/en.json";
+import mmMessages from "../messages/mm.json";
+import jpMessages from "../messages/jp.json";
 
-const locales = ["en", "mm", "jp"];
+const messages = {
+  en: enMessages,
+  mm: mmMessages,
+  jp: jpMessages,
+};
 
 export default getRequestConfig(async ({ locale }) => {
-  console.log("i18n : " + locale);
-  if (!locales.includes(locale)) notFound();
+  if (!(locale in messages)) notFound();
 
   return {
-    messages: (await import(`../messages/${locale}.json`)).default,
+    messages: messages[locale],
   };
 });

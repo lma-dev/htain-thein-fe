@@ -71,7 +71,7 @@ const DashboardPage = ({ params }) => {
             </div>
             <div>
               <div className="mt-8">
-                <OverAllStatusCard calculations={calculations} lang={t} />
+                <OverAllStatusCard calculations={calculations} t={t} />
               </div>
 
               <div className="mt-8">

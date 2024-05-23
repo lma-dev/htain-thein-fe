@@ -12,7 +12,6 @@ const LangSwitcher = () => {
   const handleChange = (event) => {
     const newLanguage = event.target.value;
     const currentRoute = pathname.slice(4);
-    console.log("Language : " + newLanguage);
     setSelectedLanguage(newLanguage);
     router.push(`/${newLanguage}/${currentRoute}`, undefined, {
       locale: newLanguage,
@@ -51,6 +50,6 @@ export default LangSwitcher;
 
 const options = [
   { language: "English", code: "en" },
-  { language: "Japanese", code: "jp" },
-  { language: "Myanmar", code: "mm" },
+  { language: "日本語", code: "jp" },
+  { language: "ဗမာ", code: "mm" },
 ];
