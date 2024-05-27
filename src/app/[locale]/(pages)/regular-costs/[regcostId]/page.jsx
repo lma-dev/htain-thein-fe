@@ -4,6 +4,7 @@ import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FetchSingleRegularCostService } from "../../../../services/RegularCostService/FetchSingleRegularCostService";
+import { useTranslations } from "next-intl";
 
 const DetailRegularCost = ({ params }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const DetailRegularCost = ({ params }) => {
     description: "",
     reporter: "",
   });
+  const t = useTranslations("Translation");
+
   //   const params = useParams();
   const { data: regularCostData } = FetchSingleRegularCostService(
     params.regcostId
@@ -29,7 +32,7 @@ const DetailRegularCost = ({ params }) => {
         <div className="w-1/2">
           <div className="flex flex-wrap justify-center sm:justify-center">
             <div className="w-full max-w-screen-sm rounded-lg border border-gray-200 bg-white p-10 shadow dark:border-gray-700 dark:bg-gray-800">
-              <h1 className="mb-3 text-xl font-medium">Detail</h1>
+              <h1 className="mb-3 text-xl font-medium">{t("detail")}</h1>
 
               <div className="mb-6 grid gap-6 sm:grid-cols-2">
                 <div className="sm:col-span-1">
@@ -37,7 +40,7 @@ const DetailRegularCost = ({ params }) => {
                     htmlFor="amount"
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Amount
+                    {t("amount")}
                   </label>
                   <input
                     name="amount"
@@ -54,11 +57,11 @@ const DetailRegularCost = ({ params }) => {
                     htmlFor="reporter"
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Requester
+                    {t("requester")}
                   </label>
                   <input
                     name="reporter"
-                    value={formData?.reporter}
+                    value={formData?.reporter?.name ?? ""}
                     type="text"
                     id="reporter"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
@@ -71,7 +74,7 @@ const DetailRegularCost = ({ params }) => {
                   htmlFor="description"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  description
+                  {t("description")}
                 </label>
                 <textarea
                   name="description"
@@ -87,7 +90,7 @@ const DetailRegularCost = ({ params }) => {
                 href={`/${params.locale}/regular-costs`}
                 className="rounded-lg p-3 text-sm text-gray-600 font-medium border"
               >
-                Back
+                {t("back")}
               </Link>
             </div>
           </div>

@@ -7,13 +7,14 @@ import { EditRegularCostService } from "../../../../../services/RegularCostServi
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FetchSingleRegularCostService } from "../../../../../services/RegularCostService/FetchSingleRegularCostService";
+import { useTranslations } from "next-intl";
 
 const EditRegularCost = ({ params }) => {
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
-    reporter: "",
   });
+  const t = useTranslations("Translation");
 
   const router = useRouter();
   const { data: regularCostData } = FetchSingleRegularCostService(
@@ -27,7 +28,16 @@ const EditRegularCost = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateMutation.mutate({ id: params.regcostId, data: formData });
+    const reporterId = regularCostData.data.reporter.id;
+    const updatedFormData = {
+      ...formData,
+      reporter_id: reporterId,
+    };
+    console.log(updatedFormData);
+    await updateMutation.mutate({
+      id: params.regcostId,
+      data: updatedFormData,
+    });
     router.push(`/${params.locale}/regular-costs`);
   };
 
@@ -44,7 +54,7 @@ const EditRegularCost = ({ params }) => {
         <div className="w-1/2">
           <div className="flex flex-wrap justify-center sm:justify-center">
             <div className="w-full max-w-screen-sm rounded-lg border border-gray-200 bg-white p-10 shadow dark:border-gray-700 dark:bg-gray-800">
-              <h1 className="mb-3 text-xl font-medium">Edit</h1>
+              <h1 className="mb-3 text-xl font-medium">{t("edit")}</h1>
 
               <form>
                 <div className="mb-6 grid gap-6 sm:grid-cols-2">
@@ -53,7 +63,7 @@ const EditRegularCost = ({ params }) => {
                       htmlFor="amount"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Amount
+                      {t("amount")}
                     </label>
                     <input
                       name="amount"
@@ -71,11 +81,11 @@ const EditRegularCost = ({ params }) => {
                       htmlFor="reporter"
                       className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Requester
+                      {t("requester")}
                     </label>
                     <input
                       name="reporter"
-                      value={formData?.reporter}
+                      value={formData?.reporter?.name ?? ""}
                       onChange={handleInputChange}
                       type="text"
                       id="reporter"
@@ -87,7 +97,7 @@ const EditRegularCost = ({ params }) => {
                 </div>
                 <div className="mb-6">
                   <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    description
+                    {t("description")}
                   </label>
                   <textarea
                     name="description"
@@ -105,7 +115,7 @@ const EditRegularCost = ({ params }) => {
                     href={`/${params.locale}/regular-costs`}
                     className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
                   >
-                    Back
+                    {t("back")}
                   </Link>
 
                   <NormalButton

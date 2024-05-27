@@ -8,7 +8,6 @@ import { FetchSingleAnnouncementService } from "../../../../../services/Announce
 import { useEffect, useState } from "react";
 import { EditAnnouncementService } from "../../../../../services/AnnouncementService/EditAnnouncementService";
 import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
 import {
   getPriority,
   getVisibility,

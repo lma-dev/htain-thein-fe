@@ -1,7 +1,6 @@
 "use client";
 import Layout from "../../../../components/layout";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
-import { useParams, useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 import Link from "next/link";
 import Spinner from "../../../../components/Spinner/Spinner";

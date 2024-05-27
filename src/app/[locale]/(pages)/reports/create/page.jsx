@@ -10,6 +10,7 @@ import { parseCookies } from "nookies";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
+import { useTranslations } from "next-intl";
 
 const CreateReport = ({ params }) => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const CreateReport = ({ params }) => {
   const { data: userData } = FetchSingleUserService(userId);
   const reporterName = userData?.data?.name || "";
   const createReportMutation = useCreateQuery(createReportService);
+  const t = useTranslations("Translation");
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -47,7 +49,7 @@ const CreateReport = ({ params }) => {
                 htmlFor="amount"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Amount
+                {t("amount")}
               </label>
               <input
                 name="amount"
@@ -65,7 +67,7 @@ const CreateReport = ({ params }) => {
                 htmlFor="type"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Type
+                {t("type")}
               </label>
               <select
                 name="type"
@@ -75,10 +77,10 @@ const CreateReport = ({ params }) => {
                 className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               >
                 <option defaultValue="" disabled>
-                  Choose Financial Type
+                  {t("choose_financial_type")}
                 </option>
-                <option value="INCOME">INCOME</option>
-                <option value="EXPENSE">EXPENSE</option>
+                <option value="INCOME"> {t("income")}</option>
+                <option value="EXPENSE"> {t("expense")}</option>
               </select>
             </div>
             <div className="mb-6">
@@ -86,7 +88,7 @@ const CreateReport = ({ params }) => {
                 htmlFor="reporter"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Reporter
+                {t("reporter")}
               </label>
               <input
                 name="reporter"
@@ -104,7 +106,7 @@ const CreateReport = ({ params }) => {
                 htmlFor="email"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Description
+                {t("description")}
               </label>
               <textarea
                 name="description"
@@ -122,7 +124,7 @@ const CreateReport = ({ params }) => {
                 href={`/${params.locale}/reports`}
                 className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
               >
-                Back
+                {t("back")}
               </Link>
               <NormalButton text="Create" onClick={handleSubmit} />
             </div>

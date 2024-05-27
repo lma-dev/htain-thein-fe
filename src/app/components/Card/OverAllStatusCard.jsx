@@ -22,7 +22,9 @@ const OverAllStatusCard = ({ calculations, t }) => {
           </span>
         </h1>
         <div className="pt-6">
-          <h3 className="text-xl font-bold text-gray-500">Overview Analysis</h3>
+          <h3 className="text-xl font-bold text-gray-500">
+            {t("overviewAnalysis")}
+          </h3>
           <div className="mt-4">
             <span className="block text-sm text-gray-500 font-semibold">
               {t("regularDeposit")}:
@@ -37,7 +39,7 @@ const OverAllStatusCard = ({ calculations, t }) => {
                 {t("mostDepositPerson")}:
               </span>
               <span className="mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold text-gray-800">
-                {calculations?.data?.mostDepositPerson}
+                {calculations?.data?.mostDepositPerson || "-"}
               </span>
             </div>
             <div className="flex-1">
@@ -45,7 +47,7 @@ const OverAllStatusCard = ({ calculations, t }) => {
                 {t("mostWithdrawPerson")}:
               </span>
               <span className="mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold text-gray-800">
-                {calculations?.data?.mostWithdrawPerson}
+                {calculations?.data?.mostWithdrawPerson || "-"}
               </span>
             </div>
           </div>

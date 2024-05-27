@@ -10,6 +10,7 @@ import { parseCookies } from "nookies";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
+import { useTranslations } from "next-intl";
 
 const CreateRegularCost = ({ params }) => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const CreateRegularCost = ({ params }) => {
   const { data: userData } = FetchSingleUserService(userId);
   const reporterName = userData?.data?.name || "";
   const createRegularCostMutation = useCreateQuery(createRegularCostService);
+  const t = useTranslations("Translation");
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -46,7 +48,7 @@ const CreateRegularCost = ({ params }) => {
                 htmlFor="amount"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Amount
+                {t("amount")}
               </label>
               <input
                 name="amount"
@@ -65,7 +67,7 @@ const CreateRegularCost = ({ params }) => {
                 htmlFor="reporter"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Reporter
+                {t("reporter")}
               </label>
               <input
                 name="reporter"
@@ -83,7 +85,7 @@ const CreateRegularCost = ({ params }) => {
                 htmlFor="email"
                 className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
               >
-                Description
+                {t("description")}
               </label>
               <textarea
                 name="description"
@@ -101,7 +103,7 @@ const CreateRegularCost = ({ params }) => {
                 href={`/${params.locale}/regular-costs`}
                 className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
               >
-                Back
+                {t("back")}
               </Link>
               <NormalButton text="Create" onClick={handleSubmit} />
             </div>

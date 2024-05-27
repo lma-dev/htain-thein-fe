@@ -107,7 +107,9 @@ const UserTable = ({ users, loading, onPageChange, t, lang }) => {
           </table>
         </div>
       </div>
-      <Pagination meta={users?.meta} handlePageChange={onPageChange} />
+      {users?.data?.length > 0 && (
+        <Pagination meta={users?.meta} handlePageChange={onPageChange} />
+      )}
     </div>
   );
 };

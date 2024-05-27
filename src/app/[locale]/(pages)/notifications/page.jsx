@@ -25,7 +25,12 @@ const NotificationPage = ({ params }) => {
         <div>
           {notifications?.data.length > 0 &&
             notifications.data.map((notification, index) => (
-              <NotificationCard key={index} notification={notification} t={t} />
+              <NotificationCard
+                key={index}
+                notification={notification}
+                t={t}
+                lang={params.locale}
+              />
             ))}
         </div>
       )}

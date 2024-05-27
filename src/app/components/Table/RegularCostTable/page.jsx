@@ -77,7 +77,7 @@ const RegularCostTable = ({ regularCosts, loading, t, lang }) => {
                       {item.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {item.reporter}
+                      {item.reporter.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words ">
                       {item.amount} {CurrencyType.MMK}

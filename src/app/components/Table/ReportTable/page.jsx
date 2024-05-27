@@ -104,7 +104,7 @@ const ReportTable = ({ reports, loading, onPageChange, t, lang }) => {
                             : ""
                         }`}
                       >
-                        {item.type}
+                        {item.type ?? "-"}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words">
@@ -136,7 +136,9 @@ const ReportTable = ({ reports, loading, onPageChange, t, lang }) => {
           </table>
         </div>
       </div>
-      <Pagination meta={reports?.meta} handlePageChange={onPageChange} />
+      {reports?.data?.length > 0 && (
+        <Pagination meta={reports?.meta} handlePageChange={onPageChange} />
+      )}
     </div>
   );
 };

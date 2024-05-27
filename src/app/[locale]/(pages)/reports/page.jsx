@@ -22,7 +22,8 @@ const ReportsPage = ({ params }) => {
     amount,
     confirmStatus,
     type,
-    createdAt
+    createdAt,
+    page
   );
 
   const handlePageChange = (newPage) => {
