@@ -36,9 +36,15 @@ const EditReport = ({ params }) => {
       verifier_id: verifierId,
     };
     e.preventDefault();
-    await updateMutation.mutate({ id: params.reportId, data: updatedFormData });
-    console.log(updatedFormData);
-    router.push(`/${params.locale}/reports`);
+    try {
+      await updateMutation.mutate({
+        id: params.reportId,
+        data: updatedFormData,
+      });
+      router.push(`/${params.locale}/reports`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

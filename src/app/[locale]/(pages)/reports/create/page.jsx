@@ -34,8 +34,12 @@ const CreateReport = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedFormData = { ...formData, reporter_id: userId };
-    await createReportMutation.mutateAsync(updatedFormData);
-    router.push(`/${params.locale}/deposit-requests`);
+    try {
+      await createReportMutation.mutateAsync(updatedFormData);
+      router.push(`/${params.locale}/deposit-requests`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

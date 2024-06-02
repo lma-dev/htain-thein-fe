@@ -16,7 +16,6 @@ const EditUser = ({ params }) => {
     accountStatus: "",
   });
   const router = useRouter();
-  //   const params = useParams();
   const { data: userData } = FetchSingleUserService(params.userId);
   const updateMutation = EditUserService();
 
@@ -26,8 +25,12 @@ const EditUser = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateMutation.mutate({ id: params.userId, data: formData });
-    router.push(`/${params.locale}/users`);
+    try {
+      await updateMutation.mutate({ id: params.userId, data: formData });
+      router.push(`/${params.locale}/users`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

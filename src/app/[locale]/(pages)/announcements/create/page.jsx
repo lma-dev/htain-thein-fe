@@ -26,8 +26,12 @@ const CreateAnnouncement = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createMutation.mutateAsync(formData);
-    router.push(`/${params.locale}/announcements`);
+    try {
+      await createMutation.mutateAsync(formData);
+      router.push(`/${params.locale}/announcements`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleNewAnnouncement = () => {

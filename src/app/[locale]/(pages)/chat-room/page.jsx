@@ -33,8 +33,15 @@ const ChatPage = ({ params }) => {
   const { data, isLoading: loadingMessages } = FetchAllMessageService(senderId);
 
   const sendMessage = async () => {
-    await createMessageMutation.mutateAsync({ id: senderId, data: newMessage });
-    setNewMessage("");
+    try {
+      await createMessageMutation.mutateAsync({
+        id: senderId,
+        data: newMessage,
+      });
+      setNewMessage("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleKeyPress = (event) => {

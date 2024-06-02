@@ -33,8 +33,12 @@ const CreateRegularCost = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedFormData = { ...formData, reporter_id: userId };
-    await createRegularCostMutation.mutateAsync(updatedFormData);
-    router.push(`/${params.locale}/regular-costs`);
+    try {
+      await createRegularCostMutation.mutateAsync(updatedFormData);
+      router.push(`/${params.locale}/regular-costs`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

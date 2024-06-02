@@ -33,12 +33,15 @@ const EditRegularCost = ({ params }) => {
       ...formData,
       reporter_id: reporterId,
     };
-    console.log(updatedFormData);
-    await updateMutation.mutate({
-      id: params.regcostId,
-      data: updatedFormData,
-    });
-    router.push(`/${params.locale}/regular-costs`);
+    try {
+      await updateMutation.mutate({
+        id: params.regcostId,
+        data: updatedFormData,
+      });
+      router.push(`/${params.locale}/regular-costs`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

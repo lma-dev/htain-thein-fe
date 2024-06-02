@@ -28,8 +28,12 @@ const CreateUser = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createUserMutation.mutateAsync(formData);
-    router.push(`/${params.locale}/users`);
+    try {
+      await createUserMutation.mutateAsync(formData);
+      router.push(`/${params.locale}/users`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const createUserMutation = useCreateQuery(createUserService);

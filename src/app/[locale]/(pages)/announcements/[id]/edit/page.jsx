@@ -32,8 +32,12 @@ const EditAnnouncement = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateMutation.mutate({ id: params.id, data: formData });
-    router.push(`/${params.locale}/announcements`);
+    try {
+      await updateMutation.mutate({ id: params.id, data: formData });
+      router.push(`/${params.locale}/announcements`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     if (announceData?.data) {
