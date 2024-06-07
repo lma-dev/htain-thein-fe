@@ -2,7 +2,7 @@ import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import { CurrencyType } from "../../../enums/CurrencyType";
 
-const RegularCostTable = ({ regularCosts, loading }) => {
+const RegularCostTable = ({ regularCosts, loading, t, lang }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -14,37 +14,37 @@ const RegularCostTable = ({ regularCosts, loading }) => {
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Id
+                  {t("id")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Requester
+                  {t("requester")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Amount
+                  {t("amount")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Description
+                  {t("description")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Request Date
+                  {t("requestDate")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-end text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Action
+                  {t("action")}
                 </th>
               </tr>
             </thead>
@@ -77,7 +77,7 @@ const RegularCostTable = ({ regularCosts, loading }) => {
                       {item.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {item.reporter}
+                      {item.reporter.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words ">
                       {item.amount} {CurrencyType.MMK}
@@ -91,7 +91,11 @@ const RegularCostTable = ({ regularCosts, loading }) => {
                       {item.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <RegularCostDropDown regularCostId={item?.id} />
+                      <RegularCostDropDown
+                        regularCostId={item?.id}
+                        t={t}
+                        lang={lang}
+                      />
                     </td>
                   </tr>
                 ))

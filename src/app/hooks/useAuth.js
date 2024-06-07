@@ -1,12 +1,10 @@
 // hooks/useAuth.js
 import { useState } from "react";
 import AuthService from "../services/AuthService";
-import { useRouter } from "next/navigation";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const router = useRouter();
 
   const login = async (email, password, setLoading) => {
     try {
@@ -14,7 +12,7 @@ const useAuth = () => {
       setUser(userData);
       setLoading(true);
       setError(null);
-      router.push("/dashboard");
+      return true;
     } catch (error) {
       setError(error.message || "Login failed");
       setUser(null);

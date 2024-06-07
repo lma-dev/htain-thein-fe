@@ -11,6 +11,7 @@ const ReportFilterInputField = ({
   onTypeChange,
   onCreatedAtChange,
   onGeneralSearchChange,
+  t,
 }) => {
   return (
     <>
@@ -44,6 +45,7 @@ const ReportFilterInputField = ({
           onConfirmStatusChange={onConfirmStatusChange}
           onTypeChange={onTypeChange}
           onCreatedAtChange={onCreatedAtChange}
+          t={t}
         />
       </div>
     </>

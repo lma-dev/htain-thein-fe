@@ -7,11 +7,11 @@ import ConfirmDialog from "../Dialog/ConfirmDialog";
 import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
-export default function ReportDropDown({ reportId }) {
+
+export default function ReportDropDown({ reportId, t, lang }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteReportService();
   const userRole = parseCookies().userRole;
-
   const handleDelete = () => {
     setOpenDeleteDialog(true);
   };
@@ -45,11 +45,11 @@ export default function ReportDropDown({ reportId }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/reports/${reportId}`}
+                  href={`/${lang}/reports/${reportId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
-                  Detail
+                  {t("detail")}
                 </Link>
               </Menu.Item>
               {(userRole === UserType.ADMIN ||
@@ -57,11 +57,11 @@ export default function ReportDropDown({ reportId }) {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/reports/${reportId}/edit`}
+                      href={`/${lang}/reports/${reportId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />
-                      Edit
+                      {t("edit")}
                     </Link>
                   </Menu.Item>
                   <Menu.Item>
@@ -71,7 +71,7 @@ export default function ReportDropDown({ reportId }) {
                       onClick={handleDelete}
                     >
                       <Trash2 size={16} className="mr-2 inline-block" />
-                      Delete
+                      {t("delete")}
                     </Link>
                   </Menu.Item>
                 </div>
@@ -84,6 +84,7 @@ export default function ReportDropDown({ reportId }) {
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
         method={handleConfirmDelete}
+        t={t}
       />
     </div>
   );

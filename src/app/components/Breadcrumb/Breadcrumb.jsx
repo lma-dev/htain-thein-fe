@@ -1,17 +1,20 @@
 import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-const BreadCrumb = ({ title }) => {
+const BreadCrumb = ({ title, lang }) => {
+  const t = useTranslations("Translation");
+
   return (
     <div className="py-5">
-      <nav aria-label="Breadcrumb">
+      <nav aria-label="BreadCrumb">
         <ol className="flex items-center gap-1 text-sm text-gray-600">
           <li>
             <Link
-              href="/dashboard"
+              href={`/${lang}/dashboard`}
               className="block transition hover:text-gray-700"
             >
-              <span className="sr-only"> Home </span>
+              <span className="sr-only"> {t("home")} </span>
 
               <Home size={16} />
             </Link>
@@ -23,8 +26,7 @@ const BreadCrumb = ({ title }) => {
 
           <li>
             <a href="#" className="block transition hover:text-gray-700">
-              {" "}
-              {title}{" "}
+              {title}
             </a>
           </li>
         </ol>

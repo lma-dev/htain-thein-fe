@@ -6,7 +6,7 @@ import Link from "next/link";
 import { DeleteAnnouncementService } from "../../services/AnnouncementService/DeleteAnnouncementService";
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 
-export default function AnnouncementDropDown({ announcementId }) {
+export default function AnnouncementDropDown({ announcementId, t, lang }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteAnnouncementService();
 
@@ -43,20 +43,20 @@ export default function AnnouncementDropDown({ announcementId }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/announcements/${announcementId}/edit`}
+                  href={`/${lang}/announcements/${announcementId}/edit`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Pencil size={16} className="mr-2 inline-block" />
-                  Edit
+                  {t("edit")}
                 </Link>
               </Menu.Item>
               <Menu.Item>
                 <Link
-                  href={`/announcements/${announcementId}`}
+                  href={`/${lang}/announcements/${announcementId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
-                  Detail
+                  {t("detail")}
                 </Link>
               </Menu.Item>
               <Menu.Item>
@@ -66,7 +66,7 @@ export default function AnnouncementDropDown({ announcementId }) {
                   onClick={handleDelete}
                 >
                   <Trash2 size={16} className="mr-2 inline-block" />
-                  Delete
+                  {t("delete")}
                 </Link>
               </Menu.Item>
             </div>
@@ -77,6 +77,7 @@ export default function AnnouncementDropDown({ announcementId }) {
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
         method={handleConfirmDelete}
+        t={t}
       />
     </div>
   );

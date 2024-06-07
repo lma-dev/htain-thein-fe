@@ -4,7 +4,7 @@ import { MoreVertical, Check, X } from "lucide-react";
 import ConfirmBox from "../../components/ModalBox/ConfirmBox";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
 
-export default function DepositTableDropDown({ id }) {
+export default function DepositTableDropDown({ id, t, lang }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [status, setStatus] = useState();
   const handleReportAction = async (key) => {
@@ -21,6 +21,8 @@ export default function DepositTableDropDown({ id }) {
             status={status}
             setOpenDialog={setOpenDialog}
             openDialog={openDialog}
+            t={t}
+            lang={lang}
           />
         )}
       </div>
@@ -56,7 +58,7 @@ export default function DepositTableDropDown({ id }) {
                   onClick={() => handleReportAction(ConfirmStatus.ACCEPT)}
                 >
                   <Check size={16} className="mr-2 inline-block" />
-                  Accept
+                  {t("accept")}
                 </a>
               </Menu.Item>
               <Menu.Item>
@@ -65,7 +67,7 @@ export default function DepositTableDropDown({ id }) {
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                   onClick={() => handleReportAction(ConfirmStatus.REJECT)}
                 >
-                  <X size={16} className="mr-2 inline-block" /> Reject
+                  <X size={16} className="mr-2 inline-block" /> {t("reject")}
                 </a>
               </Menu.Item>
             </div>
