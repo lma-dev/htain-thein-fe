@@ -27,6 +27,6 @@
     "src/app/(pages)/reports/[reportId]/history/page.jsx",
     "src/app/components/Table/ReportHistoryTable/page.jsx",
     "src/app/(pages)/notifications/page.jsx"
-, "src/app/(pages)/users/[userId]/page.jsx"  ],
+, "src/app/(pages)/users/[userId]/page.jsx", "src/app/[locale]/layout.jsx", "src/i18n.js"  ],
   "exclude": ["node_modules"]
 }

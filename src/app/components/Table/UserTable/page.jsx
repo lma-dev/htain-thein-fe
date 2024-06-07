@@ -1,6 +1,7 @@
 import UserDropDown from "../../DropDown/UserDropDown";
+import Pagination from "../../Pagination/Pagination";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
-const UserTable = ({ users, loading }) => {
+const UserTable = ({ users, loading, onPageChange, t, lang }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -12,43 +13,43 @@ const UserTable = ({ users, loading }) => {
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Id
+                  {t("id")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Name
+                  {t("name")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Email
+                  {t("email")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Role
+                  {t("role")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Status
+                  {t("status")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Join In
+                  {t("joinIn")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-end text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Action
+                  {t("action")}
                 </th>
               </tr>
             </thead>
@@ -97,7 +98,7 @@ const UserTable = ({ users, loading }) => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <UserDropDown userId={user.id} />
+                      <UserDropDown userId={user.id} t={t} lang={lang} />
                     </td>
                   </tr>
                 ))
@@ -106,6 +107,9 @@ const UserTable = ({ users, loading }) => {
           </table>
         </div>
       </div>
+      {users?.data?.length > 0 && (
+        <Pagination meta={users?.meta} handlePageChange={onPageChange} />
+      )}
     </div>
   );
 };

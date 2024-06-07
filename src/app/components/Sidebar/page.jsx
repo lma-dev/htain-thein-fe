@@ -4,13 +4,14 @@ import { LogOut } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { parseCookies } from "nookies";
+import { useTranslations } from "next-intl";
 
-const Sidebar = () => {
+const Sidebar = ({ lang }) => {
   const { logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const userId = parseCookies().userId;
+  const t = useTranslations("Translation");
+
   const handleLogout = async () => {
     await logout();
     router.push("/");
@@ -19,94 +20,94 @@ const Sidebar = () => {
     <div className="flex min-h-full flex-col justify-between w-60">
       <div className="px-4 py-6">
         <span className="grid h-10 w-32 place-content-center rounded-lg font-bold text-lg uppercase text-gray-600">
-          HTAIN THEIN
+          {t("appTitle")}
         </span>
 
         <ul className="mt-6 space-y-1">
           <li>
             <Link
-              href="/dashboard"
+              href={`/${lang}/dashboard`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/dashboard"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Dashboard
+              {t("dashboard")}
             </Link>
           </li>
 
           <li>
             <Link
-              href="/reports"
+              href={`/${lang}/reports`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/reports"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Reports
+              {t("report")}
             </Link>
           </li>
           <li>
             <Link
-              href="/regular-costs"
+              href={`/${lang}/regular-costs`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/regular-costs"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Regular Costs
+              {t("regularCost")}
             </Link>
           </li>
           <li>
             <Link
-              href="/deposit-requests"
+              href={`/${lang}/deposit-requests`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/deposit-requests"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Deposit Requests
+              {t("depositRequest")}
             </Link>
           </li>
           <li>
             <Link
-              href="/users"
+              href={`/${lang}/users`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/users"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Users
+              {t("user")}
             </Link>
           </li>
           <li>
             <Link
-              href="/chat-room"
+              href={`/${lang}/chat-room`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/chat-room"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Chat Room
+              {t("chatRoom")}
             </Link>
           </li>
 
           <li>
             <Link
-              href="/announcements"
+              href={`/${lang}/announcements`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/announcements"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               }`}
             >
-              Announcements
+              {t("announcement")}
             </Link>
           </li>
         </ul>
@@ -117,7 +118,7 @@ const Sidebar = () => {
           className="p-3 flex justify-center items-center cursor-pointer w-full font-semibold focus:outline-none hover:bg-gray-100"
           onClick={handleLogout}
         >
-          <span className="text-red-400 pr-3 ">Logout</span>
+          <span className="text-red-400 pr-3 ">{t("logOut")}</span>
           <LogOut size={16} className="inline-block text-red-400 " />
         </div>
       </div>

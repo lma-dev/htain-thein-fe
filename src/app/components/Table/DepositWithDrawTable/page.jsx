@@ -2,7 +2,7 @@ import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 
-const DepositWithdrawTable = ({ uncheckReports, loading }) => {
+const DepositWithdrawTable = ({ uncheckReports, loading, t, lang }) => {
   return (
     <div className="flex flex-col w-full ">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -14,43 +14,43 @@ const DepositWithdrawTable = ({ uncheckReports, loading }) => {
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Id
+                  {t("id")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Requester
+                  {t("requester")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Amount
+                  {t("amount")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Type
+                  {t("type")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Confirm Status
+                  {t("confirmStatus")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Request Date
+                  {t("requestDate")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-end text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  Action
+                  {t("action")}
                 </th>
               </tr>
             </thead>
@@ -120,7 +120,7 @@ const DepositWithdrawTable = ({ uncheckReports, loading }) => {
                       {item.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <DepositTableDropDown id={item.id} />
+                      <DepositTableDropDown id={item.id} t={t} lang={lang} />
                     </td>
                   </tr>
                 ))

@@ -28,19 +28,18 @@ export async function callApi(method, url, data, responseType = null) {
     if (error.response && error.response.data) {
       const { errors } = error.response.data;
       const errorMessages = Object.values(errors).flat();
-  
+
       errorMessages.forEach((errorMessage) => {
         ToastsBox.error({ message: errorMessage });
       });
 
       throw new Error("Validation errors occurred");
     } else if (error.request) {
-      ToastsBox.error({ message: 'No response received:' + error.request });
-      throw new Error('No response received');
+      ToastsBox.error({ message: "No response received:" + error.request });
+      throw new Error("No response received");
     } else {
-      ToastsBox.error({ message: 'Error:' + error.message });
+      ToastsBox.error({ message: "Error:" + error.message });
       throw new Error(error.message);
     }
   }
-  
 }

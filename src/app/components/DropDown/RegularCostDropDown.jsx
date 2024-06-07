@@ -8,7 +8,7 @@ import ConfirmDialog from "../Dialog/ConfirmDialog";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
 
-export default function RegularCostTable({ regularCostId }) {
+export default function RegularCostTable({ regularCostId, t, lang }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteRegularCostService();
   const userRole = parseCookies().userRole;
@@ -16,7 +16,6 @@ export default function RegularCostTable({ regularCostId }) {
   const handleDelete = () => {
     setOpenDeleteDialog(true);
   };
-
   const handleConfirmDelete = async () => {
     await deleteMutation.mutate(regularCostId);
     setOpenDeleteDialog(false);
@@ -46,11 +45,11 @@ export default function RegularCostTable({ regularCostId }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/regular-costs/${regularCostId}`}
+                  href={`/${lang}/regular-costs/${regularCostId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
-                  Detail
+                  {t("detail")}
                 </Link>
               </Menu.Item>
 
@@ -59,11 +58,11 @@ export default function RegularCostTable({ regularCostId }) {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/regular-costs/${regularCostId}/edit`}
+                      href={`/${lang}/regular-costs/${regularCostId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />
-                      Edit
+                      {t("edit")}
                     </Link>
                   </Menu.Item>
 
@@ -74,7 +73,7 @@ export default function RegularCostTable({ regularCostId }) {
                       onClick={handleDelete}
                     >
                       <Trash2 size={16} className="mr-2 inline-block" />
-                      Delete
+                      {t("delete")}
                     </Link>
                   </Menu.Item>
                 </div>
@@ -87,6 +86,7 @@ export default function RegularCostTable({ regularCostId }) {
         open={openDeleteDialog}
         setOpen={setOpenDeleteDialog}
         method={handleConfirmDelete}
+        t={t}
       />
     </div>
   );
