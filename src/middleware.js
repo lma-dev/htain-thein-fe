@@ -6,7 +6,7 @@ const middleware = createMiddleware({
   locales: ["en", "mm", "jp"],
 
   // Default locale if no match
-  defaultLocale: "en",
+  defaultLocale: "mm",
 });
 
 export default middleware;
