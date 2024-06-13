@@ -1,49 +1,30 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../../components/layout";
 import { parseCookies } from "nookies";
 import { Send } from "lucide-react";
-import Spinner from "../../../components/Spinner/Spinner";
-import { createData } from "../../../utils/ApiMethodHelper";
-import { firestore } from "../../../libs/firebaseConfig";
+import useFireStoreCollection from "../../../hooks/useFirestoreCollection";
+import { useCreateQuery } from "../../../hooks/useCreateQuery";
+import { createMessageApi } from "../../../api/chat/sendMessageDataApi";
 
 const ChatPage = ({ params }) => {
   const [newMessage, setNewMessage] = useState("");
-  const [messages, setMessages] = useState([]);
   const userIdFromCookies = parseCookies().userId;
 
   const senderId = parseInt(userIdFromCookies, 10);
-
-  useEffect(() => {
-    const unsubscribe = firestore
-      .collection("messages")
-      .orderBy("timestamp")
-      .onSnapshot((snapshot) => {
-        const messagesData = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            ...data,
-          };
-        });
-        setMessages(messagesData);
-      });
-
-    return () => unsubscribe();
-  }, []);
+  const messages = useFireStoreCollection("messages", "timestamp");
+  const createSendMutation = useCreateQuery(createMessageApi);
 
   const sendMessage = async () => {
     try {
-      const message = { message: newMessage, senderId: senderId };
-      await createData("/send-message", message);
+      await createSendMutation.mutateAsync(newMessage);
       setNewMessage("");
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
 
-  console.log("messages", messages);
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       sendMessage();
