@@ -1,30 +1,52 @@
-import { BellPlus } from "lucide-react";
-import { BellMinus } from "lucide-react";
+import { BellPlus, BellMinus, Info, ShieldAlert } from "lucide-react";
 import { FinancialType } from "../../enums/FinancialType";
 import { EmptyStatus } from "../../enums/EmptyStatus";
 
 const NotificationCard = ({ notification, t, lang }) => {
   const IconType = () => {
-    if (notification.reportData?.type === FinancialType.INCOME) {
-      return <BellPlus size={24} className="mr-3 text-green-500" />;
+    if (notification.reportData) {
+      if (notification.reportData.type === FinancialType.INCOME) {
+        return <BellPlus size={24} className="mr-3 text-green-500" />;
+      }
+      if (notification.reportData.type === FinancialType.EXPENSE) {
+        return <BellMinus size={24} className="mr-3 text-red-500" />;
+      }
+    } else if (notification.announcementData) {
+      if (notification.announcementData.priority === "1") {
+        return <Info size={24} className="mr-3 text-blue-500" />;
+      }
+      if (notification.announcementData.priority === "2") {
+        return <Info size={24} className="mr-3 text-yellow-500" />;
+      }
+      if (notification.announcementData.priority === "3") {
+        return <Info size={24} className="mr-3 text-red-500" />;
+      }
     } else {
-      return <BellMinus size={24} className="mr-3 text-red-500" />;
+      return <ShieldAlert size={24} className="mr-3 text-blue-500" />;
     }
   };
 
   const notificationType = () => {
-    if (notification.reportData?.type === FinancialType.INCOME) {
+    if (notification.reportData) {
+      if (notification.reportData?.type === FinancialType.INCOME) {
+        return (
+          <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+            {t("deposit")}
+          </span>
+        );
+      }
       return (
         <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
-          {t("deposit")}
+          {t("withdraw")}
+        </span>
+      );
+    } else if (notification.announcementData) {
+      return (
+        <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+          {t("announcement")}
         </span>
       );
     }
-    return (
-      <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
-        {t("withdraw")}
-      </span>
-    );
   };
 
   return (
@@ -33,12 +55,12 @@ const NotificationCard = ({ notification, t, lang }) => {
         {IconType()}
         <div>
           <span className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-            {notification.reportData?.reporter?.name || EmptyStatus.ANONYMOUS}{" "}
+            {notification.userData?.name || EmptyStatus.ANONYMOUS}{" "}
           </span>
           {t("article")}{" "}
           {lang === "en" ? (
             <>
-              {t("requestedTo")} {notificationType()}
+              {notificationType()}
               <p className="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 break-words">
                 {notification.reportData?.description ||
                   EmptyStatus.NO_DESCRIPTION}
@@ -48,8 +70,7 @@ const NotificationCard = ({ notification, t, lang }) => {
             <>
               {notificationType()} {t("requestedTo")}
               <p className="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 break-words">
-                {notification.reportData?.description ||
-                  EmptyStatus.NO_DESCRIPTION}
+                {notification.reportData?.description || notification.createdAt}
               </p>
             </>
           )}

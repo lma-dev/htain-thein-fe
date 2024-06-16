@@ -4,11 +4,11 @@ import Link from "next/link";
 import Layout from "../../../../components/layout";
 import BreadCrumb from "../../../../components/BreadCrumb/BreadCrumb";
 import { NormalButton } from "../../../../components/Button/Button";
-import { createAnnouncementService } from "../../../../services/AnnouncementService/CreateAnnouncementService";
+import { CreateAnnouncementService } from "../../../../services/AnnouncementService/CreateAnnouncementService";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
-import usePusher from "../../../../hooks/usePusher";
+import { useTranslations } from "next-intl";
 
 const CreateAnnouncement = ({ params }) => {
   const router = useRouter();
@@ -18,7 +18,11 @@ const CreateAnnouncement = ({ params }) => {
     slug: "info",
     isVisible: 1,
     priority: 2,
+    dueDate: "",
   });
+  const t = useTranslations("Translation");
+
+  const createMutation = useCreateQuery(CreateAnnouncementService);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,18 +37,6 @@ const CreateAnnouncement = ({ params }) => {
       console.log(error);
     }
   };
-
-  const handleNewAnnouncement = () => {
-    // Handle the new announcement event here, e.g., show a notification
-    console.log("New announcement received");
-  };
-
-  const createMutation = useCreateQuery(createAnnouncementService);
-  usePusher(
-    process.env.NEXT_PUBLIC_ANNOUNCEMENT_CHANNEL,
-    process.env.NEXT_PUBLIC_ANNOUNCEMENT_EVENT,
-    handleNewAnnouncement
-  );
 
   return (
     <Layout lang={params.locale}>
@@ -68,7 +60,7 @@ const CreateAnnouncement = ({ params }) => {
                   />
 
                   <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
-                    Title
+                    {t("title")}
                   </span>
                 </label>
               </div>
@@ -88,7 +80,7 @@ const CreateAnnouncement = ({ params }) => {
                   />
 
                   <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
-                    Content
+                    {t("content")}
                   </span>
                 </label>
               </div>
@@ -98,7 +90,7 @@ const CreateAnnouncement = ({ params }) => {
                   htmlFor="role"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  slug
+                  {t("slug")}
                 </label>
                 <select
                   name="slug"
@@ -121,7 +113,7 @@ const CreateAnnouncement = ({ params }) => {
                   htmlFor="isVisible"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Visible Status
+                  {t("visibleStatus")}
                 </label>
                 <select
                   name="isVisible"
@@ -141,7 +133,7 @@ const CreateAnnouncement = ({ params }) => {
                   htmlFor="isVisible"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Priority
+                  {t("priority")}
                 </label>
                 <select
                   name="priority"
@@ -157,12 +149,28 @@ const CreateAnnouncement = ({ params }) => {
                   <option value={3}>High</option>
                 </select>
               </div>
+
+              <div className="mb-6">
+                <label
+                  htmlFor="dueDate"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  {t("dueDate")}
+                </label>
+                <input
+                  name="dueDate"
+                  type="date"
+                  id="dueDate"
+                  onChange={handleInputChange}
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                />
+              </div>
               <div className="flex justify-between">
                 <Link
                   href={`/${params.locale}/announcements`}
                   className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
                 >
-                  Back
+                  {t("back")}
                 </Link>
                 <NormalButton text="create" onClick={handleSubmit} />
               </div>

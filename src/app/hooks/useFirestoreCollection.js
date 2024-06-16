@@ -4,6 +4,7 @@ import { firestore } from "../libs/firebaseConfig";
 
 const useFireStoreCollection = (collectionName, orderByField) => {
   const [data, setData] = useState([]);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const unsubscribe = firestore
@@ -15,12 +16,13 @@ const useFireStoreCollection = (collectionName, orderByField) => {
           ...doc.data(),
         }));
         setData(collectionData);
+        setCount(snapshot.size);
       });
 
     return () => unsubscribe();
   }, [collectionName, orderByField]);
 
-  return data;
+  return { data, count };
 };
 
 export default useFireStoreCollection;

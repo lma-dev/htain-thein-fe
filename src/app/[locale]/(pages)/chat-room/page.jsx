@@ -4,7 +4,7 @@ import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../../components/layout";
 import { parseCookies } from "nookies";
 import { Send } from "lucide-react";
-import useFireStoreCollection from "../../../hooks/useFirestoreCollection";
+import useFireStoreCollection from "../../../hooks/useFireStoreCollection";
 import { useCreateQuery } from "../../../hooks/useCreateQuery";
 import { createMessageApi } from "../../../api/chat/sendMessageDataApi";
 

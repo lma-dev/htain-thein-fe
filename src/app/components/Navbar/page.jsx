@@ -7,11 +7,13 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import LangSwitcher from "../Language/LangSwitcher";
 import { useTranslations } from "next-intl";
-
+import useFireStoreCollection from "../../hooks/useFireStoreCollection";
 const Navbar = ({ lang }) => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const t = useTranslations("Translation");
+  const { data: notifications, count: notificationsCount } =
+    useFireStoreCollection("notifications", "timestamp");
 
   return (
     <div>
@@ -63,13 +65,14 @@ const Navbar = ({ lang }) => {
 
                 <Link
                   href={`/${lang}/notifications`}
-                  className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${
-                    pathname === "/notifications"
-                      ? " border-sky-500 text-sky-600"
-                      : "text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  }`}
+                  className="relative inline-block px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
                   {t("notification")}
+                  {notificationsCount > 0 && (
+                    <span className="inline-block bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                      {notificationsCount > 9 ? "9+" : notificationsCount}
+                    </span>
+                  )}
                 </Link>
               </nav>
 
@@ -84,7 +87,7 @@ const Navbar = ({ lang }) => {
 
       {/* Mobile Navbar */}
 
-      {open && <MobileSidebar setOpen={setOpen} open={open} />}
+      {open && <MobileSidebar setOpen={setOpen} open={open} lang={lang} />}
     </div>
   );
 };
