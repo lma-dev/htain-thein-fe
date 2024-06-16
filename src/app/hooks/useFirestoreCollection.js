@@ -11,6 +11,11 @@ const useFireStoreCollection = (collectionName, orderByField) => {
       .collection(collectionName)
       .orderBy(orderByField)
       .onSnapshot((snapshot) => {
+        if (snapshot.empty) {
+          setData([]);
+          setCount(0);
+          return;
+        }
         const collectionData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

@@ -13,9 +13,11 @@ const ChatPage = ({ params }) => {
   const userIdFromCookies = parseCookies().userId;
 
   const senderId = parseInt(userIdFromCookies, 10);
-  const messages = useFireStoreCollection("messages", "timestamp");
+  const { data: messages, count } = useFireStoreCollection(
+    "messages",
+    "timestamp"
+  );
   const createSendMutation = useCreateQuery(createMessageApi);
-
   const sendMessage = async () => {
     try {
       await createSendMutation.mutateAsync(newMessage);
