@@ -32,6 +32,7 @@ export default function UserFilterDropDown({
           type="button"
           onClick={openModal}
           className="rounded-md bg-gray-700 text-white px-4 py-2 text-sm font-medium transition hover:scale-105"
+          aria-label="button"
         >
           <Filter size={21} />
         </button>
@@ -105,6 +106,7 @@ export default function UserFilterDropDown({
                       <button
                         onClick={handleClear}
                         className="inline-block rounded border w-full border-gray-300 p-2 text-sm font-medium text-gray-600 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring active:bg-indigo-500"
+                        aria-label="button"
                       >
                         {t("resetAll")}
                       </button>

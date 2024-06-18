@@ -86,10 +86,11 @@ const ChatPage = ({ params }) => {
               onKeyPress={handleKeyPress}
               className="flex-1 border border-gray-300 rounded p-2 mb-2 lg:mb-0 lg:mr-2 focus:outline-none focus:border-blue-500"
             />
-            <div className="">
+            <div>
               <button
                 className="bg-red-500 text-white rounded p-2 mb-2 lg:mb-0 lg:mr-2 hover:bg-red-600 focus:outline-none focus:bg-red-600 w-full lg:w-auto"
                 onClick={sendMessage}
+                 aria-label="button"
               >
                 <Send />
               </button>

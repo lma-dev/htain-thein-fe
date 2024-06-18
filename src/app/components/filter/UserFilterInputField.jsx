@@ -18,6 +18,7 @@ const UserFilterInputField = ({
                 type="button"
                 title="search"
                 className="p-1 focus:outline-none focus:ring"
+                 aria-label="button"
               >
                 <Search size={16} className="text-gray-500" />
               </button>

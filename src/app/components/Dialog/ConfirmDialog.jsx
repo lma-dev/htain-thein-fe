@@ -75,6 +75,7 @@ const ConfirmDialog = ({ open, setOpen, method, t }) => {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                     onClick={handleConfirm}
+                    aria-label="button"
                   >
                     {isLoading ? <ButtonLoading t={t} /> : "Confirm"}
                   </button>
@@ -83,6 +84,7 @@ const ConfirmDialog = ({ open, setOpen, method, t }) => {
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
+                    aria-label="button"
                   >
                     {t("cancel")}
                   </button>

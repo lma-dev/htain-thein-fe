@@ -22,7 +22,11 @@ const UserProfileIconDropdown = ({ lang }) => {
     router.push(`/${lang}`);
   };
   return (
-    <Menu as="div" className="relative inline-block text-left ">
+    <Menu
+      as="div"
+      className="relative inline-block text-left "
+      aria-label="userMenu"
+    >
       <div>
         <Menu.Button className="inline-flex rounded-md">
           <CircleUserRound size={27} className="text-gray-600" />
@@ -63,6 +67,8 @@ const UserProfileIconDropdown = ({ lang }) => {
                     "block w-full px-4 py-2 text-left text-sm"
                   )}
                   onClick={handleLogout}
+                  aria-label="accountant"
+                  signOut
                 >
                   {t("signOut")}
                 </a>

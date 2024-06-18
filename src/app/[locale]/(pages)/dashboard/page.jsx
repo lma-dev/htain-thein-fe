@@ -29,18 +29,20 @@ const DashboardPage = ({ params }) => {
     loadingCalculations ||
     loadingGeneralOutcome;
 
+  const t = useTranslations("Translation");
+
   let userCount = users?.meta?.totalItems;
   let reportsCount = reports?.meta?.totalItems;
   let income = calculations?.data?.income;
   let outcome = calculations?.data?.outcome;
   let incomePercentage = calculations?.data?.incomeRate ?? 0;
   let outcomePercentage = calculations?.data?.outcomeRate ?? 0;
-  const t = useTranslations("Translation");
 
   const { isIncomeGreaterThanOutcome } = checkIncomeAndOutCome(
     incomePercentage,
     outcomePercentage
   );
+
   return (
     <Layout lang={params.locale}>
       <div className="flex flex-col">
@@ -49,7 +51,6 @@ const DashboardPage = ({ params }) => {
         {overallLoading ? (
           <SkeletonAnimation />
         ) : (
-          // Actual content when data is available
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <ItemCountCard count={userCount} title={"users"} lang={t} />
@@ -69,22 +70,20 @@ const DashboardPage = ({ params }) => {
                 lang={t}
               />
             </div>
-            <div>
-              <div className="mt-8">
-                <OverAllStatusCard calculations={calculations} t={t} />
-              </div>
+            <div className="mt-8">
+              <OverAllStatusCard calculations={calculations} t={t} />
+            </div>
 
-              <div className="mt-8">
-                <h1 className="text-gray-600 font-bold text-lg my-5">
-                  {t("generalOutComeTable")}
-                </h1>
-                <RegularCostTable
-                  regularCosts={regularCosts}
-                  loading={overallLoading}
-                  t={t}
-                  lang={params.locale}
-                />
-              </div>
+            <div className="mt-8">
+              <h1 className="text-gray-600 font-bold text-lg my-5">
+                {t("generalOutComeTable")}
+              </h1>
+              <RegularCostTable
+                regularCosts={regularCosts}
+                loading={overallLoading}
+                t={t}
+                lang={params.locale}
+              />
             </div>
           </div>
         )}
