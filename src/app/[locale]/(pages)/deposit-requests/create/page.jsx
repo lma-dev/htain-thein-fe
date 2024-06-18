@@ -7,7 +7,7 @@ import { NormalButton } from "../../../../components/Button/Button";
 import { createReportService } from "../../../../services/ReportService/CreateReportService";
 import { useState } from "react";
 import { parseCookies } from "nookies";
-import { useCreateQuery } from "../../../hooks/useCreateQuery";
+import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 

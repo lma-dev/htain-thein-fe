@@ -100,7 +100,21 @@ const DetailAnnouncement = ({ params }) => {
                   readOnly
                 />
               </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="dueDate"
+                  className="block text-xs font-medium text-gray-500"
+                >
+                  {t("dueDate")}
+                </label>
 
+                <input
+                  type="text"
+                  className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
+                  value={announceData.data.dueDate}
+                  readOnly
+                />
+              </div>
               <div className="flex justify-between">
                 <Link
                   href={`/${params.locale}/announcements`}

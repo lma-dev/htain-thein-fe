@@ -7,13 +7,16 @@ import { NormalButton } from "../../../../../components/Button/Button";
 import { FetchSingleAnnouncementService } from "../../../../../services/AnnouncementService/FetchSingleAnnouncementService";
 import { useEffect, useState } from "react";
 import { EditAnnouncementService } from "../../../../../services/AnnouncementService/EditAnnouncementService";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import {
   getPriority,
   getVisibility,
 } from "../../../../../utils/FunctionHelper";
+
 const EditAnnouncement = ({ params }) => {
   const router = useRouter();
+  const t = useTranslations("Translation");
   const { data: announceData, isLoading } = FetchSingleAnnouncementService(
     params.id
   );
@@ -24,6 +27,7 @@ const EditAnnouncement = ({ params }) => {
     slug: "",
     isVisible: "",
     priority: "",
+    dueDate: "",
   });
 
   const handleInputChange = (e) => {
@@ -57,7 +61,7 @@ const EditAnnouncement = ({ params }) => {
                   htmlFor="role"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Title
+                  {t("title")}
                 </label>
 
                 <input
@@ -76,7 +80,7 @@ const EditAnnouncement = ({ params }) => {
                   htmlFor="role"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Content
+                  {t("content")}
                 </label>
 
                 <textarea
@@ -95,7 +99,7 @@ const EditAnnouncement = ({ params }) => {
                   htmlFor="role"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Slug
+                  {t("slug")}
                 </label>
                 <select
                   name="slug"
@@ -120,7 +124,7 @@ const EditAnnouncement = ({ params }) => {
                   htmlFor="isVisible"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Visible Status
+                  {t("visibleStatus")}
                 </label>
                 <select
                   name="isVisible"
@@ -142,7 +146,7 @@ const EditAnnouncement = ({ params }) => {
                   htmlFor="isVisible"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Priority
+                  {t("priority")}
                 </label>
                 <select
                   name="priority"
@@ -160,12 +164,28 @@ const EditAnnouncement = ({ params }) => {
                   <option value={3}>High</option>
                 </select>
               </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="dueDate"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  {t("dueDate")}
+                </label>
+                <input
+                  name="dueDate"
+                  type="date"
+                  id="dueDate"
+                  onChange={handleInputChange}
+                  value={formData.dueDate}
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                />
+              </div>
               <div className="flex justify-between">
                 <Link
                   href={`/${params.locale}/announcements`}
                   className="block rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border mr-5"
                 >
-                  Back
+                  {t("back")}
                 </Link>
                 <NormalButton text="Update" onClick={handleSubmit} />
               </div>

@@ -36,6 +36,7 @@ const AuthService = {
       destroyCookie(null, "userId");
       destroyCookie(null, "userName");
       destroyCookie(null, "userRole");
+
       if (!response.data) {
         throw new Error("Logout failed");
       }
