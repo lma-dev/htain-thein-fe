@@ -79,13 +79,14 @@ const Navbar = ({ lang }) => {
                   className="relative inline-block px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
                   {t("notification")}
-                  {unreadNotificationsCount && unreadNotificationsCount > 0 && (
-                    <span className="inline-block bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
-                      {unreadNotificationsCount > 9
-                        ? "9+"
-                        : unreadNotificationsCount}
-                    </span>
-                  )}
+                  {unreadNotificationsCount !== undefined &&
+                    unreadNotificationsCount >= 0 && (
+                      <span className="inline-block bg-red-500 text-white rounded-full px-2 py-1 text-xs absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                        {unreadNotificationsCount > 9
+                          ? "9+"
+                          : unreadNotificationsCount}
+                      </span>
+                    )}
                 </Link>
               </nav>
 
