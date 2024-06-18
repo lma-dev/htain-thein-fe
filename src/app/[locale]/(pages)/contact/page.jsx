@@ -33,6 +33,7 @@ const contactPage = () => {
           <button
             type="button"
             className="text-white bg-blue-500 hover:bg-blue-600 font-semibold rounded-md text-sm px-4 py-3 w-full"
+            aria-label="button"
           >
             Send
           </button>

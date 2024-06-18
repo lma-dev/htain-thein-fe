@@ -53,6 +53,7 @@ const AnnouncementCard = ({ announcement, t, lang }) => {
                 className="text-primary dark:text-primary-400 text-sm mr-2"
                 data-twe-toggle="tooltip"
                 title={getBadgeTitle(announcement.priority)}
+                aria-label="bandage"
               >
                 {getBadgeColor(announcement.priority)}
               </a>

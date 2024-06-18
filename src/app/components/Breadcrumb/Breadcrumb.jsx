@@ -25,7 +25,11 @@ const BreadCrumb = ({ title, lang }) => {
           </li>
 
           <li>
-            <a href="#" className="block transition hover:text-gray-700">
+            <a
+              href="#"
+              className="block transition hover:text-gray-700"
+              aria-label="title"
+            >
               {title}
             </a>
           </li>
