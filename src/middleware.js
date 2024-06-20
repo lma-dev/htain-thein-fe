@@ -1,4 +1,4 @@
-//middleware.ts
+//TODO ADD route middleware for internationalization
 import createMiddleware from "next-intl/middleware";
 
 const middleware = createMiddleware({

@@ -1,7 +1,10 @@
 import BreadCrumb from "../../../components/BreadCrumb/BreadCrumb";
 import Layout from "../../../components/layout";
+import { useTranslations } from "next-intl";
 
-const contactPage = () => {
+const ContactPage = ({ params }) => {
+  const t = useTranslations("Translation");
+
   return (
     <Layout lang={params.locale}>
       <BreadCrumb lang={params.locale} title="Contact" />
@@ -43,4 +46,4 @@ const contactPage = () => {
   );
 };
 
-export default contactPage;
+export default ContactPage;
