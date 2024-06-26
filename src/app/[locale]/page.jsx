@@ -182,7 +182,7 @@ export default function Home({ params }) {
             <a
               className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
               href="/accountant"
-                 aria-label="accountant"
+              aria-label="accountant"
             >
               <span className="inline-block rounded-lg bg-gray-50 p-3">
                 <svg
