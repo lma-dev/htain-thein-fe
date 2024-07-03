@@ -45,7 +45,6 @@ export default function middleware(request) {
     !locales.some((loc) => sanitizedPathname === `/${loc}`)
   ) {
     const locale = getLocale(request);
-    console.log("Redirecting to login due to missing token.");
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }
 
