@@ -68,7 +68,6 @@ const UserProfileIconDropdown = ({ lang }) => {
                   )}
                   onClick={handleLogout}
                   aria-label="accountant"
-                  signOut
                 >
                   {t("signOut")}
                 </a>

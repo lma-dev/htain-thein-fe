@@ -1,10 +1,9 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import TanStackProvider from "../providers/TanStackProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-
+import "../globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -19,7 +18,7 @@ export default async function RootLayout({ children, params: { locale } }) {
     <html lang={locale}>
       {/* TODO:remove suppressHydrationWarning={true} */}
       <NextIntlClientProvider messages={messages}>
-        <body suppressHydrationWarning={true} className={inter.className}>
+        <body suppressHydrationWarning={false} className={inter.className}>
           <TanStackProvider>
             <div>{children}</div>
           </TanStackProvider>

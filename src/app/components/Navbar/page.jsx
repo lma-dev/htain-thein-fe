@@ -54,7 +54,7 @@ const Navbar = ({ lang }) => {
                 className="-mb-px flex gap-6 text-center align-middle justify-center"
                 aria-label="Tabs"
               >
-                <Link
+                {/* <Link
                   href={`/${lang}/settings`}
                   className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${
                     pathname === "/settings"
@@ -63,7 +63,7 @@ const Navbar = ({ lang }) => {
                   }`}
                 >
                   {t("setting")}
-                </Link>
+                </Link> */}
 
                 <a
                   target="_blank"
@@ -71,7 +71,7 @@ const Navbar = ({ lang }) => {
                   href="https://lma-dev.github.io/"
                   className="shrink-0 border-b-2 px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
-                  {t("about")}
+                  {t("aboutMe")}
                 </a>
 
                 <Link

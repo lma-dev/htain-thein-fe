@@ -40,7 +40,7 @@ const ChatPage = ({ params }) => {
       </div>
       <div className="p-5">
         <div className="mr-5 mt-5 ">
-          <div className="mb-4 overflow-y-auto max-h-screen md:max-h-[560px] sm:max-h-[360px]">
+          <div className="mb-4 overflow-y-auto max-h-screen md:max-h-[560px] sm:max-h-[360px] p-3">
             {messages?.map((message, index) => (
               // This will log true or false in the console
               <div
@@ -52,7 +52,7 @@ const ChatPage = ({ params }) => {
                 key={index}
               >
                 <div
-                  className={`rounded-lg p-3 max-w-md ${
+                  className={`rounded-xl p-3 max-w-md ${
                     message?.senderId === senderId
                       ? "bg-gray-700 text-white"
                       : "bg-gray-200 text-black"
@@ -64,9 +64,7 @@ const ChatPage = ({ params }) => {
                         ? "text-yellow-400"
                         : "text-black"
                     }`}
-                  >
-                    {/* {message?.senderInfo?.name ?? "still loading ..."} */}
-                  </p>
+                  ></p>
                   <p className="text-base break-words">{message.message}</p>
                   <small className="text-xs text-gray-400 mt-1">
                     {message.timestamp}
@@ -90,7 +88,7 @@ const ChatPage = ({ params }) => {
               <button
                 className="bg-red-500 text-white rounded p-2 mb-2 lg:mb-0 lg:mr-2 hover:bg-red-600 focus:outline-none focus:bg-red-600 w-full lg:w-auto"
                 onClick={sendMessage}
-                 aria-label="button"
+                aria-label="button"
               >
                 <Send />
               </button>
