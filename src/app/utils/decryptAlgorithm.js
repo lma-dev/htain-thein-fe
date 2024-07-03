@@ -3,7 +3,7 @@ import CryptoJS from "crypto-js";
 export const decryptAlgorithm = (encryptedUserData) => {
   try {
     if (!encryptedUserData) {
-      console.log("Decryption failed: No data provided.");
+      // console.log("Decryption failed: No data provided.");
       return;
     }
 
@@ -19,7 +19,7 @@ export const decryptAlgorithm = (encryptedUserData) => {
     const hmacIvValueWA = CryptoJS.HmacSHA256(ivValueWA, keyWA);
 
     if (ciphertextJson.mac !== hmacIvValueWA.toString()) {
-      console.log("Decryption failed: Data integrity compromised.");
+      // console.log("Decryption failed: Data integrity compromised.");
       return;
     }
 
@@ -31,6 +31,6 @@ export const decryptAlgorithm = (encryptedUserData) => {
     const parseJson = JSON.parse(decryptedDataWA);
     return parseJson;
   } catch (error) {
-    console.log("Decryption failed: ", error);
+    // console.log("Decryption failed: ", error);
   }
 };

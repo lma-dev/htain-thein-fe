@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 const UserProfileCard = () => {
   return (
     <div>
-      <a
+      
         href="#"
         className="group relative block overflow-hidden bg-white border rounded-lg border-gray-100"
       >

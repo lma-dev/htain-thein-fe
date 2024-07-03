@@ -97,9 +97,9 @@ const ReportTable = ({ reports, loading, onPageChange, t, lang }) => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
                       <span
                         className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          item.type === "Income"
+                          item.type === "INCOME"
                             ? "bg-green-100 text-green-800"
-                            : item.type === "Outcome"
+                            : item.type === "EXPENSE"
                             ? "bg-red-100 text-red-800"
                             : ""
                         }`}

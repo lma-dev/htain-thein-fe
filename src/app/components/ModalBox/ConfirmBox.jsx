@@ -78,6 +78,7 @@ const ConfirmBox = ({ id, status, setOpenDialog, openDialog, t, lang }) => {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     onClick={() => handleButtonAction()}
+                    aria-label="button"
                   >
                     {t("confirm")}
                   </button>
@@ -86,6 +87,7 @@ const ConfirmBox = ({ id, status, setOpenDialog, openDialog, t, lang }) => {
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                     onClick={() => setOpenDialog(false)}
                     ref={cancelButtonRef}
+                    aria-label="button"
                   >
                     {t("cancel")}
                   </button>

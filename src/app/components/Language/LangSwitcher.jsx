@@ -27,9 +27,12 @@ const LangSwitcher = () => {
 
   return (
     <div className="flex">
+      <label htmlFor="language-switcher" className="sr-only">
+        Language Switcher
+      </label>
       <select
         onChange={handleChange}
-        className="focus:shadow-outline-blue p-1 block w-auto appearance-none rounded-lg text-center border mr-2 border-gray-300 bg-gray-800 text-white leading-tight shadow hover:border-blue-500 focus:border-blue-300 focus:outline-none"
+        className="focus:shadow-outline-blue p-2 block w-auto appearance-none rounded-lg text-center border mr-2 border-gray-300 bg-gray-800 text-white leading-tight shadow hover:border-blue-500 focus:border-blue-300 focus:outline-none"
       >
         <option value="" readOnly>
           {getLanguageName()}

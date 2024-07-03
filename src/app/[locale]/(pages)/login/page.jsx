@@ -28,7 +28,7 @@ const Login = ({ params }) => {
   };
 
   const initialCheck = () => {
-    const encryptedUserData = searchParams.get("encryptedUserData");
+    const encryptedUserData = searchParams.get("encrypted");
     const decryptedData = decryptAlgorithm(encryptedUserData);
     setDecryptedUserData(decryptedData);
   };
@@ -48,6 +48,7 @@ const Login = ({ params }) => {
       }
     }
   }, [decryptedUserData, params.locale]);
+
   return (
     <div>
       <div className="flex h-screen items-center justify-center p-5">
@@ -87,6 +88,7 @@ const Login = ({ params }) => {
                 type="submit"
                 className="w-full p-3 text-center hover:bg-gray-950 text-white rounded-lg bg-gray-800 dark:text-gray-900 dark:bg-violet-400"
                 disabled={loading}
+                aria-label="button"
               >
                 {loading ? <ButtonLoading t={t} /> : t("signIn")}
               </button>
@@ -100,7 +102,10 @@ const Login = ({ params }) => {
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           </div>
           <div className="flex justify-center space-x-4">
-            <a href={`${backendUrl}/auth/google`}>
+            <a
+              href={`${backendUrl}/auth/google?locale=${params.locale}`}
+              aria-label="accountant"
+            >
               <button
                 aria-label="Log in with Google"
                 className="p-3 rounded-sm"
@@ -114,7 +119,10 @@ const Login = ({ params }) => {
                 </svg>
               </button>
             </a>
-            <a href={`${backendUrl}/auth/github`}>
+            <a
+              href={`${backendUrl}/auth/github?locale=${params.locale}`}
+              aria-label="oath"
+            >
               <button
                 aria-label="Log in with GitHub"
                 className="p-3 rounded-sm"

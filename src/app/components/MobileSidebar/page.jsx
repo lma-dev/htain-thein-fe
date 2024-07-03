@@ -4,10 +4,12 @@ import { LogOut } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { XCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const Sidebar = ({ setOpen, open, lang }) => {
+const MobileSidebar = ({ setOpen, open, lang }) => {
   const { logout } = useAuth();
   const router = useRouter();
+  const t = useTranslations("Translation");
 
   const handleLogout = async () => {
     await logout();
@@ -25,7 +27,7 @@ const Sidebar = ({ setOpen, open, lang }) => {
         <div className="px-4 py-6">
           <div className="flex justify-between items-center mb-4">
             <div className="text-white text-lg font-bold uppercase px-4 py-2">
-              {lang("appTitle")}
+              {t("appTitle")}
             </div>
             <XCircle
               size={24}
@@ -38,42 +40,56 @@ const Sidebar = ({ setOpen, open, lang }) => {
             <li>
               <Link href={`/${lang}/dashboard`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("dashboard")}
+                  {t("dashboard")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/reports`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("reports")}
+                  {t("report")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/regular-costs`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("regularCost")}
+                  {t("regularCost")}
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/${lang}/deposit-requests`} passHref>
+                <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
+                  {t("depositRequest")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/users`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("user")}
+                  {t("user")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/chat-room`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("chatRoom")}
+                  {t("chatRoom")}
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/${lang}/announcements`} passHref>
+                <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
+                  {t("announcement")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/settings`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("setting")}
+                  {t("setting")}
                 </span>
               </Link>
             </li>
@@ -84,21 +100,21 @@ const Sidebar = ({ setOpen, open, lang }) => {
                 href="https://lma-dev.github.io/"
               >
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("about")}
+                  {t("about")}
                 </span>
               </a>
             </li>
             <li>
               <Link href={`/${lang}/notifications`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("notification")}
+                  {t("notification")}
                 </span>
               </Link>
             </li>
             <li>
               <Link href={`/${lang}/announcements`} passHref>
                 <span className="block px-4 py-2 text-gray-200 hover:bg-gray-700 rounded-md">
-                  {lang("announcement")}
+                  {t("announcement")}
                 </span>
               </Link>
             </li>
@@ -109,7 +125,7 @@ const Sidebar = ({ setOpen, open, lang }) => {
             className="p-3 flex justify-center items-center cursor-pointer"
             onClick={handleLogout}
           >
-            <span className="text-red-400 pr-2 text-sm">{lang("logOut")}</span>
+            <span className="text-red-400 pr-2 text-sm">{t("logOut")}</span>
             <LogOut size={16} className="text-red-400" />
           </div>
         </div>
@@ -118,4 +134,4 @@ const Sidebar = ({ setOpen, open, lang }) => {
   );
 };
 
-export default Sidebar;
+export default MobileSidebar;

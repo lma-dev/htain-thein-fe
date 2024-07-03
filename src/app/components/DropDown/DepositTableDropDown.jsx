@@ -56,6 +56,7 @@ export default function DepositTableDropDown({ id, t, lang }) {
                   href="#"
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                   onClick={() => handleReportAction(ConfirmStatus.ACCEPT)}
+                  aria-label="confirm_accept"
                 >
                   <Check size={16} className="mr-2 inline-block" />
                   {t("accept")}
@@ -66,6 +67,7 @@ export default function DepositTableDropDown({ id, t, lang }) {
                   href="#"
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                   onClick={() => handleReportAction(ConfirmStatus.REJECT)}
+                  aria-label="reortReject"
                 >
                   <X size={16} className="mr-2 inline-block" /> {t("reject")}
                 </a>

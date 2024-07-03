@@ -1,5 +1,5 @@
-import { createMessageApi } from "../../api/chat/createMessageApi";
+import { createMessageApi } from "../../api/chat/sendMessageDataApi";
 
-export const createMessagesService = async (senderId, newData) => {
-  return await createMessageApi(senderId, newData);
+export const createMessagesService = async (newData) => {
+  return await createMessageApi(newData);
 };

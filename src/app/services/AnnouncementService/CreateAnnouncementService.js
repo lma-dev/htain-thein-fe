@@ -1,5 +1,5 @@
 import { createAnnouncementApi } from "../../api/announcement/createAnnouncementApi";
 
-export const createAnnouncementService = async (newData) => {
+export const CreateAnnouncementService = async (newData) => {
   return await createAnnouncementApi(newData);
 };

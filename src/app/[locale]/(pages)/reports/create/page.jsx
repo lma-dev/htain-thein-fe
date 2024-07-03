@@ -22,7 +22,7 @@ const CreateReport = ({ params }) => {
 
   const [formData, setFormData] = useState({
     amount: 0,
-    type: "Income",
+    type: "INCOME",
     description: "",
   });
 

@@ -7,7 +7,7 @@ import { NormalButton } from "../../../../components/Button/Button";
 import { createReportService } from "../../../../services/ReportService/CreateReportService";
 import { useState } from "react";
 import { parseCookies } from "nookies";
-import { useCreateQuery } from "../../../hooks/useCreateQuery";
+import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 
@@ -20,7 +20,7 @@ const CreateReport = ({ params }) => {
 
   const [formData, setFormData] = useState({
     amount: 0,
-    type: "Income",
+    type: "INCOME",
     description: "",
   });
 
