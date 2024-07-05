@@ -9,6 +9,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useTranslations } from "next-intl";
+import { handleErrors } from "../../../../schema/errorHandler";
+import { userSchema } from "../../../../schema/userSchema";
+import { UserType } from "../../../../enums/UserType";
 
 const CreateUser = ({ params }) => {
   const router = useRouter();
@@ -29,10 +32,11 @@ const CreateUser = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createUserMutation.mutateAsync(formData);
+      const validationData = userSchema.parse(formData);
+      await createUserMutation.mutateAsync(validationData);
       router.push(`/${params.locale}/users`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 
@@ -113,9 +117,11 @@ const CreateUser = ({ params }) => {
                   required
                 >
                   <option value=""> {t("select")}</option>
-                  <option value="SuperAdmin"> {t("superAdmin")}</option>
-                  <option value="Admin">{t("admin")}</option>
-                  <option value="Member">{t("member")}</option>
+                  <option value={UserType.SUPER_ADMIN}>
+                    {t("superAdmin")}
+                  </option>
+                  <option value={UserType.ADMIN}>{t("admin")}</option>
+                  <option value={UserType.MEMBER}>{t("member")}</option>
                 </select>
               </div>
               <div className="mb-6">

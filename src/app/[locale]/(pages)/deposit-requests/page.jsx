@@ -21,7 +21,7 @@ const ReportsPage = ({ params }) => {
             href={`/${params.locale}/reports/create`}
             className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
           >
-            {t("create_deposit_request")}
+            {t("createReports")}
           </Link>
         </div>
         <DepositWithdrawTable

@@ -7,6 +7,9 @@ import { EditUserService } from "../../../../../services/UserService/EditUserSer
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../../services/UserService/FetchSingleUserService";
+import { handleErrors } from "../../../../../schema/errorHandler";
+import { userSchema } from "../../../../../schema/userSchema";
+import { UserType } from "../../../../../enums/UserType";
 
 const EditUser = ({ params }) => {
   const [formData, setFormData] = useState({
@@ -26,10 +29,11 @@ const EditUser = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateMutation.mutate({ id: params.userId, data: formData });
+      const validationData = userSchema.parse(formData);
+      await updateMutation.mutate({ id: params.userId, data: validationData });
       router.push(`/${params.locale}/users`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 
@@ -121,9 +125,9 @@ const EditUser = ({ params }) => {
                 <option defaultValue={formData?.role} disabled>
                   {formData?.role}
                 </option>
-                <option value="Member">Member</option>
-                <option value="Admin">Admin</option>
-                <option value="SuperAdmin">Super Admin</option>
+                <option value={UserType.MEMBER}>Member</option>
+                <option value={UserType.ADMIN}>Admin</option>
+                <option value={UserType.SUPER_ADMIN}>Super Admin</option>
               </select>
             </div>
 

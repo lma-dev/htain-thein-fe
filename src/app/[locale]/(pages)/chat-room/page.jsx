@@ -7,6 +7,8 @@ import { Send } from "lucide-react";
 import useFireStoreCollection from "../../../hooks/useFireStoreCollection";
 import { useCreateQuery } from "../../../hooks/useCreateQuery";
 import { createMessageApi } from "../../../api/chat/sendMessageDataApi";
+import { handleErrors } from "../../../schema/errorHandler";
+import { messageSchema } from "../../../schema/messageSchema";
 
 const ChatPage = ({ params }) => {
   const [newMessage, setNewMessage] = useState("");
@@ -20,10 +22,12 @@ const ChatPage = ({ params }) => {
   const createSendMutation = useCreateQuery(createMessageApi);
   const sendMessage = async () => {
     try {
-      await createSendMutation.mutateAsync(newMessage);
+      console.log("newMessage", newMessage);
+      const validationData = messageSchema.parse(newMessage);
+      await createSendMutation.mutateAsync(validationData);
       setNewMessage("");
     } catch (error) {
-      console.error("Error sending message:", error);
+      handleErrors(error);
     }
   };
 
@@ -42,7 +46,6 @@ const ChatPage = ({ params }) => {
         <div className="mr-5 mt-5 ">
           <div className="mb-4 overflow-y-auto max-h-screen md:max-h-[560px] sm:max-h-[360px] p-3">
             {messages?.map((message, index) => (
-              // This will log true or false in the console
               <div
                 className={`flex ${
                   message?.senderId === senderId

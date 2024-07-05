@@ -11,6 +11,8 @@ import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 import { useTranslations } from "next-intl";
+import { reportSchema } from "../../../../schema/reportSchema";
+import { handleErrors } from "../../../../schema/errorHandler";
 
 const CreateReport = ({ params }) => {
   const router = useRouter();
@@ -35,10 +37,11 @@ const CreateReport = ({ params }) => {
     e.preventDefault();
     const updatedFormData = { ...formData, reporter_id: userId };
     try {
-      await createReportMutation.mutateAsync(updatedFormData);
+      const validationData = reportSchema.parse(updatedFormData);
+      await createReportMutation.mutateAsync(validationData);
       router.push(`/${params.locale}/deposit-requests`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 
