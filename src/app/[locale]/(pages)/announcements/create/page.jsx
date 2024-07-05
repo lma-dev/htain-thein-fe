@@ -9,7 +9,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useTranslations } from "next-intl";
-
+import { announcementSchema } from "../../../../schema/announcementSchema";
+import { handleErrors } from "../../../../schema/errorHandler";
 const CreateAnnouncement = ({ params }) => {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -31,10 +32,11 @@ const CreateAnnouncement = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createMutation.mutateAsync(formData);
+      const validationData = announcementSchema.parse(formData);
+      await createMutation.mutateAsync(validationData);
       router.push(`/${params.locale}/announcements`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 

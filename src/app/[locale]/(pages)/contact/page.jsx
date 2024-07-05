@@ -7,6 +7,8 @@ import { CreateContactInfoService } from "../../../services/ContactInfo/CreateAn
 import { useCreateQuery } from "../../../hooks/useCreateQuery";
 import { NormalButton } from "../../../components/Button/Button";
 import { useState } from "react";
+import { contactSchema } from "../../../schema/contactSchema";
+import { handleErrors } from "../../../schema/errorHandler";
 
 const ContactPage = ({ params }) => {
   const t = useTranslations("Translation");
@@ -26,9 +28,10 @@ const ContactPage = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createContactMutation.mutateAsync(formData);
+      const validationData = contactSchema.parse(formData);
+      await createContactMutation.mutateAsync(validationData);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 

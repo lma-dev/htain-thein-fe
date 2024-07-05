@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FetchSingleRegularCostService } from "../../../../../services/RegularCostService/FetchSingleRegularCostService";
 import { useTranslations } from "next-intl";
+import { handleErrors } from "../../../../../schema/errorHandler";
+import { regularCostSchema } from "../../../../../schema/regularCostSchema";
 
 const EditRegularCost = ({ params }) => {
   const [formData, setFormData] = useState({
@@ -28,19 +30,20 @@ const EditRegularCost = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const reporterId = regularCostData.data.reporter.id;
-    const updatedFormData = {
-      ...formData,
-      reporter_id: reporterId,
-    };
     try {
+      const reporterId = regularCostData.data.reporter.id;
+      const updatedFormData = {
+        ...formData,
+        reporter_id: reporterId,
+      };
+      const validationData = regularCostSchema.parse(updatedFormData);
       await updateMutation.mutate({
         id: params.regcostId,
-        data: updatedFormData,
+        data: validationData,
       });
       router.push(`/${params.locale}/regular-costs`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 

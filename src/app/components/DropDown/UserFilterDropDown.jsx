@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { Filter } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { UserType } from "../../enums/UserType";
 
 export default function UserFilterDropDown({
   role,
@@ -79,9 +80,11 @@ export default function UserFilterDropDown({
                         name="role"
                       >
                         <option value="">{t("select")}</option>
-                        <option value="SuperAdmin">{t("superAdmin")}</option>
-                        <option value="Admin">{t("admin")}</option>
-                        <option value="Member">{t("member")}</option>
+                        <option value={UserType.SUPER_ADMIN}>
+                          {t("superAdmin")}
+                        </option>
+                        <option value={UserType.ADMIN}>{t("admin")}</option>
+                        <option value={UserType.MEMBER}>{t("member")}</option>
                       </select>
                     </div>
                     <div className="mt-2 px-3">

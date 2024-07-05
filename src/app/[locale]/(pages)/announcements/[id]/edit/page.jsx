@@ -13,6 +13,8 @@ import {
   getPriority,
   getVisibility,
 } from "../../../../../utils/FunctionHelper";
+import { handleErrors } from "../../../../../schema/errorHandler";
+import { announcementSchema } from "../../../../../schema/announcementSchema";
 
 const EditAnnouncement = ({ params }) => {
   const router = useRouter();
@@ -37,10 +39,15 @@ const EditAnnouncement = ({ params }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateMutation.mutate({ id: params.id, data: formData });
+      const updatedFormData = { ...formData, id: params.id };
+      const validationData = announcementSchema.parse(updatedFormData);
+      await updateMutation.mutate({
+        id: params.id,
+        data: validationData,
+      });
       router.push(`/${params.locale}/announcements`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
   useEffect(() => {

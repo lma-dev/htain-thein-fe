@@ -1,5 +1,5 @@
 export const UserType = {
-  ADMIN: "Admin",
-  SUPER_ADMIN: "SuperAdmin",
-  MEMBER: "Member",
+  ADMIN: "ADMIN",
+  SUPER_ADMIN: "SUPER_ADMIN",
+  MEMBER: "MEMBER",
 };

@@ -11,6 +11,8 @@ import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 import { useTranslations } from "next-intl";
+import { handleErrors } from "../../../../schema/errorHandler";
+import { regularCostSchema } from "../../../../schema/regularCostSchema";
 
 const CreateRegularCost = ({ params }) => {
   const router = useRouter();
@@ -32,12 +34,13 @@ const CreateRegularCost = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedFormData = { ...formData, reporter_id: userId };
     try {
-      await createRegularCostMutation.mutateAsync(updatedFormData);
+      const updatedFormData = { ...formData, reporter_id: userId };
+      const validationData = regularCostSchema.parse(updatedFormData);
+      await createRegularCostMutation.mutateAsync(validationData);
       router.push(`/${params.locale}/regular-costs`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 

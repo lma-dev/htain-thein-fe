@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FetchSingleReportService } from "../../../../../services/ReportService/FetchSingleReportService";
 import { useTranslations } from "next-intl";
+import { handleErrors } from "../../../../../schema/errorHandler";
+import { reportSchema } from "../../../../../schema/reportSchema";
 
 const EditReport = ({ params }) => {
   const [formData, setFormData] = useState({
@@ -28,22 +30,24 @@ const EditReport = ({ params }) => {
   };
 
   const handleSubmit = async (e) => {
-    const reporterId = reportData.data.reporter.id;
-    const verifierId = reportData.data.verifier.id;
-    const updatedFormData = {
-      ...formData,
-      reporter_id: reporterId,
-      verifier_id: verifierId,
-    };
     e.preventDefault();
     try {
+      const reporterId = reportData.data.reporter.id;
+      const verifierId = reportData.data.verifier.id;
+      const updatedFormData = {
+        ...formData,
+        reporter_id: reporterId,
+        verifier_id: verifierId,
+      };
+
+      const validationData = reportSchema.parse(updatedFormData);
       await updateMutation.mutate({
         id: params.reportId,
-        data: updatedFormData,
+        data: validationData,
       });
       router.push(`/${params.locale}/reports`);
     } catch (error) {
-      console.log(error);
+      handleErrors(error);
     }
   };
 
