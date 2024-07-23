@@ -1,3 +1,4 @@
+"use client";
 import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";

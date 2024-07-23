@@ -27,13 +27,12 @@ const Login = ({ params }) => {
     }
   };
 
-  const initialCheck = () => {
-    const encryptedUserData = searchParams.get("encrypted");
-    const decryptedData = decryptAlgorithm(encryptedUserData);
-    setDecryptedUserData(decryptedData);
-  };
-
   useEffect(() => {
+    const initialCheck = () => {
+      const encryptedUserData = searchParams.get("encrypted");
+      const decryptedData = decryptAlgorithm(encryptedUserData);
+      setDecryptedUserData(decryptedData);
+    };
     initialCheck();
   }, [searchParams, params.locale]);
 
@@ -47,7 +46,7 @@ const Login = ({ params }) => {
         router.push(`/${params.locale}/dashboard`);
       }
     }
-  }, [decryptedUserData, params.locale]);
+  }, [decryptedUserData, params.locale, router]);
 
   return (
     <div>
