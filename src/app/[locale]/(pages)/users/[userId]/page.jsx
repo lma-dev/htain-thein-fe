@@ -10,8 +10,8 @@ const DetailUser = ({ params }) => {
   const { data: userData, isLoading } = FetchSingleUserService(params.userId);
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="User Profile" />
+    <Layout>
+      <BreadCrumb title="User Profile" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         {isLoading ? (
           <Spinner />

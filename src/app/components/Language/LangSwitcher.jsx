@@ -1,28 +1,22 @@
+"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Change import statement
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
+import { useTransition } from "react";
 
 const LangSwitcher = () => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const localActive = useLocale();
   const pathname = usePathname();
 
-  const [selectedLanguage, setSelectedLanguage] = useState(pathname.slice(1));
-  const languageCode = selectedLanguage.split("/")[0];
-
-  const handleChange = (event) => {
-    const newLanguage = event.target.value;
+  const onSelectChange = (e) => {
+    const nextLocale = e.target.value;
     const currentRoute = pathname.slice(4);
-    setSelectedLanguage(newLanguage);
-    router.push(`/${newLanguage}/${currentRoute}`, undefined, {
-      locale: newLanguage,
+    startTransition(() => {
+      router.replace(`/${nextLocale}/${currentRoute}`);
     });
-  };
-
-  const getLanguageName = () => {
-    const selectedOption = options.find(
-      (option) => option.code === languageCode
-    );
-    return selectedOption ? selectedOption.language : "";
   };
 
   return (
@@ -31,28 +25,17 @@ const LangSwitcher = () => {
         Language Switcher
       </label>
       <select
-        onChange={handleChange}
+        defaultValue={localActive}
+        onChange={onSelectChange}
+        disabled={isPending}
         className="focus:shadow-outline-blue p-2 block w-auto appearance-none rounded-lg text-center border mr-2 border-gray-300 bg-gray-800 text-white leading-tight shadow hover:border-blue-500 focus:border-blue-300 focus:outline-none"
       >
-        <option value="" readOnly>
-          {getLanguageName()}
-        </option>
-        {options
-          .filter((option) => option.code !== languageCode)
-          .map((option) => (
-            <option key={option.code} value={option.code}>
-              {option.language}
-            </option>
-          ))}
+        <option value="en">English</option>
+        <option value="jp">Japanese</option>
+        <option value="mm">Burmese</option>
       </select>
     </div>
   );
 };
 
 export default LangSwitcher;
-
-const options = [
-  { language: "English", code: "en" },
-  { language: "日本語", code: "jp" },
-  { language: "ဗမာ", code: "mm" },
-];

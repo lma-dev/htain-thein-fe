@@ -1,7 +1,7 @@
 import UserDropDown from "../../DropDown/UserDropDown";
 import Pagination from "../../Pagination/Pagination";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
-const UserTable = ({ users, loading, onPageChange, t, lang }) => {
+const UserTable = ({ users, loading, onPageChange, t }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -98,7 +98,7 @@ const UserTable = ({ users, loading, onPageChange, t, lang }) => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <UserDropDown userId={user.id} t={t} lang={lang} />
+                      <UserDropDown userId={user.id} t={t} />
                     </td>
                   </tr>
                 ))

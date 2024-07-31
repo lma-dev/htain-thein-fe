@@ -13,9 +13,9 @@ const ReportsPage = ({ params }) => {
   const t = useTranslations("Translation");
 
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="Deposit Requests" />
+        <BreadCrumb title="Deposit Requests" />
         <div className="flex justify-end items-center align-middle">
           <Link
             href={`/${params.locale}/reports/create`}
@@ -28,7 +28,6 @@ const ReportsPage = ({ params }) => {
           uncheckReports={uncheckReports}
           loading={loading}
           t={t}
-          lang={params.locale}
         />
       </div>
     </Layout>

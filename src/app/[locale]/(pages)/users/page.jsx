@@ -34,9 +34,9 @@ const UsersPage = ({ params }) => {
   }, []);
 
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="Users" />
+        <BreadCrumb title="Users" />
         <div className="flex justify-between items-center align-middle">
           <div>
             <UserFilterInputField
@@ -66,7 +66,6 @@ const UsersPage = ({ params }) => {
           loading={loading}
           onPageChange={handlePageChange}
           t={t}
-          lang={params.locale}
         />
       </div>
     </Layout>

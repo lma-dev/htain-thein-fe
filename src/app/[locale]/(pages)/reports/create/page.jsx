@@ -46,8 +46,8 @@ const CreateReport = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Create Report" />
+    <Layout>
+      <BreadCrumb title="Create Report" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <form>

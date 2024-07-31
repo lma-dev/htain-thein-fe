@@ -45,8 +45,8 @@ const CreateRegularCost = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Create Regular Cost" />
+    <Layout>
+      <BreadCrumb title="Create Regular Cost" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <form>

@@ -1,11 +1,11 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { AlertTriangle } from "lucide-react";
 import AcceptReportService from "../../services/ReportService/AcceptReportService";
 import RejectReportService from "../../services/ReportService/RejectReportService";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
 
-const ConfirmBox = ({ id, status, setOpenDialog, openDialog, t, lang }) => {
+const ConfirmBox = ({ id, status, setOpenDialog, openDialog, t }) => {
   const cancelButtonRef = useRef(null);
   const acceptMutation = AcceptReportService();
   const rejectMutation = RejectReportService();

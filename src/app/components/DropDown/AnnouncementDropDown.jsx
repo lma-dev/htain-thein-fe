@@ -6,10 +6,10 @@ import Link from "next/link";
 import { DeleteAnnouncementService } from "../../services/AnnouncementService/DeleteAnnouncementService";
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 
-export default function AnnouncementDropDown({ announcementId, t, lang }) {
+export default function AnnouncementDropDown({ announcementId, t }) {
+  const { currentLocale } = useLocale();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteAnnouncementService();
-
   const handleDelete = () => {
     setOpenDeleteDialog(true);
   };
@@ -43,7 +43,7 @@ export default function AnnouncementDropDown({ announcementId, t, lang }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/${lang}/announcements/${announcementId}/edit`}
+                  href={`/${currentLocale}/announcements/${announcementId}/edit`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Pencil size={16} className="mr-2 inline-block" />
@@ -52,7 +52,7 @@ export default function AnnouncementDropDown({ announcementId, t, lang }) {
               </Menu.Item>
               <Menu.Item>
                 <Link
-                  href={`/${lang}/announcements/${announcementId}`}
+                  href={`/${currentLocale}/announcements/${announcementId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />

@@ -14,7 +14,7 @@ const ItemCountCard = ({
   text = null,
   rate = null,
   financialStatus = null,
-  lang,
+  t,
 }) => {
   const getIcon = () => {
     if (title === "reports") {
@@ -56,9 +56,7 @@ const ItemCountCard = ({
         <div className="mt-1 flex gap-1">
           {rate === null ? (
             <>
-              <span className="text-gray-500 text-xs">
-                {lang("notingToShow")}
-              </span>
+              <span className="text-gray-500 text-xs">{t("notingToShow")}</span>
             </>
           ) : (
             <>
@@ -71,7 +69,7 @@ const ItemCountCard = ({
               <p className="flex gap-2 text-xs">
                 <span className="font-medium"> {rate} %</span>
 
-                <span className="text-gray-500"> {lang("timeLastWeek")} </span>
+                <span className="text-gray-500"> {t("timeLastWeek")} </span>
               </p>
             </>
           )}

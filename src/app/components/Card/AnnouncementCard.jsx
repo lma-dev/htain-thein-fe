@@ -1,6 +1,6 @@
 import { BadgeInfo } from "lucide-react";
 import AnnouncementDropdown from "../DropDown/AnnouncementDropDown";
-const AnnouncementCard = ({ announcement, t, lang }) => {
+const AnnouncementCard = ({ announcement, t }) => {
   const getBadgeColor = (level) => {
     if (level == 1) {
       return <BadgeInfo size={17} className="text-blue-600" />;
@@ -63,11 +63,7 @@ const AnnouncementCard = ({ announcement, t, lang }) => {
             </div>
           </div>
           <div className="text-gray-500 text-sm">
-            <AnnouncementDropdown
-              announcementId={announcement.id}
-              t={t}
-              lang={lang}
-            />
+            <AnnouncementDropdown announcementId={announcement.id} t={t} />
           </div>
         </div>
         <p className="text-gray-500 text-md text-wrap line-clamp-1">

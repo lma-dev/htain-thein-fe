@@ -44,8 +44,8 @@ const EditUser = ({ params }) => {
   }, [userData]);
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Edit User" />
+    <Layout>
+      <BreadCrumb title="Edit User" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <form>

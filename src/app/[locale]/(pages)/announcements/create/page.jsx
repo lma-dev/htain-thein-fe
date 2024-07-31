@@ -41,8 +41,8 @@ const CreateAnnouncement = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Create Announcement" />
+    <Layout>
+      <BreadCrumb title="Create Announcement" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <form>

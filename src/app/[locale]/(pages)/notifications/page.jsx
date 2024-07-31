@@ -17,8 +17,8 @@ const NotificationPage = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Notifications" />
+    <Layout>
+      <BreadCrumb title="Notifications" />
       {loading ? (
         <div>
           <NotificationSkeletonAnimation />
@@ -33,7 +33,6 @@ const NotificationPage = ({ params }) => {
                 key={index}
                 notification={notification}
                 t={t}
-                lang={params.locale}
                 handleReadNotification={handleReadNotification}
               />
             ))}

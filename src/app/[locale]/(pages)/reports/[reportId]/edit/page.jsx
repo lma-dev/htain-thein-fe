@@ -58,8 +58,8 @@ const EditReport = ({ params }) => {
   }, [reportData]);
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Edit Report" />
+    <Layout>
+      <BreadCrumb title="Edit Report" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <div className="flex flex-wrap justify-center sm:justify-center">

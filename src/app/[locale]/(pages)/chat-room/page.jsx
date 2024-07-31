@@ -38,9 +38,9 @@ const ChatPage = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="chat-room" />
+        <BreadCrumb title="chat-room" />
       </div>
       <div className="p-5">
         <div className="mr-5 mt-5 ">

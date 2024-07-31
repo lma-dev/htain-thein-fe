@@ -43,8 +43,8 @@ const CreateUser = ({ params }) => {
   const createUserMutation = useCreateQuery(createUserService);
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Create User" />
+    <Layout>
+      <BreadCrumb title="Create User" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <form>

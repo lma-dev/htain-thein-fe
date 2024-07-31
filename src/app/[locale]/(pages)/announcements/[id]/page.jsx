@@ -15,8 +15,8 @@ const DetailAnnouncement = ({ params }) => {
   );
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Detail Announcement" />
+    <Layout>
+      <BreadCrumb title="Detail Announcement" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         {isLoading ? (
           <Spinner />

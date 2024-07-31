@@ -15,7 +15,7 @@ import OverAllStatusCard from "../../../components/Card/OverAllStatusCard";
 import SkeletonAnimation from "../../../components/Skeleton/SkeletonAnimation";
 import { useTranslations } from "next-intl";
 
-const DashboardPage = ({ params }) => {
+const DashboardPage = () => {
   const { data: users, isLoading: loadingUsers } = FetchUsersService();
   const { data: reports, isLoading: loadingReports } = FetchReportsService();
   const { data: calculations, isLoading: loadingCalculations } =
@@ -44,30 +44,30 @@ const DashboardPage = ({ params }) => {
   );
 
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="Dashboard" />
+        <BreadCrumb title="Dashboard" />
 
         {overallLoading ? (
           <SkeletonAnimation />
         ) : (
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <ItemCountCard count={userCount} title={"users"} lang={t} />
-              <ItemCountCard count={reportsCount} title={"reports"} lang={t} />
+              <ItemCountCard count={userCount} title={"users"} t={t} />
+              <ItemCountCard count={reportsCount} title={"reports"} t={t} />
               <ItemCountCard
                 text={income}
                 title={"income"}
                 rate={incomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
-                lang={t}
+                t={t}
               />
               <ItemCountCard
                 text={outcome}
                 title={"outcome"}
                 rate={outcomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
-                lang={t}
+                t={t}
               />
             </div>
             <div className="mt-8">
@@ -82,7 +82,6 @@ const DashboardPage = ({ params }) => {
                 regularCosts={regularCosts}
                 loading={overallLoading}
                 t={t}
-                lang={params.locale}
               />
             </div>
           </div>

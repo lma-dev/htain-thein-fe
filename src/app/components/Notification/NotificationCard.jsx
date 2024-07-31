@@ -1,13 +1,9 @@
 import { EmptyStatus } from "../../enums/EmptyStatus";
 import IconType from "../../traits/IconType";
 import NotificationType from "../../traits/NotificationType";
-
-const NotificationCard = ({
-  notification,
-  t,
-  lang,
-  handleReadNotification,
-}) => {
+import { useLocale } from "../../context/LangContext";
+const NotificationCard = ({ notification, t, handleReadNotification }) => {
+  const { currentLocale } = useLocale();
   const handleClick = () => {
     handleReadNotification(notification.firebaseNotificationId);
   };
@@ -23,7 +19,7 @@ const NotificationCard = ({
             {notification.userData?.name || EmptyStatus.ANONYMOUS}{" "}
           </span>
           {t("article")}{" "}
-          {lang === "en" ? (
+          {currentLocale === "en" ? (
             <>
               {NotificationType(notification, t)}
               <p className="text-sm font-normal text-gray-600 dark:text-gray-300 mt-1 break-words">

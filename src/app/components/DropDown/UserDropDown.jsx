@@ -14,11 +14,13 @@ import ConfirmDialog from "../Dialog/ConfirmDialog";
 import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
+import { useLocale } from "../../context/LangContext";
 
-const UserDropDown = ({ userId, t, lang }) => {
+const UserDropDown = ({ userId, t }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteUserService();
   const userRole = parseCookies().userRole;
+  const { currentLocale } = useLocale();
 
   const handleDelete = () => {
     setOpenDeleteDialog(true);
@@ -60,7 +62,7 @@ const UserDropDown = ({ userId, t, lang }) => {
 
               <Menu.Item>
                 <Link
-                  href={`/${lang}/users/${userId}/location`}
+                  href={`/${currentLocale}/users/${userId}/location`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <MapPinned size={16} className="mr-2 inline-block" />
@@ -82,7 +84,7 @@ const UserDropDown = ({ userId, t, lang }) => {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/${lang}/users/${userId}/edit`}
+                      href={`/${currentLocale}/users/${userId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />

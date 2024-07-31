@@ -31,9 +31,9 @@ const ReportsPage = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="Reports" />
+        <BreadCrumb title="Reports" />
         <div className="flex justify-between items-center align-middle">
           <div>
             <ReportFilterInputField
@@ -62,7 +62,6 @@ const ReportsPage = ({ params }) => {
           loading={loading}
           onPageChange={handlePageChange}
           t={t}
-          lang={params.locale}
         />
       </div>
     </Layout>

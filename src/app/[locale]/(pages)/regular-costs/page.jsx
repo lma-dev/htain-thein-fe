@@ -21,9 +21,9 @@ const RegularCost = ({ params }) => {
     setUserRole(parseCookies().userRole);
   }, []);
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="Regular Costs" />
+        <BreadCrumb title="Regular Costs" />
         <div className="flex justify-end items-center align-middle">
           {(userRole === UserType.ADMIN ||
             userRole === UserType.SUPER_ADMIN) && (
@@ -35,12 +35,7 @@ const RegularCost = ({ params }) => {
             </Link>
           )}
         </div>
-        <RegularCostTable
-          regularCosts={regularCosts}
-          loading={loading}
-          t={t}
-          lang={params.locale}
-        />
+        <RegularCostTable regularCosts={regularCosts} loading={loading} t={t} />
       </div>
     </Layout>
   );

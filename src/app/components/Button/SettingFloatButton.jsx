@@ -1,7 +1,8 @@
 import { FilePlus2, CalendarPlus, Bug } from "lucide-react";
 import Link from "next/link";
-
-const SettingFloatButton = ({ lang }) => {
+import { useLocale } from "../../context/LangContext";
+const SettingFloatButton = () => {
+  const { currentLocale } = useLocale();
   return (
     <div className="group fixed bottom-0 right-0 p-2  flex items-end justify-end w-24 h-24 z-10 ">
       <div className="text-white shadow-xl flex items-center justify-center p-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 z-50 absolute  ">
@@ -26,18 +27,18 @@ const SettingFloatButton = ({ lang }) => {
         </svg>
       </div>
       <div className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-y-0 group-hover:scale-y-100 group-hover:-translate-x-16   flex  p-2 hover:p-3 bg-green-300 scale-100 hover:bg-green-400 text-white">
-        <Link href={`/${lang}/contact`}>
+        <Link href={`/${currentLocale}/contact`}>
           <Bug size={20} />
         </Link>
       </div>
       <div className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-x-0 group-hover:scale-x-100 group-hover:-translate-y-16  flex  p-2 hover:p-3 bg-blue-300 hover:bg-blue-400  text-white">
-        <Link href={`/${lang}/reports/create`}>
+        <Link href={`/${currentLocale}/reports/create`}>
           <FilePlus2 size={20} />
         </Link>
       </div>
 
       <div className="absolute rounded-full transition-all duration-[0.2s] ease-out scale-x-0 group-hover:scale-x-100 group-hover:-translate-y-14 group-hover:-translate-x-14   flex  p-2 hover:p-3 bg-yellow-300 hover:bg-yellow-400 text-white">
-        <Link href={`/${lang}/regular-costs/create`}>
+        <Link href={`/${currentLocale}/regular-costs/create`}>
           <CalendarPlus size={20} />
         </Link>
       </div>

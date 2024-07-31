@@ -5,12 +5,13 @@ import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-
-const Sidebar = ({ lang }) => {
+import { useLocale } from "../../context/LangContext";
+const Sidebar = () => {
   const { logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("Translation");
+  const { currentLocale } = useLocale();
 
   const handleLogout = async () => {
     await logout();
@@ -26,7 +27,7 @@ const Sidebar = ({ lang }) => {
         <ul className="mt-6 space-y-1">
           <li>
             <Link
-              href={`/${lang}/dashboard`}
+              href={`/${currentLocale}/dashboard`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/dashboard"
                   ? "bg-gray-200 text-gray-900"
@@ -39,7 +40,7 @@ const Sidebar = ({ lang }) => {
 
           <li>
             <Link
-              href={`/${lang}/reports`}
+              href={`/${currentLocale}/reports`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/reports"
                   ? "bg-gray-200 text-gray-900"
@@ -51,7 +52,7 @@ const Sidebar = ({ lang }) => {
           </li>
           <li>
             <Link
-              href={`/${lang}/regular-costs`}
+              href={`/${currentLocale}/regular-costs`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/regular-costs"
                   ? "bg-gray-200 text-gray-900"
@@ -63,7 +64,7 @@ const Sidebar = ({ lang }) => {
           </li>
           <li>
             <Link
-              href={`/${lang}/deposit-requests`}
+              href={`/${currentLocale}/deposit-requests`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/deposit-requests"
                   ? "bg-gray-200 text-gray-900"
@@ -75,7 +76,7 @@ const Sidebar = ({ lang }) => {
           </li>
           <li>
             <Link
-              href={`/${lang}/users`}
+              href={`/${currentLocale}/users`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/users"
                   ? "bg-gray-200 text-gray-900"
@@ -87,7 +88,7 @@ const Sidebar = ({ lang }) => {
           </li>
           <li>
             <Link
-              href={`/${lang}/chat-room`}
+              href={`/${currentLocale}/chat-room`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/chat-room"
                   ? "bg-gray-200 text-gray-900"
@@ -100,7 +101,7 @@ const Sidebar = ({ lang }) => {
 
           <li>
             <Link
-              href={`/${lang}/announcements`}
+              href={`/${currentLocale}/announcements`}
               className={`block rounded-lg px-4 py-2 text-sm font-medium ${
                 pathname === "/announcements"
                   ? "bg-gray-200 text-gray-900"

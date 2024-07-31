@@ -7,19 +7,22 @@ import { useRouter } from "next/navigation";
 import { parseCookies } from "nookies";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useLocale } from "../../context/LangContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const UserProfileIconDropdown = ({ lang }) => {
+const UserProfileIconDropdown = () => {
   const { logout } = useAuth();
   const router = useRouter();
+  const { currentLocale } = useLocale();
   const authUserId = parseCookies().userId;
   const t = useTranslations("Translation");
+
   const handleLogout = async () => {
     await logout();
-    router.push(`/${lang}`);
+    router.push(`/${currentLocale}`);
   };
   return (
     <Menu
@@ -47,7 +50,7 @@ const UserProfileIconDropdown = ({ lang }) => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  href={`/${lang}/users/${authUserId}`}
+                  href={`/${currentLocale}/users/${authUserId}`}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"

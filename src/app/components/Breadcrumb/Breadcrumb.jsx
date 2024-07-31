@@ -1,9 +1,10 @@
 import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-
-const BreadCrumb = ({ title, lang }) => {
+import { useLocale } from "../../context/LangContext";
+const BreadCrumb = ({ title }) => {
   const t = useTranslations("Translation");
+  const { currentLocale } = useLocale();
 
   return (
     <div className="py-5">
@@ -11,7 +12,7 @@ const BreadCrumb = ({ title, lang }) => {
         <ol className="flex items-center gap-1 text-sm text-gray-600">
           <li>
             <Link
-              href={`/${lang}/dashboard`}
+              href={`/${currentLocale}/dashboard`}
               className="block transition hover:text-gray-700"
             >
               <span className="sr-only"> {t("home")} </span>

@@ -15,8 +15,8 @@ const History = ({ params }) => {
   const t = useTranslations("Translation");
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="History" />
+    <Layout>
+      <BreadCrumb title="History" />
       <div className="py-6 dark:bg-gray-800 dark:text-gray-50">
         <div className="flex flex-col mt-6">
           {loading ? (

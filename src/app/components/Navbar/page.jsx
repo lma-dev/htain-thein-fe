@@ -4,17 +4,17 @@ import UserProfileIconDropdown from "../DropDown/UserProfileIconDropdown";
 import { AlignLeft } from "lucide-react";
 import MobileSidebar from "../MobileSidebar/page";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import LangSwitcher from "../Language/LangSwitcher";
 import { useTranslations } from "next-intl";
 import useFireStoreCollection from "../../hooks/useFireStoreCollection";
 import useUserReadNotifications from "../../hooks/useUserReadNotifications";
 import { parseCookies } from "nookies";
-const Navbar = ({ lang }) => {
-  const pathname = usePathname();
-  const userIdFromCookies = parseCookies().userId;
+import { useLocale } from "../../context/LangContext";
 
-  const [open, setOpen] = useState(false);
+const Navbar = () => {
+  const userIdFromCookies = parseCookies().userId;
+  const { currentLocale } = useLocale();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations("Translation");
 
   const { data: notifications, count: notificationsCount } =
@@ -26,6 +26,10 @@ const Navbar = ({ lang }) => {
     (notification) => !readNotifications.includes(notification.id)
   ).length;
 
+  const handleToggleSidebar = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
   return (
     <div>
       <div className="mt-5">
@@ -35,7 +39,7 @@ const Navbar = ({ lang }) => {
               <AlignLeft
                 size={24}
                 className="mr-5 cursor-pointer text-gray-600"
-                onClick={() => setOpen(!open)}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               />
               <span className="align-middle font-bold text-lg uppercase text-gray-600">
                 {t("appTitle")}
@@ -43,7 +47,7 @@ const Navbar = ({ lang }) => {
             </div>
           </div>
           <div className="mr-7">
-            <UserProfileIconDropdown lang={lang} />
+            <UserProfileIconDropdown currentLocale={currentLocale} />
           </div>
         </div>
         <div className="hidden sm:block md:block">
@@ -55,7 +59,7 @@ const Navbar = ({ lang }) => {
                 aria-label="Tabs"
               >
                 {/* <Link
-                  href={`/${lang}/settings`}
+                  href={`/${currentLocale}/settings`}
                   className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${
                     pathname === "/settings"
                       ? " border-sky-500 text-sky-600"
@@ -75,7 +79,7 @@ const Navbar = ({ lang }) => {
                 </a>
 
                 <Link
-                  href={`/${lang}/notifications`}
+                  href={`/${currentLocale}/notifications`}
                   className="relative inline-block px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
                   {t("notification")}
@@ -92,7 +96,7 @@ const Navbar = ({ lang }) => {
 
               <div className="flex justify-center items-center">
                 <LangSwitcher />
-                <UserProfileIconDropdown lang={lang} />
+                <UserProfileIconDropdown />
               </div>
             </div>
           </div>
@@ -101,7 +105,7 @@ const Navbar = ({ lang }) => {
 
       {/* Mobile Navbar */}
 
-      {open && <MobileSidebar setOpen={setOpen} open={open} lang={lang} />}
+      <MobileSidebar isOpen={isMobileMenuOpen} onClose={handleToggleSidebar} />
     </div>
   );
 };

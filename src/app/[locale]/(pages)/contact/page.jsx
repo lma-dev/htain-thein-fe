@@ -36,8 +36,8 @@ const ContactPage = ({ params }) => {
   };
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Support Box" />
+    <Layout>
+      <BreadCrumb title="Support Box" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <form>

@@ -12,8 +12,8 @@ const Announcement = ({ params }) => {
     FetchAllAnnouncementsService();
   const t = useTranslations("Translation");
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Announcements" />
+    <Layout>
+      <BreadCrumb title="Announcements" />
       <div className="flex justify-end">
         <Link
           href={`/${params.locale}/announcements/create`}
@@ -37,7 +37,6 @@ const Announcement = ({ params }) => {
                   key={index}
                   announcement={announcement}
                   t={t}
-                  lang={params.locale}
                 />
               ))}
           </div>

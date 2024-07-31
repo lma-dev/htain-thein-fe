@@ -5,9 +5,9 @@ import SettingTab from "../../../components/Tab/SettingTab";
 
 const Setting = () => {
   return (
-    <Layout lang={params.locale}>
+    <Layout>
       <div className="flex flex-col">
-        <BreadCrumb lang={params.locale} title="Setting" />
+        <BreadCrumb title="Setting" />
         <div className="flex justify-center">
           <SettingTab />
         </div>

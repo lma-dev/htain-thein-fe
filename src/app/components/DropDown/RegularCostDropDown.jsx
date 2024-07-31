@@ -7,11 +7,13 @@ import { DeleteRegularCostService } from "../../services/RegularCostService/Dele
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
+import { useLocale } from "../../context/LangContext";
 
-export default function RegularCostTable({ regularCostId, t, lang }) {
+export default function RegularCostTable({ regularCostId, t }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteRegularCostService();
   const userRole = parseCookies().userRole;
+  const { currentLocale } = useLocale();
 
   const handleDelete = () => {
     setOpenDeleteDialog(true);
@@ -45,7 +47,7 @@ export default function RegularCostTable({ regularCostId, t, lang }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/${lang}/regular-costs/${regularCostId}`}
+                  href={`/${currentLocale}/regular-costs/${regularCostId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
@@ -58,7 +60,7 @@ export default function RegularCostTable({ regularCostId, t, lang }) {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/${lang}/regular-costs/${regularCostId}/edit`}
+                      href={`/${currentLocale}/regular-costs/${regularCostId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />

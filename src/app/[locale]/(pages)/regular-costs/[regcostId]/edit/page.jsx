@@ -54,8 +54,8 @@ const EditRegularCost = ({ params }) => {
   }, [regularCostData]);
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Edit Regular Cost" />
+    <Layout>
+      <BreadCrumb title="Edit Regular Cost" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <div className="flex flex-wrap justify-center sm:justify-center">

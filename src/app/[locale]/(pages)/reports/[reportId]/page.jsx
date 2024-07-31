@@ -25,8 +25,8 @@ const DetailReport = ({ params }) => {
   }, [reportData]);
 
   return (
-    <Layout lang={params.locale}>
-      <BreadCrumb lang={params.locale} title="Detail Report" />
+    <Layout>
+      <BreadCrumb title="Detail Report" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
           <div className="flex flex-wrap justify-center sm:justify-center">

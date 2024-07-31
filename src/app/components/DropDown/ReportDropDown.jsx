@@ -7,11 +7,13 @@ import ConfirmDialog from "../Dialog/ConfirmDialog";
 import Link from "next/link";
 import { UserType } from "../../enums/UserType";
 import { parseCookies } from "nookies";
+import { useLocale } from "../../context/LangContext";
 
-export default function ReportDropDown({ reportId, t, lang }) {
+export default function ReportDropDown({ reportId, t }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteReportService();
   const userRole = parseCookies().userRole;
+  const { currentLocale } = useLocale();
   const handleDelete = () => {
     setOpenDeleteDialog(true);
   };
@@ -45,7 +47,7 @@ export default function ReportDropDown({ reportId, t, lang }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 <Link
-                  href={`/${lang}/reports/${reportId}`}
+                  href={`/${currentLocale}/reports/${reportId}`}
                   className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                 >
                   <Eye size={16} className="mr-2 inline-block" />
@@ -57,7 +59,7 @@ export default function ReportDropDown({ reportId, t, lang }) {
                 <div>
                   <Menu.Item>
                     <Link
-                      href={`/${lang}/reports/${reportId}/edit`}
+                      href={`/${currentLocale}/reports/${reportId}/edit`}
                       className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
                     >
                       <Pencil size={16} className="mr-2 inline-block" />

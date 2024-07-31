@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
     "incremental": true,
-    "esModuleInterop": true,
     "module": "esnext",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,14 +26,9 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "src/app/(pages)/users/[userId]/edit/page.jsx",
-    "src/app/(pages)/reports/[reportId]/history/page.jsx",
-    "src/app/components/Table/ReportHistoryTable/page.jsx",
-    "src/app/(pages)/notifications/page.jsx",
-    "src/app/(pages)/users/[userId]/page.jsx",
-    "src/app/[locale]/app.jsx",
-    "src/i18n.js"
+    "**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
