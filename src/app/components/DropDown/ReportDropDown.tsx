@@ -5,7 +5,7 @@ import { MoreVertical, Pencil, Trash2, Eye } from "lucide-react";
 import { DeleteReportService } from "../../services/ReportService/DeleteReportService";
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 import Link from "next/link";
-import { UserType } from "../../enums/UserType";
+import { UserRole } from "../../enums/UserRole";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
 
@@ -54,30 +54,30 @@ export default function ReportDropDown({ reportId, t }) {
                   {t("detail")}
                 </Link>
               </Menu.Item>
-              {(userRole === UserType.ADMIN ||
-                userRole === UserType.SUPER_ADMIN) && (
-                <div>
-                  <Menu.Item>
-                    <Link
-                      href={`/${currentLocale}/reports/${reportId}/edit`}
-                      className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
-                    >
-                      <Pencil size={16} className="mr-2 inline-block" />
-                      {t("edit")}
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      href="#"
-                      className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400"
-                      onClick={handleDelete}
-                    >
-                      <Trash2 size={16} className="mr-2 inline-block" />
-                      {t("delete")}
-                    </Link>
-                  </Menu.Item>
-                </div>
-              )}
+              {(userRole === UserRole.ADMIN ||
+                userRole === UserRole.SUPER_ADMIN) && (
+                  <div>
+                    <Menu.Item>
+                      <Link
+                        href={`/${currentLocale}/reports/${reportId}/edit`}
+                        className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
+                      >
+                        <Pencil size={16} className="mr-2 inline-block" />
+                        {t("edit")}
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <Link
+                        href="#"
+                        className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400"
+                        onClick={handleDelete}
+                      >
+                        <Trash2 size={16} className="mr-2 inline-block" />
+                        {t("delete")}
+                      </Link>
+                    </Menu.Item>
+                  </div>
+                )}
             </div>
           </Menu.Items>
         </Transition>

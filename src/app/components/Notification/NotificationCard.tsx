@@ -2,7 +2,15 @@ import { EmptyStatus } from "../../enums/EmptyStatus";
 import IconType from "../../traits/IconType";
 import NotificationType from "../../traits/NotificationType";
 import { useLocale } from "../../context/LangContext";
-const NotificationCard = ({ notification, t, handleReadNotification }) => {
+import { NotificationDataType } from "../../types/Notification/NotificatioDataType";
+
+type NotificationCardProps = {
+  notification: NotificationDataType,
+  t: any,
+  handleReadNotification: (id: string) => void
+}
+
+const NotificationCard = ({ notification, t, handleReadNotification }: NotificationCardProps) => {
   const { currentLocale } = useLocale();
   const handleClick = () => {
     handleReadNotification(notification.firebaseNotificationId);

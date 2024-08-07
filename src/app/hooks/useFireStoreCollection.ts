@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { firestore } from "../libs/firebaseConfig";
 
-const useFireStoreCollection = (collectionName, orderByField) => {
-  const [data, setData] = useState([]);
+const useFireStoreCollection = (collectionName:string, orderByField:string) => {
+  const [data, setData] =useState<any[]>([]);
   const [count, setCount] = useState(0);
 
   useEffect(() => {

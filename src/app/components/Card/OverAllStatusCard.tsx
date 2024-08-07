@@ -1,6 +1,10 @@
 import React from "react";
 
-const OverAllStatusCard = ({ calculations, t }) => {
+type OverAllStatusCardProps = {
+  calculations: any,
+  t: any
+}
+const OverAllStatusCard = ({ calculations, t }: OverAllStatusCardProps) => {
   return (
     <div>
       <h1 className="pb-4 text-xl font-semibold text-gray-500">
@@ -12,11 +16,10 @@ const OverAllStatusCard = ({ calculations, t }) => {
         </h3>
         <h1 className="w-auto rounded-lg border bg-gray-100 p-4 md:text-4xl sm:text-lg font-semibold text-gray-800">
           <span
-            className={`mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold ${
-              calculations?.data?.availableBalance < 0
-                ? "text-red-500"
-                : "text-green-500"
-            }`}
+            className={`mt-1 block rounded-md bg-gray-100 px-4 py-2 font-semibold ${calculations?.data?.availableBalance < 0
+              ? "text-red-500"
+              : "text-green-500"
+              }`}
           >
             {calculations?.data?.availableBalance?.toLocaleString()} $
           </span>

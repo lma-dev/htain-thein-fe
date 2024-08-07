@@ -13,13 +13,13 @@ import { ContactSchemaType } from "../../../types/Contact/Zod/ContactSchemaType"
 
 const ContactPage = () => {
   const t = useTranslations("Translation");
-  const createContactMutation = useCreateQuery(CreateContactInfoService);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
+  const createContactMutation = useCreateQuery(CreateContactInfoService);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -104,7 +104,7 @@ const ContactPage = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
-                rows="6"
+                rows={6}
                 className="w-full rounded-md px-4 pt-3 bg-gray-50 outline-blue-500 mb-2 block text-sm font-medium text-gray-900 dark:text-white border"
               ></textarea>
             </div>

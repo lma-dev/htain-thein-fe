@@ -12,12 +12,10 @@ import { useTranslations } from "next-intl";
 import { announcementSchema } from "../../../../schema/announcementSchema";
 import { handleErrors } from "../../../../schema/errorHandler";
 import { useLocale } from "../../../../context/LangContext";
-import { AnnouncementFormType } from "../../../../types/Announcement/AnnouncementType";
 import { AnnouncementSchemaType } from "../../../../types/Announcement/Zod/AnnouncementSchemaType";
 
 const CreateAnnouncement = () => {
-  const router = useRouter();
-  const [formData, setFormData] = useState<AnnouncementFormType>({
+  const [formData, setFormData] = useState({
     title: "",
     content: "",
     slug: "info",
@@ -40,7 +38,7 @@ const CreateAnnouncement = () => {
     try {
       const validationData: AnnouncementSchemaType = announcementSchema.parse(formData);
       await createMutation.mutateAsync(validationData);
-      router.push(`/${currentLocale}/announcements`);
+      // router.push(`/${currentLocale}/announcements`);
     } catch (error) {
       handleErrors(error);
     }

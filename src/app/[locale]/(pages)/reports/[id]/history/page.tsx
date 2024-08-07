@@ -78,7 +78,8 @@ const History = ({ params }: IdParamType) => {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                          {histories?.data.map((edit) => (
+                          {/* TODO FIX */}
+                          {histories?.data.map((edit: any) => (
                             <tr
                               key={edit.id}
                               className="hover:bg-gray-100 dark:hover:bg-gray-700"

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
 import Layout from "../../../components/layout";
 import { parseCookies } from "nookies";
@@ -31,7 +31,7 @@ const ChatPage = () => {
     }
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       sendMessage();
     }

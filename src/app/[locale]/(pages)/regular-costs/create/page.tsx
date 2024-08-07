@@ -16,20 +16,19 @@ import { regularCostSchema } from "../../../../schema/regularCostSchema";
 import { useLocale } from "../../../../context/LangContext";
 
 const CreateRegularCost = () => {
-  const router = useRouter();
-  const userId = parseCookies().userId;
+  const userId = parseInt(parseCookies().userId);
   const { data: userData } = FetchSingleUserService(userId);
   const reporterName = userData?.data?.name || "";
-  const createRegularCostMutation = useCreateQuery(createRegularCostService);
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
+  const createRegularCostMutation = useCreateQuery(createRegularCostService);
 
   const [formData, setFormData] = useState({
     amount: 0,
     description: "",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -40,7 +39,7 @@ const CreateRegularCost = () => {
       const updatedFormData = { ...formData, reporter_id: userId };
       const validationData = regularCostSchema.parse(updatedFormData);
       await createRegularCostMutation.mutateAsync(validationData);
-      router.push(`/${currentLocale}/regular-costs`);
+      // router.push(`/${currentLocale}/regular-costs`);
     } catch (error) {
       handleErrors(error);
     }

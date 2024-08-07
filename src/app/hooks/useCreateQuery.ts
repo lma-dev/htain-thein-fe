@@ -1,17 +1,20 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient,UseMutationResult } from "@tanstack/react-query";
 
-export const useCreateQuery = (apiFn) => {
+export const useCreateQuery = <TData>(
+  apiFn: (data: TData) => Promise<void>
+): UseMutationResult<void, unknown, TData> => {
   return useMutation({
-    mutationFn: (data) => {
-      return apiFn(data);
-    },
+    mutationFn: apiFn,
   });
 };
 
-export const useDoubleParameterCreateQuery = (key, apiFn) => {
+export const useDoubleParameterCreateQuery = <TData, TId>(
+  key: string,
+  apiFn: (id: TId, data: TData) => Promise<void>
+) => {
   const queryClient = useQueryClient(); // Obtain queryClient
 
-  return useMutation({
+  return useMutation<void, unknown, { id: TId, data: TData }>({
     mutationFn: ({ id, data }) => {
       return apiFn(id, data);
     },

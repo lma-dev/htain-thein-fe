@@ -13,6 +13,7 @@ import { reportSchema } from "../../../../../schema/reportSchema";
 import { IdParamType } from "../../../../../types/Share/IdParamType";
 import { useLocale } from "../../../../../context/LangContext";
 
+//TODO FIX
 const EditReport = ({ params }: IdParamType) => {
   const [formData, setFormData] = useState({
     amount: "",
@@ -28,7 +29,7 @@ const EditReport = ({ params }: IdParamType) => {
   const updateMutation = EditReportService();
   const t = useTranslations("Translation");
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

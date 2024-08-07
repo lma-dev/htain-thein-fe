@@ -16,13 +16,12 @@ import { handleErrors } from "../../../../schema/errorHandler";
 import { useLocale } from "../../../../context/LangContext";
 
 const CreateReport = () => {
-  const router = useRouter();
-  const userId = parseCookies().userId;
+  const userId = parseInt(parseCookies().userId);
   const { data: userData } = FetchSingleUserService(userId);
   const reporterName = userData?.data?.name || "";
-  const createReportMutation = useCreateQuery(createReportService);
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
+  const createReportMutation = useCreateQuery(createReportService);
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -30,7 +29,7 @@ const CreateReport = () => {
     description: "",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -41,7 +40,7 @@ const CreateReport = () => {
     try {
       const validationData = reportSchema.parse(updatedFormData);
       await createReportMutation.mutateAsync(validationData);
-      router.push(`/${currentLocale}/deposit-requests`);
+      // router.push(`/${currentLocale}/deposit-requests`);
     } catch (error) {
       handleErrors(error);
     }

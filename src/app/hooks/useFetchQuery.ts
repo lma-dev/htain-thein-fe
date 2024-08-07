@@ -1,19 +1,24 @@
-"use client";
+import { useQuery, QueryKey } from '@tanstack/react-query';
 
-import { useQuery } from "@tanstack/react-query";
+// Generic type for the query function
+type ApiFn<T> = () => Promise<T>;
 
-export const useFetchQuery = (key, apiFn) => {
-  return useQuery({
+// useFetchQuery with generic type
+export const useFetchQuery = <T>(key: QueryKey, apiFn: ApiFn<T>) => {
+  return useQuery<T>({
     queryKey: key,
     queryFn: apiFn,
-    cached: true,
+    staleTime: 5 * 60 * 1000,
   });
 };
 
-export const useFetchQueryWithParams = (key, apiFn, id) => {
-  return useQuery({
-    queryKey: [key, id],
-    queryFn: () => apiFn(id),
-    cached: true,
+// useFetchQueryWithParams with generic type and parameterized function
+type ApiFnWithParams<T, P> = (param: P) => Promise<T>;
+
+export const useFetchQueryWithParams = <T, P>(key: QueryKey, apiFn: ApiFnWithParams<T, P>, param: P) => {
+  return useQuery<T>({
+    queryKey: [key, param],
+    queryFn: () => apiFn(param),
+    staleTime: 5 * 60 * 1000,
   });
 };

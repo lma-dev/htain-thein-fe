@@ -51,7 +51,6 @@ const DetailAnnouncement = ({ params }: IdParamType) => {
                 </label>
 
                 <textarea
-                  type="text"
                   className="mt-1 w-full min-h-44 rounded-md border-gray-200 shadow-sm sm:text-sm p-3 bg-gray-200"
                   value={announceData.data.content}
                   readOnly

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../../services/UserService/FetchSingleUserService";
 import { handleErrors } from "../../../../../schema/errorHandler";
 import { userSchema } from "../../../../../schema/userSchema";
-import { UserType } from "../../../../../enums/UserType";
+import { UserRole } from "../../../../../enums/UserRole";
 import { useLocale } from "../../../../../context/LangContext";
 import { IdParamType } from "../../../../../types/Share/IdParamType";
 import { UserSchemaType } from "../../../../../types/User/Zod/UserSchemaType";
@@ -129,9 +129,9 @@ const EditUser = ({ params }: IdParamType) => {
                 <option defaultValue={formData?.role} disabled>
                   {formData?.role}
                 </option>
-                <option value={UserType.MEMBER}>Member</option>
-                <option value={UserType.ADMIN}>Admin</option>
-                <option value={UserType.SUPER_ADMIN}>Super Admin</option>
+                <option value={UserRole.MEMBER}>Member</option>
+                <option value={UserRole.ADMIN}>Admin</option>
+                <option value={UserRole.SUPER_ADMIN}>Super Admin</option>
               </select>
             </div>
 

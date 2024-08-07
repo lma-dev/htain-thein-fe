@@ -8,14 +8,23 @@ import {
   TrendingDown,
 } from "lucide-react";
 
+
+type ItemCountCardProps = {
+  title?: string,
+  count?: number,
+  text?: string,
+  rate?: number,
+  financialStatus?: boolean,
+  t: any
+}
 const ItemCountCard = ({
   title,
   count,
-  text = null,
-  rate = null,
-  financialStatus = null,
+  text,
+  rate,
+  financialStatus,
   t,
-}) => {
+}: ItemCountCardProps) => {
   const getIcon = () => {
     if (title === "reports") {
       return <ScrollText size={24} />;

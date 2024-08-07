@@ -21,6 +21,7 @@ const DetailReport = ({ params }: IdParamType) => {
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
 
+  // TODO FIX
   useEffect(() => {
     if (reportData?.data) {
       setFormData(reportData.data);

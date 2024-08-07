@@ -11,14 +11,14 @@ import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useTranslations } from "next-intl";
 import { handleErrors } from "../../../../schema/errorHandler";
 import { userSchema } from "../../../../schema/userSchema";
-import { UserType } from "../../../../enums/UserType";
+import { UserRole } from "../../../../enums/UserRole";
 import { useLocale } from "../../../../context/LangContext";
 import { UserSchemaType } from "../../../../types/User/Zod/UserSchemaType";
 
 const CreateUser = () => {
-  const router = useRouter();
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
+  const createUserMutation = useCreateQuery(createUserService);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,13 +37,12 @@ const CreateUser = () => {
     try {
       const validationData: UserSchemaType = userSchema.parse(formData);
       await createUserMutation.mutateAsync(validationData);
-      router.push(`/${currentLocale}/users`);
+      //TODO CHECK THIS 
+      // router.push(`/${currentLocale}/users`);
     } catch (error) {
       handleErrors(error);
     }
   };
-
-  const createUserMutation = useCreateQuery(createUserService);
 
   return (
     <Layout>
@@ -120,11 +119,11 @@ const CreateUser = () => {
                   required
                 >
                   <option value=""> {t("select")}</option>
-                  <option value={UserType.SUPER_ADMIN}>
+                  <option value={UserRole.SUPER_ADMIN}>
                     {t("superAdmin")}
                   </option>
-                  <option value={UserType.ADMIN}>{t("admin")}</option>
-                  <option value={UserType.MEMBER}>{t("member")}</option>
+                  <option value={UserRole.ADMIN}>{t("admin")}</option>
+                  <option value={UserRole.MEMBER}>{t("member")}</option>
                 </select>
               </div>
               <div className="mb-6">

@@ -11,12 +11,12 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
 
 const ReportsPage = () => {
-  const [generalSearch, setGeneralSearch] = useState("");
-  const [amount, setAmount] = useState("");
-  const [confirmStatus, setConfirmStatus] = useState("");
-  const [type, setType] = useState("");
-  const [page, setPage] = useState(1);
-  const [createdAt, setCreatedAt] = useState("");
+  const [generalSearch, setGeneralSearch] = useState<string>("");
+  const [amount, setAmount] = useState<number>();
+  const [confirmStatus, setConfirmStatus] = useState<number>();
+  const [type, setType] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [createdAt, setCreatedAt] = useState<string>("");
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
 
@@ -40,7 +40,6 @@ const ReportsPage = () => {
         <div className="flex justify-between items-center align-middle">
           <div>
             <ReportFilterInputField
-              generalSearch={generalSearch}
               amount={amount}
               confirmStatus={confirmStatus}
               type={type}

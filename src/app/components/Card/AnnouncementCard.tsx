@@ -1,7 +1,14 @@
 import { BadgeInfo } from "lucide-react";
 import AnnouncementDropdown from "../DropDown/AnnouncementDropDown";
-const AnnouncementCard = ({ announcement, t }) => {
-  const getBadgeColor = (level) => {
+import { AnnouncementType } from "../../types/Announcement/AnnouncementType";
+
+
+type AnnouncementCardProps = {
+  announcement: AnnouncementType,
+  t: any
+}
+const AnnouncementCard = ({ announcement, t }: AnnouncementCardProps) => {
+  const getBadgeColor = (level: number) => {
     if (level == 1) {
       return <BadgeInfo size={17} className="text-blue-600" />;
     }
@@ -13,13 +20,13 @@ const AnnouncementCard = ({ announcement, t }) => {
     }
   };
 
-  function getBadgeTitle(priority) {
+  function getBadgeTitle(priority: number): string {
     switch (priority) {
-      case "1":
+      case 1:
         return t("lowPriority");
-      case "2":
+      case 2:
         return t("normalPriority");
-      case "3":
+      case 3:
         return t("highPriority");
       default:
         return t("unknownPriority");
@@ -33,11 +40,10 @@ const AnnouncementCard = ({ announcement, t }) => {
             <h3 className="font-semibold text-gray-800 text-lg mb-1">
               {announcement.title}
               <span
-                className={`inline-block ml-2 px-2 py-0.5 rounded-full text-xs ${
-                  announcement.isVisible == 1
-                    ? "bg-green-500 text-white"
-                    : "bg-red-500 text-white"
-                }`}
+                className={`inline-block ml-2 px-2 py-0.5 rounded-full text-xs ${announcement.isVisible == 1
+                  ? "bg-green-500 text-white"
+                  : "bg-red-500 text-white"
+                  }`}
               >
                 {announcement.isVisible == 1
                   ? t("published")

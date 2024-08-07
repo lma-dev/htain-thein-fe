@@ -11,8 +11,8 @@ export const announcementSchema = z.object({
     .min(1, { message: "Please provide a title" }),
   content: z.string().optional(),
   isVisible: z.preprocess(
-    preprocessBoolean,
-    z.boolean({ message: "Please select Visible Status" }).optional()
+    preprocessNumber,
+    z.number({ message: "Please select Visible Status" }).optional()
   ),
   priority: z.preprocess(
     preprocessNumber,

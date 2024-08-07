@@ -11,13 +11,12 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useLocale } from "../../../../../context/LangContext";
 import {
-  getPriority,
-  getVisibility,
+  getDefaultDueDate,
 } from "../../../../../utils/FunctionHelper";
 import { handleErrors } from "../../../../../schema/errorHandler";
 import { announcementSchema } from "../../../../../schema/announcementSchema";
-import { IdParamType } from "../../../../../types/IdParamType";
-import { AnnouncementFormType } from "../../../../../types/Announcement/AnnouncementType";
+import { IdParamType } from "../../../../../types/Share/IdParamType";
+import { AnnouncementSchemaType } from "../../../../../types/Announcement/Zod/AnnouncementSchemaType";
 
 const EditAnnouncement = ({ params }: IdParamType) => {
   const router = useRouter();
@@ -27,16 +26,16 @@ const EditAnnouncement = ({ params }: IdParamType) => {
     params.id
   );
   const updateMutation = EditAnnouncementService();
-  const [formData, setFormData] = useState<AnnouncementFormType>({
+  const [formData, setFormData] = useState<AnnouncementSchemaType>({
     title: "",
     content: "",
-    slug: "",
+    slug: "info",
     isVisible: 1,
     priority: 2,
-    dueDate: "",
+    dueDate: getDefaultDueDate(),
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -96,7 +95,6 @@ const EditAnnouncement = ({ params }: IdParamType) => {
 
                 <textarea
                   name="content"
-                  type="text"
                   id="content"
                   value={formData.content}
                   onChange={handleInputChange}
@@ -142,13 +140,11 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                   onChange={handleInputChange}
                   id="isVisible"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                  defaultValue={getVisibility(formData?.isVisible)}
+                  value={formData.isVisible}
                   required
                 >
-                  <option defaultValue={formData?.isVisible} disabled>
-                    {getVisibility(formData?.isVisible)}
-                  </option>
-                  <option value={1}>Public</option>
+                  <option value="" disabled>Select visibility</option>
+                  <option value={1}>Publish</option>
                   <option value={0}>UnPublish</option>
                 </select>
               </div>
@@ -161,15 +157,13 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                 </label>
                 <select
                   name="priority"
-                  defaultValue={getPriority(formData?.priority)}
+                  value={formData.priority}
                   onChange={handleInputChange}
                   id="priority"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   required
                 >
-                  <option defaultValue={formData?.priority} disabled>
-                    {getPriority(formData?.priority)}
-                  </option>
+                  <option value="" disabled>Select Priority</option>
                   <option value={1}>Low</option>
                   <option value={2}>Normal</option>
                   <option value={3}>High</option>

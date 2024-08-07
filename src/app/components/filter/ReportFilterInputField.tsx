@@ -1,5 +1,7 @@
+import { ReportFilterDropDownType } from "../../types/Report/ReportFilterType";
 import ReportFilterDropDown from "../DropDown/ReportFilterDropDown";
 import { Search } from "lucide-react";
+
 
 const ReportFilterInputField = ({
   amount,
@@ -12,7 +14,7 @@ const ReportFilterInputField = ({
   onCreatedAtChange,
   onGeneralSearchChange,
   t,
-}) => {
+}: ReportFilterDropDownType) => {
   return (
     <>
       <div className="relative flex">

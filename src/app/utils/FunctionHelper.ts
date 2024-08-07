@@ -12,8 +12,8 @@ export function generateUUID() {
   return uuid;
 }
 
-export function changeFormatHumanTime(timestamp) {
-  const options = {
+export function changeFormatHumanTime(timestamp: Date | string | number): string {
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -23,7 +23,7 @@ export function changeFormatHumanTime(timestamp) {
   return new Date(timestamp).toLocaleString(undefined, options);
 }
 
-export function getPriority(priority) {
+export function getPriority(priority:string):string {
   switch (priority) {
     case "1":
       return "Low priority";
@@ -36,7 +36,7 @@ export function getPriority(priority) {
   }
 }
 
-export function getVisibility(isVisible) {
+export function getVisibility(isVisible:number):string {
   switch (isVisible) {
     case 1:
       return "Publish";
@@ -46,3 +46,10 @@ export function getVisibility(isVisible) {
       return "Unknown";
   }
 }
+
+export const getDefaultDueDate = (): Date => {
+  const now = new Date();
+  const futureDate = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Add 1 day (24 hours) in milliseconds
+  return futureDate;
+};
+

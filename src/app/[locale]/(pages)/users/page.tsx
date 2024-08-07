@@ -6,7 +6,7 @@ import { FetchUsersService } from "../../../services/UserService/FetchUsersServi
 import UserFilterInputField from "../../../components/filter/UserFilterInputField";
 import { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
-import { UserType } from "../../../enums/UserType";
+import { UserRole } from "../../../enums/UserRole";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useLocale } from "../../../context/LangContext";
@@ -50,8 +50,8 @@ const UsersPage = () => {
             />
           </div>
 
-          {(userRole === UserType.ADMIN ||
-            userRole === UserType.SUPER_ADMIN) && (
+          {(userRole === UserRole.ADMIN ||
+            userRole === UserRole.SUPER_ADMIN) && (
               <div>
                 <Link
                   href={`/${currentLocale}/users/create`}

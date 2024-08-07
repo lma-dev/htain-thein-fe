@@ -12,7 +12,7 @@ const Announcement = () => {
   const { data: announcements, isLoading: loading } =
     FetchAllAnnouncementsService();
   const t = useTranslations("Translation");
-  const currentLocale = 'en';
+  const { currentLocale } = useLocale();
 
   return (
     <Layout>
@@ -35,7 +35,7 @@ const Announcement = () => {
         ) : (
           <div>
             {announcements?.data.length > 0 &&
-              announcements.data.map((announcement, index) => (
+              announcements.data.map((announcement: any, index: number) => (
                 <AnnouncementCard
                   key={index}
                   announcement={announcement}

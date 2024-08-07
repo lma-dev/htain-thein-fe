@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { firestore } from "../libs/firebaseConfig";
 
-const useUserReadNotifications = (userId) => {
-  const [readNotifications, setReadNotifications] = useState([]);
+const useUserReadNotifications = (userId:number) => {
+  const [readNotifications, setReadNotifications] = useState<any[]>([]);
   useEffect(() => {
     const unsubscribeReads = firestore
       .collection("notification_reads")
-      .where("userIds", "array-contains", parseInt(userId))
+      .where("userIds", "array-contains", userId)
       .onSnapshot((snapshot) => {
         const readNotificationIds = snapshot.docs.map((doc) => doc.id);
         setReadNotifications(readNotificationIds);

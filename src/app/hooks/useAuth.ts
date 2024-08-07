@@ -1,7 +1,6 @@
 // hooks/useAuth.js
 import { useState } from "react";
 import AuthService from "../services/AuthService";
-import { LoginType } from "../types/Auth/LoginType";
 
 // Define a type for the error state
 type ErrorType = string | null;
@@ -10,7 +9,7 @@ const useAuth = () => {
   const [user, setUser] = useState<any>(null);  // Replace `any` with the actual user type if available
   const [error, setError] = useState<ErrorType>(null);
 
-  const login = async ({ email, password, setLoading }: LoginType) => {
+  const login = async (email: string, password: string, setLoading: (loading: boolean) => void) => {
     try {
       const userData = await AuthService.login(email, password);
       setUser(userData);

@@ -7,13 +7,14 @@ import { FetchAllNotificationsDataService } from "../../../services/Notification
 import NotificationSkeletonAnimation from "../../../components/Skeleton/NotificationSkeletonAnimation";
 import { useTranslations } from "next-intl";
 import { MarkAsNotificationService } from "../../../services/NotificationService/MarkAsNotificationService";
+import { NotificationDataType } from "../../../types/Notification/NotificatioDataType";
 
 const NotificationPage = () => {
   const { data: notifications, isLoading: loading } =
     FetchAllNotificationsDataService();
   const t = useTranslations("Translation");
 
-  const handleReadNotification = (notificationId: number) => {
+  const handleReadNotification = (notificationId: string) => {
     MarkAsNotificationService(notificationId);
   };
 
@@ -29,7 +30,7 @@ const NotificationPage = () => {
       ) : (
         <div>
           {notifications?.data.length > 0 &&
-            notifications.data.map((notification, index) => (
+            notifications.data.map((notification: NotificationDataType, index: number) => (
               <NotificationCard
                 key={index}
                 notification={notification}

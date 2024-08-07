@@ -27,7 +27,7 @@ const EditRegularCost = ({ params }: IdParamType) => {
   );
   const updateMutation = EditRegularCostService();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
