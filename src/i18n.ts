@@ -12,7 +12,7 @@ const messages = {
 };
 
 export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale)) notFound();
+  if (!locales.includes(locale as any)) notFound();
 
   return {
     messages: messages[locale],

@@ -9,7 +9,12 @@ import { UserRole } from "../../enums/UserRole";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
 
-export default function RegularCostTable({ regularCostId, t }) {
+type RegularCostTableProps = {
+  regularCostId: number;
+  t: any;
+};
+
+export default function RegularCostTable({ regularCostId, t }: RegularCostTableProps) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteRegularCostService();
   const userRole = parseCookies().userRole;

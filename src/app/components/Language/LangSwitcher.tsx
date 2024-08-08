@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation"; // Change import statement
 import { usePathname } from "next/navigation";
 import { useLocale } from "next-intl";
@@ -11,7 +11,7 @@ const LangSwitcher = () => {
   const localActive = useLocale();
   const pathname = usePathname();
 
-  const onSelectChange = (e) => {
+  const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const nextLocale = e.target.value;
     const currentRoute = pathname.slice(4);
     startTransition(() => {

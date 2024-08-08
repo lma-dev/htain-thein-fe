@@ -1,4 +1,4 @@
-const ButtonLoading = ({ t }) => {
+const ButtonLoading = ({ t }: { t: any }) => {
   return (
     <div className="inline-flex">
       <svg

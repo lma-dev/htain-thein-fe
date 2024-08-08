@@ -4,7 +4,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import ButtonLoading from "../Loading/ButtonLoading";
 
-const ConfirmDialog = ({ open, setOpen, method, t }) => {
+type ConfirmDialogProps = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  method: () => void;
+  t: any;
+};
+
+const ConfirmDialog = ({ open, setOpen, method, t }: ConfirmDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const cancelButtonRef = useRef(null);
 

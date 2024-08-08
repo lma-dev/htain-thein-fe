@@ -1,7 +1,16 @@
 import UserDropDown from "../../DropDown/UserDropDown";
 import Pagination from "../../Pagination/Pagination";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
-const UserTable = ({ users, loading, onPageChange, t }) => {
+
+
+interface UserTableProps {
+  users: any;
+  loading: boolean;
+  onPageChange: (page: number) => void;
+  t: any;
+}
+
+const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -76,7 +85,7 @@ const UserTable = ({ users, loading, onPageChange, t }) => {
                   />
                 </>
               ) : (
-                users?.data?.map((user, index) => (
+                users?.data?.map((user: any, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
                       {user.id}

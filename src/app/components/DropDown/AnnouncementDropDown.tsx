@@ -7,7 +7,11 @@ import { DeleteAnnouncementService } from "../../services/AnnouncementService/De
 import ConfirmDialog from "../Dialog/ConfirmDialog";
 import { useLocale } from "../../context/LangContext";
 
-export default function AnnouncementDropDown({ announcementId, t }) {
+type AnnouncementDropDownProps = {
+  announcementId: number;
+  t: any;
+};
+export default function AnnouncementDropDown({ announcementId, t }: AnnouncementDropDownProps) {
   const { currentLocale } = useLocale();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteAnnouncementService();

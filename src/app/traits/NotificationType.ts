@@ -1,7 +1,7 @@
 import React from "react";
 import { FinancialType } from "../enums/FinancialType"; // Replace with your actual import
 
-const NotificationType = (notification, t) => {
+const NotificationType = (notification:any, t:any) => {
   if (notification.reportData) {
     if (notification.reportData.type === FinancialType.INCOME) {
       return (

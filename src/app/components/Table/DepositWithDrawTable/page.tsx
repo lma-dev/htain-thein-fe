@@ -3,7 +3,12 @@ import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 
-const DepositWithdrawTable = ({ uncheckReports, loading, t }) => {
+interface DepositWithdrawTableProps {
+  uncheckReports: any;
+  loading: boolean;
+  t: any;
+}
+const DepositWithdrawTable = ({ uncheckReports, loading, t }: DepositWithdrawTableProps) => {
   return (
     <div className="flex flex-col w-full ">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -78,7 +83,7 @@ const DepositWithdrawTable = ({ uncheckReports, loading, t }) => {
                   />
                 </>
               ) : (
-                uncheckReports?.data?.map((item, index) => (
+                uncheckReports?.data?.map((item: any, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start">
                       {item.id}
@@ -92,26 +97,24 @@ const DepositWithdrawTable = ({ uncheckReports, loading, t }) => {
 
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words text-start">
                       <span
-                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          item.type === FinancialType.INCOME
-                            ? "bg-green-100 text-green-800"
-                            : item.type === FinancialType.EXPENSE
+                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${item.type === FinancialType.INCOME
+                          ? "bg-green-100 text-green-800"
+                          : item.type === FinancialType.EXPENSE
                             ? "bg-red-100 text-red-800"
                             : ""
-                        }`}
+                          }`}
                       >
                         {item.type}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 max-w-[200px] truncate text-start">
                       <span
-                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          item.confirmStatus === true
-                            ? "bg-green-100 text-green-800"
-                            : item.confirmStatus === false
+                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${item.confirmStatus === true
+                          ? "bg-green-100 text-green-800"
+                          : item.confirmStatus === false
                             ? "bg-red-100 text-red-800"
                             : ""
-                        }`}
+                          }`}
                       >
                         {item.confirmStatus ? "Confirmed" : "Pending"}
                       </span>

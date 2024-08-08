@@ -9,7 +9,11 @@ import { UserRole } from "../../enums/UserRole";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
 
-export default function ReportDropDown({ reportId, t }) {
+type ReportDropDownProps = {
+  reportId: number;
+  t: any;
+};
+export default function ReportDropDown({ reportId, t }: ReportDropDownProps) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteReportService();
   const userRole = parseCookies().userRole;

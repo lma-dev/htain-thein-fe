@@ -1,6 +1,6 @@
 import React from "react";
 
-export const AnimationButton = ({ text }) => {
+export const AnimationButton = ({ text }: { text: string }) => {
   return (
     <div>
       <button
@@ -13,7 +13,7 @@ export const AnimationButton = ({ text }) => {
   );
 };
 
-export const NormalButton = ({ text, onClick }) => {
+export const NormalButton = ({ text, onClick }: { text: string, onClick: () => void }) => {
   return (
     <div>
       <button

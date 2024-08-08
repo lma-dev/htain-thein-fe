@@ -2,7 +2,14 @@ import ReportDropDown from "../../DropDown/ReportDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import Pagination from "../../Pagination/Pagination";
 
-const ReportTable = ({ reports, loading, onPageChange, t }) => {
+
+interface ReportTableProps {
+  reports: any;
+  loading: boolean;
+  onPageChange: (page: number) => void;
+  t: any;
+}
+const ReportTable = ({ reports, loading, onPageChange, t }: ReportTableProps) => {
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -83,7 +90,7 @@ const ReportTable = ({ reports, loading, onPageChange, t }) => {
                   />
                 </>
               ) : (
-                reports?.data?.map((item, index) => (
+                reports?.data?.map((item: any, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
                       {item.id}
@@ -96,26 +103,24 @@ const ReportTable = ({ reports, loading, onPageChange, t }) => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
                       <span
-                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          item.type === "INCOME"
-                            ? "bg-green-100 text-green-800"
-                            : item.type === "EXPENSE"
+                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${item.type === "INCOME"
+                          ? "bg-green-100 text-green-800"
+                          : item.type === "EXPENSE"
                             ? "bg-red-100 text-red-800"
                             : ""
-                        }`}
+                          }`}
                       >
                         {item.type ?? "-"}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words">
                       <span
-                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                          item.confirmStatus === true
-                            ? "bg-green-100 text-green-800"
-                            : item.confirmStatus === false
+                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${item.confirmStatus === true
+                          ? "bg-green-100 text-green-800"
+                          : item.confirmStatus === false
                             ? "bg-red-100 text-red-800"
                             : ""
-                        }`}
+                          }`}
                       >
                         {item.confirmStatus ? "Confirmed" : "Pending"}
                       </span>

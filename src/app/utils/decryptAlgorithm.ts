@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 
-export const decryptAlgorithm = (encryptedUserData) => {
+export const decryptAlgorithm = (encryptedUserData:any) => {
   try {
     if (!encryptedUserData) {
       // console.log("Decryption failed: No data provided.");

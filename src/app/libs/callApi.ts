@@ -2,9 +2,9 @@ import { parseCookies } from "nookies";
 import axios from "../utils/axios";
 import ToastsBox from "../components/Toasts/ToastsBox";
 
-export async function callApi(method, url, data, responseType = null) {
+export async function callApi(method:string, url:string, data:any, responseType = null) {
   const token = parseCookies().accessToken;
-  const config = {
+  const config:any = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -25,6 +25,7 @@ export async function callApi(method, url, data, responseType = null) {
     }
     return response.data;
   } catch (error) {
+    //TODO CHECK error type
     if (error.response && error.response.data) {
       const { errors } = error.response.data;
       const errorMessages = Object.values(errors).flat();

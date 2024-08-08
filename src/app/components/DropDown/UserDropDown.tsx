@@ -16,7 +16,12 @@ import { UserRole } from "../../enums/UserRole";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
 
-const UserDropDown = ({ userId, t }) => {
+type UserDropDownProps = {
+  userId: number;
+  t: any;
+};
+
+const UserDropDown = ({ userId, t }: UserDropDownProps) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteUserService();
   const userRole = parseCookies().userRole;

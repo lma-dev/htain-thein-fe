@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../context/LangContext";
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 

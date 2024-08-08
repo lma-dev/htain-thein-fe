@@ -3,14 +3,13 @@ export interface ReportFilterDropDownType {
     confirmStatus?: number;
     createdAt?: string;
     type?: string;
-    onAmountChange: (amount: number) => void;
-    onConfirmStatusChange: (confirmStatus: number) => void;
+    onAmountChange: (amount: number|string) => void;
+    onConfirmStatusChange: (confirmStatus: number|string) => void;
     onTypeChange: (type: string) => void;
     onCreatedAtChange: (createdAt: string) => void;
-    onGeneralSearchChange: (search: string) => void;
     t:any;
 }
 
 export interface ReportFilterType extends ReportFilterDropDownType {
-    onGeneralSearchChange: React.Dispatch<React.SetStateAction<string>>;
+    onGeneralSearchChange: (search: string) => void;
 }

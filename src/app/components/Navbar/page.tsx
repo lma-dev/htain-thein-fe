@@ -12,7 +12,7 @@ import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
 
 const Navbar = () => {
-  const userIdFromCookies = parseCookies().userId;
+  const userIdFromCookies = parseInt(parseCookies().userId);
   const { currentLocale } = useLocale();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations("Translation");
@@ -47,7 +47,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="mr-7">
-            <UserProfileIconDropdown currentLocale={currentLocale} />
+            <UserProfileIconDropdown />
           </div>
         </div>
         <div className="hidden sm:block md:block">

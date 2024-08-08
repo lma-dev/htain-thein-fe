@@ -5,11 +5,11 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { cookies } from "next/headers";
 
-export default function middleware(request) {
+export default function middleware(request:any) {
   const cookieStore = cookies();
   const token = cookieStore.get("accessToken") || "";
 
-  function getLocale(request) {
+  function getLocale(request:any) {
     const acceptedLanguage =
       request.headers.get("accept-language") ?? undefined;
     const headers = { "accept-language": acceptedLanguage };
