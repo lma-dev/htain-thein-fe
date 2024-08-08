@@ -1,6 +1,11 @@
 import Link from "next/link";
 
-function LocalizedLink({ href, router, ...rest }) {
+interface LocalizedLinkProps {
+  href: string;
+  router: any;
+}
+
+function LocalizedLink({ href, router, ...rest }: LocalizedLinkProps) {
   const { locale } = router;
 
   return <Link href={`/${locale}${href}`} {...rest} />;

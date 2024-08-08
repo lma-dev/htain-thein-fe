@@ -11,10 +11,10 @@ import { FC } from "react";
 
 interface MobileSidebarProps {
   isOpen: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
-const MobileSidebar: FC<MobileSidebarProps> = ({ isOpen, onClose }) => {
+const MobileSidebar = ({ isOpen, onClose }: MobileSidebarProps) => {
   const { logout } = useAuth();
   const router = useRouter();
   const t = useTranslations("Translation");

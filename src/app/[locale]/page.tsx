@@ -2,9 +2,11 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useLocale } from "../context/LangContext";
 
-export default function Home({ params }) {
+export default function Home() {
   const t = useTranslations("Translation");
+  const { currentLocale } = useLocale();
 
   return (
     <section className="flex justify-center items-center min-h-screen">
@@ -16,7 +18,7 @@ export default function Home({ params }) {
             <p className="mt-4 text-gray-600">{t("homeText")}</p>
 
             <Link
-              href={`/${params.locale}/login`}
+              href={`/${currentLocale}/login`}
               className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
             >
               {t("getStarted")}

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../context/LangContext";
+
 const Sidebar = () => {
   const { logout } = useAuth();
   const router = useRouter();
@@ -28,11 +29,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/dashboard`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/dashboard"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/dashboard"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("dashboard")}
             </Link>
@@ -41,11 +41,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/reports`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/reports"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/reports"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("report")}
             </Link>
@@ -53,11 +52,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/regular-costs`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/regular-costs"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/regular-costs"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("regularCost")}
             </Link>
@@ -65,11 +63,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/deposit-requests`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/deposit-requests"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/deposit-requests"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("depositRequest")}
             </Link>
@@ -77,11 +74,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/users`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/users"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/users"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("user")}
             </Link>
@@ -89,11 +85,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/chat-room`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/chat-room"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/chat-room"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("chatRoom")}
             </Link>
@@ -102,11 +97,10 @@ const Sidebar = () => {
           <li>
             <Link
               href={`/${currentLocale}/announcements`}
-              className={`block rounded-lg px-4 py-2 text-sm font-medium ${
-                pathname === "/announcements"
+              className={`block rounded-lg px-4 py-2 text-sm font-medium ${pathname === "/announcements"
                   ? "bg-gray-200 text-gray-900"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("announcement")}
             </Link>
