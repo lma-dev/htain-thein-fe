@@ -2,11 +2,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { Filter } from 'lucide-react';
 import { CurrencyType } from "../../enums/CurrencyType";
+import { ReportFilterDropDownType } from '../../types/Report/ReportFilterType';
 
 export default function ReportFilterDropDown({
     amount, type, confirmStatus, createdAt, onAmountChange, onTypeChange, onConfirmStatusChange, onCreatedAtChange, t
-
-}) {
+}: ReportFilterDropDownType) {
     let [isOpen, setIsOpen] = useState(false)
     function closeModal() {
         setIsOpen(false)
