@@ -3,15 +3,12 @@
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
 import DepositWithdrawTable from "../../../components/Table/DepositWithDrawTable/page";
 import Layout from "../../../components/layout";
-import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
 
 const ReportsPage = () => {
-  const { currentLocale } = useLocale()
-  const { data: uncheckReports, isLoading: loading } =
-    FetchUncheckReportService();
+  const { currentLocale } = useLocale();
   const t = useTranslations("Translation");
 
   return (
@@ -27,9 +24,6 @@ const ReportsPage = () => {
           </Link>
         </div>
         <DepositWithdrawTable
-          uncheckReports={uncheckReports}
-          loading={loading}
-          t={t}
         />
       </div>
     </Layout>

@@ -3,8 +3,8 @@ export interface ReportFilterDropDownType {
     confirmStatus?: number;
     createdAt?: string;
     type?: string;
-    onAmountChange: (amount: number|string) => void;
-    onConfirmStatusChange: (confirmStatus: number|string) => void;
+    onAmountChange: (amount: number) => void;
+    onConfirmStatusChange: (confirmStatus: number) => void;
     onTypeChange: (type: string) => void;
     onCreatedAtChange: (createdAt: string) => void;
     t:any;

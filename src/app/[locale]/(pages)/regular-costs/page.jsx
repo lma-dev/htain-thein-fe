@@ -37,7 +37,7 @@ const RegularCost = () => {
             </Link>
           )}
         </div>
-        <RegularCostTable regularCosts={regularCosts} loading={loading} t={t} />
+        <RegularCostTable/>
       </div>
     </Layout>
   );

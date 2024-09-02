@@ -1,16 +1,22 @@
+import { MetaDataType } from "../../../types/Share/MetaDataType";
+import { UserType } from "../../../types/User/UserType";
 import UserDropDown from "../../DropDown/UserDropDown";
 import Pagination from "../../Pagination/Pagination";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
-
+import { useTranslations } from "next-intl";
 
 interface UserTableProps {
-  users: any;
+  users: {
+    data: Array<UserType>;
+    meta: MetaDataType;
+  };
   loading: boolean;
   onPageChange: (page: number) => void;
-  t: any;
 }
 
-const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
+const UserTable = ({ users, loading, onPageChange }: UserTableProps) => {
+  const t = useTranslations("Translation");
+
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -85,7 +91,7 @@ const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
                   />
                 </>
               ) : (
-                users?.data?.map((user: any, index: number) => (
+                users?.data?.map((user: UserType, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
                       {user.id}

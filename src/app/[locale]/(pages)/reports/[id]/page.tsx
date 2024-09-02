@@ -14,8 +14,12 @@ const DetailReport = ({ params }: IdParamType) => {
     description: "",
     type: "",
     confirmStatus: "",
-    reporter: "",
-    verifier: "",
+    reporter: {
+      name: "Anonymous",
+    },
+    verifier: {
+      name: "Anonymous",
+    },
   });
   const { data: reportData } = FetchSingleReportService(params.id);
   const t = useTranslations("Translation");

@@ -5,7 +5,7 @@ import Layout from "../../../components/layout";
 import { useTranslations } from "next-intl";
 import { CreateContactInfoService } from "../../../services/ContactInfo/CreateAnnouncementService";
 import { useCreateQuery } from "../../../hooks/useCreateQuery";
-import { NormalButton } from "../../../components/Button/Button";
+import { FormSubmitButton } from "../../../components/Button/Button";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { contactSchema } from "../../../schema/contactSchema";
 import { handleErrors } from "../../../schema/errorHandler";
@@ -21,7 +21,9 @@ const ContactPage = () => {
   });
   const createContactMutation = useCreateQuery(CreateContactInfoService);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -41,7 +43,7 @@ const ContactPage = () => {
       <BreadCrumb title="Support Box" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label
                 htmlFor="name"
@@ -110,7 +112,7 @@ const ContactPage = () => {
             </div>
 
             <div className="flex justify-start">
-              <NormalButton text="Send" onClick={handleSubmit} />
+              <FormSubmitButton text="Send" />
             </div>
           </form>
         </div>

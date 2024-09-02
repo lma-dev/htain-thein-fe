@@ -13,7 +13,13 @@ export const AnimationButton = ({ text }: { text: string }) => {
   );
 };
 
-export const NormalButton = ({ text, onClick }: { text: string, onClick: () => void }) => {
+export const NormalButton = ({
+  text,
+  onClick,
+}: {
+  text: string;
+  onClick: () => void;
+}) => {
   return (
     <div>
       <button
@@ -21,6 +27,20 @@ export const NormalButton = ({ text, onClick }: { text: string, onClick: () => v
         onClick={onClick}
         type="submit"
         aria-label="NormalButton"
+      >
+        {text}
+      </button>
+    </div>
+  );
+};
+
+export const FormSubmitButton = ({ text }: { text: string }) => {
+  return (
+    <div>
+      <button
+        className="block w-full rounded-lg p-3 text-sm text-gray-600 font-medium transition hover:scale-105 border"
+        type="submit"
+        aria-label="Submit"
       >
         {text}
       </button>

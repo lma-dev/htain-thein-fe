@@ -3,12 +3,11 @@
 import Link from "next/link";
 import Layout from "../../../../components/layout";
 import BreadCrumb from "../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../components/Button/Button";
 import { createRegularCostService } from "../../../../services/RegularCostService/CreateRegularCostService";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { parseCookies } from "nookies";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
-import { useRouter } from "next/navigation";
 import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 import { useTranslations } from "next-intl";
 import { handleErrors } from "../../../../schema/errorHandler";
@@ -28,12 +27,14 @@ const CreateRegularCost = () => {
     description: "",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const updatedFormData = { ...formData, reporter_id: userId };
@@ -50,7 +51,7 @@ const CreateRegularCost = () => {
       <BreadCrumb title="Create Regular Cost" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label
                 htmlFor="amount"
@@ -113,7 +114,7 @@ const CreateRegularCost = () => {
               >
                 {t("back")}
               </Link>
-              <NormalButton text="Create" onClick={handleSubmit} />
+              <FormSubmitButton text="Create" />
             </div>
           </form>
         </div>

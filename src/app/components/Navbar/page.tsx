@@ -2,7 +2,7 @@
 import Link from "next/link";
 import UserProfileIconDropdown from "../DropDown/UserProfileIconDropdown";
 import { AlignLeft } from "lucide-react";
-import MobileSidebar from "../MobileSidebar/page";
+// import MobileSidebar from "../MobileSidebar/page";
 import { useState } from "react";
 import LangSwitcher from "../Language/LangSwitcher";
 import { useTranslations } from "next-intl";
@@ -27,7 +27,9 @@ const Navbar = () => {
   ).length;
 
   const handleToggleSidebar = () => {
+    console.log("before handleToggleSidebar" + isMobileMenuOpen);
     setIsMobileMenuOpen((prev) => !prev);
+    console.log("after handleToggleSidebar" + isMobileMenuOpen);
   };
 
   return (
@@ -39,7 +41,7 @@ const Navbar = () => {
               <AlignLeft
                 size={24}
                 className="mr-5 cursor-pointer text-gray-600"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={handleToggleSidebar}
               />
               <span className="align-middle font-bold text-lg uppercase text-gray-600">
                 {t("appTitle")}
@@ -105,7 +107,7 @@ const Navbar = () => {
 
       {/* Mobile Navbar */}
 
-      <MobileSidebar isOpen={isMobileMenuOpen} onClose={handleToggleSidebar} />
+      {/* <MobileSidebar isOpen={isMobileMenuOpen} onClose={handleToggleSidebar} /> */}
     </div>
   );
 };

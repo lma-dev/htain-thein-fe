@@ -8,17 +8,18 @@ import ConfirmDialog from "../Dialog/ConfirmDialog";
 import { UserRole } from "../../enums/UserRole";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
+import { useTranslations } from "next-intl";
 
 type RegularCostTableProps = {
   regularCostId: number;
-  t: any;
 };
 
-export default function RegularCostTable({ regularCostId, t }: RegularCostTableProps) {
+export default function RegularCostDropDown({ regularCostId }: RegularCostTableProps) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteRegularCostService();
   const userRole = parseCookies().userRole;
   const { currentLocale } = useLocale();
+  const t = useTranslations("Translation");
 
   const handleDelete = () => {
     setOpenDeleteDialog(true);

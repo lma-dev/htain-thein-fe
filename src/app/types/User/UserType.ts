@@ -5,5 +5,5 @@ export interface UserType{
     password?:string;
     role: string;
     accountStatus: string;
-    createdAt:string
+    createdAt?:string
 }

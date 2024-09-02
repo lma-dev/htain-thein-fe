@@ -2,5 +2,5 @@ import { deleteAnnouncementApi } from "../../api/announcement/deleteAnnouncement
 import { useDeleteQuery } from "../../hooks/useDeleteQuery";
 
 export const DeleteAnnouncementService = () => {
-  return useDeleteQuery("announcements", deleteAnnouncementApi);
+  return useDeleteQuery(["announcements"], deleteAnnouncementApi);
 };

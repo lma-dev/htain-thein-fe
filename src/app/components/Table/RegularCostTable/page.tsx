@@ -1,8 +1,14 @@
 import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import { CurrencyType } from "../../../enums/CurrencyType";
+import { useTranslations } from "next-intl";
+import { FetchRegularCostsDataService } from "../../../services/RegularCostService/FetchRegularCostService";
 
-const RegularCostTable = ({ regularCosts, loading, t }) => {
+const RegularCostTable = () => {
+  const t = useTranslations("Translation");
+  const { data: regularCosts, isLoading: loading } =
+    FetchRegularCostsDataService();
+
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -71,7 +77,7 @@ const RegularCostTable = ({ regularCosts, loading, t }) => {
                   />
                 </>
               ) : (
-                regularCosts?.data?.map((item, index) => (
+                regularCosts?.data?.map((item: any, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
                       {item.id}
@@ -91,7 +97,7 @@ const RegularCostTable = ({ regularCosts, loading, t }) => {
                       {item.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <RegularCostDropDown regularCostId={item?.id} t={t} />
+                      <RegularCostDropDown regularCostId={item?.id} />
                     </td>
                   </tr>
                 ))

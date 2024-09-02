@@ -3,16 +3,14 @@
 import Link from "next/link";
 import Layout from "../../../../../components/layout";
 import BreadCrumb from "../../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../../components/Button/Button";
 import { FetchSingleAnnouncementService } from "../../../../../services/AnnouncementService/FetchSingleAnnouncementService";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { EditAnnouncementService } from "../../../../../services/AnnouncementService/EditAnnouncementService";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useLocale } from "../../../../../context/LangContext";
-import {
-  getDefaultDueDate,
-} from "../../../../../utils/FunctionHelper";
+import { getDefaultDueDate } from "../../../../../utils/FunctionHelper";
 import { handleErrors } from "../../../../../schema/errorHandler";
 import { announcementSchema } from "../../../../../schema/announcementSchema";
 import { IdParamType } from "../../../../../types/Share/IdParamType";
@@ -35,7 +33,9 @@ const EditAnnouncement = ({ params }: IdParamType) => {
     dueDate: getDefaultDueDate(),
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -44,7 +44,7 @@ const EditAnnouncement = ({ params }: IdParamType) => {
     try {
       const updatedFormData = { ...formData, id: params.id };
       const validationData = announcementSchema.parse(updatedFormData);
-      await updateMutation.mutate({
+      await updateMutation.mutateAsync({
         id: params.id,
         data: validationData,
       });
@@ -64,7 +64,7 @@ const EditAnnouncement = ({ params }: IdParamType) => {
       <BreadCrumb title="Edit Announcement" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <div className="mb-6">
                 <label
@@ -143,7 +143,9 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                   value={formData.isVisible}
                   required
                 >
-                  <option value="" disabled>Select visibility</option>
+                  <option value="" disabled>
+                    Select visibility
+                  </option>
                   <option value={1}>Publish</option>
                   <option value={0}>UnPublish</option>
                 </select>
@@ -163,7 +165,9 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   required
                 >
-                  <option value="" disabled>Select Priority</option>
+                  <option value="" disabled>
+                    Select Priority
+                  </option>
                   <option value={1}>Low</option>
                   <option value={2}>Normal</option>
                   <option value={3}>High</option>
@@ -181,7 +185,7 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                   type="date"
                   id="dueDate"
                   onChange={handleInputChange}
-                  value={formData.dueDate}
+                  value={formData.dueDate.toISOString().split("T")[0]}
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 />
               </div>
@@ -192,7 +196,7 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                 >
                   {t("back")}
                 </Link>
-                <NormalButton text="Update" onClick={handleSubmit} />
+                <FormSubmitButton text="Update" />
               </div>
             </div>
           </form>

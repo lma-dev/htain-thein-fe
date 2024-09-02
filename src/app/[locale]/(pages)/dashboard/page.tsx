@@ -53,25 +53,23 @@ const DashboardPage = () => {
         ) : (
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <ItemCountCard count={userCount} title={"users"} t={t} />
-              <ItemCountCard count={reportsCount} title={"reports"} t={t} />
+              <ItemCountCard count={userCount} title={"users"} />
+              <ItemCountCard count={reportsCount} title={"reports"} />
               <ItemCountCard
                 text={income}
                 title={"income"}
                 rate={incomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
-                t={t}
               />
               <ItemCountCard
                 text={outcome}
                 title={"outcome"}
                 rate={outcomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
-                t={t}
               />
             </div>
             <div className="mt-8">
-              <OverAllStatusCard calculations={calculations} t={t} />
+              <OverAllStatusCard calculations={calculations} />
             </div>
 
             <div className="mt-8">
@@ -79,9 +77,6 @@ const DashboardPage = () => {
                 {t("generalOutComeTable")}
               </h1>
               <RegularCostTable
-                regularCosts={regularCosts}
-                loading={overallLoading}
-                t={t}
               />
             </div>
           </div>

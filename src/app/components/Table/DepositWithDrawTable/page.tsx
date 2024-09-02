@@ -2,13 +2,14 @@
 import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
+import { useTranslations } from "next-intl";
+import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
 
-interface DepositWithdrawTableProps {
-  uncheckReports: any;
-  loading: boolean;
-  t: any;
-}
-const DepositWithdrawTable = ({ uncheckReports, loading, t }: DepositWithdrawTableProps) => {
+const DepositWithdrawTable = () => {
+  const t = useTranslations("Translation");
+  const { data: uncheckReports, isLoading: loading } =
+    FetchUncheckReportService();
+
   return (
     <div className="flex flex-col w-full ">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -124,7 +125,7 @@ const DepositWithdrawTable = ({ uncheckReports, loading, t }: DepositWithdrawTab
                       {item.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <DepositTableDropDown id={item.id} t={t} />
+                      <DepositTableDropDown id={item.id} />
                     </td>
                   </tr>
                 ))

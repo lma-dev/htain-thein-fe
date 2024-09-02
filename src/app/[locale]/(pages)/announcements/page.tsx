@@ -39,7 +39,6 @@ const Announcement = () => {
                 <AnnouncementCard
                   key={index}
                   announcement={announcement}
-                  t={t}
                 />
               ))}
           </div>

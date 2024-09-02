@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "./module/NestedTable.module.css";
+import { DataItem } from "../../../types/Report/ReportHistoryType";
 
-const NestedTable = ({ data }) => {
+//TODO FIX Typescript
+const NestedTable = () => {
   return (
     <div className={styles.container}>
-      {Object.keys(data).map((key) => (
+      {/* {Object.keys(data).map((key) => (
         <div className={styles.row} key={key}>
           <div className={styles.value}>
             {key === "amount" ? "$ " + data[key] : data[key]}
@@ -13,7 +15,7 @@ const NestedTable = ({ data }) => {
             </span>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import { BadgeInfo } from "lucide-react";
 import AnnouncementDropdown from "../DropDown/AnnouncementDropDown";
 import { AnnouncementType } from "../../types/Announcement/AnnouncementType";
-
+import { useTranslations } from "next-intl";
 
 type AnnouncementCardProps = {
   announcement: AnnouncementType,
-  t: any
 }
-const AnnouncementCard = ({ announcement, t }: AnnouncementCardProps) => {
+const AnnouncementCard = ({ announcement }: AnnouncementCardProps) => {
+  const t = useTranslations("Translation");
   const getBadgeColor = (level: number) => {
     if (level == 1) {
       return <BadgeInfo size={17} className="text-blue-600" />;

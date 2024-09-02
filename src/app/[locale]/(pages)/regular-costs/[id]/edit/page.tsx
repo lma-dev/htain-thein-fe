@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Layout from "../../../../../components/layout";
 import BreadCrumb from "../../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../../components/Button/Button";
 import { EditRegularCostService } from "../../../../../services/RegularCostService/EditRegularCostService";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,21 +17,24 @@ const EditRegularCost = ({ params }: IdParamType) => {
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
+    reporter: {
+      name: "Anonymous",
+    },
   });
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
 
   const router = useRouter();
-  const { data: regularCostData } = FetchSingleRegularCostService(
-    params.id
-  );
+  const { data: regularCostData } = FetchSingleRegularCostService(params.id);
   const updateMutation = EditRegularCostService();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const reporterId = regularCostData.data.reporter.id;
@@ -65,7 +68,7 @@ const EditRegularCost = ({ params }: IdParamType) => {
             <div className="w-full max-w-screen-sm rounded-lg border border-gray-200 bg-white p-10 shadow dark:border-gray-700 dark:bg-gray-800">
               <h1 className="mb-3 text-xl font-medium">{t("edit")}</h1>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-6 grid gap-6 sm:grid-cols-2">
                   <div className="sm:col-span-1">
                     <label
@@ -127,11 +130,7 @@ const EditRegularCost = ({ params }: IdParamType) => {
                     {t("back")}
                   </Link>
 
-                  <NormalButton
-                    onClick={handleSubmit}
-                    text={"Update"}
-                    className="inline-block w-full sm:w-auto rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  />
+                  <FormSubmitButton text={"Update"} />
                 </div>
               </form>
             </div>

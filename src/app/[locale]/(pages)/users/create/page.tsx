@@ -3,10 +3,9 @@
 import Link from "next/link";
 import Layout from "../../../../components/layout";
 import BreadCrumb from "../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../components/Button/Button";
 import { createUserService } from "../../../../services/UserService/CreateUserService";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useTranslations } from "next-intl";
 import { handleErrors } from "../../../../schema/errorHandler";
@@ -14,12 +13,14 @@ import { userSchema } from "../../../../schema/userSchema";
 import { UserRole } from "../../../../enums/UserRole";
 import { useLocale } from "../../../../context/LangContext";
 import { UserSchemaType } from "../../../../types/User/Zod/UserSchemaType";
+import { useRouter } from "next/navigation";
 
 const CreateUser = () => {
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
   const createUserMutation = useCreateQuery(createUserService);
 
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,17 +29,19 @@ const CreateUser = () => {
     role: "Member",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const validationData: UserSchemaType = userSchema.parse(formData);
       await createUserMutation.mutateAsync(validationData);
-      //TODO CHECK THIS 
-      // router.push(`/${currentLocale}/users`);
+      //TODO CHECK THIS
+      router.push(`/${currentLocale}/users`);
     } catch (error) {
       handleErrors(error);
     }
@@ -49,7 +52,7 @@ const CreateUser = () => {
       <BreadCrumb title="Create User" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <div className="mb-6">
                 <label
@@ -153,7 +156,7 @@ const CreateUser = () => {
                 >
                   {t("back")}
                 </Link>
-                <NormalButton text={t("create")} onClick={handleSubmit} />
+                <FormSubmitButton text={t("create")} />
               </div>
             </div>
           </form>

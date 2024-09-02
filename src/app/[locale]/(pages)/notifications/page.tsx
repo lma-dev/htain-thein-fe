@@ -34,7 +34,6 @@ const NotificationPage = () => {
               <NotificationCard
                 key={index}
                 notification={notification}
-                t={t}
                 handleReadNotification={handleReadNotification}
               />
             ))}

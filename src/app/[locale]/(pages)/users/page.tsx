@@ -1,6 +1,6 @@
 "use client";
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
-import UserTable from "../../../components/Table/UserTable/page";
+import UserTable from "../../../components/Table/UserTable/UserTable";
 import Layout from "../../../components/layout";
 import { FetchUsersService } from "../../../services/UserService/FetchUsersService";
 import UserFilterInputField from "../../../components/filter/UserFilterInputField";
@@ -52,21 +52,20 @@ const UsersPage = () => {
 
           {(userRole === UserRole.ADMIN ||
             userRole === UserRole.SUPER_ADMIN) && (
-              <div>
-                <Link
-                  href={`/${currentLocale}/users/create`}
-                  className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
-                >
-                  {t("create")} {t("user")}
-                </Link>
-              </div>
-            )}
+            <div>
+              <Link
+                href={`/${currentLocale}/users/create`}
+                className="inline-flex mr-1.5 rounded-lg p-3 text-sm text-white bg-gray-900 font-medium transition hover:scale-105 border"
+              >
+                {t("create")} {t("user")}
+              </Link>
+            </div>
+          )}
         </div>
         <UserTable
           users={users}
           loading={loading}
           onPageChange={handlePageChange}
-          t={t}
         />
       </div>
     </Layout>

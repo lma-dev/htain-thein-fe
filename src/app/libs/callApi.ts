@@ -2,7 +2,9 @@ import { parseCookies } from "nookies";
 import axios from "../utils/axios";
 import ToastsBox from "../components/Toasts/ToastsBox";
 
-export async function callApi(method:string, url:string, data:any, responseType = null) {
+export async function callApi(method:string, url:string, data?:any, responseType?: "arraybuffer"
+
+) {
   const token = parseCookies().accessToken;
   const config:any = {
     headers: {

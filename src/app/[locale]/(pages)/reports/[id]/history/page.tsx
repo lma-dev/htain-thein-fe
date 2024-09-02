@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { IdParamType } from "../../../../../types/Share/IdParamType";
 import { useLocale } from "../../../../../context/LangContext";
+import { ReportHistoryType } from "../../../../../types/Report/ReportHistoryType";
 
 const History = ({ params }: IdParamType) => {
   const { data: histories, isLoading: loading } = FetchChangedHistoriesService(
@@ -79,25 +80,25 @@ const History = ({ params }: IdParamType) => {
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                           {/* TODO FIX */}
-                          {histories?.data.map((edit: any) => (
+                          {histories?.data.map((history: ReportHistoryType) => (
                             <tr
-                              key={edit.id}
+                              key={history.id}
                               className="hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                {edit.id}
+                                {history.id}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {edit.editor}
+                                {history.editor}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <NestedTable data={edit.oldData} />
+                                {/* <NestedTable data={history.oldData} /> */}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <NestedTable data={edit.newData} />
+                                {/* <NestedTable data={history.newData} /> */}
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {edit.updatedAt}
+                                {history.updatedAt}
                               </td>
                             </tr>
                           ))}

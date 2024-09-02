@@ -12,7 +12,9 @@ const DetailRegularCost = ({ params }: IdParamType) => {
   const [formData, setFormData] = useState({
     amount: "",
     description: "",
-    reporter: "",
+    reporter: {
+      name: "Anonymous",
+    },
   });
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();

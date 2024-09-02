@@ -3,15 +3,16 @@ import IconType from "../../traits/IconType";
 import NotificationType from "../../traits/NotificationType";
 import { useLocale } from "../../context/LangContext";
 import { NotificationDataType } from "../../types/Notification/NotificatioDataType";
+import { useTranslations } from "next-intl";
 
 type NotificationCardProps = {
   notification: NotificationDataType,
-  t: any,
   handleReadNotification: (id: string) => void
 }
 
-const NotificationCard = ({ notification, t, handleReadNotification }: NotificationCardProps) => {
+const NotificationCard = ({ notification, handleReadNotification }: NotificationCardProps) => {
   const { currentLocale } = useLocale();
+  const t = useTranslations("Translation");
   const handleClick = () => {
     handleReadNotification(notification.firebaseNotificationId);
   };

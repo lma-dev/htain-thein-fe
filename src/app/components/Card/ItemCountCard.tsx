@@ -7,7 +7,7 @@ import {
   TrendingUp,
   TrendingDown,
 } from "lucide-react";
-
+import { useTranslations } from "next-intl";
 
 type ItemCountCardProps = {
   title?: string,
@@ -15,7 +15,6 @@ type ItemCountCardProps = {
   text?: string,
   rate?: number,
   financialStatus?: boolean,
-  t: any
 }
 const ItemCountCard = ({
   title,
@@ -23,8 +22,8 @@ const ItemCountCard = ({
   text,
   rate,
   financialStatus,
-  t,
 }: ItemCountCardProps) => {
+  const t = useTranslations("Translation");
   const getIcon = () => {
     if (title === "reports") {
       return <ScrollText size={24} />;
