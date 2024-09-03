@@ -1,7 +1,7 @@
 "use client";
 
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
-import DepositWithdrawTable from "../../../components/Table/DepositWithDrawTable/page";
+import DepositWithdrawTable from "../../../components/Table/DepositWithDrawTable/DepositWithdrawTable";
 import Layout from "../../../components/layout";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -23,8 +23,7 @@ const ReportsPage = () => {
             {t("createReports")}
           </Link>
         </div>
-        <DepositWithdrawTable
-        />
+        <DepositWithdrawTable />
       </div>
     </Layout>
   );

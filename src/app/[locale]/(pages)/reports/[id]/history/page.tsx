@@ -1,7 +1,7 @@
 "use client";
 
 import Layout from "../../../../../components/layout";
-import NestedTable from "../../../../../components/Table/ReportHistoryTable/page";
+import ReportHistoryTable from "../../../../../components/Table/ReportHistoryTable/ReportHistoryTable";
 import { FetchChangedHistoriesService } from "../../../../../services/ReportService/FetchChangedHistoriesService";
 import BreadCrumb from "../../../../../components/BreadCrumb/Breadcrumb";
 import Spinner from "../../../../../components/Spinner/Spinner";
@@ -79,29 +79,53 @@ const History = ({ params }: IdParamType) => {
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                          {/* TODO FIX */}
-                          {histories?.data.map((history: ReportHistoryType) => (
-                            <tr
-                              key={history.id}
-                              className="hover:bg-gray-100 dark:hover:bg-gray-700"
-                            >
-                              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                {history.id}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {history.editor}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {/* <NestedTable data={history.oldData} /> */}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {/* <NestedTable data={history.newData} /> */}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {history.updatedAt}
+                          {histories?.data.length === 0 ? (
+                            <tr>
+                              <td
+                                colSpan={5}
+                                className="px-6 py-4 text-center text-sm font-medium text-gray-800 dark:text-gray-200"
+                              >
+                                No history available.
                               </td>
                             </tr>
-                          ))}
+                          ) : (
+                            histories?.data.map(
+                              (history: ReportHistoryType) => (
+                                <tr
+                                  key={history.id}
+                                  className="hover:bg-gray-100 dark:hover:bg-gray-700"
+                                >
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                                    {history.id ?? "-"}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                    {history.editor ?? "-"}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                    {history.oldData ? (
+                                      <ReportHistoryTable
+                                        data={history.oldData}
+                                      />
+                                    ) : (
+                                      "-"
+                                    )}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                    {history.newData ? (
+                                      <ReportHistoryTable
+                                        data={history.newData}
+                                      />
+                                    ) : (
+                                      "-"
+                                    )}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                    {history.updatedAt}
+                                  </td>
+                                </tr>
+                              )
+                            )
+                          )}
                         </tbody>
                       </table>
                     </div>

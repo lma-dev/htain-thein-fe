@@ -98,24 +98,26 @@ const DepositWithdrawTable = () => {
 
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words text-start">
                       <span
-                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${item.type === FinancialType.INCOME
-                          ? "bg-green-100 text-green-800"
-                          : item.type === FinancialType.EXPENSE
+                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                          item.type === FinancialType.INCOME
+                            ? "bg-green-100 text-green-800"
+                            : item.type === FinancialType.EXPENSE
                             ? "bg-red-100 text-red-800"
                             : ""
-                          }`}
+                        }`}
                       >
                         {item.type}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 max-w-[200px] truncate text-start">
                       <span
-                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${item.confirmStatus === true
-                          ? "bg-green-100 text-green-800"
-                          : item.confirmStatus === false
+                        className={`mr-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                          item.confirmStatus === true
+                            ? "bg-green-100 text-green-800"
+                            : item.confirmStatus === false
                             ? "bg-red-100 text-red-800"
                             : ""
-                          }`}
+                        }`}
                       >
                         {item.confirmStatus ? "Confirmed" : "Pending"}
                       </span>

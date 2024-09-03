@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
-import RegularCostTable from "../../../components/Table/RegularCostTable/page";
+import RegularCostTable from "../../../components/Table/RegularCostTable/RegularCostTable";
 
 import Layout from "../../../components/layout";
 import { FetchRegularCostsDataService } from "../../../services/RegularCostService/FetchRegularCostService";
@@ -37,7 +37,7 @@ const RegularCost = () => {
             </Link>
           )}
         </div>
-        <RegularCostTable/>
+        <RegularCostTable />
       </div>
     </Layout>
   );

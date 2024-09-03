@@ -7,7 +7,7 @@ export interface DataItem {
   }
   
  export interface ReportHistoryType {
-    id: number;      
+  id: number;      
   editor: string;   
   oldData: DataItem | null; 
   newData: DataItem | null; 

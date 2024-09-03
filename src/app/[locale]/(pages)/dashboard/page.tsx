@@ -10,7 +10,7 @@ import { FetchFinanceCalculationService } from "../../../services/FinanceService
 import { FetchRegularCostsDataService } from "../../../services/RegularCostService/FetchRegularCostService";
 import { checkIncomeAndOutCome } from "../../../utils/checkIncomeAndOutCome";
 
-import RegularCostTable from "../../../components/Table/RegularCostTable/page";
+import RegularCostTable from "../../../components/Table/RegularCostTable/RegularCostTable";
 import OverAllStatusCard from "../../../components/Card/OverAllStatusCard";
 import SkeletonAnimation from "../../../components/Skeleton/SkeletonAnimation";
 import { useTranslations } from "next-intl";
@@ -76,8 +76,7 @@ const DashboardPage = () => {
               <h1 className="text-gray-600 font-bold text-lg my-5">
                 {t("generalOutComeTable")}
               </h1>
-              <RegularCostTable
-              />
+              <RegularCostTable />
             </div>
           </div>
         )}
