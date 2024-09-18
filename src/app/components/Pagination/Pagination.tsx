@@ -1,4 +1,13 @@
-const Pagination = ({ meta, handlePageChange }) => {
+interface PaginationProps {
+    meta: {
+        currentPage: number;
+        totalPages: number;
+    };
+    handlePageChange: (page: number) => void;
+}
+
+
+const Pagination = ({ meta, handlePageChange }: PaginationProps) => {
 
     return (
         <div className="flex justify-center mt-4">
