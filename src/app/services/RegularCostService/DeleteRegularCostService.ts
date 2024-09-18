@@ -2,5 +2,5 @@ import { deleteRegularCostApi } from "../../api/regular-cost/deleteRegularCostAp
 import { useDeleteQuery } from "../../hooks/useDeleteQuery";
 
 export const DeleteRegularCostService = () => {
-  return useDeleteQuery("general-outcome", deleteRegularCostApi);
+  return useDeleteQuery(["general-outcome"], deleteRegularCostApi);
 };

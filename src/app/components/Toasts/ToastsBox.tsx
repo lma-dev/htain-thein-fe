@@ -1,27 +1,16 @@
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
-
+type ToastType = {
+  message: any;
+};
 const ToastsBox = {
-    success: ({ message }) => {
-        toast.success(message)
+  success: ({ message }: ToastType) => {
+    toast.success(message);
+  },
 
-    },
-
-    error: ({ message }) => {
-        toast.error(message)
-
-    },
-
-    info: ({ message }) => {
-        toast.promise(
-            saveSettings(settings),
-            {
-                loading: 'Saving...',
-                success: <b>Settings saved!</b>,
-                error: <b>Could not save.</b>,
-            }
-        );
-    }
+  error: ({ message }: ToastType) => {
+    toast.error(message);
+  },
 };
 
 export default ToastsBox;

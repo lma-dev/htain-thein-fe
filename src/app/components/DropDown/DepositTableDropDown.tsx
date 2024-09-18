@@ -3,14 +3,15 @@ import { Fragment, useState } from "react";
 import { MoreVertical, Check, X } from "lucide-react";
 import ConfirmBox from "../ModalBox/ConfirmBox";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
+import { useTranslations } from "next-intl";
 
 type DepositTableDropDownProps = {
   id: number;
-  t: any;
 };
-export default function DepositTableDropDown({ id, t }: DepositTableDropDownProps) {
+export default function DepositTableDropDown({ id }: DepositTableDropDownProps) {
   const [openDialog, setOpenDialog] = useState(false);
   const [status, setStatus] = useState();
+  const t = useTranslations("Translation");
   const handleReportAction = async (key: any) => {
     setOpenDialog(true);
     setStatus(key);
@@ -25,7 +26,6 @@ export default function DepositTableDropDown({ id, t }: DepositTableDropDownProp
             status={status}
             setOpenDialog={setOpenDialog}
             openDialog={openDialog}
-            t={t}
           />
         )}
       </div>

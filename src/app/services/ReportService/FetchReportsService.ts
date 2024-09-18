@@ -1,5 +1,6 @@
 import { fetchReportsApi } from "../../api/report/fetchReportApi";
 import { useFetchQuery } from "../../hooks/useFetchQuery";
+import { ReportsResponse } from "../../types/Report/ReportType";
 
 export const FetchReportsService = (
   generalSearch?:string,

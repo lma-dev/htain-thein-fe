@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Layout from "../../../../../components/layout";
 import BreadCrumb from "../../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../../components/Button/Button";
 import { EditReportService } from "../../../../../services/ReportService/EditReportService";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -20,8 +20,12 @@ const EditReport = ({ params }: IdParamType) => {
     description: "",
     type: "",
     confirmStatus: "",
-    reporter: "",
-    verifier: "",
+    reporter: {
+      name: "Anonymous",
+    },
+    verifier: {
+      name: "Anonymous",
+    },
   });
   const router = useRouter();
   const { currentLocale } = useLocale();
@@ -29,11 +33,13 @@ const EditReport = ({ params }: IdParamType) => {
   const updateMutation = EditReportService();
   const t = useTranslations("Translation");
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const reporterId = reportData.data.reporter.id;
@@ -70,7 +76,7 @@ const EditReport = ({ params }: IdParamType) => {
             <div className="w-full max-w-screen-sm rounded-lg border border-gray-200 bg-white p-10 shadow dark:border-gray-700 dark:bg-gray-800">
               <h1 className="mb-3 text-xl font-medium">{t("edit")}</h1>
 
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-6 grid gap-6 sm:grid-cols-2">
                   <div className="sm:col-span-1">
                     <label
@@ -170,11 +176,7 @@ const EditReport = ({ params }: IdParamType) => {
                     {t("back")}
                   </Link>
 
-                  <NormalButton
-                    onClick={handleSubmit}
-                    text={"Update"}
-                    className="inline-block w-full sm:w-auto rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  />
+                  <FormSubmitButton text={"Update"} />
                 </div>
               </form>
               <div className="mt-5">

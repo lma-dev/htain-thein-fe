@@ -4,19 +4,20 @@ import { AlertTriangle } from "lucide-react";
 import AcceptReportService from "../../services/ReportService/AcceptReportService";
 import RejectReportService from "../../services/ReportService/RejectReportService";
 import { ConfirmStatus } from "../../enums/ConfirmStatus";
+import { useTranslations } from "next-intl";
 
 type ConfirmBoxProps = {
   id: number;
-  status: string;
+  status: string | undefined;
   setOpenDialog: any;
   openDialog: boolean;
-  t: any;
 };
 
-const ConfirmBox = ({ id, status, setOpenDialog, openDialog, t }: ConfirmBoxProps) => {
+const ConfirmBox = ({ id, status, setOpenDialog, openDialog }: ConfirmBoxProps) => {
   const cancelButtonRef = useRef(null);
   const acceptMutation = AcceptReportService();
   const rejectMutation = RejectReportService();
+  const t = useTranslations("Translation");
 
   const handleButtonAction = async () => {
     if (status === ConfirmStatus.ACCEPT) {

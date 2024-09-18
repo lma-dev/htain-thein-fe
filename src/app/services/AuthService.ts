@@ -3,7 +3,7 @@ import axios from "../utils/axios";
 import ToastsBox from "../components/Toasts/ToastsBox";
 
 const AuthService = {
-  login: async (email, password) => {
+  login: async (email:string, password:string) => {
     try {
       const response = await axios.post("/login", { email, password });
       if (!response.data) {

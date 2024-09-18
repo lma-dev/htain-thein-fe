@@ -1,18 +1,25 @@
 "use client";
 
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
-import DepositWithdrawTable from "../../../components/Table/DepositWithDrawTable/page";
+import DepositWithdrawTable from "../../../components/Table/DepositWithDrawTable/DepositWithdrawTable";
 import Layout from "../../../components/layout";
-import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
+import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
+import { useEffect, useState } from "react";
 
-const ReportsPage = () => {
-  const { currentLocale } = useLocale()
+const DepositReportsPage = () => {
+  const { currentLocale } = useLocale();
+  const t = useTranslations("Translation");
+  const [page, setPage] = useState<number>(1);
+
   const { data: uncheckReports, isLoading: loading } =
     FetchUncheckReportService();
-  const t = useTranslations("Translation");
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   return (
     <Layout>
@@ -27,13 +34,14 @@ const ReportsPage = () => {
           </Link>
         </div>
         <DepositWithdrawTable
-          uncheckReports={uncheckReports}
+          uncheckReports={uncheckReports?.data}
           loading={loading}
-          t={t}
+          handlePageChange={handlePageChange}
+          meta={uncheckReports?.meta}
         />
       </div>
     </Layout>
   );
 };
 
-export default ReportsPage;
+export default DepositReportsPage;

@@ -10,12 +10,15 @@ import { FetchFinanceCalculationService } from "../../../services/FinanceService
 import { FetchRegularCostsDataService } from "../../../services/RegularCostService/FetchRegularCostService";
 import { checkIncomeAndOutCome } from "../../../utils/checkIncomeAndOutCome";
 
-import RegularCostTable from "../../../components/Table/RegularCostTable/page";
+import RegularCostTable from "../../../components/Table/RegularCostTable/RegularCostTable";
 import OverAllStatusCard from "../../../components/Card/OverAllStatusCard";
 import SkeletonAnimation from "../../../components/Skeleton/SkeletonAnimation";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 const DashboardPage = () => {
+  const [page, setPage] = useState<number>(1);
+
   const { data: users, isLoading: loadingUsers } = FetchUsersService();
   const { data: reports, isLoading: loadingReports } = FetchReportsService();
   const { data: calculations, isLoading: loadingCalculations } =
@@ -43,6 +46,9 @@ const DashboardPage = () => {
     outcomePercentage
   );
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   return (
     <Layout>
       <div className="flex flex-col">
@@ -53,25 +59,23 @@ const DashboardPage = () => {
         ) : (
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <ItemCountCard count={userCount} title={"users"} t={t} />
-              <ItemCountCard count={reportsCount} title={"reports"} t={t} />
+              <ItemCountCard count={userCount} title={"users"} />
+              <ItemCountCard count={reportsCount} title={"reports"} />
               <ItemCountCard
                 text={income}
                 title={"income"}
                 rate={incomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
-                t={t}
               />
               <ItemCountCard
                 text={outcome}
                 title={"outcome"}
                 rate={outcomePercentage}
                 financialStatus={isIncomeGreaterThanOutcome}
-                t={t}
               />
             </div>
             <div className="mt-8">
-              <OverAllStatusCard calculations={calculations} t={t} />
+              <OverAllStatusCard calculations={calculations} />
             </div>
 
             <div className="mt-8">
@@ -80,8 +84,8 @@ const DashboardPage = () => {
               </h1>
               <RegularCostTable
                 regularCosts={regularCosts}
-                loading={overallLoading}
-                t={t}
+                loading={loadingGeneralOutcome}
+                onPageChange={handlePageChange}
               />
             </div>
           </div>

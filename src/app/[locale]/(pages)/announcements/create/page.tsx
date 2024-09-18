@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Layout from "../../../../components/layout";
 import BreadCrumb from "../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../components/Button/Button";
 import { CreateAnnouncementService } from "../../../../services/AnnouncementService/CreateAnnouncementService";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,19 +26,26 @@ const CreateAnnouncement = () => {
 
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
+  const router = useRouter();
 
-  const createMutation = useCreateQuery(CreateAnnouncementService);
+  const createMutation = useCreateQuery(
+    CreateAnnouncementService,
+    "announcements"
+  );
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const validationData: AnnouncementSchemaType = announcementSchema.parse(formData);
+      const validationData: AnnouncementSchemaType =
+        announcementSchema.parse(formData);
       await createMutation.mutateAsync(validationData);
-      // router.push(`/${currentLocale}/announcements`);
+      router.push(`/${currentLocale}/announcements`);
     } catch (error) {
       handleErrors(error);
     }
@@ -49,7 +56,7 @@ const CreateAnnouncement = () => {
       <BreadCrumb title="Create Announcement" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <div className="mb-6">
                 <label
@@ -178,7 +185,7 @@ const CreateAnnouncement = () => {
                 >
                   {t("back")}
                 </Link>
-                <NormalButton text="create" onClick={handleSubmit} />
+                <FormSubmitButton text="create" />
               </div>
             </div>
           </form>

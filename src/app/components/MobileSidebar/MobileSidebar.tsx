@@ -6,42 +6,26 @@ import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../context/LangContext";
-import { FC } from "react";
-
 
 interface MobileSidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  navigationItems: {
+    href: string;
+    label: string;
+    target?: string;
+    rel?: string;
+  }[];
+  onLogout: () => void;
 }
 
-const MobileSidebar = ({ isOpen, onClose }: MobileSidebarProps) => {
-  const { logout } = useAuth();
-  const router = useRouter();
+const MobileSidebar = ({
+  isOpen,
+  onClose,
+  navigationItems,
+  onLogout,
+}: MobileSidebarProps) => {
   const t = useTranslations("Translation");
-  const { currentLocale } = useLocale();
-
-  const handleLogout = async () => {
-    await logout();
-    router.push("/");
-  };
-
-  const navigationItems = [
-    { href: `/${currentLocale}/dashboard`, label: t("dashboard") },
-    { href: `/${currentLocale}/reports`, label: t("report") },
-    { href: `/${currentLocale}/regular-costs`, label: t("regularCost") },
-    { href: `/${currentLocale}/deposit-requests`, label: t("depositRequest") },
-    { href: `/${currentLocale}/users`, label: t("user") },
-    { href: `/${currentLocale}/chat-room`, label: t("chatRoom") },
-    { href: `/${currentLocale}/announcements`, label: t("announcement") },
-    { href: `/${currentLocale}/settings`, label: t("setting") },
-    {
-      href: "https://lma-dev.github.io/",
-      target: "_blank",
-      rel: "noopener noreferrer",
-      label: t("about"),
-    },
-    { href: `/${currentLocale}/notifications`, label: t("notification") },
-  ];
 
   return (
     <motion.div
@@ -62,7 +46,6 @@ const MobileSidebar = ({ isOpen, onClose }: MobileSidebarProps) => {
               onClick={onClose}
             />
           </div>
-
           <ul className="space-y-2">
             {navigationItems.map((item) => (
               <li key={item.href}>
@@ -78,7 +61,7 @@ const MobileSidebar = ({ isOpen, onClose }: MobileSidebarProps) => {
         <div className="sticky inset-x-0 bottom-0 bg-gray-700 border-t border-gray-600">
           <div
             className="p-3 flex justify-center items-center cursor-pointer"
-            onClick={handleLogout}
+            onClick={onLogout}
           >
             <span className="text-white pr-2 text-sm">{t("logOut")}</span>
             <LogOut size={16} className="text-white" />

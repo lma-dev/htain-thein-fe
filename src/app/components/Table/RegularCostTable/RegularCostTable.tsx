@@ -1,16 +1,27 @@
-import UserDropDown from "../../DropDown/UserDropDown";
-import Pagination from "../../Pagination/Pagination";
+import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
+import { CurrencyType } from "../../../enums/CurrencyType";
+import { useTranslations } from "next-intl";
+import { MetaDataType } from "../../../types/Share/MetaDataType";
+import { RegularCostsType } from "../../../types/RegularCost/RegularCostsType";
+import Pagination from "../../Pagination/Pagination";
 
-
-interface UserTableProps {
-  users: any;
+interface RegularCostsTableProps {
+  regularCosts: {
+    data: Array<RegularCostsType>;
+    meta: MetaDataType;
+  };
   loading: boolean;
   onPageChange: (page: number) => void;
-  t: any;
 }
 
-const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
+const RegularCostTable = ({
+  regularCosts,
+  loading,
+  onPageChange,
+}: RegularCostsTableProps) => {
+  const t = useTranslations("Translation");
+
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -28,31 +39,25 @@ const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("name")}
+                  {t("requester")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("email")}
+                  {t("amount")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("role")}
+                  {t("description")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("status")}
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
-                >
-                  {t("joinIn")}
+                  {t("requestDate")}
                 </th>
                 <th
                   scope="col"
@@ -66,48 +71,46 @@ const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
               {loading ? (
                 <>
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
                   />
                 </>
               ) : (
-                users?.data?.map((user: any, index: number) => (
+                regularCosts?.data?.map((item: any, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {user.id}
+                      {item.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {user.name}
+                      {item.reporter.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
-                      {user.email}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
-                      {user.role}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
-                      {user.accountStatus}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
-                      {user.createdAt}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words ">
+                      {item.amount} {CurrencyType.MMK}
                     </td>
 
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words max-w-[200px] truncate text-start">
+                      {item.description}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
+                      {item.createdAt}
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <UserDropDown userId={user.id} t={t} />
+                      <RegularCostDropDown regularCostId={item?.id} />
                     </td>
                   </tr>
                 ))
@@ -116,11 +119,11 @@ const UserTable = ({ users, loading, onPageChange, t }: UserTableProps) => {
           </table>
         </div>
       </div>
-      {users?.data?.length > 0 && (
-        <Pagination meta={users?.meta} handlePageChange={onPageChange} />
+      {regularCosts?.data?.length > 0 && (
+        <Pagination meta={regularCosts?.meta} handlePageChange={onPageChange} />
       )}
     </div>
   );
 };
 
-export default UserTable;
+export default RegularCostTable;

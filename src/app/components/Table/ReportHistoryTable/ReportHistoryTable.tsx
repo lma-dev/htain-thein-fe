@@ -1,7 +1,11 @@
 import React from "react";
-import styles from "./module/NestedTable.module.css";
+import styles from "./module/ReportHistoryTable.module.css";
+import { DataItem } from "../../../types/Report/ReportHistoryType";
 
-const NestedTable = ({ data }) => {
+type ReportHistoryTableProps = {
+  data: DataItem;
+};
+const ReportHistoryTable = ({ data }: ReportHistoryTableProps) => {
   return (
     <div className={styles.container}>
       {Object.keys(data).map((key) => (
@@ -18,4 +22,4 @@ const NestedTable = ({ data }) => {
   );
 };
 
-export default NestedTable;
+export default ReportHistoryTable;

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import UserProfileIconDropdown from "../DropDown/UserProfileIconDropdown";
 import { AlignLeft } from "lucide-react";
-import MobileSidebar from "../MobileSidebar/page";
 import { useState } from "react";
 import LangSwitcher from "../Language/LangSwitcher";
 import { useTranslations } from "next-intl";
@@ -10,21 +9,50 @@ import useFireStoreCollection from "../../hooks/useFireStoreCollection";
 import useUserReadNotifications from "../../hooks/useUserReadNotifications";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
+import { useRouter } from "next/navigation";
+import useAuth from "../../hooks/useAuth";
+import MobileSidebar from "../MobileSidebar/MobileSidebar";
 
-const Navbar = () => {
+const NavBar = () => {
+  const { logout } = useAuth();
   const userIdFromCookies = parseInt(parseCookies().userId);
   const { currentLocale } = useLocale();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations("Translation");
+  const router = useRouter();
 
-  const { data: notifications, count: notificationsCount } =
-    useFireStoreCollection("notifications", "timestamp");
-
+  const { data: notifications } = useFireStoreCollection(
+    "notifications",
+    "timestamp"
+  );
   const readNotifications = useUserReadNotifications(userIdFromCookies);
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
 
   const unreadNotificationsCount = notifications.filter(
     (notification) => !readNotifications.includes(notification.id)
   ).length;
+
+  const navigationItems = [
+    { href: `/${currentLocale}/dashboard`, label: t("dashboard") },
+    { href: `/${currentLocale}/reports`, label: t("report") },
+    { href: `/${currentLocale}/regular-costs`, label: t("regularCost") },
+    { href: `/${currentLocale}/deposit-requests`, label: t("depositRequest") },
+    { href: `/${currentLocale}/users`, label: t("user") },
+    { href: `/${currentLocale}/chat-room`, label: t("chatRoom") },
+    { href: `/${currentLocale}/announcements`, label: t("announcement") },
+    { href: `/${currentLocale}/settings`, label: t("setting") },
+    {
+      href: "https://lma-dev.github.io/",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      label: t("about"),
+    },
+    { href: `/${currentLocale}/notifications`, label: t("notification") },
+  ];
 
   const handleToggleSidebar = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -33,13 +61,13 @@ const Navbar = () => {
   return (
     <div>
       <div className="mt-5">
-        <div className="sm:hidden md:hidden flex justify-between border-b border-gray-200 ">
+        <div className="sm:hidden md:hidden flex justify-between border-b border-gray-200">
           <div className="text-center ml-5">
             <div className="inline-flex">
               <AlignLeft
                 size={24}
                 className="mr-5 cursor-pointer text-gray-600"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={handleToggleSidebar}
               />
               <span className="align-middle font-bold text-lg uppercase text-gray-600">
                 {t("appTitle")}
@@ -58,17 +86,6 @@ const Navbar = () => {
                 className="-mb-px flex gap-6 text-center align-middle justify-center"
                 aria-label="Tabs"
               >
-                {/* <Link
-                  href={`/${currentLocale}/settings`}
-                  className={`shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ${
-                    pathname === "/settings"
-                      ? " border-sky-500 text-sky-600"
-                      : "text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  }`}
-                >
-                  {t("setting")}
-                </Link> */}
-
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -103,11 +120,15 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navbar */}
-
-      <MobileSidebar isOpen={isMobileMenuOpen} onClose={handleToggleSidebar} />
+      {/* Mobile SideBar */}
+      <MobileSidebar
+        isOpen={isMobileMenuOpen}
+        onClose={handleToggleSidebar}
+        navigationItems={navigationItems}
+        onLogout={handleLogout}
+      />
     </div>
   );
 };
 
-export default Navbar;
+export default NavBar;

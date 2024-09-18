@@ -1,8 +1,22 @@
-import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
+import { MetaDataType } from "../../../types/Share/MetaDataType";
+import { UserType } from "../../../types/User/UserType";
+import UserDropDown from "../../DropDown/UserDropDown";
+import Pagination from "../../Pagination/Pagination";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
-import { CurrencyType } from "../../../enums/CurrencyType";
+import { useTranslations } from "next-intl";
 
-const RegularCostTable = ({ regularCosts, loading, t }) => {
+interface UserTableProps {
+  users: {
+    data: Array<UserType>;
+    meta: MetaDataType;
+  };
+  loading: boolean;
+  onPageChange: (page: number) => void;
+}
+
+const UserTable = ({ users, loading, onPageChange }: UserTableProps) => {
+  const t = useTranslations("Translation");
+
   return (
     <div className="flex flex-col w-full">
       <div className="p-1.5 min-w-full inline-block align-middle">
@@ -20,25 +34,31 @@ const RegularCostTable = ({ regularCosts, loading, t }) => {
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("requester")}
+                  {t("name")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("amount")}
+                  {t("email")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("description")}
+                  {t("role")}
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
                 >
-                  {t("requestDate")}
+                  {t("status")}
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-start text-xs font-bold text-gray-700 uppercase dark:text-gray-400"
+                >
+                  {t("joinIn")}
                 </th>
                 <th
                   scope="col"
@@ -52,46 +72,48 @@ const RegularCostTable = ({ regularCosts, loading, t }) => {
               {loading ? (
                 <>
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
                   />
                   <SkeletonTableRow
-                    cellWidths={["16", "24", "20", "32", "28", "28", "28", "8"]}
+                    cellWidths={["16", "24", "20", "32", "28", "28", "8"]}
                   />
                 </>
               ) : (
-                regularCosts?.data?.map((item, index) => (
+                users?.data?.map((user: UserType, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {item.id}
+                      {user.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200">
-                      {item.reporter.name}
+                      {user.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words ">
-                      {item.amount} {CurrencyType.MMK}
-                    </td>
-
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200 break-words max-w-[200px] truncate text-start">
-                      {item.description}
-                    </td>
-
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
-                      {item.createdAt}
+                      {user.email}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
+                      {user.role}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
+                      {user.accountStatus}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-200">
+                      {user.createdAt}
+                    </td>
+
                     <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium align-middle">
-                      <RegularCostDropDown regularCostId={item?.id} t={t} />
+                      <UserDropDown userId={user.id} t={t} />
                     </td>
                   </tr>
                 ))
@@ -100,8 +122,11 @@ const RegularCostTable = ({ regularCosts, loading, t }) => {
           </table>
         </div>
       </div>
+      {users?.data?.length > 0 && (
+        <Pagination meta={users?.meta} handlePageChange={onPageChange} />
+      )}
     </div>
   );
 };
 
-export default RegularCostTable;
+export default UserTable;

@@ -1,7 +1,7 @@
 "use client";
 
 import BreadCrumb from "../../../components/BreadCrumb/Breadcrumb";
-import ReportTable from "../../../components/Table/ReportTable/page";
+import ReportTable from "../../../components/Table/ReportTable/ReportTable";
 import Layout from "../../../components/layout";
 import { FetchReportsService } from "../../../services/ReportService/FetchReportsService";
 import ReportFilterInputField from "../../../components/filter/ReportFilterInputField";
@@ -12,7 +12,7 @@ import { useLocale } from "../../../context/LangContext";
 
 const ReportsPage = () => {
   const [generalSearch, setGeneralSearch] = useState<string>("");
-  const [amount, setAmount] = useState<number>();
+  const [amount, setAmount] = useState<number>(0);
   const [confirmStatus, setConfirmStatus] = useState<number>();
   const [type, setType] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -60,10 +60,10 @@ const ReportsPage = () => {
           </Link>
         </div>
         <ReportTable
-          reports={reports}
+          reports={reports?.data}
           loading={loading}
-          onPageChange={handlePageChange}
-          t={t}
+          handlePageChange={handlePageChange}
+          meta={reports?.meta}
         />
       </div>
     </Layout>

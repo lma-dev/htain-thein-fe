@@ -1,10 +1,10 @@
 import React from "react";
-
+import { useTranslations } from "next-intl";
 type OverAllStatusCardProps = {
   calculations: any,
-  t: any
 }
-const OverAllStatusCard = ({ calculations, t }: OverAllStatusCardProps) => {
+const OverAllStatusCard = ({ calculations }: OverAllStatusCardProps) => {
+  const t = useTranslations("Translation");
   return (
     <div>
       <h1 className="pb-4 text-xl font-semibold text-gray-500">

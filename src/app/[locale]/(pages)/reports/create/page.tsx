@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Layout from "../../../../components/layout";
 import BreadCrumb from "../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../components/Button/Button";
 import { createReportService } from "../../../../services/ReportService/CreateReportService";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { parseCookies } from "nookies";
@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import { reportSchema } from "../../../../schema/reportSchema";
 import { handleErrors } from "../../../../schema/errorHandler";
 import { useLocale } from "../../../../context/LangContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateReport = () => {
   const userId = parseInt(parseCookies().userId);
@@ -21,7 +22,9 @@ const CreateReport = () => {
   const reporterName = userData?.data?.name || "";
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
-  const createReportMutation = useCreateQuery(createReportService);
+  const createReportMutation = useCreateQuery(createReportService, "reports");
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -29,18 +32,21 @@ const CreateReport = () => {
     description: "",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedFormData = { ...formData, reporter_id: userId };
     try {
       const validationData = reportSchema.parse(updatedFormData);
       await createReportMutation.mutateAsync(validationData);
-      // router.push(`/${currentLocale}/deposit-requests`);
+      queryClient.invalidateQueries({ queryKey: ["uncheckReports"] }); // Invalidates the query
+      router.push(`/${currentLocale}/deposit-requests`);
     } catch (error) {
       handleErrors(error);
     }
@@ -51,7 +57,7 @@ const CreateReport = () => {
       <BreadCrumb title="Create Report" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label
                 htmlFor="amount"
@@ -134,7 +140,7 @@ const CreateReport = () => {
               >
                 {t("back")}
               </Link>
-              <NormalButton text="Create" onClick={handleSubmit} />
+              <FormSubmitButton text="Create" />
             </div>
           </form>
         </div>

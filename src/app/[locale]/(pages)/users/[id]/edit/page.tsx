@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Layout from "../../../../../components/layout";
 import BreadCrumb from "../../../../../components/BreadCrumb/Breadcrumb";
-import { NormalButton } from "../../../../../components/Button/Button";
+import { FormSubmitButton } from "../../../../../components/Button/Button";
 import { EditUserService } from "../../../../../services/UserService/EditUserService";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ import { UserRole } from "../../../../../enums/UserRole";
 import { useLocale } from "../../../../../context/LangContext";
 import { IdParamType } from "../../../../../types/Share/IdParamType";
 import { UserSchemaType } from "../../../../../types/User/Zod/UserSchemaType";
+import { UserType } from "../../../../../types/User/UserType";
 
 const EditUser = ({ params }: IdParamType) => {
   const { currentLocale } = useLocale();
@@ -20,17 +21,20 @@ const EditUser = ({ params }: IdParamType) => {
     name: "",
     email: "",
     role: "",
+    password: "",
     accountStatus: "",
   });
   const router = useRouter();
   const { data: userData } = FetchSingleUserService(params.id);
   const updateMutation = EditUserService();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const validationData: UserSchemaType = userSchema.parse(formData);
@@ -43,7 +47,13 @@ const EditUser = ({ params }: IdParamType) => {
 
   useEffect(() => {
     if (userData?.data) {
-      setFormData(userData.data);
+      setFormData({
+        name: userData.data.name || "",
+        email: userData.data.email || "",
+        role: userData.data.role || "",
+        password: "", // Password is left blank intentionally
+        accountStatus: userData.data.accountStatus || "",
+      });
     }
   }, [userData]);
 
@@ -52,7 +62,7 @@ const EditUser = ({ params }: IdParamType) => {
       <BreadCrumb title="Edit User" />
       <div className="flex justify-center align-middle mx-auto min-h-fit">
         <div className="w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-5">
               <label
                 htmlFor="Name"
@@ -166,11 +176,7 @@ const EditUser = ({ params }: IdParamType) => {
               >
                 Back
               </Link>
-              <NormalButton
-                onClick={handleSubmit}
-                text="Update"
-                className="inline-block w-full sm:w-auto rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              />
+              <FormSubmitButton text="Update" />
             </div>
           </form>
         </div>
