@@ -2,12 +2,25 @@ import RegularCostDropDown from "../../DropDown/RegularCostDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import { CurrencyType } from "../../../enums/CurrencyType";
 import { useTranslations } from "next-intl";
-import { FetchRegularCostsDataService } from "../../../services/RegularCostService/FetchRegularCostService";
+import { MetaDataType } from "../../../types/Share/MetaDataType";
+import { RegularCostsType } from "../../../types/RegularCost/RegularCostsType";
+import Pagination from "../../Pagination/Pagination";
 
-const RegularCostTable = () => {
+interface RegularCostsTableProps {
+  regularCosts: {
+    data: Array<RegularCostsType>;
+    meta: MetaDataType;
+  };
+  loading: boolean;
+  onPageChange: (page: number) => void;
+}
+
+const RegularCostTable = ({
+  regularCosts,
+  loading,
+  onPageChange,
+}: RegularCostsTableProps) => {
   const t = useTranslations("Translation");
-  const { data: regularCosts, isLoading: loading } =
-    FetchRegularCostsDataService();
 
   return (
     <div className="flex flex-col w-full">
@@ -106,6 +119,9 @@ const RegularCostTable = () => {
           </table>
         </div>
       </div>
+      {regularCosts?.data?.length > 0 && (
+        <Pagination meta={regularCosts?.meta} handlePageChange={onPageChange} />
+      )}
     </div>
   );
 };

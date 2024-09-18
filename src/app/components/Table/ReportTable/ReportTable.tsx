@@ -2,7 +2,7 @@ import ReportDropDown from "../../DropDown/ReportDropDown";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import Pagination from "../../Pagination/Pagination";
 import { useTranslations } from "next-intl";
-import { ReportsResponse, ReportType } from "../../../types/Report/ReportType";
+import { ReportType } from "../../../types/Report/ReportType";
 import { MetaDataType } from "../../../types/Share/MetaDataType";
 
 interface ReportTableComponentProps {

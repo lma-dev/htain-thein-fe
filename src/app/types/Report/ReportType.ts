@@ -9,7 +9,7 @@ export type ReportType ={
     reporter: User | null;
     verifier: User | null;
     createdAt: string; 
-    updatedAt: string;
+    updatedAt?: string;
   }
   
   type User = {

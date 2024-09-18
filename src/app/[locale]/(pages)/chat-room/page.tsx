@@ -31,7 +31,9 @@ const ChatPage = () => {
     }
   };
 
-  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleKeyPress = (
+    event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     if (event.key === "Enter") {
       sendMessage();
     }
@@ -47,23 +49,26 @@ const ChatPage = () => {
           <div className="mb-4 overflow-y-auto max-h-screen md:max-h-[560px] sm:max-h-[360px] p-3">
             {messages?.map((message, index) => (
               <div
-                className={`flex ${message?.senderId === senderId
-                  ? "justify-end items-end"
-                  : "justify-start items-start"
-                  } mb-4`}
+                className={`flex ${
+                  message?.senderId === senderId
+                    ? "justify-end items-end"
+                    : "justify-start items-start"
+                } mb-4`}
                 key={index}
               >
                 <div
-                  className={`rounded-xl p-3 max-w-md ${message?.senderId === senderId
-                    ? "bg-gray-700 text-white"
-                    : "bg-gray-200 text-black"
-                    } shadow-md`}
+                  className={`rounded-xl p-3 max-w-md ${
+                    message?.senderId === senderId
+                      ? "bg-gray-700 text-white"
+                      : "bg-gray-200 text-black"
+                  } shadow-md`}
                 >
                   <p
-                    className={`text-sm font-semibold mb-1 ${message?.senderId === senderId
-                      ? "text-yellow-400"
-                      : "text-black"
-                      }`}
+                    className={`text-sm font-semibold mb-1 ${
+                      message?.senderId === senderId
+                        ? "text-yellow-400"
+                        : "text-black"
+                    }`}
                   ></p>
                   <p className="text-base break-words">{message.message}</p>
                   <small className="text-xs text-gray-400 mt-1">

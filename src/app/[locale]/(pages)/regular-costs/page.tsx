@@ -13,11 +13,17 @@ import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
 
 const RegularCost = () => {
-  const [userRole, setUserRole] = useState();
+  const [userRole, setUserRole] = useState<string>();
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
+  const [page, setPage] = useState<number>(1);
+
   const { data: regularCosts, isLoading: loading } =
     FetchRegularCostsDataService();
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   useEffect(() => {
     setUserRole(parseCookies().userRole);
@@ -37,7 +43,11 @@ const RegularCost = () => {
             </Link>
           )}
         </div>
-        <RegularCostTable />
+        <RegularCostTable
+          regularCosts={regularCosts}
+          loading={loading}
+          onPageChange={handlePageChange}
+        />
       </div>
     </Layout>
   );

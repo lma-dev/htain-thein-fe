@@ -184,9 +184,13 @@ const EditAnnouncement = ({ params }: IdParamType) => {
                   name="dueDate"
                   type="date"
                   id="dueDate"
-                  onChange={handleInputChange}
-                  value={formData.dueDate.toISOString().split("T")[0]}
+                  value={
+                    formData.dueDate instanceof Date
+                      ? formData.dueDate.toISOString().slice(0, 10)
+                      : formData.dueDate
+                  }
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                  readOnly
                 />
               </div>
               <div className="flex justify-between">

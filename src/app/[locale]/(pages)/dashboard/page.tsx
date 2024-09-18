@@ -14,8 +14,11 @@ import RegularCostTable from "../../../components/Table/RegularCostTable/Regular
 import OverAllStatusCard from "../../../components/Card/OverAllStatusCard";
 import SkeletonAnimation from "../../../components/Skeleton/SkeletonAnimation";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 const DashboardPage = () => {
+  const [page, setPage] = useState<number>(1);
+
   const { data: users, isLoading: loadingUsers } = FetchUsersService();
   const { data: reports, isLoading: loadingReports } = FetchReportsService();
   const { data: calculations, isLoading: loadingCalculations } =
@@ -43,6 +46,9 @@ const DashboardPage = () => {
     outcomePercentage
   );
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
   return (
     <Layout>
       <div className="flex flex-col">
@@ -76,7 +82,11 @@ const DashboardPage = () => {
               <h1 className="text-gray-600 font-bold text-lg my-5">
                 {t("generalOutComeTable")}
               </h1>
-              <RegularCostTable />
+              <RegularCostTable
+                regularCosts={regularCosts}
+                loading={loadingGeneralOutcome}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         )}

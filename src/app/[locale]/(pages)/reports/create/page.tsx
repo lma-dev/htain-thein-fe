@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import { reportSchema } from "../../../../schema/reportSchema";
 import { handleErrors } from "../../../../schema/errorHandler";
 import { useLocale } from "../../../../context/LangContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateReport = () => {
   const userId = parseInt(parseCookies().userId);
@@ -21,7 +22,9 @@ const CreateReport = () => {
   const reporterName = userData?.data?.name || "";
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
-  const createReportMutation = useCreateQuery(createReportService);
+  const createReportMutation = useCreateQuery(createReportService, "reports");
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
     amount: 0,
@@ -42,7 +45,8 @@ const CreateReport = () => {
     try {
       const validationData = reportSchema.parse(updatedFormData);
       await createReportMutation.mutateAsync(validationData);
-      // router.push(`/${currentLocale}/deposit-requests`);
+      queryClient.invalidateQueries({ queryKey: ["uncheckReports"] }); // Invalidates the query
+      router.push(`/${currentLocale}/deposit-requests`);
     } catch (error) {
       handleErrors(error);
     }

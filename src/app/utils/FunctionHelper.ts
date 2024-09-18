@@ -47,9 +47,8 @@ export function getVisibility(isVisible:number):string {
   }
 }
 
-export const getDefaultDueDate = (): Date => {
-  const now = new Date();
-  const futureDate = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Add 1 day (24 hours) in milliseconds
-  return futureDate;
-};
-
+export function getDefaultDueDate(): Date {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow;
+}

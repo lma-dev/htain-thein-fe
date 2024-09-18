@@ -3,12 +3,24 @@ import DepositTableDropDown from "../../DropDown/DepositTableDropDown";
 import { FinancialType } from "../../../enums/FinancialType";
 import SkeletonTableRow from "../../Skeleton/SkeletonTableRow";
 import { useTranslations } from "next-intl";
-import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
+import { ReportType } from "../../../types/Report/ReportType";
+import { MetaDataType } from "../../../types/Share/MetaDataType";
+import Pagination from "../../Pagination/Pagination";
 
-const DepositWithdrawTable = () => {
+interface DepositWithdrawTableProps {
+  uncheckReports: ReportType[] | undefined;
+  loading: boolean;
+  handlePageChange: (newPage: number) => void;
+  meta: MetaDataType;
+}
+
+const DepositWithdrawTable = ({
+  uncheckReports,
+  loading,
+  handlePageChange,
+  meta,
+}: DepositWithdrawTableProps) => {
   const t = useTranslations("Translation");
-  const { data: uncheckReports, isLoading: loading } =
-    FetchUncheckReportService();
 
   return (
     <div className="flex flex-col w-full ">
@@ -84,7 +96,7 @@ const DepositWithdrawTable = () => {
                   />
                 </>
               ) : (
-                uncheckReports?.data?.map((item: any, index: number) => (
+                uncheckReports?.map((item: any, index: number) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600 dark:text-gray-200 text-start">
                       {item.id}
@@ -136,6 +148,9 @@ const DepositWithdrawTable = () => {
           </table>
         </div>
       </div>
+      {uncheckReports && uncheckReports?.length > 0 && (
+        <Pagination meta={meta} handlePageChange={handlePageChange} />
+      )}
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { useTranslations } from "next-intl";
 import { handleErrors } from "../../../../schema/errorHandler";
 import { regularCostSchema } from "../../../../schema/regularCostSchema";
 import { useLocale } from "../../../../context/LangContext";
+import { useRouter } from "next/navigation";
 
 const CreateRegularCost = () => {
   const userId = parseInt(parseCookies().userId);
@@ -20,12 +21,18 @@ const CreateRegularCost = () => {
   const reporterName = userData?.data?.name || "";
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
-  const createRegularCostMutation = useCreateQuery(createRegularCostService);
+
+  const createRegularCostMutation = useCreateQuery(
+    createRegularCostService,
+    "general-outcome"
+  );
 
   const [formData, setFormData] = useState({
     amount: 0,
     description: "",
   });
+
+  const router = useRouter();
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -40,7 +47,7 @@ const CreateRegularCost = () => {
       const updatedFormData = { ...formData, reporter_id: userId };
       const validationData = regularCostSchema.parse(updatedFormData);
       await createRegularCostMutation.mutateAsync(validationData);
-      // router.push(`/${currentLocale}/regular-costs`);
+      router.push(`/${currentLocale}/regular-costs`);
     } catch (error) {
       handleErrors(error);
     }

@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
-import { ReportsResponse } from "../../../types/Report/ReportType";
 
 const ReportsPage = () => {
   const [generalSearch, setGeneralSearch] = useState<string>("");

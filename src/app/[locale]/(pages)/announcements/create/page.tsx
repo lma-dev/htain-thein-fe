@@ -26,8 +26,12 @@ const CreateAnnouncement = () => {
 
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
+  const router = useRouter();
 
-  const createMutation = useCreateQuery(CreateAnnouncementService);
+  const createMutation = useCreateQuery(
+    CreateAnnouncementService,
+    "announcements"
+  );
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -41,7 +45,7 @@ const CreateAnnouncement = () => {
       const validationData: AnnouncementSchemaType =
         announcementSchema.parse(formData);
       await createMutation.mutateAsync(validationData);
-      // router.push(`/${currentLocale}/announcements`);
+      router.push(`/${currentLocale}/announcements`);
     } catch (error) {
       handleErrors(error);
     }

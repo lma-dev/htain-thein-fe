@@ -6,10 +6,20 @@ import Layout from "../../../components/layout";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
+import { FetchUncheckReportService } from "../../../services/ReportService/FetchUncheckReportService";
+import { useEffect, useState } from "react";
 
-const ReportsPage = () => {
+const DepositReportsPage = () => {
   const { currentLocale } = useLocale();
   const t = useTranslations("Translation");
+  const [page, setPage] = useState<number>(1);
+
+  const { data: uncheckReports, isLoading: loading } =
+    FetchUncheckReportService();
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   return (
     <Layout>
@@ -23,10 +33,15 @@ const ReportsPage = () => {
             {t("createReports")}
           </Link>
         </div>
-        <DepositWithdrawTable />
+        <DepositWithdrawTable
+          uncheckReports={uncheckReports?.data}
+          loading={loading}
+          handlePageChange={handlePageChange}
+          meta={uncheckReports?.meta}
+        />
       </div>
     </Layout>
   );
 };
 
-export default ReportsPage;
+export default DepositReportsPage;

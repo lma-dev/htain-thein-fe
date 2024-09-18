@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 const CreateUser = () => {
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
-  const createUserMutation = useCreateQuery(createUserService);
+  const createUserMutation = useCreateQuery(createUserService, "users");
 
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -40,7 +40,6 @@ const CreateUser = () => {
     try {
       const validationData: UserSchemaType = userSchema.parse(formData);
       await createUserMutation.mutateAsync(validationData);
-      //TODO CHECK THIS
       router.push(`/${currentLocale}/users`);
     } catch (error) {
       handleErrors(error);

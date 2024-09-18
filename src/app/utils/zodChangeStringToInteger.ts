@@ -12,10 +12,9 @@ export const preprocessNumber = (val:any) => {
   return val;
 };
 
-export const preprocessDate = (val:any) => {
-  if (typeof val === "string" || val instanceof Date) {
-    const parsed = new Date(val);
-    return isNaN(parsed.getTime()) ? val : parsed;
+export const preprocessDate = (input: unknown): Date => {
+  if (typeof input === 'string' || input instanceof Date) {
+    return new Date(input);
   }
-  return val;
+  throw new Error('Invalid date format');
 };
