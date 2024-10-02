@@ -1,23 +1,30 @@
-import { parseCookies } from "nookies";
+import { getSession } from "next-auth/react"; // Import getSession for client-side
 import axios from "../utils/axios";
 import ToastsBox from "../components/Toasts/ToastsBox";
 
-export async function callApi(method:string, url:string, data?:any, responseType?: "arraybuffer"
-
+export async function callApi(
+  method: string,
+  url: string,
+  data?: any,
+  responseType?: "arraybuffer" | "blob" | "document" | "json" | "text" // Explicit response type
 ) {
-  const token = parseCookies().accessToken;
-  const config:any = {
+  // Get the session token
+  const session = await getSession();
+  const token = session?.user.access_token; // Adjust based on your session structure
+
+  const config: any = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Include the token in headers
     },
-    method: method,
-    url: url,
-    data: data,
-    responseType: responseType,
+    method,
+    url,
+    data,
+    responseType,
   };
 
   try {
     const response = await axios(config);
+
     if (
       (response.status === 200 || response.status === 201) &&
       response.data.msg &&
@@ -25,9 +32,10 @@ export async function callApi(method:string, url:string, data?:any, responseType
     ) {
       ToastsBox.success({ message: response.data.msg });
     }
+
     return response.data;
   } catch (error) {
-    //TODO CHECK error type
+    // Handle different error types
     if (error.response && error.response.data) {
       const { errors } = error.response.data;
       const errorMessages = Object.values(errors).flat();
@@ -38,10 +46,10 @@ export async function callApi(method:string, url:string, data?:any, responseType
 
       throw new Error("Validation errors occurred");
     } else if (error.request) {
-      ToastsBox.error({ message: "No response received:" + error.request });
+      ToastsBox.error({ message: "No response received: " + error.request });
       throw new Error("No response received");
     } else {
-      ToastsBox.error({ message: "Error:" + error.message });
+      ToastsBox.error({ message: "Error: " + error.message });
       throw new Error(error.message);
     }
   }

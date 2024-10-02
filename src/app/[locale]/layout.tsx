@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 import { LocaleProvider } from "../context/LangContext";
 import "../globals.css";
 import { ReactNode } from "react";
+import NextAuthProvider from "../providers/NextAuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +35,9 @@ export default async function RootLayout({
         <body suppressHydrationWarning={false} className={inter.className}>
           <LocaleProvider locale={locale}>
             <TanStackProvider>
-              <div>{children}</div>
+              <NextAuthProvider>
+                <div>{children}</div>
+              </NextAuthProvider>
             </TanStackProvider>
           </LocaleProvider>
           <Toaster position="top-right" reverseOrder={false} />

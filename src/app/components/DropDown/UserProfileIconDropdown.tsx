@@ -1,13 +1,13 @@
 "use client";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { CircleUserRound } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { parseCookies } from "nookies";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../context/LangContext";
+import useUserSession from "../../hooks/useUserSession";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -17,7 +17,8 @@ const UserProfileIconDropdown = () => {
   const { logout } = useAuth();
   const router = useRouter();
   const { currentLocale } = useLocale();
-  const authUserId = parseCookies().userId;
+  const { session, userRole } = useUserSession();
+  const authUserId = session?.user?.userId;
   const t = useTranslations("Translation");
 
   const handleLogout = async () => {

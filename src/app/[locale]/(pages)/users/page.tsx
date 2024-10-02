@@ -4,15 +4,15 @@ import UserTable from "../../../components/Table/UserTable/UserTable";
 import Layout from "../../../components/layout";
 import { FetchUsersService } from "../../../services/UserService/FetchUsersService";
 import UserFilterInputField from "../../../components/filter/UserFilterInputField";
-import { useEffect, useState } from "react";
-import { parseCookies } from "nookies";
+import { useState } from "react";
 import { UserRole } from "../../../enums/UserRole";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useLocale } from "../../../context/LangContext";
+import useUserSession from "../../../hooks/useUserSession";
 
 const UsersPage = () => {
-  const [userRole, setUserRole] = useState<string>();
+  const { session, userRole } = useUserSession();
   const [generalSearch, setGeneralSearch] = useState("");
   const [role, setRole] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -30,10 +30,6 @@ const UsersPage = () => {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
-
-  useEffect(() => {
-    setUserRole(parseCookies().userRole);
-  }, []);
 
   return (
     <Layout>

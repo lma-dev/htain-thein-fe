@@ -14,11 +14,12 @@ import { handleErrors } from "../../../../schema/errorHandler";
 import { regularCostSchema } from "../../../../schema/regularCostSchema";
 import { useLocale } from "../../../../context/LangContext";
 import { useRouter } from "next/navigation";
+import useUserSession from "../../../../hooks/useUserSession";
 
 const CreateRegularCost = () => {
-  const userId = parseInt(parseCookies().userId);
-  const { data: userData } = FetchSingleUserService(userId);
-  const reporterName = userData?.data?.name || "";
+  const { session, userRole } = useUserSession();
+  const userId = parseInt(session?.user?.userId);
+  const reporterName = session?.user?.userName || "";
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
 

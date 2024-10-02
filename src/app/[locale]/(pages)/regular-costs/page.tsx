@@ -6,14 +6,14 @@ import RegularCostTable from "../../../components/Table/RegularCostTable/Regular
 
 import Layout from "../../../components/layout";
 import { FetchRegularCostsDataService } from "../../../services/RegularCostService/FetchRegularCostService";
-import { parseCookies } from "nookies";
 import { UserRole } from "../../../enums/UserRole";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "../../../context/LangContext";
+import useUserSession from "../../../hooks/useUserSession";
 
 const RegularCost = () => {
-  const [userRole, setUserRole] = useState<string>();
+  const { session, userRole } = useUserSession();
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
   const [page, setPage] = useState<number>(1);
@@ -25,9 +25,6 @@ const RegularCost = () => {
     setPage(newPage);
   };
 
-  useEffect(() => {
-    setUserRole(parseCookies().userRole);
-  }, []);
   return (
     <Layout>
       <div className="flex flex-col">

@@ -9,15 +9,19 @@ import { UserRole } from "../../enums/UserRole";
 import { parseCookies } from "nookies";
 import { useLocale } from "../../context/LangContext";
 import { useTranslations } from "next-intl";
+import useUserSession from "../../hooks/useUserSession";
 
 type RegularCostTableProps = {
   regularCostId: number;
 };
 
-export default function RegularCostDropDown({ regularCostId }: RegularCostTableProps) {
+export default function RegularCostDropDown({
+  regularCostId,
+}: RegularCostTableProps) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const deleteMutation = DeleteRegularCostService();
-  const userRole = parseCookies().userRole;
+  const { session, userRole } = useUserSession();
+
   const { currentLocale } = useLocale();
   const t = useTranslations("Translation");
 
@@ -63,29 +67,29 @@ export default function RegularCostDropDown({ regularCostId }: RegularCostTableP
 
               {(userRole === UserRole.ADMIN ||
                 userRole === UserRole.SUPER_ADMIN) && (
-                  <div>
-                    <Menu.Item>
-                      <Link
-                        href={`/${currentLocale}/regular-costs/${regularCostId}/edit`}
-                        className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
-                      >
-                        <Pencil size={16} className="mr-2 inline-block" />
-                        {t("edit")}
-                      </Link>
-                    </Menu.Item>
+                <div>
+                  <Menu.Item>
+                    <Link
+                      href={`/${currentLocale}/regular-costs/${regularCostId}/edit`}
+                      className="text-sm block p-2 hover:bg-gray-200 w-full rounded"
+                    >
+                      <Pencil size={16} className="mr-2 inline-block" />
+                      {t("edit")}
+                    </Link>
+                  </Menu.Item>
 
-                    <Menu.Item>
-                      <Link
-                        href="#"
-                        className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400"
-                        onClick={handleDelete}
-                      >
-                        <Trash2 size={16} className="mr-2 inline-block" />
-                        {t("delete")}
-                      </Link>
-                    </Menu.Item>
-                  </div>
-                )}
+                  <Menu.Item>
+                    <Link
+                      href="#"
+                      className="p-2 hover:bg-gray-200 w-full rounded text-sm block text-red-400"
+                      onClick={handleDelete}
+                    >
+                      <Trash2 size={16} className="mr-2 inline-block" />
+                      {t("delete")}
+                    </Link>
+                  </Menu.Item>
+                </div>
+              )}
             </div>
           </Menu.Items>
         </Transition>

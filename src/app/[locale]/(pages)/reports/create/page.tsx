@@ -6,20 +6,20 @@ import BreadCrumb from "../../../../components/BreadCrumb/Breadcrumb";
 import { FormSubmitButton } from "../../../../components/Button/Button";
 import { createReportService } from "../../../../services/ReportService/CreateReportService";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { parseCookies } from "nookies";
 import { useCreateQuery } from "../../../../hooks/useCreateQuery";
 import { useRouter } from "next/navigation";
-import { FetchSingleUserService } from "../../../../services/UserService/FetchSingleUserService";
 import { useTranslations } from "next-intl";
 import { reportSchema } from "../../../../schema/reportSchema";
 import { handleErrors } from "../../../../schema/errorHandler";
 import { useLocale } from "../../../../context/LangContext";
 import { useQueryClient } from "@tanstack/react-query";
+import useUserSession from "../../../../hooks/useUserSession";
 
 const CreateReport = () => {
-  const userId = parseInt(parseCookies().userId);
-  const { data: userData } = FetchSingleUserService(userId);
-  const reporterName = userData?.data?.name || "";
+  const { session, userRole } = useUserSession();
+  const userId = parseInt(session?.user?.userId);
+  const reporterName = session?.user?.userName || "";
+  console.log("reporter", reporterName);
   const t = useTranslations("Translation");
   const { currentLocale } = useLocale();
   const createReportMutation = useCreateQuery(createReportService, "reports");

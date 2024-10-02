@@ -1,62 +1,48 @@
-import { NextResponse } from "next/server";
-import createMiddleware from "next-intl/middleware";
-import { locales, defaultLocale } from "./app/config/config";
-import { match } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
-import { cookies } from "next/headers";
+import {NextRequest} from 'next/server';
+import {withAuth} from 'next-auth/middleware';
+import createMiddleware from 'next-intl/middleware';
+import {routing} from './i18n/routing';
 
-export default function middleware(request:any) {
-  const cookieStore = cookies();
-  const token = cookieStore.get("accessToken") || "";
+const publicPages = [
+  '/',
+  '/login'
+  // (/secret requires auth)
+];
 
-  function getLocale(request:any) {
-    const acceptedLanguage =
-      request.headers.get("accept-language") ?? undefined;
-    const headers = { "accept-language": acceptedLanguage };
-    const languages = new Negotiator({ headers }).languages();
-    return match(languages, locales, defaultLocale);
+const intlMiddleware = createMiddleware(routing);
+
+const authMiddleware = withAuth(
+  // Note that this callback is only invoked if
+  // the `authorized` callback has returned `true`
+  // and not for pages listed in `pages`.
+  (req) => intlMiddleware(req),
+  {
+    callbacks: {      
+      authorized: ({token}) => token != null
+    },
+    pages: {
+      signIn: '/login'
+    }
   }
+);
 
-  const { pathname } = request.nextUrl;
-
-  // Validate and sanitize pathname for locale handling
-  const sanitizedPathname = pathname.replace(/\/$/, ""); // Remove trailing slashes
-  // Handle missing locale prefix
-  const pathnameIsMissingLocale = locales.every(
-    (locale) =>
-      !sanitizedPathname.startsWith(`/${locale}/`) &&
-      sanitizedPathname !== `/${locale}`
+export default function middleware(req: NextRequest) {
+  const publicPathnameRegex = RegExp(
+    `^(/(${routing.locales.join('|')}))?(${publicPages
+      .flatMap((p) => (p === '/' ? ['', '/'] : p))
+      .join('|')})/?$`,
+    'i'
   );
+  const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
 
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-    // Validate and sanitize locale before redirection
-    const sanitizedLocale = locale.replace(/\/$/, ""); // Remove trailing slashes
-    return NextResponse.redirect(
-      new URL(`/${sanitizedLocale}/${sanitizedPathname}`, request.url)
-    );
+  if (isPublicPage) {
+    return intlMiddleware(req);
+  } else {
+    return (authMiddleware as any)(req);
   }
-
-  // Redirect to login if token is missing and not on login or API routes
-  if (
-    !token &&
-    !locales.some((loc) => sanitizedPathname.startsWith(`/${loc}/login`)) &&
-    !sanitizedPathname.startsWith("/api") &&
-    !locales.some((loc) => sanitizedPathname === `/${loc}`)
-  ) {
-    const locale = getLocale(request);
-    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
-  }
-
-  // Initialize i18n middleware for further routing
-  const handleI18nRouting = createMiddleware({
-    locales,
-    defaultLocale,
-  });
-
-  return handleI18nRouting(request);
 }
 
 export const config = {
-  matcher: ["/((?!api|assets|.*\\..*|_next).*)"],
+  // Skip all paths that should not be internationalized
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 };

@@ -12,7 +12,7 @@ const Login = ({ params }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL;
   const [decryptedUserData, setDecryptedUserData] = useState(null);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -21,32 +21,39 @@ const Login = ({ params }) => {
   const handleLogin = async (e) => {
     setLoading(true);
     e.preventDefault();
-    let result = await login(email, password, setLoading);
-    if (result) {
+    const result = await login(email, password, setLoading);
+    console.log(result.ok);
+    if (result.ok) {
+      console.log("Login successful, redirecting to dashboard.");
+      console.log("result", params.locale);
+      //  console.log(`/${params.locale}/dashboard`);
       router.push(`/${params.locale}/dashboard`);
+    } else {
+      // Optionally handle the case where login failed (e.g., show an error message)
+      console.log("Login failed, not redirecting.");
     }
   };
 
-  useEffect(() => {
-    const initialCheck = () => {
-      const encryptedUserData = searchParams.get("encrypted");
-      const decryptedData = decryptAlgorithm(encryptedUserData);
-      setDecryptedUserData(decryptedData);
-    };
-    initialCheck();
-  }, [searchParams, params.locale]);
+  // useEffect(() => {
+  //   const initialCheck = () => {
+  //     const encryptedUserData = searchParams.get("encrypted");
+  //     const decryptedData = decryptAlgorithm(encryptedUserData);
+  //     setDecryptedUserData(decryptedData);
+  //   };
+  //   initialCheck();
+  // }, [searchParams, params.locale]);
 
-  useEffect(() => {
-    if (decryptedUserData) {
-      setCookie(null, "accessToken", decryptedUserData.token);
-      setCookie(null, "userId", decryptedUserData.userId);
-      setCookie(null, "userName", decryptedUserData.userName);
-      setCookie(null, "userRole", decryptedUserData.userRole);
-      if (decryptedUserData.token) {
-        router.push(`/${params.locale}/dashboard`);
-      }
-    }
-  }, [decryptedUserData, params.locale, router]);
+  // useEffect(() => {
+  //   if (decryptedUserData) {
+  //     setCookie(null, "accessToken", decryptedUserData.token);
+  //     setCookie(null, "userId", decryptedUserData.userId);
+  //     setCookie(null, "userName", decryptedUserData.userName);
+  //     setCookie(null, "userRole", decryptedUserData.userRole);
+  //     if (decryptedUserData.token) {
+  //       router.push(`/${params.locale}/dashboard`);
+  //     }
+  //   }
+  // }, [decryptedUserData, params.locale, router]);
 
   return (
     <div>
